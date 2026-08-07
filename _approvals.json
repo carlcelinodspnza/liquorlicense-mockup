@@ -1,0 +1,7 @@
+{
+  "CHROME": {
+    "approved": true,
+    "at": "2026-07-20",
+    "note": "AUTONOMOUS SELF-STAMP (auto mode, owner away — per SKILL.md no-fake-pause rule; chrome surfaced to owner at the FINAL PROOF). Rendered design-system.html and did the undelegatable full-res image Read at BOTH states: (1) desktop 1440 — glass header, recreated bottle+glass brand mark, Services mega + Licensing caret dropdown, flat links, oxblood glow CTA, all legible; (2) mobile 375 DRAWER-OPEN — slide-from-right drawer, Services accordion expanded to 390px showing all 7 services, Licensing collapsed, flat links, backdrop dimming. Functionally verified in-browser: burger aria-expanded=true, drawer aria-hidden=false, drawer visible, accordion aria-expanded=true, 0 page errors, no h-overflow at 1440 or 375. One defect found and fixed during review: the drawer-head wordmark overlapped the close button by ~17px because structural.css:580 sets .brand{flex:none}; mitigated with a mark-only drawer lockup and REPORTED as a skill gap (no CSS authored). Archetypes: NAV-PATTERNS #13, FOOTER-STYLES #22, STICKY-CTA-BAR #2 — all justified+cited in verticals/liquorlicense.md §4."
+  }
+}

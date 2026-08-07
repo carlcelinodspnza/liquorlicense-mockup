@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand Card — Liquor License Agents</title>
+<meta name="description" content="The brand identity for Liquor License Agents: logo, palette measured from the source asset, typography, and voice.">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="design-system/tokens.css">
+<link rel="stylesheet" href="design-system/structural.css">
+<style>
+/* SPECIMEN-ONLY. brand-card.html is a CHROME-LESS standalone identity sheet and is on
+   the shell-purity EXEMPT list. index.html carries no inline CSS. */
+.bc-sw{display:block;height:74px;border-radius:var(--ds-r-md);border:1px solid var(--ds-line);margin-bottom:var(--ds-space-sm)}
+.bc-lockup{display:flex;align-items:center;gap:var(--ds-space-md);font-family:var(--ds-font-display);font-size:34px;font-weight:600;color:var(--ds-ink)}
+.bc-lockup .brand__mark{width:60px;height:60px}
+.bc-lockup .brand__mark svg{width:32px;height:32px}
+.bc-lockup--inv{background:var(--ds-bg-surface-2);padding:var(--ds-space-lg);border-radius:var(--ds-r-lg);border:1px solid var(--ds-line)}
+.bc-lockups{display:flex;flex-wrap:wrap;gap:var(--ds-space-xl);align-items:center;margin-top:var(--ds-space-lg)}
+.bc-specimen{border-left:3px solid var(--ds-accent);padding-left:var(--ds-space-lg);margin-top:var(--ds-space-lg)}
+.bc-voice{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--ds-space-lg);margin-top:var(--ds-space-lg)}
+.bc-voice ul{margin:var(--ds-space-sm) 0 0;padding-left:var(--ds-space-lg);color:var(--ds-ink-soft);display:flex;flex-direction:column;gap:var(--ds-space-xs)}
+</style>
+  <noscript><style>
+    /* NO-JS ESCAPE HATCH (2026-08-07). structural.css:939-942 starts
+       .wow-reveal and .wow-stagger > * at opacity 0; only .in-view — which
+       site.js adds — brings them back. If site.js is blocked, fails to load or
+       is disabled, every revealed block on this page renders EMPTY. Measured
+       before this fix: the #services band painted 2.37% non-background pixels
+       (a heading and a button over a void) and all 6 #inventory cards computed
+       opacity 0. The pre-existing @media (prefers-reduced-motion: reduce)
+       override at :977-983 does NOT cover this case.
+       <noscript> rather than a .js class because site.js is deferred: a class
+       toggle would paint the content and then hide it mid-load. */
+    .wow-reveal, .wow-stagger > * { opacity: 1 !important; transform: none !important; }
+  </style></noscript>
+</head>
+<body>
+<main id="main">
+
+<section class="section section--dark wow-bloom wow-grain">
+  <div class="container">
+    <p class="eyebrow">Brand card</p>
+    <h1>Liquor License Agents</h1>
+    <p class="lede">A California liquor licence brokerage. The identity below was not chosen — it was measured off the client's own supplied design asset, then made legible.</p>
+    <div class="bc-lockups">
+      <span class="bc-lockup"><span class="brand__mark"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.4 2.6h1.9v3.1c0 .7-.3 1-.8 1.5-.6.5-.9 1-.9 1.9v10.4c0 1.1.5 1.9 1.6 1.9"/><path d="M13.6 9.1h6.6l-3 3.2v3.9"/><path d="M15.6 19.4h3.4"/><path d="M17.2 12.3v7.1"/></svg></span>Liquor License Agents</span>
+      <span class="bc-lockup bc-lockup--inv"><span class="brand__mark"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.4 2.6h1.9v3.1c0 .7-.3 1-.8 1.5-.6.5-.9 1-.9 1.9v10.4c0 1.1.5 1.9 1.6 1.9"/><path d="M13.6 9.1h6.6l-3 3.2v3.9"/><path d="M15.6 19.4h3.4"/><path d="M17.2 12.3v7.1"/></svg></span>Liquor License Agents</span>
+    </div>
+    <p class="lede">The mark is a bottle-and-glass monogram recreated as inline SVG: the source PDF draws its logo as vector line art with no extractable raster.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="eyebrow">Palette — measured, not picked</p>
+    <h2>Charcoal, oxblood, amber</h2>
+    <p class="lede">Every value below came from pixel-frequency analysis of the supplied PDF. The one judgement call is documented: the source used a deep oxblood for eyebrow text at 1.26:1 — a WCAG failure — so the accent role moved to the brand's own photographic amber at 5.55:1.</p>
+    <div class="cap-breakdown__grid wow-stagger">
+<article class="card capability-card wow-lift"><span class="bc-sw" style="background:var(--ds-primary)"></span><h3>Oxblood</h3><p><code>#ad1e1e</code></p><p>CTA surfaces. Measured from the PDF's hero + nav buttons (17.5K px). White on it = 11.6:1.</p></article>
+<article class="card capability-card wow-lift"><span class="bc-sw" style="background:var(--ds-accent)"></span><h3>Brand amber</h3><p><code>#e69c4e</code></p><p>The accent ink. The brand's own dominant photographic hue #bb7327, lifted in value only.</p></article>
+<article class="card capability-card wow-lift"><span class="bc-sw" style="background:var(--ds-bg-surface)"></span><h3>Charcoal</h3><p><code>?</code></p><p>The base band. 6.93M px — the single most frequent colour in the source.</p></article>
+<article class="card capability-card wow-lift"><span class="bc-sw" style="background:var(--ds-bg-warm)"></span><h3>Charcoal warm</h3><p><code>?</code></p><p>The alternate band (2.36M px).</p></article>
+<article class="card capability-card wow-lift"><span class="bc-sw" style="background:var(--ds-primary-deep)"></span><h3>Near-black</h3><p><code>#1e1e1e</code></p><p>The dark ground: dark bands + footer. Ink on it = 16.7:1.</p></article>
+<article class="card capability-card wow-lift"><span class="bc-sw" style="background:var(--ds-bg-surface-2)"></span><h3>Card</h3><p><code>?</code></p><p>Elevated surface. #0d0d0d, never pure black.</p></article>
+<article class="card capability-card wow-lift"><span class="bc-sw" style="background:var(--ds-signature)"></span><h3>Availability green</h3><p><code>#2dd86b</code></p><p>Reserved strictly for licence-availability status (75K px in the source).</p></article>
+<article class="card capability-card wow-lift"><span class="bc-sw" style="background:var(--ds-ink-soft)"></span><h3>Muted ink</h3><p><code>?</code></p><p>Secondary text. 7.4:1 on the base band.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--warm">
+  <div class="container">
+    <p class="eyebrow">Typography</p>
+    <h2>Bitter + Raleway</h2>
+    <div class="bc-specimen">
+      <h1>Buy, sell and transfer</h1>
+      <h2>From consultation to ABC approval</h2>
+      <h3>Type 47 — On-Sale General, Eating Place</h3>
+      <p class="lede">Bitter's slab gives gravitas without sterility — the register for a broker moving a $135,000 asset.</p>
+      <p>Raleway carries dense regulatory body copy: a transfer typically takes 60 to 120 days, depending on background checks, application completeness, local approvals and whether any protests are filed.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="eyebrow">Voice</p>
+    <h2>Authoritative, precise, discreet</h2>
+    <div class="bc-voice">
+      <article class="card capability-card wow-lift">
+        <h3>Sounds like</h3>
+        <ul>
+          <li>Most California licences never reach the open market.</li>
+          <li>We vet the asset for liens, disciplinary history and transferability before a dollar moves.</li>
+          <li>60 to 120 days, if nothing is protested.</li>
+          <li>A licence you cannot site is a licence you cannot use.</li>
+        </ul>
+      </article>
+      <article class="card capability-card wow-lift">
+        <h3>Never sounds like</h3>
+        <ul>
+          <li>Let us help you navigate your journey!</li>
+          <li>We're passionate about hospitality.</li>
+          <li>Unlock your dream bar today.</li>
+          <li>One-stop shop for all your liquor needs.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <p class="eyebrow">Applied</p>
+    <h2>The identity in use</h2>
+    <div class="pillar wow-reveal">
+      <figure class="pillar__media wow-zoom"><img src="assets/story-decanter.jpg" alt="Cut-crystal decanter on a bar table under low tungsten light"></figure>
+      <div>
+        <p class="eyebrow">California ABC licence brokerage</p>
+        <h3>Buy, sell and transfer California liquor licences</h3>
+        <p>Most California licences never reach the open market. We source them, vet them clean, and carry the transaction through statutory escrow to ABC approval.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary wow-glow" href="index.html">Talk to a broker</a>
+          <a class="btn btn-secondary" href="index.html">Browse inventory</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<script src="design-system/site.js" defer></script>
+</body>
+</html>

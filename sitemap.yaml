@@ -1,0 +1,149 @@
+site:  liquorlicense
+brand: "Liquor License Agents"
+
+# ── SITE TYPE (Stage 0.5 step a) ──────────────────────────────────────────────
+# REMAKE-OF-EXISTING. A live site exists (liquorlicenseagents.com) and a legacy
+# Figma export of a redesign exists (the supplied PDF). The owner's brief: rebuild
+# from scratch — retain the PDF's palette / imagery / industry register, DISCARD
+# its structural layout, and take no design cue from the live site.
+# The value doubles as the vertical signal: photo-RICH (hospitality interiors +
+# spirits still-life), so the FULL photo floor applies — no photo-light relaxation.
+site_type: california-liquor-license-brokerage
+
+design_system: design-system/
+
+# ── SCOPE CHANGE — 2026-07-29 ─────────────────────────────────────────────────
+# This file previously declared ONE page. That was the owner's original scoping
+# ("focus your generation efforts exclusively on executing this single page"), and
+# the V3 single-page build shipped SUCCESSFUL under it on 2026-07-22.
+#
+# The owner has now reversed that scoping and asked for the whole site. Scope was
+# chosen as the CORE 9: every homepage section that carries a full explanation gets
+# a real page to own it. Industries / coverage / guides / testimonials deliberately
+# stay HOMEPAGE-ONLY sections — they are pointers or proof, not destinations, and
+# manufacturing pages for them would violate SITE-PLAN rule 2 ("a page earns its
+# place from a present fact type + the vertical — never from a guess").
+#
+# CONSEQUENCE: pages[] > 1 now, so verify-nav-integrity's `if (pages.size > 1)`
+# branch is LIVE. Every built page's <header> must carry >= 2 distinct real
+# <slug>.html links, and every '#frag' must resolve to a real id on its TARGET
+# page. The anchor-only nav that was legitimate for a one-pager is now a hard fail.
+
+# ── NAV ───────────────────────────────────────────────────────────────────────
+# The FLAT nav[] is the always-present fallback and the source of the chrome's
+# nav-link SIGNATURE. verify-chrome-consistent (c) requires EVERY page's <header>
+# to carry a real `<slug>.html` link for EACH entry below — so this list is exactly
+# the set of destinations the stamped header actually reaches, no more.
+#
+# `page: index` entries are the homepage-only sections. The chrome renders them as
+# `index.html#<section-id>`; realPageLinkTargets() strips the fragment, so they
+# satisfy check (c) as a real `index` link (the brand logo already provides one).
+nav:
+  - { label: "About",        page: about }
+  - { label: "Services",     page: services }
+  - { label: "Licence types", page: licence-types }
+  - { label: "Industries",   page: index }          # -> index.html#industries
+  - { label: "Locations",    page: locations }
+  - { label: "Inventory",    page: inventory }
+  - { label: "Process",      page: process }
+  - { label: "Resources",    page: resources }
+  - { label: "FAQ",          page: faq }
+  - { label: "Contact",      page: contact }
+
+# ── GROUPED NAV ───────────────────────────────────────────────────────────────
+# Structure is UNCHANGED from the owner-stamped CHROME stage (NAV-PATTERNS #13):
+# ONE mega group (Services) + ONE dropdown group (Licensing) + flat links + CTA.
+# Only the DESTINATIONS change — every anchor that used to resolve into index.html
+# now resolves to the page that owns the claim.
+nav_groups:
+  - label: "Services"
+    kind: mega
+    items:
+      - { label: "Buy a liquor licence",        page: services }  # -> services.html#buy
+      - { label: "Sell a liquor licence",       page: services }  # -> services.html#sell
+      - { label: "Transfer a liquor licence",   page: services }  # -> services.html#transfer
+      - { label: "Licence valuation",           page: services }  # -> services.html#valuation
+      - { label: "Conditional Use Permits",     page: services }  # -> services.html#cup
+      - { label: "ABC compliance",              page: services }  # -> services.html#compliance
+      - { label: "Escrow guidance",             page: services }  # -> services.html#escrow
+      - { label: "New business planning",       page: services }  # -> services.html#new-business
+    featured:
+      img:     "assets/story-decanter.jpg"
+      eyebrow: "Live inventory"
+      line:    "Off-market licences"
+      href:    "inventory"
+  - label: "Licensing"
+    kind: dropdown
+    items:
+      - { label: "Type 21 — Off-Sale General",         page: licence-types }
+      - { label: "Type 47 — On-Sale, Eating Place",    page: licence-types }
+      - { label: "Type 48 — On-Sale, Public Premises", page: licence-types }
+      - { label: "Conditional Use Permits",            page: services }   # -> services.html#cup
+      - { label: "Transfer timeline & escrow",         page: process }
+      - { label: "Statewide coverage",                 page: locations }  # C33 moved off the homepage 2026-07-29
+      - { label: "Knowledge base",                     page: resources }
+      - { label: "Guides",                             page: index }      # -> index.html#guides
+      - { label: "Licensing FAQs",                     page: faq }
+
+# ── FOOTER ────────────────────────────────────────────────────────────────────
+footer:
+  - title: "Services"
+    links:
+      - { label: "Buy a liquor licence",   page: services }
+      - { label: "Sell a liquor licence",  page: services }
+      - { label: "Transfer a licence",     page: services }
+      - { label: "Licence valuation",      page: services }
+      - { label: "Conditional Use Permits", page: services }
+  # Retargeted 2026-07-29: locations.html is now the canonical owner of claim C33
+  # (statewide / 58 counties / the markets). These deep-link to its per-market tabs.
+  - title: "Major markets"
+    links:
+      - { label: "Los Angeles County",          page: locations }
+      - { label: "Orange County",               page: locations }
+      - { label: "San Diego County",            page: locations }
+      - { label: "San Francisco / Bay Area",    page: locations }
+      - { label: "Sacramento & Central Valley", page: locations }
+      - { label: "All markets we cover",        page: locations }
+  # THREE nav columns, not four. `.site-footer__top` is a `1.5fr 1fr 1fr 1fr` grid
+  # (design-system/structural.css:774) = the brand block + exactly three columns; a
+  # fourth wraps to a second row. Widening the grid would mean authoring CSS, which
+  # the build must not do — so Company and Contact share this column.
+  - title: "Company & contact"
+    links:
+      - { label: "About us",              page: about }
+      - { label: "How a transfer works",  page: process }
+      - { label: "Knowledge base",        page: resources }
+      - { label: "Licensing questions",   page: faq }
+      - { label: "800.799.9081",          href: "tel:+18007999081" }
+      - { label: "Request a valuation",   page: contact }
+
+# ── PAGES ─────────────────────────────────────────────────────────────────────
+# `kind:` is constrained by references/SITEMAP-SCHEMA.md to
+# home|about|service|shop|blog|product|blog-post.
+# Each page below owns claims that today live on index.html; the claim-ownership
+# contract is _content-requirements/_dedup-ledger.md (PART 1 re-authored with PAGE
+# owners on 2026-07-29). No page is speculative — every one is backed by declared
+# R-* fact rows, except `resources`, which is deliberately fact-free (it owns
+# framing and mechanism, points at the owners, and declares NO required_ids).
+pages:
+  - { slug: index,         template: homepage, kind: home,    title: "California Liquor License Brokers | Buy, Sell & Transfer ABC Licenses — Liquor License Agents" }
+  - { slug: about,         template: about-1,  kind: about,   title: "About Liquor License Agents | 20+ Years Brokering California ABC Licences" }
+  - { slug: services,      template: service-1, kind: service, title: "Liquor Licence Brokerage Services | Buy, Sell, Transfer & Value — California" }
+  - { slug: licence-types, template: service-1, kind: service, title: "California ABC Licence Types 21, 47 & 48 Explained" }
+  - { slug: inventory,     template: shop-1,   kind: shop,    title: "Liquor Licences For Sale in California | Live ABC Inventory & Pricing" }
+  # ADDED 2026-07-29 on owner instruction. ONE parent page with inner tabs — explicitly NOT
+  # per-location pages ("you DO NOT need to create separate pages for each location. Just the
+  # parent page"). Structure mirrors the client's own live nav: location -> licence type.
+  # 14 tabs (California statewide + 13 markets) x the 5 declared types R-CERT-01..05.
+  - { slug: locations,     template: service-1, kind: service, title: "Where We Broker Liquor Licences in California | Markets & Coverage" }
+  - { slug: process,       template: service-1, kind: service, title: "How a California Liquor Licence Transfer Works | 6 Phases, 60–120 Days" }
+  - { slug: resources,     template: blog-1,   kind: blog,    title: "California Liquor Licensing Knowledge Base | Guides & Explainers" }
+  - { slug: faq,           template: about-1,  kind: about,   title: "California Liquor Licence FAQs | Cost, Timelines, City Approval" }
+  - { slug: contact,       template: about-1,  kind: about,   title: "Contact a California Liquor Licence Broker | 800.799.9081" }
+
+templated: []
+funnels:   []
+
+# Services / B2B site with no platform surface (no auth, no cart, no checkout).
+# The conversion goal is `request_quote`; its destination is the real `contact` page.
+platform_pages: []

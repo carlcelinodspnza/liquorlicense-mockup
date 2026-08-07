@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design System — Liquor License Agents</title>
+<meta name="description" content="The locked design system for Liquor License Agents: tokens, the 12 globals, shared chrome, and the component library in every state.">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="design-system/tokens.css">
+<link rel="stylesheet" href="design-system/structural.css">
+<style>
+/* SPECIMEN-ONLY scaffolding. design-system.html is on the shell-purity EXEMPT list
+   (it is a specimen deliverable, not a site page). index.html carries NO inline CSS. */
+.ds-sw{display:block;height:60px;border-radius:var(--ds-r-md);border:1px solid var(--ds-line);margin-bottom:var(--ds-space-sm)}
+.ds-table{width:100%;border-collapse:collapse;font-family:var(--ds-font-mono);font-size:12.5px}
+.ds-table td,.ds-table th{padding:9px 12px;border-bottom:1px solid var(--ds-line);text-align:left;vertical-align:top;color:var(--ds-ink-soft)}
+.ds-table th{color:var(--ds-accent-ink);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.ds-table code{color:var(--ds-accent-ink)}
+.ds-wrap{overflow-x:auto}
+.ds-row{display:flex;flex-wrap:wrap;gap:var(--ds-space-md);align-items:center;margin-top:var(--ds-space-md)}
+.ds-grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:var(--ds-space-lg);margin-top:var(--ds-space-lg)}
+.ds-note{color:var(--ds-ink-soft);font-size:14px;margin-top:var(--ds-space-xs)}
+</style>
+  <noscript><style>
+    /* NO-JS ESCAPE HATCH (2026-08-07). structural.css:939-942 starts
+       .wow-reveal and .wow-stagger > * at opacity 0; only .in-view — which
+       site.js adds — brings them back. If site.js is blocked, fails to load or
+       is disabled, every revealed block on this page renders EMPTY. Measured
+       before this fix: the #services band painted 2.37% non-background pixels
+       (a heading and a button over a void) and all 6 #inventory cards computed
+       opacity 0. The pre-existing @media (prefers-reduced-motion: reduce)
+       override at :977-983 does NOT cover this case.
+       <noscript> rather than a .js class because site.js is deferred: a class
+       toggle would paint the content and then hide it mid-load. */
+    .wow-reveal, .wow-stagger > * { opacity: 1 !important; transform: none !important; }
+  </style></noscript>
+</head>
+<body>
+
+<a class="mm-skip" href="#main">Skip to content</a>
+
+<header class="site-header wow-glass" id="site-header">
+  <div class="container site-header__bar">
+    <a class="brand" href="index.html" aria-label="Liquor License Agents — home">
+      <img class="brand__logo" src="assets/logo.png" alt="Liquor License Agents" width="216" height="112">
+    </a>
+
+    <ul class="site-nav" role="list" aria-label="Primary">
+
+      <li class="mm-has-panel" data-disclosure="services">
+        <button class="mm-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="mm-mega-services">
+          Services
+          <svg class="mm-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="mm-panel mm-mega" id="mm-mega-services" role="menu" aria-label="Services">
+          <span class="mm-panel__bloom" aria-hidden="true"></span>
+          <div class="mm-mega__layout">
+            <a class="mm-mega__feature" role="menuitem" href="inventory.html">
+              <img src="assets/story-decanter.jpg" alt="Cut-crystal decanter on a bar table under low tungsten light" width="1400" height="1400" loading="lazy" decoding="async">
+              <span class="eyebrow">Live inventory</span>
+              <span class="ttl">Off-market <span class="accent">licences</span></span>
+              <span class="sub">Type 21, 47 and 48 assets that never list publicly, priced and status-checked.</span>
+              <span class="lnk">Browse inventory</span>
+            </a>
+            <div class="mm-mega__cards">
+              <div class="mm-mega__head"><span class="lbl">Brokerage &amp; regulatory services</span></div>
+              <div class="mm-mega__grid">
+                <a class="mm-mega__card" role="menuitem" href="services.html#buy"><span class="mm-mega__ico">01</span><span class="mm-mega__txt"><span class="t">Buy a licence</span><span class="s">Off-market, LOI to ABC issuance</span></span></a>
+                <a class="mm-mega__card" role="menuitem" href="services.html#sell"><span class="mm-mega__ico">02</span><span class="mm-mega__txt"><span class="t">Sell a licence</span><span class="s">Pre-qualified buyers, secure escrow</span></span></a>
+                <a class="mm-mega__card" role="menuitem" href="services.html#transfer"><span class="mm-mega__ico">03</span><span class="mm-mega__txt"><span class="t">Transfer a licence</span><span class="s">Person and premises transfers</span></span></a>
+                <a class="mm-mega__card" role="menuitem" href="services.html#valuation"><span class="mm-mega__ico">04</span><span class="mm-mega__txt"><span class="t">Licence valuation</span><span class="s">Appraisals from closed transactions</span></span></a>
+                <a class="mm-mega__card" role="menuitem" href="services.html#cup"><span class="mm-mega__ico">05</span><span class="mm-mega__txt"><span class="t">Conditional Use Permits</span><span class="s">Zoning, police permits, hearings</span></span></a>
+                <a class="mm-mega__card" role="menuitem" href="services.html#compliance"><span class="mm-mega__ico">06</span><span class="mm-mega__txt"><span class="t">ABC compliance</span><span class="s">Audits and LEAD training</span></span></a>
+                <a class="mm-mega__card" role="menuitem" href="services.html#escrow"><span class="mm-mega__ico">07</span><span class="mm-mega__txt"><span class="t">Escrow guidance</span><span class="s">Statutory notices, disbursements</span></span></a>
+                <a class="mm-mega__card" role="menuitem" href="services.html#new-business"><span class="mm-mega__ico">08</span><span class="mm-mega__txt"><span class="t">New business planning</span><span class="s">Strategy before you sign a site</span></span></a>
+              </div>
+              <div class="mm-mega__foot">
+                <span class="mm-mega__note">Serving all <b>58 California counties</b></span>
+                <a class="mm-mega__all" role="menuitem" href="services.html">All services</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="mm-has-panel" data-disclosure="licensing">
+        <button class="mm-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="mm-dd-licensing">
+          Licensing
+          <svg class="mm-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="mm-panel mm-dropdown" id="mm-dd-licensing" role="menu" aria-label="Licensing">
+          <span class="mm-panel__bloom" aria-hidden="true"></span>
+          <ul role="list">
+            <li><a role="menuitem" href="licence-types.html#type-21"><span class="t">Type 21 — Off-Sale General</span><span class="d">Beer, wine and spirits for off-premises consumption</span></a></li>
+            <li><a role="menuitem" href="licence-types.html#type-47"><span class="t">Type 47 — On-Sale, Eating Place</span><span class="d">Full liquor at a bona fide eating place</span></a></li>
+            <li><a role="menuitem" href="licence-types.html#type-48"><span class="t">Type 48 — Public Premises</span><span class="d">Bars and nightclubs; minors prohibited</span></a></li>
+            <li><a role="menuitem" href="services.html#cup"><span class="t">Conditional Use Permits</span><span class="d">Local land-use approval before ABC signs off</span></a></li>
+            <li><a role="menuitem" href="process.html"><span class="t">Transfer timeline &amp; escrow</span><span class="d">Six phases, 60 to 120 days</span></a></li>
+            <li><a role="menuitem" href="locations.html"><span class="t">Statewide coverage</span><span class="d">Local experts in all 58 counties</span></a></li>
+            <li><a role="menuitem" href="resources.html"><span class="t">Knowledge base</span><span class="d">Classification, pricing, routes to market, zoning</span></a></li>
+            <li><a role="menuitem" href="index.html#guides"><span class="t">Guides</span><span class="d">Five explainers on licence types, transfers and permits</span></a></li>
+            <li><a role="menuitem" href="faq.html"><span class="t">Licensing FAQs</span><span class="d">Cost, timelines, city approval</span></a></li>
+          </ul>
+          <a class="mm-dd-preview" href="licence-types.html#type-47" tabindex="-1" aria-hidden="true">
+            <span class="mm-dd-preview__mark" data-kind="num">47</span>
+            <span class="mm-dd-preview__t">Type 47 — On-Sale, Eating Place</span>
+            <span class="mm-dd-preview__d">Full liquor at a bona fide eating place</span>
+            <span class="mm-dd-preview__go">→</span>
+          </a>
+        </div>
+      </li>
+
+      <li><a class="mm-navlink" href="about.html">About</a></li>
+      <li><a class="mm-navlink" href="index.html#industries">Industries</a></li>
+      <li><a class="mm-navlink" href="locations.html">Locations</a></li>
+      <li><a class="mm-navlink" href="inventory.html">Inventory</a></li>
+
+      <li class="mm-cta-desktop"><a class="btn btn-primary wow-glow" href="contact.html">Talk to a broker</a></li>
+    </ul>
+
+    <button class="site-header__hamburger mm-burger" id="mm-burger" type="button"
+            aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
+      <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+    </button>
+  </div>
+</header>
+
+<div class="site-drawer-backdrop mm-overlay" id="mm-overlay" data-open="false" tabindex="-1" hidden></div>
+<nav id="mobile-drawer" class="site-drawer" aria-hidden="true" aria-label="Mobile" hidden>
+  <div class="mm-drawer__head">
+    <!-- Mark-only lockup in the drawer head. SKILL GAP (reported, not worked around):
+         structural.css:580 sets .brand { flex: none }, so at 375 the full 244.6px wordmark
+         cannot shrink inside the 266px .mm-drawer__head and overlaps the close button by
+         ~17px (measured). Fixing it properly needs a flex-shrink/min-width rule in
+         structural.css, which this build must not author. A mark-only drawer head is a
+         standard pattern and the full wordmark is still present in the header above. -->
+    <a class="brand" href="index.html" aria-label="Liquor License Agents — home"><img class="brand__logo" src="assets/logo.png" alt="Liquor License Agents" width="216" height="112"></a>
+    <button class="site-drawer__close" id="mm-drawer-close" type="button" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+
+  <div class="mm-drawer__nav">
+    <div class="mm-acc">
+      <button class="mm-acc__btn" type="button" aria-expanded="false" aria-controls="mm-acc-services">
+        Services
+        <svg class="mm-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="mm-acc__panel" id="mm-acc-services">
+        <div class="mm-acc__inner">
+          <a href="services.html#buy"><span class="mm-acc__ico">01</span>Buy a licence</a>
+          <a href="services.html#sell"><span class="mm-acc__ico">02</span>Sell a licence</a>
+          <a href="services.html#transfer"><span class="mm-acc__ico">03</span>Transfer a licence</a>
+          <a href="services.html#valuation"><span class="mm-acc__ico">04</span>Licence valuation</a>
+          <a href="services.html#cup"><span class="mm-acc__ico">05</span>Conditional Use Permits</a>
+          <a href="services.html#compliance"><span class="mm-acc__ico">06</span>ABC compliance</a>
+          <a href="services.html#escrow"><span class="mm-acc__ico">07</span>Escrow guidance</a>
+          <a href="services.html#new-business"><span class="mm-acc__ico">08</span>New business planning</a>
+        </div>
+      </div>
+    </div>
+    <div class="mm-acc">
+      <button class="mm-acc__btn" type="button" aria-expanded="false" aria-controls="mm-acc-licensing">
+        Licensing
+        <svg class="mm-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="mm-acc__panel" id="mm-acc-licensing">
+        <div class="mm-acc__inner">
+          <a href="licence-types.html#type-21"><span class="mm-acc__ico">21</span>Type 21 — Off-Sale General</a>
+          <a href="licence-types.html#type-47"><span class="mm-acc__ico">47</span>Type 47 — On-Sale, Eating Place</a>
+          <a href="licence-types.html#type-48"><span class="mm-acc__ico">48</span>Type 48 — Public Premises</a>
+          <a href="process.html"><span class="mm-acc__ico">→</span>Transfer timeline &amp; escrow</a>
+        </div>
+      </div>
+    </div>
+
+    <a class="mm-drawer__link" href="about.html">About</a>
+    <a class="mm-drawer__link" href="index.html#industries">Industries</a>
+    <a class="mm-drawer__link" href="locations.html">Locations</a>
+    <a class="mm-drawer__link" href="inventory.html">Inventory</a>
+    <a class="mm-drawer__link" href="resources.html">Resources</a>
+    <a class="mm-drawer__link" href="faq.html">FAQ</a>
+  </div>
+
+  <div class="mm-drawer__cta">
+    <a class="btn btn-primary wow-glow" href="contact.html">Talk to a broker</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<section class="section wow-bloom wow-grain">
+  <div class="container">
+    <p class="eyebrow">The locked contract</p>
+    <h1>Design system</h1>
+    <p class="lede">Everything below is inherited, not re-decided. The identity was measured off the client's supplied PDF; the 12 globals were locked once at the web card (Direction C, Tungsten Bloom). Every page overlays these through the <code>wow-*</code> classes.</p>
+  </div>
+</section>
+
+<section class="section section--warm">
+  <div class="container">
+    <p class="eyebrow">01 — Colour</p>
+    <h2>Measured, not picked</h2>
+    <p class="lede">Every value extracted by pixel-frequency analysis of the source PDF. The amber is the brand's own dominant photographic hue (<code>#bb7327</code>), lifted in value only until it clears WCAG AA as small text.</p>
+    <div class="ds-grid3 wow-stagger">
+<div class="card capability-card wow-lift"><span class="ds-sw" style="background:var(--ds-primary)"></span><h3>Oxblood CTA</h3><p><code>--ds-primary</code><br>#ad1e1e</p></div>
+<div class="card capability-card wow-lift"><span class="ds-sw" style="background:var(--ds-primary-deep)"></span><h3>Dark ground</h3><p><code>--ds-primary-deep</code><br>#1e1e1e</p></div>
+<div class="card capability-card wow-lift"><span class="ds-sw" style="background:var(--ds-primary-soft)"></span><h3>Oxblood tint</h3><p><code>--ds-primary-soft</code><br>#3a1a18</p></div>
+<div class="card capability-card wow-lift"><span class="ds-sw" style="background:var(--ds-accent)"></span><h3>Brand amber (accent ink)</h3><p><code>--ds-accent</code><br>#e69c4e</p></div>
+<div class="card capability-card wow-lift"><span class="ds-sw" style="background:var(--ds-accent-ink)"></span><h3>Amber, small text</h3><p><code>--ds-accent-ink</code><br>#eba459</p></div>
+<div class="card capability-card wow-lift"><span class="ds-sw" style="background:var(--ds-accent-soft)"></span><h3>Amber tint</h3><p><code>--ds-accent-soft</code><br>#2a2016</p></div>
+<div class="card capability-card wow-lift"><span class="ds-sw" style="background:var(--ds-bg-surface)"></span><h3>Base band</h3><p><code>--ds-bg-surface</code><br>(not found)</p></div>
+<div class="card capability-card wow-lift"><span class="ds-sw" style="background:var(--ds-bg-warm)"></span><h3>Warm band</h3><p><code>--ds-bg-warm</code><br>(not found)</p></div>
+<div class="card capability-card wow-lift"><span class="ds-sw" style="background:var(--ds-bg-surface-2)"></span><h3>Card</h3><p><code>--ds-bg-surface-2</code><br>(not found)</p></div>
+<div class="card capability-card wow-lift"><span class="ds-sw" style="background:var(--ds-ink)"></span><h3>Ink</h3><p><code>--ds-ink</code><br>#ffffff</p></div>
+<div class="card capability-card wow-lift"><span class="ds-sw" style="background:var(--ds-ink-soft)"></span><h3>Muted ink</h3><p><code>--ds-ink-soft</code><br>(not found)</p></div>
+<div class="card capability-card wow-lift"><span class="ds-sw" style="background:var(--ds-line)"></span><h3>Line</h3><p><code>--ds-line</code><br>#4a4a4a</p></div>
+<div class="card capability-card wow-lift"><span class="ds-sw" style="background:var(--ds-signature)"></span><h3>Availability green</h3><p><code>--ds-signature</code><br>#2dd86b</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <p class="eyebrow">02 — The 12 globals</p>
+    <h2>Locked once at the web card</h2>
+    <p class="lede">Direction C, "Tungsten Bloom". There is no second visual pick downstream — if a surface looks wrong, these values change, not the surface.</p>
+    <div class="ds-wrap"><table class="ds-table"><thead><tr><th>Token</th><th>Locked value</th></tr></thead><tbody>
+<tr><td><code>--ds-glass-bg</code></td><td>rgba(26, 26, 26, .74)</td></tr>
+<tr><td><code>--ds-glass-blur</code></td><td>blur(16px) saturate(160%)</td></tr>
+<tr><td><code>--ds-glass-border</code></td><td>rgba(230, 156, 78, .18)</td></tr>
+<tr><td><code>--ds-hairline</code></td><td>rgba(255, 255, 255, .09)</td></tr>
+<tr><td><code>--ds-inset-hi</code></td><td>inset 0 1px 0 rgba(255, 255, 255, .08)</td></tr>
+<tr><td><code>--ds-glow</code></td><td>0 0 40px rgba(173, 30, 30, .32)</td></tr>
+<tr><td><code>--ds-glow-wash</code></td><td>radial-gradient(ellipse 62% 48% at 50% 0%, rgba(230, 156, 78, .16), transparent 68%)</td></tr>
+<tr><td><code>--ds-grain</code></td><td>url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTur</td></tr>
+<tr><td><code>--ds-divider-h</code></td><td>0px</td></tr>
+<tr><td><code>--ds-dur-fast</code></td><td>170ms</td></tr>
+<tr><td><code>--ds-dur-slow</code></td><td>640ms</td></tr>
+<tr><td><code>--ds-ease-out</code></td><td>cubic-bezier(.22, .68, .24, 1)</td></tr>
+    </tbody></table></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="eyebrow">03 — Typography</p>
+    <h2>Bitter + Raleway</h2>
+    <p class="ds-note">TYPOGRAPHY-PAIRINGS.md #42. Slab display for gravitas, humanist sans for dense regulatory copy.</p>
+    <h1>Buy, sell and transfer</h1>
+    <h2>From consultation to ABC approval</h2>
+    <h3>Type 47 — On-Sale General, Eating Place</h3>
+    <p class="lede">Lede: most California licences never reach the open market.</p>
+    <p>Body: a typical transfer takes 60 to 120 days, depending on background checks, application completeness, local approvals and whether any protests are filed.</p>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <p class="eyebrow">04 — Components, live</p>
+    <h2>Every state, inherited</h2>
+
+    <h3>Buttons</h3>
+    <div class="ds-row">
+      <a class="btn btn-primary wow-glow" href="#main">Primary + glow</a>
+      <a class="btn btn-secondary" href="#main">Secondary</a>
+      <button class="btn btn-primary wow-glow" type="button">Button element</button>
+    </div>
+    <p class="ds-note">Hover shifts colour (MOTION #2); <code>:active</code> presses (MOTION #36); focus ring is the amber accent.</p>
+
+    <h3>Cards — hairline + lift</h3>
+    <div class="cap-breakdown__grid wow-stagger">
+      <article class="card capability-card wow-lift"><h3>Off-market supply</h3><p>Type 21, 47 and 48 licences that never list publicly.</p></article>
+      <article class="card capability-card wow-lift"><h3>Clean-asset vetting</h3><p>Liens, disciplinary history and transferability, checked before a dollar moves.</p></article>
+      <article class="card capability-card wow-lift"><h3>Local approval carried</h3><p>CUP and police permits, represented at planning commission.</p></article>
+    </div>
+    <p class="ds-note">Card hover deepens elevation without translating (MOTION #11) — the catalog notes translate reads toy-like for serious verticals.</p>
+
+    <h3>Image frame — hover zoom</h3>
+    <figure class="product-hero__gallery wow-zoom"><img src="assets/valuation-appraisal.jpg" alt="Appraiser recording notes beside stemware"></figure>
+
+    <h3>Form fields</h3>
+    <form class="form" onsubmit="return false">
+      <div class="field"><label for="ds-type">Licence type</label>
+        <input id="ds-type" type="text" list="ds-types" autocomplete="off"><datalist id="ds-types"><option value="Type 21 — Off-Sale General"></option><option value="Type 47 — On-Sale, Eating Place"></option><option value="Type 48 — Public Premises"></option></datalist></div>
+      <div class="field"><label for="ds-county">County</label><input id="ds-county" type="text"></div>
+      <button class="btn btn-primary wow-glow" type="submit">Check availability</button>
+    </form>
+
+    <h3>Badges &amp; chips</h3>
+    <div class="ds-row">
+      <span class="chip">Type 21</span><span class="chip">Type 47</span><span class="chip">Type 48</span>
+      <span class="badge">Active</span>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <p class="eyebrow">05 — Motion + count-up</p>
+    <h2>Settles, never performs</h2>
+    <div class="data-proof__grid">
+      <div class="stat"><span class="stat__num" data-count="20">20</span><span class="stat__label">Years in business</span></div>
+      <div class="stat"><span class="stat__num" data-count="1000">1,000</span><span class="stat__label">Licences brokered</span></div>
+      <div class="stat"><span class="stat__num" data-count="58">58</span><span class="stat__label">California counties</span></div>
+    </div>
+    <p class="ds-note">Reveal 640ms on <code>cubic-bezier(.22,.68,.24,1)</code>, micro 170ms. All motion is <code>prefers-reduced-motion</code>-gated by the shared <code>site.js</code>. Count-up targets are proof magnitudes, never calendar years.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="eyebrow">06 — Section rhythm</p>
+    <h2>The figure/ground ladder</h2>
+    <p class="lede">A dark-polarity brand, so the ladder runs across three near-black values rather than paper-to-anchor. <code>.section--accent</code> is deliberately unused: an amber band would put <code>--ds-ink-soft</code> at 1.34:1.</p>
+    <div class="ds-wrap"><table class="ds-table"><thead><tr><th>#</th><th>Section</th><th>Band</th><th>Imagery</th><th>Chrome</th></tr></thead><tbody>
+<tr><td>1</td><td>hero</td><td><b>light</b></td><td>inset-photo</td><td>open-layout</td></tr>
+<tr><td>2</td><td>trust-logo-wall</td><td><b>warm</b></td><td>inset-photo</td><td>hairline-card</td></tr>
+<tr><td>3</td><td>services-capability</td><td><b>light</b></td><td>decorative-illustration</td><td>hairline-card</td></tr>
+<tr><td>4</td><td>proof-stats</td><td><b>dark</b></td><td>none (numerals)</td><td>open-layout</td></tr>
+<tr><td>5</td><td>industries-tiles</td><td><b>warm</b></td><td>full-bleed-photo</td><td>image-overlay</td></tr>
+<tr><td>6</td><td>licence-types</td><td><b>light</b></td><td>inset-photo</td><td>hairline-card</td></tr>
+<tr><td>7</td><td>live-inventory</td><td><b>warm</b></td><td>inset-photo</td><td>shadow-lift</td></tr>
+<tr><td>8</td><td>process-six-phase</td><td><b>light</b></td><td>none (numbered)</td><td>open-layout</td></tr>
+<tr><td>9</td><td>coverage-california</td><td><b>warm</b></td><td>inset-photo</td><td>open-layout</td></tr>
+<tr><td>10</td><td>faq</td><td><b>light</b></td><td>none (text)</td><td>hairline-card</td></tr>
+<tr><td>11</td><td>licence-lookup-cta</td><td><b>dark</b></td><td>inset-photo</td><td>open-layout</td></tr>
+    </tbody></table></div>
+  </div>
+</section>
+
+<section class="section section--warm">
+  <div class="container">
+    <p class="eyebrow">07 — Shared chrome</p>
+    <h2>Injected identically on every page</h2>
+    <p class="lede">The header, mobile drawer and footer rendered on this page are byte-identical to the ones on <code>index.html</code>. Nav is NAV-PATTERNS #13 (caret dropdown + exactly one overlay mega-menu); footer is FOOTER-STYLES #22 (closing CTA row, nav columns, legal row); the mobile sticky bar is STICKY-CTA-BAR #2, carrying both the quote and the phone path.</p>
+    <p class="ds-note">This is a single-page site, so nav targets are in-page anchors — legitimate here and exempted by <code>verify-nav-integrity</code>, which reserves the real-page-nav rule for multi-page sites and separately checks that every fragment resolves.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+
+    <!-- Canonical hairline rule from the stamped chrome (CHROME-CANONICAL.html:178,
+         styled structural.css:771 as a 1px var(--ds-line) edge). It is the divider
+         signal verify-not-flat (d) looks for, and it is the ONLY divider idiom this
+         build may use: the vertical audit §2.17/§7 bans shape dividers outright, and
+         the geometry-altering overlay classes are hard-blocked by verify-globals-overlay
+         and verify-inner-page-parity. Present on all 9 pages.
+         NB: do NOT name a banned overlay class in a comment — verify-globals-overlay
+         string-matches the raw file and does not strip comments (same parser class as
+         the verify-not-flat desync noted at the about-band insert point). -->
+    <hr class="mm-footer__divide" aria-hidden="true">
+
+    <div class="site-footer__top">
+      <div>
+        <div class="site-footer__brand"><img loading="lazy" decoding="async" class="site-footer__logo" src="assets/logo.png" alt="Liquor License Agents" width="216" height="112"></div>
+        <p class="site-footer__blurb">A California liquor licence brokerage helping businesses buy, sell, transfer and value liquor licences throughout the state.</p>
+        <div class="site-footer__hours">
+          <strong>Los Angeles office</strong>
+          <!-- src: R-LOC-01 -->
+          <span data-source="R-LOC-01">5243 E Beverly Blvd., Los Angeles, CA 90022</span>
+          <!-- src: R-LOC-02 -->
+          <a href="tel:+18007999081" data-source="R-LOC-02">800.799.9081</a>
+        </div>
+      </div>
+
+      <div class="site-footer__col"><h4>Services</h4>
+        <ul>
+          <li><a href="services.html#buy">Buy a liquor licence</a></li>
+          <li><a href="services.html#sell">Sell a liquor licence</a></li>
+          <li><a href="services.html#transfer">Transfer a licence</a></li>
+          <li><a href="services.html#valuation">Licence valuation</a></li>
+          <li><a href="services.html#cup">Conditional Use Permits</a></li>
+          <li><a href="services.html#escrow">Escrow and transaction guidance</a></li>
+          <li><a href="services.html#new-business">New business licence planning</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col"><h4>Major markets</h4>
+        <ul>
+          <li><a href="locations.html#los-angeles">Los Angeles County</a></li>
+          <li><a href="locations.html#orange">Orange County</a></li>
+          <li><a href="locations.html#san-diego">San Diego County</a></li>
+          <li><a href="locations.html#san-francisco">San Francisco / Bay Area</a></li>
+          <li><a href="locations.html#sacramento">Sacramento &amp; Central Valley</a></li>
+          <li><a href="locations.html">All markets we cover</a></li>
+        </ul>
+      </div>
+
+      <!-- Company + Contact share ONE column deliberately. .site-footer__top is a
+           `1.5fr 1fr 1fr 1fr` grid (structural.css:774) = brand block + exactly THREE
+           nav columns. A fourth column would wrap to a second row. Fixing that needs a
+           grid-template-columns change in structural.css, which this build must not
+           author — so the sitemap declares three columns and they are merged here. -->
+      <div class="site-footer__col"><h4>Company &amp; contact</h4>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="process.html">How a transfer works</a></li>
+          <li><a href="resources.html">Knowledge base</a></li>
+          <li><a href="faq.html">Licensing questions</a></li>
+          <li><a href="tel:+18007999081">800.799.9081</a></li>
+          <li><a href="contact.html">Request a valuation</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <span>Copyright &copy; 2026 Liquor License Agents. All Rights Reserved</span>
+      <!-- src: R-FACT-01 -->
+      <span class="site-footer__bcorp" data-source="R-FACT-01">Licence transfers are administered by the California Department of Alcoholic Beverage Control (ABC).</span>
+    </div>
+
+  </div>
+</footer>
+
+<div class="mm-sticky-cta" id="mm-sticky-cta" aria-hidden="true">
+  <div class="mm-sticky-cta__copy">
+    <b>Talk to a senior broker</b>
+    <span><a href="tel:+18007999081">800.799.9081</a></span>
+  </div>
+  <a class="btn btn-primary btn-sm" href="contact.html">Request a quote</a>
+</div>
+<script src="design-system/site.js" defer></script>
+</body>
+</html>

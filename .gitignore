@@ -1,0 +1,20 @@
+# Working artefacts — not part of the site the team is reviewing.
+# Excluded on the owner's instruction to keep the clone small (240MB -> ~90MB).
+# NOTE: .gitignore does NOT support trailing comments on a pattern line — the
+# comment becomes part of the pattern and the rule silently matches nothing.
+
+# 52 full-page screenshots, 100MB
+_captures/
+
+# superseded build artefacts, 38MB
+_archive/
+
+# per-block rollback points, 12MB
+_backups/
+
+_gate-receipts/
+_webcard-renders/
+
+.DS_Store
+**/.DS_Store
+Thumbs.db
