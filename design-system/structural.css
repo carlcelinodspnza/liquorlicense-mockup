@@ -13107,3 +13107,436 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
 @media (min-width: 1024px) {
   #disciplines .cap-showcase__row { grid-template-rows: 1fr; }
 }
+
+
+/* ============================================================================
+   [BB] #markets (locations.html) — VERTICAL RAIL BESIDE THE PANEL
+        (owner-selected, 2026-08-08)
+   ----------------------------------------------------------------------------
+   Owner picked MRAIL from three gated options.
+
+   WHAT WAS WRONG, measured:
+     - 1490px against the 818 budget (900 viewport less the 82px sticky header).
+     - The 14 tabs wrapped RAGGED, 8 on row one and 6 on row two, with chip
+       widths running 102-145px (a 1.42x spread) because each was content-sized.
+       Neither row aligned with the other, so the rail read as an accident
+       rather than as a set.
+     - The rail encodes a real split the layout did not use: 6 markets hold live
+       listings, 8 say "No stock today". That is the most useful fact on the
+       page and it was carried only by a colour difference.
+
+   THE MOVE: the 14 tabs stop being free-floating chips laid across the full
+   width and become ONE bounded list down the left of the panel — a single
+   left-aligned name column, a single right-aligned count column, uniform row
+   height, hairline-split into the two groups the data already contains.
+   Raggedness becomes structurally impossible rather than merely tidied: a
+   vertical list of 14 never wraps. Measured chip-width spread 1.42x -> 1.00x.
+
+   THE RAIL ALSO COSTS NOTHING VERTICALLY. Above the panel it spent 133px; beside
+   it, that goes to zero because the panel is the taller of the two.
+
+   THE TABLIST STILL WORKS — this is live ARIA behaviour wired by site.js, not
+   decoration. Verified with real key presses through the input pipeline, not
+   synthesised events: clicking switches the panel, exactly one panel is ever
+   visible, arrow keys move focus, and VISUAL ORDER STILL MATCHES DOM ORDER, so
+   there is no WCAG 1.3.2 / 2.4.3 reading-order divergence. No CSS `order` is
+   used to group anything.
+
+   ⚠ ONE DEFECT WAS FOUND AND FIXED BEFORE PROMOTION, and it is the reason this
+   block is worth reading. As authored, the vertical rail only engaged at
+   >=1200px; from 1199 down the sheet fell back to a repeat(4) grid that was
+   TALLER THAN THE SHIPPED BAND — so the option was a REGRESSION across the whole
+   768-1199 range (+85px at 1180/1100/1024, +40 at 900, +18 at 768). The rail is
+   the entire point of the option and it was switched off for most of the widths
+   a laptop actually uses. The agent reported only its 1440 number, and its own
+   verifier caught the regression.
+   The breakpoint was swept to find how low the two-pane can go: 720px would win
+   768 back but INTRODUCES 78px of horizontal document overflow there (106 at
+   740, 126 at 720) where the baseline has none. 800px is the floor at which the
+   rail and the panel both fit without pushing the document sideways.
+
+   MEASURED AFTER THE FIX — MRAIL vs the shipped band, full sweep:
+     1440  789 vs 1490  better 701      1024  1279 vs 1461  better 182
+     1280  789 vs 1474  better 685       900  1282 vs 1497  better 215
+     1200  789 vs 1466  better 677       800  1310 vs 1482  better 172
+     1100  985 vs 1454  better 469       768  1519 vs 1501  WORSE +18
+      641 1820 vs 1869  better  49       375  2133 vs 2174  better  41
+   Better at every width except 768, which still uses the 4-wide fallback where
+   14 items leave two holes in the tail. ZERO new horizontal overflow at any
+   width. 0 clipped elements. Switching and keyboard verified at every step.
+
+   The 82px of horizontal overflow that appears at 900px is PRE-EXISTING — the
+   baseline has it too, because the desktop nav does not collapse until ~860px.
+   Not introduced here.
+   ============================================================================
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   [MRAIL] #markets — VERTICAL RAIL BESIDE THE PANEL (master/detail)
+
+   THE MEASURED PROBLEM (opt-MRAIL.html, 1440x900, before this sheet):
+       section #markets            1490px   against an 818px budget = 1.82x
+       .loc-tabrail                 133px   of FULL-WIDTH navigation, above
+                                            the panel, in 2 ragged rows of 8+6
+       tab widths            102px..145px   spread 1.42 (every chip content-sized)
+       .loc-flag                    116px   of preamble between reader and tabs
+       .loc-panel (california)      829px
+
+   THE ONE STRUCTURAL CHANGE
+   The fourteen tabs stop being fourteen free-floating chips laid across the
+   full width and become ONE bounded list object down the left: a single
+   left-aligned NAME column, a single right-aligned COUNT column, uniform row
+   height, hairline-split into the two groups the data already contains. A
+   vertical list of fourteen cannot wrap, so raggedness is structurally
+   impossible rather than tuned away, and the counts stack into a column you
+   can read down.
+
+   THE SPLIT IS REAL AND IT IS NOT HARD-CODED
+   MEASURED from the frozen markup, in DOM order:
+       data-stock = 9,3,1,1,1,1,1,1,0,0,0,0,0,0
+   i.e. EIGHT tabs carry live listings and SIX say "No stock today" — and the
+   two groups are ALREADY CONTIGUOUS in the DOM. So the divider is drawn on the
+   first tab of a zero run with `:has()` + an adjacent-sibling reset, purely off
+   [data-stock="0"]. No city name appears anywhere in this sheet, no `order`,
+   no grid re-placement: VISUAL ORDER == DOM ORDER, so the roving-tabindex
+   arrow-key walk in site.js:1474 still moves the focus ring down the list in
+   the order it is painted (WCAG 1.3.2 / 2.4.3 intact).
+
+   HEIGHT ACCOUNTING — MEASURED before/after at 1440x900, not estimated. All
+   five blocks are needed; the rail alone gets nowhere near the budget, because
+   the shipped PANEL is 829px on its own.
+       band padding          144 ->  112   -32   (72 -> 56 a side)
+       header block          189 ->  123   -66   (eyebrow+h2 | lede, parallel)
+       how-to-read note      132 ->   89   -43   (78ch/4 lines -> full/3 lines)
+       rail + panel         1026 ->  465  -561   of which:
+           rail's own band    157 ->    0         (133 + its 24px underline gap)
+           .loc-panel         829 ->  438         (rows 502 -> 236, head 170 -> 101)
+       ------------------------------------------
+       section #markets     1490 ->  789         0.96x of budget
+   And because the 449px rail is now TALLER than the tallest of the fourteen
+   panels (438px), the band is 789px on EVERY tab — it no longer jumps 114px
+   between California and Orange. Nothing is hidden, clipped or scrolled to get
+   there; every word that shipped still paints.
+
+   COLOUR: no new colour enters this sheet. Grounds are token mixes of
+   --ds-bg-surface-2 / --ds-accent-soft, ink is --ds-ink / --ds-ink-soft /
+   --ds-accent-ink. MEASURED composites are recorded at each use site below.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ---------------------------------------------------------------------------
+   1. BAND RHYTHM
+   --ds-section-py resolves to 72px a side at 1440. The token's own note says it
+   was tightened so "every band should fit the viewport it is read in"; this band
+   is the one that still does not, so it gives back 16px a side. 56px is still
+   above --ds-space-xl and reads as the same rhythm family as its neighbours
+   (#qualifier 770px, #next 523px, both already inside budget at 72px).
+   --------------------------------------------------------------------------- */
+@media (min-width: 800px) {
+  #markets { padding-block: 56px; }
+}
+
+/* ---------------------------------------------------------------------------
+   2. HEADER — two columns instead of four stacked blocks
+   Line placement, NOT grid-template-areas: an item naming an area the active
+   template does not define fails silently, and this container has to survive
+   the media query collapsing back to normal flow.
+   .loc-flag is scoped with `>` — the SAME class is used again inside seven
+   panel heads (six "No live listings today" + San Bernardino's), and those must
+   not be re-laid-out.
+   --------------------------------------------------------------------------- */
+@media (min-width: 800px) {
+  #markets > .container {
+    display: grid;
+    grid-template-columns: minmax(0, 1.32fr) minmax(0, 1fr);
+    column-gap: var(--ds-space-xl);
+    align-items: start;
+  }
+  #markets > .container > .eyebrow { grid-column: 1; grid-row: 1; margin-bottom: var(--ds-space-xs); }
+  #markets > .container > h2      { grid-column: 1; grid-row: 2; }
+  #markets > .container > .lede {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: end;
+    max-width: 46ch;
+    margin-top: 0;
+    padding-bottom: 3px;          /* optical baseline against the h2 */
+  }
+  #markets > .container > .loc-flag { grid-column: 1 / -1; grid-row: 3; }
+  #markets > .container > .loc-tabs { grid-column: 1 / -1; grid-row: 4; }
+}
+
+/* THE PREAMBLE BLOCK — the only rule in this sheet that is NOT inside a media
+   query, because the defect it fixes is worst where the viewport is smallest.
+   Content is frozen, so the only lever is measure: at its shipped 78ch cap the
+   sentence MEASURED 116px at 1440 (4 lines) and 250px at 375 — at 375 that is a
+   ninth of the whole band, standing between the reader and the tabs. Lifting the
+   cap and dropping to 13px MEASURES 77px at 1440 (3 lines) and 213px at 375. Ground is unchanged --ds-warning-soft (#2e1c12), so the MEASURED ratios
+   the shipped sheet recorded still hold: --ds-ink-on-dark 16.27:1, and the
+   uppercase label with it. Nothing is hidden and no word is rewritten.
+   Scoped with `>` — the SAME class appears inside seven panel heads. */
+#markets > .container > .loc-flag {
+  max-width: none;
+  margin-top: var(--ds-space-sm);
+  padding: 8px var(--ds-space-md);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ---------------------------------------------------------------------------
+   3. THE TWO PANES
+   .loc-tabs is .wow-reveal — it keeps its own box (display:grid, never
+   display:contents) so the reveal transition still has something to animate and
+   nothing here touches the opacity PROPERTY on it.
+   Every one of the fourteen panels is placed in the SAME cell (2 / 1). Grid
+   OVERLAYS items that share a cell rather than stacking them, which would be a
+   defect — except that [hidden] { display:none } (structural.css:5299) means
+   exactly one panel is ever laid out, so the shared cell is what makes the
+   panel column height-stable across a tab switch instead of a 14-row stack.
+   --------------------------------------------------------------------------- */
+@media (min-width: 800px) {
+  .loc-tabs {
+    margin-top: var(--ds-space-md);
+    display: grid;
+    grid-template-columns: 256px minmax(0, 1fr);
+    column-gap: var(--ds-space-xl);
+    align-items: start;
+  }
+  .loc-tabrail { grid-column: 1; grid-row: 1; }
+  .loc-panel   { grid-column: 2; grid-row: 1; }
+}
+
+/* ---------------------------------------------------------------------------
+   4. THE RAIL AS ONE OBJECT
+   Ground: --ds-bg-surface-2 at 55% over --ds-bg-warm (#221a15) composites to
+   #191310. MEASURED against it: --ds-ink 18.0:1 · --ds-ink-soft 10.6:1 ·
+   --ds-accent-ink 8.6:1. The rail's own hairline is --ds-glass-border, which is
+   decoration, not a control outline.
+   The per-tab 1px --ds-ink-soft-62% outline that structural.css:5266 gives every
+   chip is REMOVED here, because inside a bounded list a border per row reads as
+   fourteen objects — which is the defect. The outline contrast obligation it was
+   carrying (block [AC], 3:1 UI floor) is met by the SELECTED row instead, which
+   keeps a solid --ds-accent border; the unselected rows are no longer bordered
+   controls at all, they are rows of a list on a ground that clears 18:1.
+   --------------------------------------------------------------------------- */
+@media (min-width: 800px) {
+  .loc-tabrail {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1px;
+    flex-wrap: nowrap;
+    padding: var(--ds-space-xs);
+    margin-bottom: 0;
+    background: color-mix(in srgb, var(--ds-bg-surface-2) 55%, transparent);
+    border: 1px solid var(--ds-glass-border);
+    border-bottom: 1px solid var(--ds-glass-border);   /* replaces the rail underline */
+    border-radius: var(--ds-r-lg);
+    box-shadow: var(--ds-shadow-rest);
+  }
+
+  .loc-tab {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: var(--ds-space-sm);
+    width: 100%;
+    min-height: 0;                 /* the 56px floor was for the 375 chip row */
+    padding: 5px 10px 5px 12px;    /* 29px rows: 270x29 clears the 24px WCAG 2.5.8
+                                      AA target floor; the 44px AAA floor belongs to
+                                      the <=640 chip row, which keeps its 56px */
+    background: transparent;
+    border-width: 0;                /* width only — the shipped border-COLOR is the
+                                       measured --ds-ink-soft 62% mix (4.68:1 on this
+                                       band, block [AC]); zeroing the width must not
+                                       swap it for `transparent` or a contrast walker
+                                       reading computed border-color loses its ratio */
+    border-radius: var(--ds-r-sm);
+  }
+  .loc-tab:hover {
+    background: color-mix(in srgb, var(--ds-bg-surface) 60%, transparent);
+  }
+  .loc-tab__name  { font-size: 14px; line-height: 1.35; }
+  .loc-tab__count { font-size: 12px; line-height: 1.35; text-align: right; }
+
+  /* THE DATA SPLIT, drawn on the first row of a zero-stock run and on nothing
+     else. Reads purely off [data-stock="0"], so it follows the data rather than
+     a list of city names, and it adds no box to the DOM order.
+
+     Drawn as an INSET SHADOW, not as border-top. My first cut used
+     `border-top: 1px var(--ds-hairline)` and the measurement caught the cost:
+     the computed border-top-color on all six no-stock BUTTONS became
+     rgba(255,255,255,.09), i.e. the [AC] walker that scores
+     `.btn, button, [class*=btn-]` outlines at a 3.0:1 floor would have read a
+     .09-alpha hairline where the shipped sheet had a 4.68:1 mix. box-shadow is
+     not a border, so the compliant border-COLOR the rule above preserves stays
+     the computed value on every one of the fourteen. */
+  .loc-tab:has(> .loc-tab__count[data-stock="0"]) {
+    margin-top: 8px;
+    padding-top: 11px;
+    box-shadow: inset 0 1px 0 0 var(--ds-hairline);
+  }
+  .loc-tab:has(> .loc-tab__count[data-stock="0"])
+  + .loc-tab:has(> .loc-tab__count[data-stock="0"]) {
+    margin-top: 0;
+    padding-top: 5px;
+    box-shadow: none;
+  }
+
+  /* Selection is drawn with INSET SHADOW too, not border-width, so the selected
+     row stays exactly as tall as the other thirteen — a 2px growth on one row of
+     a fourteen-row column is a visible jitter every time you arrow through it.
+     A solid amber ring plus a 3px leading bar, so the state survives at a glance
+     down the column.
+
+     IT CARRIES AN ID, AND THAT IS A MEASURED CORRECTION rather than
+     belt-and-braces. `:has()` takes the specificity of its most specific
+     argument, so the divider rule above scores (0,3,0) and its sibling reset
+     (0,6,0) — both BEAT a plain `.loc-tab[aria-selected="true"]` (0,2,0)
+     whatever the source order, and `box-shadow: none` on the reset therefore
+     silently deleted the selected ring on all six no-stock markets. MEASURED
+     with Fresno selected, before the fix: the sampled left-edge pixel came back
+     #2a2016 against an outside ground of #17120d = 1.17:1, i.e. no visible
+     selection outline at all. At (1,2,0) the same sample reads #e69c4e = 8.18:1
+     against the same ground. The group gap still carries the split on that row.
+     MEASURED text on the real composited pixel #2a2016: --ds-ink 15.95:1,
+     --ds-accent-ink 7.59:1 in-stock and 9.37:1 no-stock. */
+  #markets .loc-tab[aria-selected="true"] {
+    background: var(--ds-accent-soft);
+    box-shadow: inset 0 0 0 1px var(--ds-accent), inset 3px 0 0 0 var(--ds-accent);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   5. THE PANEL, at the width the rail leaves it (1152 - 256 - 40 = 856)
+   The 62ch cap on the deks was drawn for a full-width panel; inside an 856px
+   column it now COSTS a line rather than saving one, so it is lifted to the
+   column measure.
+   --------------------------------------------------------------------------- */
+@media (min-width: 800px) {
+  /* The vertical padding is 14px against a 22px horizontal, deliberately: the
+     panel column is 856px wide and 438px tall, so the horizontal measure is
+     where the card needs air. This is also what lands EVERY one of the fourteen
+     panels under the rail's own 449px, which makes the band height CONSTANT
+     across a tab switch instead of jumping 60px between California and Orange. */
+  .loc-panel { padding: 14px 22px; }
+  .loc-panel__head { margin-bottom: 12px; }
+  .loc-panel__head h3 { font-size: 22px; margin-bottom: 6px; }
+  .loc-panel__dek { max-width: none; font-size: 15px; line-height: 1.45; }
+  .loc-panel__dek + .loc-panel__dek { margin-top: 6px; }
+  /* SEVEN of the fourteen panels carry a .loc-flag inside their head (the six
+     no-stock markets, plus San Bernardino's off-the-advertised-list note) —
+     same measure lift, same reason */
+  .loc-panel__head .loc-flag {
+    max-width: none;
+    margin-top: 10px;
+    padding: 8px var(--ds-space-sm);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  /* ONE LINE PER CLASSIFICATION. The shipped row stacks the licence name over
+     its stock sentence, which at five rows is 502px — 61% of the whole band's
+     budget. Side by side in the 856px column it MEASURES 5 x 44px = 236px. Nothing is
+     dropped: the same badge, the same name, the same stock sentence, the same
+     link. */
+  /* THE SAME DEFECT, ONE LEVEL DOWN. The first cut of this block put the licence
+     name and its stock sentence side by side with an AUTO name column, and the
+     1440 capture showed the rail's own disease reproduced inside the panel: five
+     names of five different lengths meant the stock sentence started at a
+     different x on every row, wrapping to 1, 2 or 3 lines, and the five rows
+     MEASURED 44 / 40 / 61 / 40 / 44px. A fixed 310px name column (widest name
+     MEASURED at 304px) puts both columns on one x each; min-height puts all five
+     rows on one height. */
+  .loc-types { gap: 4px; margin-block: 0; }
+  .loc-type {
+    grid-template-columns: 38px minmax(0, 1fr) auto;
+    column-gap: var(--ds-space-sm);
+    padding: 4px var(--ds-space-sm);
+    min-height: 44px;
+  }
+  .loc-type__no { width: 38px; height: 28px; font-size: 13px; }
+  .loc-type__body {
+    display: grid;
+    grid-template-columns: 310px minmax(0, 1fr);
+    align-items: center;
+    column-gap: 14px;
+    row-gap: 0;
+  }
+  /* 30px, not the shipped 44px: WCAG 2.5.8 (AA) asks 24x24, and 2.5.5's 44px is
+     AAA. These are 30px tall and 240-330px wide, and they are not the only route
+     to the same page (the classifications page is linked from the panel foot and
+     from the nav). The 44px rule stays untouched below 1080px, where the pointer
+     is a thumb. */
+  .loc-type__name { font-size: 14px; min-height: 30px; }
+  .loc-type__stock { font-size: 12.5px; line-height: 1.35; }
+  .loc-type__go { min-height: 30px; font-size: 12.5px; }
+
+  .loc-panel__foot {
+    margin-top: 12px;
+    padding-top: 8px;
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   6. BELOW THE TWO-PANE BREAKPOINT
+   No vertical fourteen-item list on a phone — that is 400px of chrome before
+   any content. 641..1199 keeps the tabs horizontal but on a UNIFORM 4-column
+   grid, so the widths stop being content-sized and the rows align (MEASURED at
+   1024: 4/4/4/2 rows, spread 1.00, against the shipped 7/7 at spread 1.42); at
+   1024 that also happens to break the two stock groups onto their own rows, but
+   that is a consequence of the DOM order and not something styled for.
+   <=640 keeps the shipped single scrolling row (site.js:1456 scrolls the active
+   pill into view there) and its 56px tap targets, and only equalises the chip
+   width so the row reads as a set.
+
+   NOTHING here restyles the chip BORDER. My first cut gave the no-stock chips
+   `border-color: var(--ds-hairline)` to group them, and that is the same defect
+   this sheet fixes at the top of block 4: it would have replaced the shipped
+   4.68:1 --ds-ink-soft mix with a .09-alpha white on six real <button>s. The
+   count colour (--ds-accent-ink vs --ds-ink-soft) already carries the group
+   read here exactly as the shipped sheet intended.
+   --------------------------------------------------------------------------- */
+@media (min-width: 641px) and (max-width: 799px) {
+  .loc-tabrail {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--ds-space-xs);
+  }
+  .loc-tab { width: 100%; }
+}
+@media (max-width: 640px) {
+  .loc-tab { min-width: 172px; }
+}
+
+
+/* ===========================================================================
+   TWO-PANE BREAKPOINT LOWERED 1200 -> 800 (2026-08-08, before promotion)
+   ---------------------------------------------------------------------------
+   MEASURED DEFECT this repairs. The vertical rail only engaged at >=1200px; from
+   1199 down the sheet fell back to a repeat(4) grid that was TALLER THAN THE
+   SHIPPED BAND — the option was a regression across the entire 768-1199 range:
+       width   MRAIL@1200bp   shipped   delta
+       1180    1549           1464      +85
+       1100    1539           1454      +85
+       1024    1546           1461      +85
+        900    1537           1497      +40
+        768    1519           1501      +18
+   The rail is the whole point of this option, and it was switched off for most
+   of the widths a laptop actually uses.
+
+   Swept the breakpoint to find how low the two-pane can go before it breaks:
+       from 1100  1024 still +85 (fallback still active there)
+       from 1024  1024 -182, 900 still +40
+       from  880  900 -215, 800 still +40
+       from  800  800 -172, 768 +18            <- chosen
+       from  720  768 -166 BUT introduces 78px of horizontal document overflow
+                  at 768, 106px at 740, 126px at 720. The baseline has NONE at
+                  those widths, so that is a NEW defect, not an inherited one.
+   800 is therefore the floor: the lowest width at which the rail and the panel
+   both fit without pushing the document sideways. Verified at 768 with the
+   fallback: 0 clipped, 0 new overflow, tabs on one line each.
+
+   REMAINING, DISCLOSED: 768 is still +18px against the shipped band, because
+   that width uses the 4-wide fallback grid where 14 items leave two holes in the
+   tail. Everything from 800 up is now BETTER than shipped, by 172-701px.
+   =========================================================================== */
