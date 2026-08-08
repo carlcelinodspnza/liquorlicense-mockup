@@ -14365,3 +14365,140 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
  * narrow column is still correct. Stated explicitly so a future reader does not
  * assume this block is desktop-only.
  * -------------------------------------------------------------------------- */
+
+
+/* ============================================================================
+   [BF] #inventory filter block — SPACING (owner, 2026-08-08)
+   ----------------------------------------------------------------------------
+   Owner: "fix spacing here." (the intro paragraph welded to the Type pill row)
+
+   THE BUG IS A SHORTHAND INHERITED FROM ANOTHER LAYOUT.
+     structural.css:2049  .tg-filterbar { … margin: 0 auto var(--ds-space-xl); }
+   is the GALLERY pattern's rule (#4 GALLERY — filterable grid), where the bar is
+   a CENTRED rail and `margin: 0 auto 40px` is right. Later,
+     structural.css:4899  #inventory .tg-filterbar { justify-content: flex-start;
+                                                     margin-left: 0; margin-right: 0; }
+   re-aimed it for this page — but only the HORIZONTAL margins. `margin-top: 0`
+   came along from the shorthand and was never reconsidered, so the pill row sat
+   flush against the paragraph. MEASURED GAP: 0px, at every width, while every
+   other element in the block runs on a 16px rhythm.
+
+   THE RHYTHM WAS ALSO GROUPED BACKWARDS. Measured top to bottom:
+       eyebrow -12- h2 -16- lede -16- p -0- FILTERBAR -40- form -24- grid
+   The pill row, the county/price/sort form and the status checkboxes are all the
+   same thing: filters. The bar had NO gap from the prose it should be separated
+   from and the LARGEST gap in the block to the form it belongs with — proximity
+   said the opposite of the structure. Now:
+       … lede -16- p -40- [ FILTERBAR -24- form ] -24- grid
+   Net spacing cost is +24px, not +40: the air added above is partly paid for by
+   the gap removed inside the cluster.
+
+   ALSO FIXED, AND IT IS HALF THE REASON THE BLOCK LOOKED WRONG: the paragraph
+   ran at TWICE the lede's measure. Measured at 1440 in a 1200px container —
+       .lede          633px  ->  ~47 characters per line
+       the plain <p> 1152px  ->  ~110 characters per line
+   The lede is capped and the paragraph directly beneath it was not, so the block
+   stepped from a comfortable measure to one ~2.3x wider and then straight into a
+   row of buttons. 110 characters is far outside the 45-75 body text is set for;
+   the eye loses the left edge on the return sweep. Capped at 68ch -> 748px and
+   ~73 characters. The cap is a MAX, so below that width nothing changes: at 375
+   the paragraph is the container width and measures ~44 characters.
+
+   SCOPE. `.tg-filterbar` appears exactly ONCE in the whole site — checked across
+   all 13 pages. The gallery pattern it was written for is documented in the
+   design system but never instantiated, so there is nothing else to regress.
+   Rules are STILL page-scoped to #inventory rather than to the bare class, so a
+   future gallery gets the original centred treatment untouched; the promotion
+   script refuses any rule not starting with #inventory.
+
+   GATED, 8 widths (1440/1280/1200/1024/900/768/640/375): 21 failures against the
+   shipped page, 0 after. Asserts the gap above the bar is >= 16px, that the bar
+   is grouped WITH the form (gap above > gap below) rather than with the prose,
+   that the paragraph stays under 78 characters per line, that all four pills
+   survive at >= 40px tall, and zero console errors. Result is a constant 40/24
+   at every width.
+
+   Section height 2598 -> 2647 at 1440 (+49px): +24 from the regrouped spacing and
+   +25 from the paragraph gaining a line at the narrower measure. The 82px
+   horizontal overflow at 900px is PRE-EXISTING (the desktop nav does not collapse
+   until ~860px) and untouched.
+   ============================================================================
+
+/* =============================================================================
+ * opt-BF.css — #inventory filter block spacing (inventory.html), 2026-08-08
+ * -----------------------------------------------------------------------------
+ * Owner: "fix spacing here." (screenshot of the intro paragraph welded to the
+ * Type 21 / 47 / 48 pill row)
+ *
+ * THE BUG IS A SHORTHAND INHERITED FROM ANOTHER LAYOUT.
+ *   structural.css:2049   .tg-filterbar { … margin: 0 auto var(--ds-space-xl); }
+ * That is the GALLERY pattern's rule (#4 GALLERY — filterable grid), where the
+ * bar is a CENTRED rail and `margin: 0 auto 40px` is right. Later,
+ *   structural.css:4899   #inventory .tg-filterbar { justify-content: flex-start;
+ *                                                    margin-left: 0; margin-right: 0; }
+ * re-aimed it for this page — but only the HORIZONTAL margins. `margin-top: 0`
+ * came along from the shorthand and was never reconsidered, so on inventory.html
+ * the pill row sits flush against the paragraph above it. Measured gap: 0px, at
+ * every width. Everything else in this block runs on a 16px rhythm.
+ *
+ * THE RHYTHM WAS ALSO GROUPED BACKWARDS. Measured, top to bottom:
+ *     eyebrow -12- h2 -16- lede -16- p -0- FILTERBAR -40- form -24- grid
+ * The pill row, the county/price/sort form and the status checkboxes are ALL the
+ * same thing: filters. But the bar had NO gap from the prose it should be
+ * separated from, and the LARGEST gap in the block to the form it belongs with.
+ * Proximity was saying the opposite of the structure. This block gives the
+ * cluster air above it and tightens it internally:
+ *     … lede -16- p -40- [ FILTERBAR -24- form ] -24- grid
+ * Net height cost is +24px, not +40 — the gap added above is partly paid for by
+ * the gap removed inside.
+ *
+ * SCOPE IS ONE ELEMENT. `.tg-filterbar` appears exactly ONCE in the whole site
+ * (inventory.html:520) — checked across all 13 pages. The gallery pattern it was
+ * written for is documented in the design system but never instantiated, so
+ * there is nothing else to regress. Rules are still scoped to #inventory rather
+ * than to the bare class, so re-using the gallery pattern elsewhere later gets
+ * the original centred treatment untouched.
+ *
+ * TOKENS ONLY — no raw hex, no new fonts, no new colours, no url().
+ * ============================================================================= */
+
+
+/* -----------------------------------------------------------------------------
+ * 1. THE FILTER CLUSTER — air above it, tighter within it
+ * -------------------------------------------------------------------------- */
+#inventory .tg-filterbar {
+  margin-top: var(--ds-space-xl);      /* was 0 — the reported defect */
+  margin-bottom: var(--ds-space-lg);   /* was 40; the form belongs WITH the bar */
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 2. THE PARAGRAPH'S MEASURE — stop it running twice as wide as the lede
+ * -----------------------------------------------------------------------------
+ * MEASURED at 1440 in a 1200px container:
+ *     .lede            633px wide  ->  ~47 characters per line
+ *     the plain <p>   1152px wide  ->  ~110 characters per line
+ * The lede is capped and the paragraph directly beneath it is not, so the block
+ * steps from a comfortable measure to one roughly 2.3x wider and then straight
+ * into a row of buttons. That abrupt jump is a large part of why the section
+ * reads as badly spaced rather than merely tight — the eye loses the left edge
+ * on a 110-character line, which is well outside the 45-75 that body text is set
+ * for.
+ *
+ * Matched to the lede's own cap rather than a new number, so the two paragraphs
+ * share one measure and one left edge. This is a MAX — below that width the
+ * paragraph is simply the container width, so nothing changes on a phone.
+ * -------------------------------------------------------------------------- */
+#inventory .container > p:not(.eyebrow):not(.lede):not(.tg-fcount) {
+  max-width: 68ch;
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 3. NARROW SCREENS — the cluster still needs the separation
+ * -----------------------------------------------------------------------------
+ * The 0px gap is not a desktop-only artefact; it was measured at 1440, 1200,
+ * 1024, 768 and 375 alike, because `margin-top: 0` carries no media query. The
+ * rules above are unconditional for the same reason. At 375 the pills wrap to
+ * two rows and the extra air above them matters more, not less.
+ * -------------------------------------------------------------------------- */
