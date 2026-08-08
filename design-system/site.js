@@ -3096,3 +3096,428 @@
   }
   window.addEventListener('load', decommissionCarousel);
 })();
+
+
+/* ============================================================================
+   [BD] SELECT AS COMMAND BAR — behaviour. Full rationale in structural.css [BD].
+   Native <select> stays the source of truth; this builds the listbox over it and
+   dispatches a real `change` so invApply() and the wizard keep working.
+   ============================================================================ */
+/* =============================================================================
+ * [BD] SELECT AS COMMAND BAR — behaviour (owner, 2026-08-08)
+ * -----------------------------------------------------------------------------
+ * Owner: "dropdown can be similar to how we did with the enterprise search bar."
+ *
+ * A native <select>'s popup is drawn by the OPERATING SYSTEM. It is not in the
+ * DOM, it takes no CSS, and no amount of styling the <select> itself changes it.
+ * Matching .cmdbar therefore means building a real listbox in the page.
+ *
+ * THE ARCHITECTURE, and the reason for it:
+ *   The native <select> STAYS. It keeps its id, its name, its options and its
+ *   value, and it remains the single source of truth. The combobox is a skin
+ *   that reads and writes it. Three of the seven selects on this site drive live
+ *   behaviour (inv-county / inv-band / inv-sort call invApply() on `change`, and
+ *   qz-market feeds the wizard), so anything that replaced the select outright
+ *   would silently kill filtering, sorting and the form payload at once.
+ *
+ * WHY PROGRESSIVE ENHANCEMENT IS NOT OPTIONAL HERE. The wrapper, the button and
+ * the panel are all created BY THIS SCRIPT, and the CSS that hides the native
+ * select is scoped to the wrapper this script adds. With JS off, no wrapper
+ * exists, so no rule matches and the ordinary <select> renders exactly as it
+ * does today. That is the same failure this site already had to fix once, when
+ * .wow-reveal left the whole page at opacity 0 for no-JS visitors.
+ *
+ * THE SUBTLE ONE — PROGRAMMATIC WRITES. site.js [AF] pre-fills #qz-market when a
+ * market tab is clicked, by ASSIGNING `select.value`. A property assignment
+ * fires NO event, so a skin that only listened for 'change' would keep showing
+ * the old market while the form submitted the new one — a UI that lies about the
+ * value it is about to send. The `value` and `selectedIndex` accessors are
+ * therefore overridden PER INSTANCE (delegating to the real prototype accessors)
+ * so any assignment, from anywhere, repaints the skin.
+ *
+ * POSITIONING IS ABSOLUTE, NOT FIXED, AND THAT IS MEASURED. `form.qz` — the
+ * qualifier card, i.e. the dropdown the owner actually pointed at — carries a
+ * transform from .wow-reveal. A transformed ancestor becomes the containing
+ * block for position:fixed, so a fixed panel would resolve against the form
+ * rather than the viewport and land in the wrong place on that one select.
+ * Checked every ancestor of all seven selects: none clips overflow, so absolute
+ * cannot be cut off either. Absolute is correct and fixed is not.
+ * ============================================================================= */
+(function () {
+  'use strict';
+
+  if (typeof document === 'undefined') return;
+
+  var UID = 0;
+  var openOne = null;   /* only one panel may be open at a time, site-wide */
+
+  function esc(s) {
+    return (window.CSS && CSS.escape) ? CSS.escape(s) : String(s).replace(/[^\w-]/g, '\\$&');
+  }
+
+  function enhance(sel) {
+    /* A multi-select or a sized list box is a different control with different
+       semantics; skinning it as a single-value combobox would misreport it. */
+    if (!sel || sel.multiple || sel.size > 1) return;
+    if (sel.getAttribute('data-dsel') === 'on') return;
+    sel.setAttribute('data-dsel', 'on');
+
+    var uid = sel.id || ('dsel' + (++UID));
+
+    /* ---- wrapper -------------------------------------------------------- */
+    var wrap = document.createElement('div');
+    wrap.className = 'dsel';
+    wrap.setAttribute('data-select', '');
+    sel.parentNode.insertBefore(wrap, sel);
+    wrap.appendChild(sel);
+
+    /* ---- accessible name, taken from the field's real <label for> -------- */
+    var lab = sel.id ? document.querySelector('label[for="' + esc(sel.id) + '"]') : null;
+    if (lab && !lab.id) lab.id = uid + '-lbl';
+
+    /* ---- the field (the thing that looks like the command bar) ----------- */
+    var btn = document.createElement('button');
+    btn.type = 'button';                 /* inside a <form>, a bare button submits */
+    btn.className = 'dsel__field';
+    btn.id = uid + '-cb';
+    btn.setAttribute('role', 'combobox');
+    btn.setAttribute('aria-haspopup', 'listbox');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', uid + '-lb');
+    if (lab) btn.setAttribute('aria-labelledby', lab.id + ' ' + btn.id);
+    else btn.setAttribute('aria-label', sel.getAttribute('name') || 'Choose an option');
+
+    var valEl = document.createElement('span');
+    valEl.className = 'dsel__value';
+    btn.appendChild(valEl);
+
+    var chev = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    chev.setAttribute('class', 'dsel__chev');
+    chev.setAttribute('viewBox', '0 0 16 16');
+    chev.setAttribute('aria-hidden', 'true');
+    chev.setAttribute('focusable', 'false');
+    var pth = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    pth.setAttribute('d', 'M3.5 6L8 10.5L12.5 6');
+    pth.setAttribute('fill', 'none');
+    pth.setAttribute('stroke', 'currentColor');
+    pth.setAttribute('stroke-width', '1.75');
+    pth.setAttribute('stroke-linecap', 'round');
+    pth.setAttribute('stroke-linejoin', 'round');
+    chev.appendChild(pth);
+    btn.appendChild(chev);
+
+    /* ---- the panel ------------------------------------------------------- */
+    var panel = document.createElement('div');
+    panel.className = 'dsel__panel';
+    panel.id = uid + '-lb';
+    panel.setAttribute('role', 'listbox');
+    if (lab) panel.setAttribute('aria-labelledby', lab.id);
+    panel.hidden = true;
+
+    /* Options are built from the live <select>, INCLUDING <optgroup> labels, so
+       a grouped select keeps its grouping instead of flattening into one list.
+       Group labels are presentational only — they carry no role, so they never
+       appear to a screen reader as selectable items. */
+    var optEls = [];
+    function buildOptions() {
+      panel.textContent = '';
+      optEls = [];
+      var kids = sel.children, i, k;
+      for (i = 0; i < kids.length; i++) {
+        k = kids[i];
+        if (k.tagName === 'OPTGROUP') {
+          var gl = document.createElement('div');
+          gl.className = 'dsel__grouplabel';
+          gl.textContent = k.label;
+          panel.appendChild(gl);
+          for (var j = 0; j < k.children.length; j++) addOpt(k.children[j]);
+        } else if (k.tagName === 'OPTION') {
+          addOpt(k);
+        }
+      }
+    }
+    function addOpt(o) {
+      var idx = Array.prototype.indexOf.call(sel.options, o);
+      var d = document.createElement('div');
+      d.className = 'dsel__opt';
+      d.id = uid + '-o' + idx;
+      d.setAttribute('role', 'option');
+      d.setAttribute('data-idx', String(idx));
+      d.setAttribute('aria-selected', 'false');
+      if (o.disabled) d.setAttribute('aria-disabled', 'true');
+      var t = document.createElement('span');
+      t.className = 'dsel__opt-t';
+      t.textContent = o.text;
+      d.appendChild(t);
+      panel.appendChild(d);
+      optEls.push(d);
+    }
+    buildOptions();
+
+    wrap.appendChild(btn);
+    wrap.appendChild(panel);
+
+    /* The native control is taken out of the tab order and hidden from the
+       accessibility tree, because the combobox now represents it. It is NOT
+       display:none — it stays a laid-out, submitting form control. */
+    sel.setAttribute('tabindex', '-1');
+    sel.setAttribute('aria-hidden', 'true');
+
+    var active = -1;   /* index of the visually active option while open */
+
+    /* ---- painting -------------------------------------------------------- */
+    function paint() {
+      var i = sel.selectedIndex;
+      var o = i >= 0 ? sel.options[i] : null;
+      valEl.textContent = o ? o.text : '';
+      for (var n = 0; n < optEls.length; n++) {
+        var oi = Number(optEls[n].getAttribute('data-idx'));
+        optEls[n].setAttribute('aria-selected', oi === i ? 'true' : 'false');
+      }
+    }
+
+    function elFor(idx) {
+      for (var n = 0; n < optEls.length; n++) {
+        if (Number(optEls[n].getAttribute('data-idx')) === idx) return optEls[n];
+      }
+      return null;
+    }
+
+    function setActive(idx, scroll) {
+      var el = elFor(idx);
+      if (!el) return;
+      var prev = panel.querySelector('.is-active');
+      if (prev) prev.classList.remove('is-active');
+      el.classList.add('is-active');
+      active = idx;
+      btn.setAttribute('aria-activedescendant', el.id);
+      if (scroll !== false && el.scrollIntoView) {
+        el.scrollIntoView({ block: 'nearest' });
+      }
+    }
+
+    /* ---- escaping the section's paint order -------------------------------
+     * MEASURED DEFECT, caught by hit-testing the open panel rather than by
+     * looking at it: on locations.html, 4 of the 8 visible rows were COVERED by
+     * the NEXT <section>. document.elementFromPoint returned SECTION.section,
+     * P.eyebrow and H2 where "Sacramento County" and "San Diego County" should
+     * have been — so half the counties were both unreadable and unclickable.
+     *
+     * Nothing was clipping and nothing overflowed; the panel simply could not
+     * paint above a later sibling. `form.qz` carries a transform (.wow-reveal),
+     * which makes it a STACKING CONTEXT, and a z-index inside a stacking context
+     * is meaningless outside it — the whole form paints at its own place in the
+     * section order, panel included. Raising the panel's own z-index, the
+     * obvious fix, does nothing at all for the same reason.
+     *
+     * The fix has to lift the enclosing SECTION above its later siblings, so the
+     * ancestor nearest <main> is raised for exactly as long as the panel is
+     * open, and released on close so no section is left permanently reordered.
+     * 30 is deliberate: above the sections (auto/0), still below .site-header's
+     * 40, so an open dropdown can never paint over the sticky nav.
+     * -------------------------------------------------------------------- */
+    var raised = null;
+    function raise() {
+      var e = wrap;
+      while (e.parentElement && e.parentElement !== document.body &&
+             e.parentElement.tagName !== 'MAIN') e = e.parentElement;
+      raised = e;
+      raised.setAttribute('data-dsel-raise', '');
+    }
+    function unraise() {
+      if (raised) { raised.removeAttribute('data-dsel-raise'); raised = null; }
+    }
+
+    /* ---- open / close ---------------------------------------------------- */
+    function open() {
+      if (!panel.hidden) return;
+      if (openOne && openOne !== close) openOne();
+      raise();
+      panel.hidden = false;
+      wrap.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      /* the panel drops below by default and flips above only when there is not
+         room, so it never pushes the document or hangs off the bottom */
+      var r = btn.getBoundingClientRect();
+      var below = window.innerHeight - r.bottom;
+      wrap.classList.toggle('dsel--up', below < 240 && r.top > below);
+      setActive(sel.selectedIndex >= 0 ? sel.selectedIndex : 0);
+      openOne = close;
+    }
+
+    function close(refocus) {
+      if (panel.hidden) return;
+      panel.hidden = true;
+      wrap.classList.remove('is-open', 'dsel--up');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.removeAttribute('aria-activedescendant');
+      var a = panel.querySelector('.is-active');
+      if (a) a.classList.remove('is-active');
+      unraise();
+      if (openOne === close) openOne = null;
+      if (refocus) btn.focus();
+    }
+
+    /* ---- committing ------------------------------------------------------
+     * The ONLY place the value changes. Assigning selectedIndex runs through the
+     * overridden accessor below, which repaints; then a real `change` (and
+     * `input`) is dispatched on the native select so every listener the site
+     * already has — invApply(), the wizard's qzMarketTouched flag — fires
+     * exactly as it did when the OS popup was doing the choosing.
+     * -------------------------------------------------------------------- */
+    function commit(idx) {
+      var o = sel.options[idx];
+      if (!o || o.disabled) return;
+      var changed = sel.selectedIndex !== idx;
+      if (changed) {
+        sel.selectedIndex = idx;
+        sel.dispatchEvent(new Event('input', { bubbles: true }));
+        sel.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      close(true);
+    }
+
+    /* ---- mouse ----------------------------------------------------------- */
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (panel.hidden) open(); else close();
+    });
+
+    panel.addEventListener('click', function (e) {
+      var t = e.target.closest ? e.target.closest('[role="option"]') : null;
+      if (!t || !panel.contains(t)) return;
+      commit(Number(t.getAttribute('data-idx')));
+    });
+
+    panel.addEventListener('mousemove', function (e) {
+      var t = e.target.closest ? e.target.closest('[role="option"]') : null;
+      if (t && panel.contains(t)) setActive(Number(t.getAttribute('data-idx')), false);
+    });
+
+    /* ---- keyboard --------------------------------------------------------
+     * Focus never leaves the button; the active option is announced through
+     * aria-activedescendant. Escape CANCELS — it closes without writing a
+     * value, which is what a select does and what a visitor expects.
+     * -------------------------------------------------------------------- */
+    var typed = '', typedAt = 0;
+
+    function step(from, dir) {
+      var n = sel.options.length, i = from;
+      for (var guard = 0; guard < n; guard++) {
+        i += dir;
+        if (i < 0) i = 0;
+        if (i > n - 1) i = n - 1;
+        if (!sel.options[i].disabled) return i;
+        if (i === 0 || i === n - 1) break;
+      }
+      return from;
+    }
+
+    btn.addEventListener('keydown', function (e) {
+      var k = e.key;
+      var isOpen = !panel.hidden;
+
+      if (k === 'Escape') { if (isOpen) { e.preventDefault(); close(true); } return; }
+
+      if (k === 'ArrowDown' || k === 'ArrowUp') {
+        e.preventDefault();
+        if (!isOpen) { open(); return; }
+        setActive(step(active < 0 ? sel.selectedIndex : active, k === 'ArrowDown' ? 1 : -1));
+        return;
+      }
+      if (k === 'Home' || k === 'End') {
+        if (!isOpen) return;
+        e.preventDefault();
+        setActive(k === 'Home' ? step(-1, 1) : step(sel.options.length, -1));
+        return;
+      }
+      if (k === 'Enter') {
+        if (isOpen) { e.preventDefault(); commit(active); }
+        return;   /* closed + Enter falls through so the form can submit */
+      }
+      if (k === ' ' || k === 'Spacebar') {
+        e.preventDefault();
+        if (isOpen) commit(active); else open();
+        return;
+      }
+      if (k === 'Tab') { if (isOpen) close(); return; }
+
+      /* type-ahead, the one affordance people miss most when a native select is
+         replaced: typing "sac" jumps to Sacramento County */
+      if (k.length === 1 && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        var now = Date.now();
+        typed = (now - typedAt > 900) ? k : (typed + k);
+        typedAt = now;
+        var q = typed.toLowerCase();
+        for (var i = 0; i < sel.options.length; i++) {
+          if (!sel.options[i].disabled && sel.options[i].text.toLowerCase().indexOf(q) === 0) {
+            if (isOpen) setActive(i); else commit(i);
+            break;
+          }
+        }
+      }
+    });
+
+    /* ---- dismissal ------------------------------------------------------- */
+    document.addEventListener('pointerdown', function (e) {
+      if (!panel.hidden && !wrap.contains(e.target)) close();
+    }, true);
+
+    window.addEventListener('resize', function () { close(); });
+
+    /* The panel is absolutely positioned, so it stays glued to the field as the
+       page scrolls — but the drop-or-flip decision was made once, at open time,
+       and would go stale if the field moved far enough to change the answer.
+       Recomputed on scroll rather than closing the panel, because closing on
+       scroll would fire on the panel's own wheel events. */
+    window.addEventListener('scroll', function () {
+      if (panel.hidden) return;
+      var r = btn.getBoundingClientRect();
+      var below = window.innerHeight - r.bottom;
+      wrap.classList.toggle('dsel--up', below < 240 && r.top > below);
+    }, { passive: true });
+
+    /* ---- staying in sync with the native control -------------------------
+     * `change` covers anything that fires events. The accessor overrides cover
+     * PLAIN ASSIGNMENT (`select.value = 'x'`), which fires nothing at all and is
+     * exactly what site.js [AF] does when a market tab is clicked.
+     * -------------------------------------------------------------------- */
+    sel.addEventListener('change', paint);
+
+    (function bindAccessors() {
+      var P = window.HTMLSelectElement && HTMLSelectElement.prototype;
+      if (!P) return;
+      ['value', 'selectedIndex'].forEach(function (prop) {
+        var d = Object.getOwnPropertyDescriptor(P, prop);
+        if (!d || !d.get || !d.set) return;
+        try {
+          Object.defineProperty(sel, prop, {
+            configurable: true,
+            enumerable: false,
+            get: function () { return d.get.call(this); },
+            set: function (v) { d.set.call(this, v); paint(); }
+          });
+        } catch (err) { /* fail closed: the skin just repaints on `change` only */ }
+      });
+    })();
+
+    /* if options are ever rewritten by other script, rebuild the list */
+    if (window.MutationObserver) {
+      new MutationObserver(function () { buildOptions(); paint(); })
+        .observe(sel, { childList: true });
+    }
+
+    paint();
+  }
+
+  function init() {
+    var list = document.querySelectorAll('select.ec-ctrl');
+    for (var i = 0; i < list.length; i++) enhance(list[i]);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

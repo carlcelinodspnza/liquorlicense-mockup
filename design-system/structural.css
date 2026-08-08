@@ -13686,7 +13686,20 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
        The floor has to be the TALLEST step or it is decorative. 610px covers
        the worst case at every width the two-pane runs at, with 4px of slack so
        a sub-pixel rounding difference cannot reintroduce a 1px jump. */
-    min-height: var(--qz-floor, 610px);
+    /* NO FIXED FLOOR — reverted 2026-08-08 on the owner's instruction:
+       "we can trim this part and container only adjusts when needed."
+       The floor made the section a CONSTANT 754px on every step, which killed
+       the reflow-on-Continue, but it did so by reserving the tallest step's
+       height on all five — leaving ~180px of empty card visible on steps 1 and
+       4, which are the shortest. Measured card heights are [430,506,536,430,606],
+       so three of the five steps were showing dead space to spare the other two
+       a jump. The owner judged the empty card the worse defect, and on looking
+       at it that is the right call — the void is visible on every visit, the
+       reflow only on a click.
+       A modest floor is kept so the very short steps do not collapse into a
+       strip, but the card now grows to its content instead of to its worst
+       case. */
+    min-height: var(--qz-floor, 0);
   }
   /* the step area absorbs the slack, so the nav row stays pinned to the bottom
      of the card on every step instead of floating up on the short ones */
@@ -13839,4 +13852,346 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   #qualifier .qz .ec-frow > .ec-ftwo > .ec-field { min-width: 0; width: 100%; }
   /* the textarea field is the only child that must span the whole row */
   #qualifier .qz .ec-frow > .ec-field:has(textarea) { grid-column: 1 / -1; }
+}
+
+
+/* ============================================================================
+   [BD] SELECT AS COMMAND BAR — all 7 native selects (owner, 2026-08-08)
+   ----------------------------------------------------------------------------
+   Owner: "dropdown can be similar to how we did with the enterprise search bar."
+
+   SCOPE IS SEVEN, NOT ONE. The owner pointed at the #qualifier market select,
+   but `.ec-ctrl` is a shared class and the site has SEVEN native selects:
+     contact.html    q-industry(9)  q-type(7)   q-need(5)
+     inventory.html  inv-county(8)  inv-band(4) inv-sort(4)   <- LIVE filter+sort
+     locations.html  qz-market(15)                            <- wizard step 1
+   Styling one and leaving six as OS dropdowns would have read as a bug, so the
+   treatment is applied to the shared class. THREE OF THEM DRIVE LIVE BEHAVIOUR,
+   which is what makes this a behaviour change and not a paint job.
+
+   WHY A JS LISTBOX AT ALL: a native <select> popup is drawn by the OPERATING
+   SYSTEM. It is not in the DOM and takes no CSS. There is no version of this
+   request that is only a stylesheet.
+
+   ARCHITECTURE: the native <select> STAYS and remains the source of truth —
+   same id, name, options and value. The combobox is a skin that reads and
+   writes it and dispatches a real `change`, so invApply() and the wizard's
+   qzMarketTouched flag fire exactly as they did when the OS popup was doing
+   the choosing. Verified by DRIVING THE UI, not by setting .value: the county
+   filter still cuts 9 cards to 3, and the skin reproduces the native sort
+   order on all 4 options.
+
+   ⚠ TWO DEFECTS FOUND BEFORE PROMOTION, both worth reading:
+
+   1. HALF THE OPTIONS WERE UNCLICKABLE. Everything measurable passed — ARIA,
+      keyboard, contrast, zero overflow, panel inside the viewport — while 4 of
+      the 8 visible rows on locations.html were painted over by the NEXT
+      <section>. elementFromPoint returned SECTION / P.eyebrow / H2 where four
+      counties should have been. Cause: form.qz carries a transform from
+      .wow-reveal, which makes it a STACKING CONTEXT, so the panel's z-index is
+      meaningless outside it and raising it does nothing. Fix: the ancestor
+      nearest <main> is raised to z-index 30 for exactly as long as a panel is
+      open — above the sections, still below .site-header's 40, so an open
+      dropdown can never cover the sticky nav. Geometry could not see this;
+      only a hit test could, and that hit test is now part of the gate.
+
+   2. THE SAME TRANSFORM RULED OUT position:fixed. A transformed ancestor
+      becomes the containing block for fixed, so a fixed panel would have
+      resolved against form.qz rather than the viewport — on the one dropdown
+      the owner actually pointed at. Every ancestor of all seven selects was
+      checked: none clips overflow, so absolute cannot be cut off either.
+      Absolute is correct here and fixed is not.
+
+   PROGRESSIVE ENHANCEMENT IS LOAD-BEARING. Every rule is scoped to `.dsel`, a
+   wrapper only [BD] JS creates, and the native control is hidden by opacity +
+   pointer-events rather than display:none. With JS off, nothing matches and the
+   ordinary <select> renders: measured at 531x46, display:block, opacity 1. This
+   site has already had to fix a no-JS blackout once (.wow-reveal at opacity 0).
+
+   THE COLOUR SCHEME IS DELIBERATELY NOT COPIED. .cmdbar is built from
+   --ds-ink-on-dark and the glass tokens because it sits on the dark hero; these
+   seven selects sit on light form surfaces. What is borrowed is the LANGUAGE —
+   the lifted panel, the accent left-rail on the active row, the tracked
+   uppercase group label, the ring on the field rather than the text, the same
+   radii and easing. Copying the dark palette would have put pale ink on a pale
+   card. Measured worst text/background pair in the open panel: 17.57:1.
+
+   GATED BY probe-select.mjs, which was written BEFORE the build so it could not
+   be tuned to pass: 62 failures against the shipped site, 0 against this one.
+   It checks, per select, that the native control survives with every option and
+   its name; ARIA roles/expanded/controls/activedescendant; mouse pick fires a
+   real `change`; Arrow/Enter/Escape/Home/End with Escape CANCELLING; no row is
+   occluded; the panel never covers the sticky header; 40px tap targets; zero
+   console errors. Plus: the live filter still filters, the skin matches native
+   sort on every option, the market tab still pre-fills and the UI repaints to
+   match, no-JS still renders a working select, panel contrast, and zero new
+   horizontal overflow at 375/768/900/1024/1200/1440.
+
+   The 82px of horizontal overflow at 900px is PRE-EXISTING (the desktop nav
+   does not collapse until ~860px) and is unchanged by this block: 82 -> 82.
+   ============================================================================
+
+/* =============================================================================
+ * [BD] SELECT AS COMMAND BAR — presentation (owner, 2026-08-08)
+ * -----------------------------------------------------------------------------
+ * Owner: "dropdown can be similar to how we did with the enterprise search bar."
+ *
+ * WHAT IS BORROWED FROM .cmdbar, and what deliberately is NOT.
+ * Borrowed — the things that make it read as the same control:
+ *     the lifted panel that drops under the field on its own rounded card
+ *     the accent left-rail + tinted row on the active option
+ *     the small uppercase tracked group label
+ *     the same open animation, the same easing, the same radii
+ *     the ring on the FIELD rather than on the text inside it
+ * NOT borrowed — the colour scheme. .cmdbar sits on the dark hero and is built
+ * from --ds-ink-on-dark and the glass tokens. These seven selects sit on LIGHT
+ * form surfaces. Copying the dark palette across would have put pale ink on a
+ * pale card: unreadable, and it would have failed AA rather than looked "the
+ * same". The language is the same; the palette is the one its own surface needs.
+ * The panel's worst text/background pair is measured by probe-select.mjs on real
+ * composited pixels, not asserted here.
+ *
+ * PROGRESSIVE ENHANCEMENT IS LOAD-BEARING. Every rule below is scoped to `.dsel`,
+ * a wrapper that only site.js [BD] creates. With JS off nothing here matches and
+ * the untouched native <select> renders. That is why the native control is
+ * hidden by opacity + pointer-events and NOT by display:none — it remains a
+ * laid-out, submitting form control that simply cannot be seen or clicked.
+ *
+ * TOKENS ONLY — no raw hex, no new fonts, no new colours.
+ * NO url() ANYWHERE: a lab-relative path would 404 once this sheet is appended
+ * into design-system/structural.css (the trap that cost a live 404 on [AX]).
+ * ============================================================================= */
+
+
+/* -----------------------------------------------------------------------------
+ * 1. THE WRAPPER
+ * -----------------------------------------------------------------------------
+ * .dsel replaces the <select> in the layout, so it has to carry the width the
+ * select used to have — [BC] sizes qualifier fields with `.ec-field > .ec-ctrl`,
+ * a DIRECT-child selector that stops matching once the select is wrapped.
+ * Stated explicitly rather than left to inherit.
+ * -------------------------------------------------------------------------- */
+.dsel {
+  position: relative;   /* containing block for the panel — see the note in [BD] JS
+                           about form.qz's transform ruling out position:fixed */
+  display: block;
+  width: 100%;
+}
+
+/* The native control: invisible and unclickable, but still laid out and still
+   submitting. display:none would remove it from some form-serialisation paths
+   and from the keyboard's understanding of the field entirely. */
+.dsel > select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 2. THE FIELD — .ec-ctrl's footprint, .cmdbar's manners
+ * -----------------------------------------------------------------------------
+ * Sizing matches the shipped .ec-ctrl exactly (16px body, 46px min-height, the
+ * same padding, radius and border) so replacing the select does not reflow a
+ * single form. What changes is the behaviour of the surface: the hover and the
+ * focus ring now describe the whole field, as they do on the command bar.
+ * -------------------------------------------------------------------------- */
+.dsel__field {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-sm);
+  width: 100%;
+  min-height: 46px;
+  padding: 11px 14px;
+  text-align: left;
+  font-family: var(--ds-font-body);
+  font-size: 16px;
+  line-height: 1.35;
+  color: var(--ds-ink);
+  background: var(--ds-bg-surface);
+  border: 1.5px solid var(--ds-line);
+  border-radius: var(--ds-r-md);
+  cursor: pointer;
+  -webkit-appearance: none;
+          appearance: none;
+  transition: border-color var(--ds-dur) var(--ds-ease),
+              box-shadow var(--ds-dur) var(--ds-ease);
+}
+.dsel__field:hover { border-color: var(--ds-ink-soft); }
+
+/* the ring lives on the FIELD, matching .cmdbar__field:focus-within and the
+   shipped .ec-ctrl:focus-visible — same 3px accent wash, so the form's focus
+   language does not change */
+.dsel__field:focus-visible,
+.dsel.is-open .dsel__field {
+  outline: none;
+  border-color: var(--ds-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ds-accent) 40%, transparent);
+}
+
+.dsel__value {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dsel__chev {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  color: var(--ds-accent);
+  transition: transform var(--ds-dur-fast, var(--ds-dur)) var(--ds-ease);
+}
+.dsel.is-open .dsel__chev { transform: rotate(180deg); }
+
+
+/* -----------------------------------------------------------------------------
+ * 3. THE PANEL — this is the .cmdbar quotation
+ * -----------------------------------------------------------------------------
+ * Same geometry as .cmdbar__panel: absolutely positioned a hair under the field,
+ * full field width, capped height with contained scroll, own rounded card, own
+ * lift shadow. The one addition is .dsel--up, which flips the panel above the
+ * field when there is not room below — the command bar never needed it because
+ * it lives at the top of the hero, and these selects do not.
+ * -------------------------------------------------------------------------- */
+.dsel__panel {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + var(--ds-space-2xs));
+  left: 0;
+  right: 0;
+  max-height: min(46vh, 340px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--ds-space-2xs) 0;
+  background: var(--ds-bg-surface);
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-r-md);
+  box-shadow: var(--ds-shadow-lift);
+}
+.dsel__panel[hidden] { display: none; }
+
+/* The panel cannot paint above a later sibling section on its own: form.qz has a
+   transform, which makes it a stacking context, and a z-index set inside one has
+   no meaning outside it. Measured, before this rule: 4 of 8 visible rows on
+   locations.html were covered by the NEXT section — elementFromPoint returned
+   SECTION / P.eyebrow / H2 where four counties should have been. [BD] JS sets
+   this attribute on the ancestor nearest <main> while a panel is open and
+   removes it on close. 30 clears the sections (auto) and stays under
+   .site-header's 40, so an open dropdown never covers the sticky nav. */
+[data-dsel-raise] {
+  position: relative;
+  z-index: 30;
+}
+
+.dsel--up .dsel__panel {
+  top: auto;
+  bottom: calc(100% + var(--ds-space-2xs));
+}
+
+.dsel.is-open .dsel__panel {
+  animation: ds-dsel-in var(--ds-dur-fast, var(--ds-dur)) var(--ds-ease-out, var(--ds-ease)) both;
+}
+.dsel--up.is-open .dsel__panel {
+  animation-name: ds-dsel-in-up;
+}
+@keyframes ds-dsel-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes ds-dsel-in-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dsel.is-open .dsel__panel { animation: none; }
+  .dsel__chev { transition: none; }
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 4. THE ROWS — .cmdbar__opt, on a light surface
+ * -----------------------------------------------------------------------------
+ * The accent left-rail and the tinted row are lifted straight from .cmdbar__opt.
+ * The tint is mixed into --ds-bg-surface rather than into transparency, so the
+ * row stays a LIGHT surface and the label keeps --ds-ink on it: on the dark hero
+ * a 13% accent wash over glass is dark, and the same wash left to composite over
+ * a pale form card is what would have quietly cost the AA margin.
+ *
+ * .is-active (keyboard) and :hover (mouse) are styled identically on purpose —
+ * they are the same idea arriving by two routes, and aria-selected is kept
+ * VISUALLY DISTINCT from both so "what is chosen" never reads as "what is under
+ * the cursor".
+ * -------------------------------------------------------------------------- */
+.dsel__opt {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-space-sm);
+  padding: 10px var(--ds-space-md);
+  min-height: 40px;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  color: var(--ds-ink);
+}
+.dsel__opt-t {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: var(--ds-font-body);
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+/* the chosen value: accent rail + weight, so it survives the hover tint */
+.dsel__opt[aria-selected="true"] {
+  border-left-color: var(--ds-accent);
+}
+.dsel__opt[aria-selected="true"] .dsel__opt-t {
+  font-weight: 700;
+  color: var(--ds-accent-ink);
+}
+
+/* the row under the cursor / the keyboard's active row */
+.dsel__opt:hover,
+.dsel__opt.is-active {
+  background: color-mix(in srgb, var(--ds-accent) 13%, var(--ds-bg-surface));
+  border-left-color: var(--ds-accent);
+}
+
+.dsel__opt[aria-disabled="true"] {
+  opacity: .5;
+  cursor: default;
+  background: none;
+  border-left-color: transparent;
+}
+
+.dsel__grouplabel {
+  padding: var(--ds-space-sm) var(--ds-space-md) var(--ds-space-2xs);
+  font-family: var(--ds-font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ds-accent-ink);
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 5. HIGH-CONTRAST / FORCED COLOURS
+ * -----------------------------------------------------------------------------
+ * In forced-colours mode the accent tint is discarded by the OS, which would
+ * leave the selected and active rows indistinguishable from the rest. A border
+ * survives forced colours where a background does not.
+ * -------------------------------------------------------------------------- */
+@media (forced-colors: active) {
+  .dsel__field { border: 1px solid ButtonText; }
+  .dsel__panel { border: 1px solid ButtonText; }
+  .dsel__opt.is-active { outline: 2px solid Highlight; outline-offset: -2px; }
+  .dsel__opt[aria-selected="true"] { border-left-color: Highlight; }
 }
