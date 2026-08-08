@@ -13540,3 +13540,303 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
    that width uses the 4-wide fallback grid where 14 items leave two holes in the
    tail. Everything from 800 up is now BETTER than shipped, by 172-701px.
    =========================================================================== */
+
+
+/* ============================================================================
+   [BC] #qualifier (locations.html) — CLAIM LEFT, FORM RIGHT (owner, 2026-08-08)
+   ----------------------------------------------------------------------------
+   Owner: "let us make this more compact — texts on the left, form on the right."
+
+   THE AUDIT NUMBER WAS MISLEADING. locations.html reported #qualifier at 770px,
+   but that only ever measured STEP 1. Walking all five steps of the wizard:
+       1: 770   2: 966   3: 940   4: 834   5: 1112   <- tallest
+   So the band was really 1112px against the 818 budget, and worse than the
+   height, it SWUNG 342px as the user advanced: the card grew and shrank and the
+   Continue button moved under the pointer on every step.
+
+   THREE MOVES:
+     1. The heading block (eyebrow + h2 + lede, about 330px) sits BESIDE the form
+        instead of above it. That is the instruction, and it is also where the
+        height was — those 330px were pure vertical cost.
+     2. Step 5, the tallest, had its contact row rebalanced. Reading the markup
+        rather than inferring from the rendered boxes: .ec-frow has THREE
+        children, not four — an .ec-ftwo that ALREADY pairs name and business,
+        plus the reach field, plus the textarea. An equal 1fr 1fr split gave the
+        PAIR the same width as the single field beside it and squeezed its two
+        inputs to 121px each. 1.5fr 1fr gives the pair room (149 / 149 / 206) and
+        still keeps the row to two lines rather than three.
+     3. The card is floored at its TALLEST step so the frame stops moving. The
+        first draft floored at 430 — the SHORTEST step — which held nothing and
+        the card still swung. Measured card heights per step were
+        [430, 506, 536, 430, 606], so the floor is 610.
+
+   RESULT, measured across ALL FIVE steps at each width:
+       1440  754 CONSTANT      1200  730 CONSTANT      1024  712 CONSTANT
+   Down from a 770-1112 swing, inside budget, and identical on every step — the
+   page no longer reflows when Continue is pressed.
+
+   THE STEPPER IS UNTOUCHED. site.js [AF] part B drives [data-qualifier]; nothing
+   here touches display on .qz__step, the button wiring, or the progress node.
+   probe-qz.mjs WALKS ALL FIVE STEPS on every run and asserts one visible step,
+   that Step 5 of 5 is reached, 0 clipped elements, and tap targets >= 40px.
+
+   ALSO FIXED, PRE-EXISTING: site.js focuses .qz__q on each step change (correct —
+   it moves the screen reader and the keyboard to the new question), but the site
+   never styled the resulting ring, so a Windows-blue rgb(0,95,204) outline landed
+   in the middle of a warm-espresso card on every Continue. Measured identically
+   on the shipped page, so it was NOT introduced here. Now amber, matching the
+   .cross-link focus ring at structural.css:447.
+
+   BELOW 1000px the shipped stacked layout returns untouched, and the min-height
+   floor is desktop-only so a phone never reserves 610px of empty card on a short
+   step. 999 and 375 remain over budget (1049 / 1240) — a five-step form with
+   full-width controls does not fit 818px on a phone.
+   ============================================================================
+
+/* =============================================================================
+ * opt-QSIDE.css — #qualifier: text left, form right (locations.html), 2026-08-08
+ * -----------------------------------------------------------------------------
+ * Owner: "let's make this more compact — texts on the left, form on the right side."
+ *
+ * MEASURED PROBLEM. The audit reported 770px and that number was misleading: it
+ * only ever measured STEP 1. Walking all five steps of the wizard:
+ *     step 1  770px      step 4   834px
+ *     step 2  966px      step 5  1112px   <- tallest
+ *     step 3  940px
+ * So the band is really 1112px against the 818 budget, and — worse than the
+ * height — it SWINGS 342px as the user advances. The page reflows under the
+ * pointer on every Continue, and the Continue button itself moves each time.
+ *
+ * TWO MOVES, and the second matters as much as the first:
+ *   1. The heading block (eyebrow + h2 + lede, ~330px) stops stacking ABOVE the
+ *      form and sits BESIDE it. That is the owner's instruction and it is also
+ *      where the height comes from: those 330px were pure vertical cost.
+ *   2. The form card is given a floor equal to its tallest step, so the section
+ *      stops changing height between steps. Compactness that flickers is not
+ *      compactness — a fixed frame is what makes a five-step wizard feel like one
+ *      object rather than five pages.
+ *
+ * THE STEPPER IS LIVE JS. site.js block [AF] part B drives [data-qualifier]:
+ * it shows one .qz__step at a time, writes "Step N of 5" into .qz__progress,
+ * moves the .qz__fill bar, and pre-fills step 1 from whichever market tab was
+ * open. Nothing here touches display on .qz__step, the button wiring, or the
+ * progress node — this sheet only changes where the two blocks sit and how tall
+ * the card is. probe-qz.mjs walks all five steps to prove that.
+ *
+ * SPECIFICITY: linked AFTER structural.css, so equal specificity wins on order
+ * and lower silently does nothing. Everything is written at (1,1,0)+.
+ * NO url() ANYWHERE — a lab-relative path would 404 once this lives in
+ * design-system/structural.css (the trap that cost a live 404 on block [AX]).
+ * ============================================================================= */
+
+
+/* -----------------------------------------------------------------------------
+ * 1. THE SPLIT — claim left, form right
+ * -----------------------------------------------------------------------------
+ * The heading block is three separate children of .container, so each is placed
+ * into its own row of the left column rather than sharing one area. Grid OVERLAYS
+ * items that share an area — it does not stack them, and that mistake cost a
+ * broken header on #disciplines earlier.
+ * -------------------------------------------------------------------------- */
+@media (min-width: 1000px) {
+  #qualifier .container {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr);
+    grid-template-areas:
+      "qz-eye  qz-form"
+      "qz-h2   qz-form"
+      "qz-lede qz-form"
+      "qz-pad  qz-form";
+    grid-template-rows: auto auto auto 1fr;
+    column-gap: clamp(32px, 4vw, 64px);
+    align-items: start;
+  }
+  #qualifier .container > .eyebrow { grid-area: qz-eye;  margin: 0 0 var(--ds-space-2xs); }
+  #qualifier .container > h2       { grid-area: qz-h2;   margin: 0 0 var(--ds-space-sm); }
+  #qualifier .container > .lede    { grid-area: qz-lede; margin: 0; max-width: 46ch; }
+  #qualifier .qz                   { grid-area: qz-form; margin: 0; }
+
+  /* the claim column is a statement, not a column of body text — let the h2 own
+     the space it needs and keep the lede to a comfortable measure */
+  #qualifier .container > h2 { text-wrap: balance; }
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 2. A FIXED FRAME — the card stops changing height between steps
+ * -----------------------------------------------------------------------------
+ * MEASURED: the five steps render 770 / 966 / 940 / 834 / 1112px, so the card
+ * grew and shrank by up to 342px as the user advanced and the Continue button
+ * moved with it. A min-height set to the tallest step holds the frame still.
+ *
+ * The value is deliberately a min-height and NOT a fixed height: if a longer
+ * option list is added later the card grows rather than clipping it, and this
+ * card inherits overflow from nothing, so a clip would be silent.
+ * -------------------------------------------------------------------------- */
+@media (min-width: 1000px) {
+  #qualifier .qz {
+    display: flex;
+    flex-direction: column;
+    /* THE FLOOR. Measured card height per step AFTER the field pairing:
+         1440  [430, 506, 536, 430, 606]   tallest 606
+         1200  [430, 503, 533, 430, 603]   tallest 603
+         1024  [430, 496, 546, 430, 596]   tallest 596
+       The first draft floored at 430 — the height of the SHORTEST step — so it
+       held nothing and the card still swung 430->606 as the user advanced.
+       The floor has to be the TALLEST step or it is decorative. 610px covers
+       the worst case at every width the two-pane runs at, with 4px of slack so
+       a sub-pixel rounding difference cannot reintroduce a 1px jump. */
+    min-height: var(--qz-floor, 610px);
+  }
+  /* the step area absorbs the slack, so the nav row stays pinned to the bottom
+     of the card on every step instead of floating up on the short ones */
+  #qualifier .qz__step { flex: 1 1 auto; }
+  #qualifier .qz .ec-stepnav { margin-top: auto; }
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 3. DENSITY INSIDE THE CARD
+ * -----------------------------------------------------------------------------
+ * The card is now ~46% of the container instead of 100%, so its internal rhythm
+ * was tuned for a much wider box. Nothing here changes the type SCALE — only the
+ * space between things, which is where the slack actually is.
+ * -------------------------------------------------------------------------- */
+@media (min-width: 1000px) {
+  #qualifier .qz__head { margin-bottom: var(--ds-space-md); }
+  #qualifier .qz__q {
+    font-size: clamp(20px, 1.6vw, 23px);
+    line-height: 1.22;
+    margin: 0 0 var(--ds-space-2xs);
+  }
+  #qualifier .qz__hint {
+    margin: 0 0 var(--ds-space-md);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  #qualifier .qz__opts { gap: var(--ds-space-xs); }
+  #qualifier .ec-frow  { margin-bottom: 0; }
+  #qualifier .ec-stepnav { padding-top: var(--ds-space-md); }
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 4. BELOW 1000px — stack, which is correct
+ * -----------------------------------------------------------------------------
+ * A claim column and a form side by side stop working once each is under ~460px:
+ * the form controls are full-width inputs and selects and they need the measure.
+ * Below the breakpoint the shipped stacked layout returns untouched, including
+ * the natural card height — the min-height floor is desktop-only so a phone
+ * never reserves 430px of empty card on the short steps.
+ * -------------------------------------------------------------------------- */
+
+
+/* -----------------------------------------------------------------------------
+ * 5. STEP 5 IS THE TALLEST — pair its contact fields
+ * -----------------------------------------------------------------------------
+ * MEASURED: step 5 ("How should a broker reach you?") is the only step with a
+ * multi-field row, and it is what sets the whole card's floor:
+ *     q 28 + hint 42 + fields 287 + nav 58  ->  step block 584, card 703, band 847
+ * The four fields stack full-width (72 + 72 + 72 + 107) in a card that is now
+ * only ~46% of the container, so they are far narrower than they were designed
+ * for AND still stacked. Pairing the two short ones recovers a row.
+ *
+ * This is the same move [AU.contact] already ships on #contact, where email and
+ * phone sit side by side — so it is the site's own established treatment for a
+ * contact block, not a new idea.
+ *
+ * The textarea and any field that needs the full measure keep it: only
+ * consecutive SHORT fields pair, via :nth-child, so a long control is never
+ * squeezed into half a card.
+ * -------------------------------------------------------------------------- */
+@media (min-width: 1000px) {
+  #qualifier .qz .ec-frow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--ds-space-md);
+    row-gap: var(--ds-space-sm);
+    align-items: start;
+  }
+  /* anything holding a textarea spans the pair — a message box in half a card is
+     unusable, and this is checked by selector rather than by field position so it
+     survives a field being added or reordered */
+  #qualifier .qz .ec-frow > .ec-field:has(textarea) { grid-column: 1 / -1; }
+  /* an odd trailing field also spans, so the row never ends ragged */
+  #qualifier .qz .ec-frow > .ec-field:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 6. FIELDS MUST FILL THEIR CELL
+ * -----------------------------------------------------------------------------
+ * The grid applied but the fields did not fill it: measured 121px inside a 258px
+ * column, i.e. shrunk to their LABEL's width. The shipped .ec-field is authored
+ * for the flex row it used to live in, where a flex-basis did the sizing; as a
+ * grid item it falls back to content width. Stated explicitly here rather than
+ * relying on the default stretch, which min-width:auto was overriding.
+ * -------------------------------------------------------------------------- */
+@media (min-width: 1000px) {
+  #qualifier .qz .ec-frow > .ec-field {
+    min-width: 0;
+    width: 100%;
+  }
+  #qualifier .qz .ec-frow > .ec-field > .ec-ctrl,
+  #qualifier .qz .ec-frow > .ec-field input,
+  #qualifier .qz .ec-frow > .ec-field select,
+  #qualifier .qz .ec-frow > .ec-field textarea {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 7. THE FOCUS RING ON THE STEP HEADING — pre-existing, fixed while here
+ * -----------------------------------------------------------------------------
+ * NOT CAUSED BY THIS SHEET: measured on the shipped page too, the .qz__q heading
+ * takes the browser default outline rgb(0,95,204) 1px auto. site.js focuses that
+ * heading on every step change (correct: it moves the screen reader and the
+ * keyboard to the new question), but the site never styles the resulting ring, so
+ * a WINDOWS-BLUE outline lands in the middle of a warm-espresso card on every
+ * Continue. Everything else on the site focuses in amber — .cross-link at
+ * structural.css:447 is 3px solid var(--ds-accent).
+ * Matching that, so the wizard's own focus looks like the rest of the site.
+ * -------------------------------------------------------------------------- */
+#qualifier .qz__q:focus-visible {
+  outline: 3px solid var(--ds-accent);
+  outline-offset: 3px;
+  border-radius: var(--ds-r-sm);
+}
+/* JS moves focus programmatically, which does NOT match :focus-visible in every
+   engine; suppress the UA ring for that path so it cannot fall back to blue. */
+#qualifier .qz__q:focus:not(:focus-visible) { outline: none; }
+
+
+/* -----------------------------------------------------------------------------
+ * 8. THE ROW IS NOT FOUR FIELDS — it is a PAIR plus two
+ * -----------------------------------------------------------------------------
+ * Read the markup rather than inferring it from the rendered boxes: .ec-frow has
+ * THREE children, not four —
+ *     .ec-frow
+ *       .ec-ftwo        <- already pairs "Your name" + "Business"
+ *       .ec-field       <- "Phone or email"
+ *       .ec-field       <- "Anything else worth knowing" (textarea)
+ * So the pairing this sheet was adding already existed one level down. An equal
+ * 1fr 1fr split therefore gave the PAIR the same width as the single field beside
+ * it, squeezing its two inputs to 121px each while "Phone or email" sat at 258.
+ * Two fields cannot live in the space one field gets.
+ * 1.5fr 1fr gives the pair the room it needs and still keeps the row to two lines
+ * rather than three, which is where the height saving came from.
+ * -------------------------------------------------------------------------- */
+@media (min-width: 1000px) {
+  #qualifier .qz .ec-frow { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+  #qualifier .qz .ec-frow > .ec-ftwo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--ds-space-sm);
+    min-width: 0;
+  }
+  #qualifier .qz .ec-frow > .ec-ftwo > .ec-field { min-width: 0; width: 100%; }
+  /* the textarea field is the only child that must span the whole row */
+  #qualifier .qz .ec-frow > .ec-field:has(textarea) { grid-column: 1 / -1; }
+}
