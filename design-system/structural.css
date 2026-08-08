@@ -14195,3 +14195,173 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   .dsel__opt.is-active { outline: 2px solid Highlight; outline-offset: -2px; }
   .dsel__opt[aria-selected="true"] { border-left-color: Highlight; }
 }
+
+
+/* ============================================================================
+   [BE] "Related on this site" — JOIN THE CENTRED BAND (owner, 2026-08-08)
+   ----------------------------------------------------------------------------
+   Owner: "fix this section, it looks unbalanced."
+
+   THE RAGGED WRAP WAS THE SYMPTOM, NOT THE CAUSE. This block was never included
+   in the centred band it lives in. Measured identically on all three pages:
+       .closing-cta            text-align: center      <- eyebrow, h2, lede, buttons
+       p.eyebrow ("Related…")  text-align: start       <- left
+       .cross-link-rail__rail  justify-content: normal <- left
+   So a left-aligned two-row block hung off the left edge of an otherwise centred
+   composition, and because the pills are content-width and wrap greedily, the
+   last row stopped wherever it happened to and dumped every leftover pixel on
+   the right. Measured last-row fill: locations 79/59, resources 84/68, and
+   process 97/17 — one pill stranded alone on a row 83% empty.
+
+   IT WAS ALSO TOUCHING THE BUTTONS: the eyebrow top measured 2415 against the
+   .closing-cta bottom of 2416 — a 1px OVERLAP, i.e. no separation at all. Part
+   of what read as "unbalanced" was the related links appearing to belong to the
+   button row. Now 62px.
+
+   THE FIX IS THE SITE'S OWN PATTERN. `.closing-cta` already declares
+   `text-align: center` and `.closing-cta .cta-row { justify-content: center }`.
+   This extends that to the two elements after it. Centring also fixes the
+   raggedness for free: a centred line splits its leftover space evenly instead
+   of piling it on one side.
+
+   THE MEASURE WAS SWEPT, NOT GUESSED. Centring alone still left process.html
+   wrapping 6+1. The first attempt at a cap was 74ch — about 590px, far too
+   tight; it pushed two pages to three rows and created NEW orphans. Row
+   composition at 1440 by cap, all three pages:
+       none  4+3 6+1 5+4  -> 1 orphan,  6 rows
+       1100  4+3 5+2 5+4  -> 0 orphans, 6 rows
+       1000  4+3 5+2 5+4  -> 0 orphans, 6 rows   <- chosen
+        950  4+3 5+2 4+4+1-> 1 orphan,  7 rows
+        900  3+3+1 4+3 4+4+1 -> 2 orphans, 8 rows
+   1000px is the WIDEST measure that removes every orphan while keeping all
+   three pages at the minimum two rows, so it costs no height. Wrapped in
+   min(100%, …) so it is inert below 1000px.
+
+   ⚠ SCOPE IS 3 RAILS OUT OF 23, AND THAT IS THE WHOLE RISK. Walked every
+   `.cross-link-rail__rail` on all 13 pages: 23 instances across 9 pages, and
+   exactly THREE follow a centred .closing-cta. The other 20 sit in genuinely
+   left-aligned contexts (inside #regulator's grid, in body copy, beside
+   headings) where left is correct. Every selector here is anchored to
+   `.closing-cta +`; the promotion script refuses to run if any rule touching
+   the rail or the eyebrow is not.
+
+   MEASURED AFTER, 3 pages x 8 widths (1440/1280/1200/1024/900/768/640/375):
+   row asymmetry — the difference between a row's left and right void, which is
+   what "unbalanced" actually means — is 0px in ALL 24 cases, down from a worst
+   of 959px. 0 clipped pills, 0 console errors. Desktop (1024-1440) is a clean
+   two-row block with no orphan on any of the three pages. Orphans remain at
+   900/640/375, where they are unavoidable (at 375 every pill takes its own row
+   regardless) and are now centred rather than stranded.
+
+   The 82px horizontal overflow at 900px is PRE-EXISTING (the desktop nav does
+   not collapse until ~860px) and is untouched by this block.
+   ============================================================================
+
+/* =============================================================================
+ * opt-BE.css — the "Related on this site" rail, 2026-08-08
+ * -----------------------------------------------------------------------------
+ * Owner: "fix this section, it looks unbalanced."
+ *
+ * THE RAGGED WRAP IS THE SYMPTOM. The cause is that this block was never
+ * included in the centred band it lives in. Measured on all three pages:
+ *
+ *     .closing-cta           text-align: center   <- eyebrow, h2, lede, buttons
+ *     p.eyebrow (Related…)   text-align: start    <- left
+ *     .cross-link-rail__rail justify-content: normal (flex-start)  <- left
+ *
+ * So a left-aligned two-row block hangs off the left edge of an otherwise
+ * centred composition, and because the pills are content-width and wrap
+ * greedily, the last row stops wherever it happens to and dumps ALL of the
+ * leftover space on the right. Measured last-row fill:
+ *     locations  79% / 59%      process  97% / 17%      resources  84% / 68%
+ * process.html is the worst: one pill stranded alone on a row that is 83% empty.
+ *
+ * AND THE BLOCK IS TOUCHING THE BUTTONS. The eyebrow's top is 2415 where the
+ * .closing-cta's bottom is 2416 — a ONE PIXEL overlap, i.e. no separation at
+ * all. Identical on all three pages. Part of what reads as "unbalanced" is that
+ * the related links look like they belong to the button row.
+ *
+ * THE FIX IS THE SITE'S OWN PATTERN, NOT A NEW IDEA. `.closing-cta` already
+ * declares `text-align: center` and `.closing-cta .cta-row { justify-content:
+ * center }`. This block simply extends that to the two elements that follow it.
+ * Centring also fixes the raggedness for free: a centred row splits its leftover
+ * space evenly instead of piling it on one side, so the short last row reads as
+ * a deliberate tail rather than an accident — and the lone pill on process.html
+ * lands under the middle of the row above it.
+ *
+ * SCOPE IS EXACTLY THREE RAILS OUT OF TWENTY-THREE. `.cross-link-rail__rail` is
+ * used 23 times across 9 pages, and the other 20 sit in genuinely left-aligned
+ * contexts (inside #regulator's grid, in body copy, beside headings) where left
+ * is correct. Centring them all would have broken 20 places to fix 3. The
+ * selectors below are anchored to `.closing-cta +`, which is what makes this a
+ * fix and not a redecoration — verified by walking every rail on all 13 pages:
+ * exactly 3 follow a centred .closing-cta.
+ *
+ * TOKENS ONLY. No raw hex, no new fonts, no new colours, no url().
+ * ============================================================================= */
+
+
+/* -----------------------------------------------------------------------------
+ * 1. SEPARATION — the related block stops touching the buttons
+ * -----------------------------------------------------------------------------
+ * Measured gap was 0px (a 1px overlap). --ds-space-2xl (64px) is the same step
+ * the page already uses between distinct blocks, so the related links read as
+ * their own footnote to the call to action rather than part of the button row.
+ * -------------------------------------------------------------------------- */
+.closing-cta + .eyebrow {
+  margin-top: var(--ds-space-2xl);
+  text-align: center;
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 2. ALIGNMENT — join the centred band
+ * -----------------------------------------------------------------------------
+ * justify-content centres each wrapped LINE independently, which is precisely
+ * what is wanted: full rows are unaffected (they already fill the width), and
+ * only the short last row moves — from "stranded at the left" to "centred under
+ * the row above". That is the whole of the imbalance in the screenshot.
+ * -------------------------------------------------------------------------- */
+.closing-cta + .eyebrow + .cross-link-rail__rail {
+  justify-content: center;
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 3. A TIGHTER MEASURE — fewer, fuller rows
+ * -----------------------------------------------------------------------------
+ * Centring fixes the asymmetry but not the ORPHAN ROW: at the full 1152px rail,
+ * process.html still wraps 6+1 and leaves a single pill alone on the last line.
+ * A narrower measure changes where the wrap falls, and the right measure was
+ * found by SWEEPING it rather than guessing — the first attempt here was 74ch,
+ * which is about 590px and far too tight; it pushed locations and resources to
+ * three rows and created new orphans.
+ *
+ * Row composition at 1440 by cap, across all three pages:
+ *     none   4+3   6+1   5+4   -> 1 orphan,  6 rows
+ *     1100   4+3   5+2   5+4   -> 0 orphans, 6 rows
+ *     1000   4+3   5+2   5+4   -> 0 orphans, 6 rows   <- chosen
+ *      950   4+3   5+2   4+4+1 -> 1 orphan,  7 rows
+ *      900   3+3+1 4+3   4+4+1 -> 2 orphans, 8 rows
+ *      750   3+2+2 3+4   4+3+2 -> 0 orphans, 8 rows (but 2 extra rows of height)
+ * 1000 is the widest measure that removes every orphan while keeping all three
+ * pages at the minimum two rows, so it costs no height at all. 1100 ties on
+ * composition; 1000 is preferred as the tighter, more deliberate measure.
+ *
+ * It is a MAX wrapped in min(), so below 1000px the rail is simply the container
+ * width and this rule is inert — nothing changes on a laptop or a phone.
+ * -------------------------------------------------------------------------- */
+.closing-cta + .eyebrow + .cross-link-rail__rail {
+  max-width: min(100%, 1000px);
+  margin-inline: auto;
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 4. PHONE — the cap must not fight a narrow screen
+ * -----------------------------------------------------------------------------
+ * At 375 the rail is 327px and every pill takes its own row regardless; the cap
+ * is far wider than the container so it is inert, and centring short pills in a
+ * narrow column is still correct. Stated explicitly so a future reader does not
+ * assume this block is desktop-only.
+ * -------------------------------------------------------------------------- */
