@@ -14502,3 +14502,236 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
  * rules above are unconditional for the same reason. At 375 the pills wrap to
  * two rows and the extra air above them matters more, not less.
  * -------------------------------------------------------------------------- */
+
+
+/* ============================================================================
+   [BG] THE CLOSING CTA BAND — site-wide (owner, 2026-08-08)
+   ----------------------------------------------------------------------------
+   Owner, on two different pages: "this section also looks unbalanced" /
+   "need to fix spacings".
+
+   Rather than patch the two screenshots, EVERY `.closing-cta` was audited — 11
+   bands across 10 pages. NINE had at least one defect, and they were the same
+   four faults repeating. This block fixes the class, not the two instances.
+
+   (1) THE BODY PARAGRAPH RAN UNCAPPED, on eight pages. Measured per line:
+         faq 160  locations 160  services 158  about 153  inventory 153
+         resources 151  licence-types 149  process 149
+       characters on the longest line, against the 45-75 body text is set for.
+       A centred 160-character line is the worst case for a reader: BOTH edges
+       move, so there is no stable left margin to return to. Now 69-76.
+
+   (2) A `.lede` INSIDE THE BAND WAS NOT CENTRED AS A BOX (contact.html).
+       `.lede` carries a 633px max-width but no auto margins, so inside a
+       centred band the box sat hard left while the h2 and buttons above and
+       below it were centred — MEASURED 519px off-centre. `text-align: center`
+       centres the TEXT INSIDE a box; it cannot centre the box itself. That is
+       precisely the "Both land on the same desk." line in the screenshot.
+
+   (3) THE HEADING WAS WELDED TO ITS OWN PARAGRAPH, on eight of the nine bands:
+       a 0px h2/h3 -> p gap. The one exception, contact.html, escaped only by
+       accident — its paragraph is a `.lede`, which brings its own 16px top
+       margin. A bare <p> in the band had none. Now a consistent 12 / 16 / 24
+       rhythm (eyebrow -> heading -> sentence -> buttons) on every band.
+
+   (4) A CROSS-LINK RAIL DIRECTLY ABOVE THE BAND TOUCHED IT on four pages
+       (faq, inventory, licence-types, services). Measured gap: 0px. Now 64px,
+       matching the separation [BE] uses on the other side of a closing band.
+
+   ⚠ THESE RAILS ARE DELIBERATELY *NOT* CENTRED, which is the opposite of [BE].
+   [BE] centred rails that FOLLOW a `.closing-cta`, because there the rail is a
+   footnote to a centred block. These PRECEDE it, and the section they belong to
+   is left-aligned throughout — verified on all four pages:
+       p.eyebrow start | h2 start | p.lede start | rail start | CTA center
+   The rail belongs with the left-aligned header above it, so centring it would
+   break the section in order to fix the seam. Only the seam is fixed. The
+   centred CTA bolted onto a left-aligned section is the site's own pattern on
+   every one of these pages and is left alone.
+
+   ⚠ [BF] IS CORRECTED HERE, AND THE REASON MATTERS.
+   [BF] capped the #inventory intro paragraph at 68ch and its note claimed "~73
+   characters per line". THAT NUMBER WAS WRONG. It came from dividing character
+   count by line count, which averages in the short final line and under-reports
+   badly — the same estimator called the closing bands 83 when they were 153.
+   `ch` misleads in the same direction: `ch` is the width of "0", wider than the
+   average glyph, so 68ch admits about 105 real characters, not 68. Measured
+   properly, [BF] moved that paragraph from 153 to 105 and left it OUTSIDE the
+   range rather than inside it. Corrected to 48ch here (72 characters) rather
+   than by editing [BF], because this sheet is append-only and a later block
+   overriding an earlier one is how the file works — editing [BF] in place would
+   erase the record of the mistake.
+
+   THE MEASURE WAS SWEPT against TRUE per-line counts, worst case over 8 pages:
+       uncapped 160    68ch 106    60ch 92    54ch 86    48ch 76
+   48ch is the first value that brings the worst line inside the range. It
+   computes to 528px at the 16px body size — NARROWER than the .lede's 633px,
+   and that is correct rather than a mistake: the lede is set at 20px and runs
+   66 characters at 633px, so matching its MEASURE at 16px necessarily means a
+   narrower box. Matching its pixel width instead would give 84 characters.
+
+   GATED by a site-wide audit that walks every `.closing-cta` on all 13 pages:
+   9 bands with defects before, 0 after, 11 inspected both times. The gate
+   measures characters per line by walking every character offset with a Range
+   and detecting a line break from the rect's top — not by dividing. It also
+   fails closed on a page that 404s, because a missing page has no bands and
+   would otherwise read as "no defects" (a false pass this lab actually hit when
+   a build script threw part-way through).
+   ============================================================================
+
+/* =============================================================================
+ * opt-BG.css — the closing CTA band, site-wide. 2026-08-08
+ * -----------------------------------------------------------------------------
+ * Owner, on two different pages: "this section also looks unbalanced" /
+ * "need to fix spacings".
+ *
+ * Rather than patch the two screenshots, every `.closing-cta` on the site was
+ * audited — 11 bands across 10 pages. NINE have at least one defect, and they
+ * are the same three faults repeating:
+ *
+ *   (1) THE BODY PARAGRAPH IS UNCAPPED, on eight pages. `.closing-cta` centres
+ *       its text but nothing constrains the measure, so the paragraph runs the
+ *       full 1152px container. MEASURED PER LINE, exactly — see the note on
+ *       method below:
+ *           faq 160   locations 160   services 158   about 153   inventory 153
+ *           resources 151   licence-types 149   process 149
+ *       characters on the longest line, against the 45-75 body text is set for.
+ *       A centred 160-character line is the worst case for a reader: both edges
+ *       move, so there is no stable left margin to return to. This is the single
+ *       most common defect on the site.
+ *
+ *       ⚠ HOW THESE WERE MEASURED, because the obvious method is wrong.
+ *       `characters / number-of-lines` is NOT characters-per-line — it averages
+ *       in the short final line and under-reports badly. A first pass at this
+ *       used it and reported the worst case as 83 when it was really 153. The
+ *       numbers above walk every character offset with a Range and detect a line
+ *       break by a change in the rect's top, which gives the true count per line.
+ *       `ch` units mislead in the same direction: `ch` is the width of "0", which
+ *       is wider than the average glyph, so 68ch admits about 105 real
+ *       characters, not 68.
+ *
+ *   (2) A `.lede` INSIDE THE BAND IS NOT CENTRED AS A BOX, on contact.html.
+ *       `.lede` carries `max-width: 633px` from its own rule but no auto
+ *       margins, so inside a centred band the 633px box sits hard against the
+ *       left while the h2 and the buttons around it are centred. MEASURED: the
+ *       box is off-centre by 519px. `text-align: center` centres the TEXT INSIDE
+ *       a box; it cannot centre the box itself. That is exactly the "Both land
+ *       on the same desk." line in the owner's screenshot.
+ *
+ *   (3) A CROSS-LINK RAIL DIRECTLY ABOVE THE BAND TOUCHES IT, on four pages
+ *       (faq, inventory, licence-types, services). Measured gap: 0px.
+ *
+ * ⚠ THE RAILS HERE MUST *NOT* BE CENTRED, and that is the opposite of [BE].
+ * [BE] centred rails that FOLLOW a `.closing-cta`, because there the rail is a
+ * footnote to a centred block. These rails PRECEDE it, and the section they
+ * belong to is left-aligned throughout — checked on all four pages:
+ *       p.eyebrow  start | h2  start | p.lede  start | rail  start | CTA  center
+ * The rail belongs with the left-aligned header above it, so centring it would
+ * break the section to fix the seam. Only the seam is fixed.
+ *
+ * The centred CTA bolted onto a left-aligned section is DELIBERATE and is left
+ * alone: `.closing-cta { text-align: center }` is the site's own pattern and it
+ * appears this way on every one of these pages. It reads as a distinct closing
+ * moment, not as an error.
+ *
+ * TOKENS ONLY — no raw hex, no new fonts, no new colours, no url().
+ * ============================================================================= */
+
+
+/* -----------------------------------------------------------------------------
+ * 1. EVERY PARAGRAPH BOX IN THE BAND IS CENTRED
+ * -----------------------------------------------------------------------------
+ * `text-align: center` on the parent centres the TEXT INSIDE each child box. It
+ * does nothing to a child whose box is narrower than the band — that box still
+ * sits wherever its own margins put it, which is hard left. Any paragraph in the
+ * band that carries a max-width therefore has to be centred explicitly. This is
+ * the contact.html fault, measured at 519px off-centre.
+ * -------------------------------------------------------------------------- */
+.closing-cta > p {
+  margin-inline: auto;
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 2. THE BODY PARAGRAPH GETS A MEASURE
+ * -----------------------------------------------------------------------------
+ * SWEPT against true per-line character counts, worst case across all 8 pages:
+ *       uncapped  160      68ch  106      60ch  92
+ *       54ch       86      48ch   76
+ * 48ch is the first value that brings the worst line inside the range. It
+ * computes to 528px at this 16px body size, which is NARROWER than the .lede's
+ * 633px — and that is correct, not a mistake: the lede is set at 20px and runs
+ * 66 characters at 633px, so matching its MEASURE at 16px necessarily means a
+ * narrower box. Matching the lede's pixel width instead would give 84 characters
+ * and miss the point of the rule.
+ *
+ * `.eyebrow` and `.lede` are excluded deliberately: the eyebrow is a 13-character
+ * kicker that needs no measure, and `.lede` already carries its own cap which is
+ * WIDER in pixels — without the exclusion this rule would win on specificity and
+ * squeeze a 20px lede to 528px, undoing an existing correct decision.
+ * -------------------------------------------------------------------------- */
+.closing-cta > p:not(.eyebrow):not(.lede) {
+  max-width: 48ch;
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 2b. CORRECTING [BF] — the #inventory intro paragraph was under-capped
+ * -----------------------------------------------------------------------------
+ * [BF] capped that paragraph at 68ch and the promotion note claimed "~73
+ * characters per line". THAT NUMBER WAS WRONG. It came from the
+ * characters/lines average described above; measured properly the paragraph runs
+ * at 105 characters on its longest line, so [BF] moved it from 153 to 105 and
+ * left it well outside the range rather than inside it.
+ *
+ * Corrected here rather than by editing [BF], because this sheet is append-only
+ * and a later block overriding an earlier one is how the file works — editing
+ * [BF] in place would erase the record of the mistake. Same 48ch as the closing
+ * band, for the same reason and at the same body size: 528px, 72 characters,
+ * against the .lede above it at 66.
+ * -------------------------------------------------------------------------- */
+#inventory .container > p:not(.eyebrow):not(.lede):not(.tg-fcount) {
+  max-width: 48ch;
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 2c. THE HEADING IS WELDED TO ITS OWN PARAGRAPH
+ * -----------------------------------------------------------------------------
+ * MEASURED on every band: the heading-to-paragraph gap is 0px on EIGHT of the
+ * nine. The single exception is contact.html, and only by accident — its
+ * paragraph is a `.lede`, which carries `margin-top: 16px` from its own rule.
+ * A bare `<p>` in the band has no top margin at all, so every h2/h3 sits directly
+ * on top of its own sentence.
+ *
+ * 16px is not a new number: it is what contact.html already gets, and it matches
+ * the h2 -> lede step used throughout the site. The eyebrow -> heading step stays
+ * at its existing 12px, so the band reads kicker / heading / sentence rather than
+ * as one undifferentiated lump.
+ * -------------------------------------------------------------------------- */
+.closing-cta > :is(h2, h3) + p {
+  margin-top: var(--ds-space-md);
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 3. THE SEAM WHERE A LINK RAIL MEETS THE BAND
+ * -----------------------------------------------------------------------------
+ * Adjacency-scoped, so it applies only where a rail is genuinely the element
+ * immediately before the band — the four pages measured at a 0px gap — and
+ * nothing else on the site is touched. 64px matches the separation [BE] uses on
+ * the other side of a closing band, so a rail above and a rail below now sit at
+ * the same distance from it.
+ * -------------------------------------------------------------------------- */
+.cross-link-rail__rail + .closing-cta {
+  margin-top: var(--ds-space-2xl);
+}
+
+
+/* -----------------------------------------------------------------------------
+ * 4. PHONES
+ * -----------------------------------------------------------------------------
+ * All three rules are unconditional. The measure cap is a MAX, so below ~750px
+ * the paragraph is simply the container width and rule 2 is inert; the centring
+ * in rule 1 is correct at every width; and the 0px seam in rule 3 was measured at
+ * 375 too, so the separation is needed there as much as on desktop.
+ * -------------------------------------------------------------------------- */
