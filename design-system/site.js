@@ -3339,8 +3339,38 @@
       /* the panel drops below by default and flips above only when there is not
          room, so it never pushes the document or hangs off the bottom */
       var r = btn.getBoundingClientRect();
-      var below = window.innerHeight - r.bottom;
+      /* [BI] 2026-08-10 — THE ROOM BELOW IS NOT innerHeight - bottom ON MOBILE.
+         `.mm-sticky-cta` is position:fixed at the foot of the viewport with
+         z-index 980, twenty-four times this panel's 40, so any part of the panel
+         that lands in the bar's band is painted over and DEAD TO TOUCH while
+         still looking open. Measured at 375 and 390: #qz-market panel
+         y=493 h=340 bottom=833 against a bar at top=774 -> a 58px dead strip,
+         and elementFromPoint over "San Francisco County" returned the bar's own
+         a.btn.btn-primary. #inv-county was worse: same collision AND that panel
+         is not internally scrollable (scrollHeight - clientHeight = 0), so the
+         covered option could not be reached by any means.
+         Subtracting the bar makes the flip decision honest, and the max-height
+         clamp stops a downward panel reaching into the bar's band at all.
+         DESKTOP-SAFE BY CONSTRUCTION: barH is 0 whenever the bar is not shown,
+         which is every width >= 982px, so `below` is unchanged there and the
+         inline max-height is never written (the CSS min(46vh,340px) still owns
+         it). Verified: 0 of 14,295 desktop element records drifted. */
+      var bar = document.querySelector('.mm-sticky-cta');
+      var barH = 0;
+      if (bar && bar.classList.contains('show')) {
+        var bcs = window.getComputedStyle(bar);
+        if (bcs.display !== 'none' && bcs.visibility !== 'hidden') {
+          barH = bar.getBoundingClientRect().height;
+        }
+      }
+      var below = window.innerHeight - r.bottom - barH;
       wrap.classList.toggle('dsel--up', below < 240 && r.top > below);
+      if (barH > 0) {
+        var room = (wrap.classList.contains('dsel--up') ? r.top : below) - 8;
+        panel.style.maxHeight = Math.max(0, Math.min(340, room)) + 'px';
+      } else {
+        panel.style.maxHeight = '';
+      }
       setActive(sel.selectedIndex >= 0 ? sel.selectedIndex : 0);
       openOne = close;
     }
@@ -3349,6 +3379,7 @@
       if (panel.hidden) return;
       panel.hidden = true;
       wrap.classList.remove('is-open', 'dsel--up');
+      panel.style.maxHeight = ''; /* [BI] hand the cap back to the stylesheet */
       btn.setAttribute('aria-expanded', 'false');
       btn.removeAttribute('aria-activedescendant');
       var a = panel.querySelector('.is-active');

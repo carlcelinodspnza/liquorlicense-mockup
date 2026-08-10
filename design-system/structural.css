@@ -14735,3 +14735,433 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
  * in rule 1 is correct at every width; and the 0px seam in rule 3 was measured at
  * 375 too, so the separation is needed there as much as on desktop.
  * -------------------------------------------------------------------------- */
+
+
+/* ============================================================================
+   [BH] MOBILE REPAIR — the owner's 2026-08-10 gap-hunt (two owner decisions)
+   ----------------------------------------------------------------------------
+   SCOPE CONTRACT: every rule in this block lives inside a max-width media query
+   whose ceiling is 1000px or 981px. NOTHING here can reach >=1001px. Proved by
+   desktop-lock.mjs: 14,295 element records at 1440/1280/1100 compared before and
+   after, 0 drifted. That gate was itself proved discriminating first — injecting
+   a real desktop change made it report 4,810 drifts.
+
+   Deleting this whole block is a complete revert.
+   Backup: _backups/structural.css.pre-BH-2026-08-10
+
+   ----------------------------------------------------------------------------
+   1. #industries — THE DEFECT THE OWNER SCREENSHOTTED
+
+   MEASURED at 375 on the unfixed site: the grid's rows were pinned at 150px
+   (pitch 150 + 16 gap = 166px) while .category-card carried min-height 232.5px
+   and rendered 233px. Every card therefore overflowed its own row by 67px and
+   painted over the card below it — 6 overlapping pairs, each 156x67px. The grid
+   allocated 814px for content that needed 1229px.
+
+   ROOT CAUSE — a DESKTOP fix that leaked into mobile. [F] at :4656
+   (@media max-width:1000px) had ALREADY solved this with `grid-auto-rows: auto`,
+   written specifically so these tiles grow to their SEO deks instead of cutting
+   them. [AR] at :7588 (@media max-width:1099px, added 2026-08-06 to fit the band
+   in one DESKTOP viewport) re-imposed fixed rows. Both selectors are
+   `#industries .ind-feature-grid` = (0,1,1,0), so in this append-only sheet [AR]
+   wins on source order alone and silently reverted [F].
+
+   The half that did NOT get reverted is what made it collide: [F]'s min-height
+   sits on a DIFFERENT selector (`.category-card`), so the 232.5px min-height
+   survived while the `auto` rows died. Fixed rows + a taller min-height on the
+   same tile is the collision.
+
+   Rule 1 restores [F]'s intent at ITS OWN breakpoint (1000px, not [AR]'s 1099),
+   which is why this cannot disturb the 1001-1099 tablet regime — verified by
+   probe: #industries has 0 overlaps at 1024 and 1080 both before and after.
+
+   Rule 2 is the OWNER'S PICK (option B of two rendered candidates, 2026-08-10):
+   restore the single-column banner layout the design originally specified at
+   :3690 before [AR] overrode it. Measured on the option render: overlaps 6 -> 0,
+   section height 1168 (broken, overlapping) -> 2798 (single column).
+   Option A (keep 2 columns, auto height, 1580px) was declined.
+   -------------------------------------------------------------------------- */
+@media (max-width: 1000px) {
+  #industries .ind-feature-grid { grid-auto-rows: auto; }
+}
+@media (max-width: 460px) {
+  #industries .ind-feature-grid { grid-template-columns: 1fr; }
+  #industries .ind-feature-grid__wide { grid-column: auto; }
+}
+
+/* ----------------------------------------------------------------------------
+   2. THE HEADER OVERFLOWS EVERY PAGE FROM 769px TO 981px
+
+   MEASURED by a 2px width sweep: the desktop nav switches on at exactly 769px
+   (the burger regime is @media max-width:768px at :808), but the header bar
+   needs 982px to lay out — the "Talk to a broker" CTA ends at x=982 regardless
+   of viewport. So documentElement.scrollWidth exceeds clientWidth across the
+   whole 769-981 band: 213px at 770, 162px at 820, 82px at 900, 1px at 981.
+   Every one of the 13 pages scrolls sideways there.
+
+   Real devices inside that band include iPad 10.2" (810), iPad Air portrait
+   (820) and iPad Pro 11" portrait (834).
+
+   This was previously logged only as "82px h-overflow at 900px, pre-existing,
+   do not fix by accident". It is really a 213px-wide band, and the OWNER
+   REVERSED that decision on 2026-08-10, choosing to extend the mobile header
+   regime up to 981px rather than leave it.
+
+   WHY NOT THE SMALLER FIX: hiding the header CTA alone was measured to drop
+   scrollWidth 982 -> 820 (an exact fit). It was REJECTED because .mm-sticky-cta
+   is only shown at <=768px, so 769-981 would then carry no persistent CTA at
+   all — a conversion cost disguised as a one-line fix.
+
+   This re-states ONLY the seven header/drawer rules of the :808 block at the
+   wider ceiling. The footer and closing-CTA rules that share that block are
+   deliberately NOT included: they are unrelated to the overflow and stay at 768.
+   At <=768px every rule here is identical to the one already in force, so the
+   existing mobile header is unchanged.
+   -------------------------------------------------------------------------- */
+@media (max-width: 981px) {
+  .site-nav { display: none; }
+  .mm-cta-desktop { display: none; }
+  .site-header__hamburger { display: flex; }
+  .mm-burger { display: inline-flex; }
+  .mm-sticky-cta { display: flex; }
+  .site-drawer { display: flex; }
+  .site-drawer-backdrop, .mm-overlay { display: block; }
+}
+
+
+/* ============================================================================
+   [BI] MOBILE CRITICALS — from the 2026-08-10 adversarial gap-hunt
+   ----------------------------------------------------------------------------
+   Every finding below was reported by one agent and then INDEPENDENTLY RE-MEASURED
+   by a second agent whose instruction was to REFUTE it; only survivors are here.
+   Companion JS half: site.js block [BI] (the select-panel flip). One letter, a
+   CSS half and a JS half, per this sheet's convention.
+
+   SCOPE CONTRACT: nothing here reaches >=1100px. Proved by desktop-lock.mjs
+   (0 of 14,295 records drifted at 1440/1280/1100). The two 1099-ceiling rules
+   also touch 1024/1080, so a tablet baseline was captured BEFORE this block and
+   is diffed after — that delta is reported rather than assumed.
+
+   Deleting this block + the site.js [BI] block is a complete revert.
+   Backups: _backups/structural.css.pre-BH-2026-08-10 (pre-[BH], which is also
+   pre-[BI] for every rule below), _backups/site.js.pre-BI-2026-08-10
+
+   ----------------------------------------------------------------------------
+   1. THE STICKY CTA BAR BURIES THE ABC REGULATORY DISCLAIMER — 11 pages
+
+   `.mm-sticky-cta` is position:fixed, bottom:0, z-index:980 (:742) and
+   `.site-footer` sets padding-block: 0 (:754), so nothing reserves the bar's
+   height at the end of the document. MEASURED by a real scroll to the document
+   maximum (no forced classes) on index@375: scrollY 17075 == maxScroll 17075
+   (genuinely at the bottom), bar rect top=774 bottom=844 h=70 in an 844
+   viewport, span.site-footer__bcorp rect top=770 bottom=810 -> 36 of its 40px
+   covered = 89%, and document.elementFromPoint at the disclaimer's centre
+   returns DIV.mm-sticky-cta rather than the text. There is NO scroll position
+   that reveals it.
+
+   The buried sentence is "Licence transfers are administered by the California
+   Department of Alcoholic Beverage Control..." — regulatory copy, not decoration.
+
+   CEILING IS 981, NOT 768. The hunt proposed 768 because that is where the bar
+   used to appear. [BH] extended the mobile header regime to 981px, so the bar
+   now shows to 981 — and therefore so does this defect. Fixing at 768 would
+   have left 769-981 buried, a bug [BH] itself introduced into that band.
+   84px clears the tallest measured bar (70px at 375/390, 76px at 414-900).
+   -------------------------------------------------------------------------- */
+@media (max-width: 981px) {
+  .site-footer { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+
+  /* --------------------------------------------------------------------------
+     2. THE OPEN NAV DRAWER IS PAINTED OVER BY THE SAME BAR
+
+     `.site-drawer` is z-index 100 (:699) and `.mm-overlay` is 90 (:697); the bar
+     is 980. MEASURED with a REAL burger click after scrolling past the bar's
+     480px reveal threshold, so both elements were in their genuine state: the
+     bar overlaps the open drawer's own box by 70px, and a 12-point hit-test grid
+     across the drawer inside that band returned the bar's button every time —
+     the drawer's primary CTA is 100% unclickable.
+
+     Suppressed rather than re-stacked: site.js:74 already toggles
+     `body.mm-no-scroll` exactly on drawer open, so this needs no new JS. Raising
+     the drawer above 980 was rejected — [BD]'s comment at :14086 records that
+     30 was chosen so an open panel never covers .site-header, and inflating this
+     stack would re-open that. `.mm-sticky-cta.show` is (0,0,2,0) and so is this,
+     so the later block wins on source order without !important. */
+  body.mm-no-scroll .mm-sticky-cta { transform: translateY(110%); pointer-events: none; }
+
+  /* --------------------------------------------------------------------------
+     3. TAP TARGETS — `.cross-link` chips are 40px tall
+
+     :445 gives .cross-link padding + font-size but no min-height. Of the 375-hit
+     sub-44px population across 11 pages, 233 (62%) are inline reading links
+     inside <p>/<li>/<td> and correctly discounted; of the 142 REAL standalone
+     controls that remain, this ONE rule accounts for 81. The element is already
+     display:inline-flex; align-items:center, so min-height alone centres the
+     label without moving anything else. */
+  .cross-link { min-height: 44px; }
+}
+
+/* ----------------------------------------------------------------------------
+   4. AN HTML `height` ATTRIBUTE IS PINNING PHOTO BOXES — 13 photos, 6 pages
+
+   `.feature-row__media img` (:1012) sets width:100% and object-fit:cover but no
+   `height: auto`, so the presentational `height="512"` attribute in the markup
+   survives and fixes the box height. MEASURED at 375: computed height literally
+   reports "512px"; 12 instances render 327x512 from a 512x512 square source, so
+   36.13% of each photograph is cropped horizontally, only 327 of 512 source
+   columns land in a 654 device-px box (retina 0.50x), and each photo eats 63% of
+   the 812px viewport.
+
+   The same omission exists on the base `img {}` rule at :38, which is what lets
+   resources.html:342's bare in-prose <img width="1400" height="933"> render
+   327x933 with object-fit at its initial value `fill` — that map is SQUASHED
+   76.6% horizontally, not cropped, and is 4.28x taller than its correct height.
+
+   Fixing :38 globally is the "correct" fix and is deliberately NOT done here:
+   it would change desktop (the map 680x933 -> 680x453), which is out of scope.
+   Scoped to 1099 because the defect exists at every width below the desktop
+   grid, and the 1024/1080 delta is measured and reported rather than assumed.
+   -------------------------------------------------------------------------- */
+@media (max-width: 1099px) {
+  .feature-row__media img { height: auto; }
+  #explainers img { height: auto; }
+}
+
+
+/* ============================================================================
+   [BJ] TWO MOBILE CROPS — owner-picked from rendered options, 2026-08-10
+   ----------------------------------------------------------------------------
+   Both are the SAME LATENT MECHANISM as [AR] and [BH]: an UNSCOPED declaration
+   appearing later in this append-only sheet silently kills a mobile-scoped one.
+   Neither was fixed automatically, because retargeting a crop on a photograph is
+   an aesthetic judgement — both options were rendered at 375 and the owner chose.
+
+   Deleting this block is a complete revert.
+
+   ----------------------------------------------------------------------------
+   1. #coverage MAP — this one was not cosmetic, it was showing the wrong half
+      of the state.
+
+   `.cv-map` sets `aspect-ratio: 24 / 7` at :3997 with NO media query and no
+   override anywhere (`#coverage .cv-map` at :11071 sets margin-top only, so this
+   rule wins on source order at equal specificity). MEASURED at 375: the map box
+   is 327 x 95.4 and, against a 1400x933 source under object-fit:cover, 56.2% of
+   the map is cropped away vertically.
+
+   WHAT THAT ACTUALLY COST, read off the render rather than the numbers: the
+   surviving strip is NORTHERN CALIFORNIA ONLY — Sacramento, San Francisco,
+   Oakland, San Jose, Monterey, Fresno. Los Angeles, Orange County and San Diego
+   are all outside the crop, on the homepage of a brokerage whose own office is
+   in Los Angeles and whose published market list leads with LA/OC/San Diego.
+
+   OWNER PICKED 4/3 (327 x 245): the whole state, Oregon border to Mexico, with
+   San Diego and the Channel Islands in frame. Costs 150px of scroll. The 16/9
+   option (327 x 184) was declined because it brings LA in but still cuts San
+   Diego off at the bottom edge.
+
+   Scoped to 699 so the 24/7 letterbox is untouched from 700px up.
+   -------------------------------------------------------------------------- */
+@media (max-width: 699px) {
+  .cv-map { aspect-ratio: 4 / 3; }
+}
+
+/* ----------------------------------------------------------------------------
+   2. INDEX HERO — the mobile object-position rule has never once applied.
+
+   :3159 `@media (max-width: 768px) { .hero--photo .hero__media img {
+   object-position: 64% 50% } }` is the mobile crop. :3323 then declares
+   `.hero--photo .hero__media img { ... object-position: 50% 50% }` UNSCOPED and
+   later at equal specificity (0,2,1), so it wins at every width and the mobile
+   value is dead code. MEASURED at 375: computed objectPosition is "50% 50%".
+
+   Geometry: the hero box is 375 x 1061 against a 2496 x 1664 source, so cover
+   keeps a vertical strip only 588px wide — 23.6% of the photograph.
+
+   OWNER PICKED 64% 50% — i.e. exactly the value :3159 always intended, simply
+   re-declared where it can actually win. Deliberately NOT a new number invented
+   here. The alternative 66% 42% was declined as near-indistinguishable.
+
+   NOT FIXED, and recorded so it is not mistaken for done: the hero is 1061px
+   tall on an 844px viewport (126%). That height is driven by CONTENT, not by the
+   620px min-height, so it cannot be capped without a spacing/content pass.
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .hero--photo .hero__media img { object-position: 64% 50%; }
+}
+
+
+/* ============================================================================
+   [BK] locations #markets — A 1440-MEASURED TRACK ADMITTED FROM AN 800px FLOOR
+   ----------------------------------------------------------------------------
+   Found by the re-run of the desktop-leak lens (the two lenses that died on API
+   errors in the first hunt), confirmed independently by an adversarial verifier
+   and then re-measured a third time here before this fix was written.
+
+   `.loc-type__body` ships as a stacked flex column at :5369. Inside
+   `@media (min-width: 800px)` at :13456 it becomes
+   `grid-template-columns: 310px minmax(0, 1fr)`. The sheet's own comment at
+   :13445 gives the number's provenance — "a fixed 310px name column (widest name
+   MEASURED at 304px)" against "the 856px column" — i.e. it is a 1440 measurement
+   handed an 800px floor.
+
+   MEASURED on locations.html (my own render, agreeing with the verifier's):
+
+       vw     h-overflow   grid-template-columns    stock box
+       768         0       none (flex column)       364 x 19    correct
+       799         0       none (flex column)       394 x 19    correct
+       800        46       310px 0px                  0 x 169   <- second track
+       820        26       310px 0px                  0 x 169      collapses to
+       845         1       310px 0px                  0 x 169      EXACTLY ZERO
+       981         0       310px 0px                  0 x 169
+      1099         0       310px 106.594px          107 x 68
+      1440         0       310px 207.594px          208 x 34    as designed
+
+   The stock sentence is therefore laid out in a ZERO-WIDTH box: it renders one
+   word per line down a 169px column and overprints the row's own orange CTA
+   ("Send a sourcing brief" / "Open them on the board"), while names longer than
+   310px (Type 41, Type 47) overrun their track into the same link from the left.
+   Verified visually at 900px, not inferred from the numbers. The 46px of sideways
+   scroll at 800px is that zero-width box's overflowing inline text (widest word
+   "classification", 76px) propagating up through #markets/#main/body.
+
+   The whole 800-981 band is inside the mobile regime [BH] established, and
+   800-845 additionally scrolls the page sideways.
+
+   THE FIX re-asserts the SHIPPED stacked layout — the same declarations as
+   :5369, which is the arrangement already proved correct at 768 (stock 364x19).
+   No new number is invented.
+
+   Ceiling 1099, not 981: the second track is unusably narrow all the way to
+   ~1050 (7.6px at 1000, 57.6px at 1050), so stopping at 981 would leave a
+   known-broken band behind. >=1100 is untouched — measured 310px + 107.594px at
+   1100 and 310px + 207.594px at 1280/1440, identical before and after.
+
+   NOT done, deliberately: raising :13413's own `min-width: 800px` floor to 1100.
+   That block also carries #markets padding, the two-column .container and the
+   .loc-tabs layout, all of which SHOULD fire below 1100.
+
+   ⚠ `align-items` MUST be reset with the direction change, and the first cut of
+   this block did not do it. :13456 sets `align-items: center` to centre the two
+   GRID tracks vertically. The moment the body becomes a COLUMN flex container
+   that same property centres the children HORIZONTALLY instead, so the name and
+   its stock sentence were laid out centred rather than flush-left — caught in the
+   900px render (rows 21/47/48 visibly indented against rows 20/41), not by any
+   number. `stretch` is the initial value and the one :5369's shipped column
+   relies on.
+   -------------------------------------------------------------------------- */
+@media (max-width: 1099px) {
+  .loc-type__body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+  }
+}
+
+
+/* ============================================================================
+   [BL] FOUR MOBILE MAJORS — from the re-run typography + desktop-leak lenses
+   ----------------------------------------------------------------------------
+   All four confirmed by an adversarial verifier and re-checked against source
+   here before writing. Every rule sits inside a max-width query with a ceiling
+   of 720px or lower, except the #services token override at 620px — so nothing
+   here can reach >=1100px. Deleting this block is a complete revert.
+
+   ----------------------------------------------------------------------------
+   1. process #phases — a 91px pill holds 107px of every row hostage
+
+   `.compliance-item` (:459) is `display: flex; align-items: baseline` and
+   `.compliance-item__status` (:460) is `flex: 0 0 auto`, so the "Phase 01".."06"
+   pill can never leave the copy's line and never shrink. MEASURED at 375: the
+   li is 327px (full container) but its copy column is only 220px — 91px pill +
+   16px gap = 107px, 29% of the viewport, dead for the full height of each row.
+   All six paragraphs run 219-222px = 67-68% of the container.
+
+   Stacking the pill above the copy on mobile returns the whole 327px measure.
+   -------------------------------------------------------------------------- */
+@media (max-width: 700px) {
+  .compliance-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--ds-space-xs);
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   2. The sticky CTA headline is cut mid-word on 11 pages
+
+   :745 gives `.mm-sticky-cta__copy b` `white-space: nowrap; overflow: hidden;
+   text-overflow: ellipsis`. MEASURED at 375: clientWidth 158 vs scrollWidth 169
+   — 11px over, so the ellipsis fires and the site's most prominent mobile CTA
+   reads "Talk to a senior brok…". Width sweep: 320 cuts 66px (14 of 23 chars),
+   360 cuts 26px, 375 cuts 11px, and 390 and up cut nothing.
+
+   This is the ONE genuine text truncation on the site, and the site-wide probe
+   CANNOT see it — .mm-sticky-cta is on the probe's ESCAPE_OK list (it is fixed
+   chrome that legitimately escapes its parent), so the CLIP check never reaches
+   it. It was found by reading, not by the gate.
+
+   Placed in the EXISTING @media (max-width: 390px) regime (:835), which already
+   hides `.mm-sticky-cta__copy span` — so the bar is showing one line of copy
+   there and has room for two. At 391px and up the headline already fits on one
+   line, so allowing wrap changes nothing above the query.
+   -------------------------------------------------------------------------- */
+@media (max-width: 390px) {
+  .mm-sticky-cta__copy b {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.15;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   3. locations #markets — 40px of measure lost to a UA list indent
+
+   `.loc-types` (:5346) sets display/flex-direction/gap but never `padding: 0`
+   or `list-style: none`, so the <ul> keeps the browser default
+   `padding-inline-start: 40px`. The sheet is INCONSISTENT with itself about
+   this: `.compliance-roadmap__list` at :458 resets both.
+
+   MEASURED box chain at 375: container 375 -> padding 24 -> .loc-tabs 327 ->
+   .loc-panel padding 20 -> ul.loc-types 285 with padding-left 40 / right 0 ->
+   li.loc-type 245 -> text column 149px. Because the li is display:grid no
+   marker ever paints, so the 40px is pure invisible loss, and it is one-sided:
+   the rows sit 40px in from the left and flush to the right.
+
+   Added to the existing @media (max-width: 720px) block's regime (:5397).
+   Desktop keeps the same indent and is outside the query.
+   -------------------------------------------------------------------------- */
+@media (max-width: 720px) {
+  .loc-types { padding-left: 0; list-style: none; }
+}
+
+/* ----------------------------------------------------------------------------
+   4. index #services — seven of eight service names at 11px
+
+   :10547 opens `@media (max-width: 1099px)` with NO min-width floor and sets
+   `--md-t-h3-fs: 11px` (:10571) for the master-detail tiles. It is a TABLET
+   compression budget applied unchanged down to 320px — the same no-floor
+   mechanism as [AR]. Desktop is 14.5px, tablet 12.5px, so 11px is a
+   mobile-only value and the smallest type on the site, used as a heading AND a
+   tap label.
+
+   MEASURED at 375, this fix A/B'd against two alternatives before choosing:
+       CURRENT    min font 11px    section 792px
+       13px/62    min font 13px    section 840px   (+48)   <- chosen
+       13.5px/66  min font 13.5px  section 856px   (+64)
+   No tile clips in any of the three (row scrollHeight == clientHeight at 7/7),
+   so the defect here is legibility, not overflow — the lens's claim of a
+   clipped tile did NOT reproduce for me and is not repeated as fact.
+
+   Ceiling 620, so the 621-1099 tablet tuning that :10547 was actually written
+   for is untouched. A more aggressive single-column mobile layout
+   (--md-tile-cols: 1 at 560) was considered and NOT taken: it restructures the
+   band, which is an owner-facing design decision rather than a defect fix.
+   -------------------------------------------------------------------------- */
+@media (max-width: 620px) {
+  #services .svc-rows.md-on {
+    --md-t-h3-fs: 13px;
+    --md-tile-h:  62px;
+  }
+}
