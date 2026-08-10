@@ -1563,7 +1563,49 @@
       if (n === qzTotal - 1) qzRenderSummary();
       if (focus) {
         var h = qzSteps[n].querySelector('.qz__q');
-        if (h && h.focus) h.focus();
+        /* [BM] 2026-08-10 — FOCUSING THE HEADING IS NOT THE SAME AS SHOWING THE
+           STEP. qzGo() focused `.qz__q`, which on mobile is already inside the
+           viewport at roughly y=165, so the browser had no reason to scroll —
+           while the step's own body and its Continue button had moved BELOW the
+           fold. Measured by walking all 5 steps with real taps at 375 and 390:
+           window.scrollY never moved once across the whole wizard (3074 at 375,
+           3057 at 390), so on steps 2 and 3 the visitor saw an unchanged screen
+           and no indication that anything had happened.
+           preventScroll keeps focus from fighting the scroll below; the scroll
+           only fires when the step does NOT already fit under the sticky header,
+           so a desktop viewport that shows the whole step is untouched. */
+        if (h && h.focus) {
+          try { h.focus({ preventScroll: true }); } catch (e) { h.focus(); }
+        }
+        var st = qzSteps[n];
+        if (st && st.getBoundingClientRect) {
+          var hdr = document.querySelector('.site-header');
+          var hdrH = (hdr && getComputedStyle(hdr).position === 'sticky') ? hdr.getBoundingClientRect().height : 0;
+          /* The usable viewport is bounded at the BOTTOM too. First cut of this
+             fix aligned the step's top under the sticky header and ignored the
+             sticky CTA bar, which put step 2's own Continue button at y 788-830
+             underneath a bar occupying 774-844: elementFromPoint over the button
+             returned the bar, so the wizard's primary action was unclickable
+             even though it was "in view". Measured at 375. */
+          var bar = document.querySelector('.mm-sticky-cta');
+          var barH = 0;
+          if (bar && bar.classList.contains('show')) {
+            var bcs2 = window.getComputedStyle(bar);
+            if (bcs2.display !== 'none' && bcs2.visibility !== 'hidden') barH = bar.getBoundingClientRect().height;
+          }
+          var usableBottom = window.innerHeight - barH;
+          var box = st.getBoundingClientRect();
+          if (box.top < hdrH || box.bottom > usableBottom) {
+            /* When the step fits the usable band, sit it under the header. When
+               it does not, bias to the FOOT of the step so the control the
+               visitor has to press is the part guaranteed to be on screen —
+               the heading is one scroll away, the buried button is a dead end. */
+            var target = (box.height <= usableBottom - hdrH)
+              ? window.scrollY + box.top - hdrH - 12
+              : window.scrollY + box.bottom - usableBottom + 12;
+            window.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
+          }
+        }
       }
     }
 

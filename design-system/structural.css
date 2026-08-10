@@ -15165,3 +15165,133 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
     --md-tile-h:  62px;
   }
 }
+
+
+/* ============================================================================
+   [BM] THE REMAINING CONFIRMED MINORS
+   ----------------------------------------------------------------------------
+   Only findings that SURVIVED adversarial verification are here. The following
+   were REFUTED by their verifiers and are deliberately NOT acted on, so a later
+   reader does not "re-fix" them: the footer's 607px clip (decorative
+   pseudo-element, no content hidden) · #services 50x48 thumbnails · the twelve
+   512x512 source photographs (an ASSET ceiling, not reachable from CSS at any
+   breakpoint) · #disciplines row gap · #about .ab-cluster's dead aspect-ratio ·
+   the hero h1's 1.02 line-height · and the two now-inert #industries
+   grid-auto-rows clamps at :3684 / :4244 (harmless dead code, left in place).
+
+   All ceilings are 899px or lower. Deleting this block is a complete revert.
+
+   ----------------------------------------------------------------------------
+   1. #guides — the TOPIC chip hangs off its own thumbnail
+
+   `--gf-thumb: 76px` is set at :12244 (@media max-width:560px); the chip's
+   padding at :12295 was added later and nothing re-checked the fit. MEASURED at
+   375 on rows 02 and 03: the chip is 73-74px wide against a 76px thumb and its
+   right edge sits 5.2px / 5.5px PAST the photo's right edge, covering 24% of it.
+
+   Two fixes were rendered and measured before choosing:
+       CURRENT   overhang +5.5px   chip covers 24%   section 1186px
+       thumb 92  overhang -10.5px  chip covers 16%   section 1204px  <- chosen
+       chip 9px  overhang -12.9px  chip covers 14%   section 1186px
+   The chip-shrink clears more overhang for free, but it takes an already-small
+   uppercase label down to 9px. Widening the slot keeps the label at its current
+   size AND gives the photograph 21% more area, for 18px of section height.
+   -------------------------------------------------------------------------- */
+@media (max-width: 560px) {
+  #guides { --gf-thumb: 92px; }
+}
+
+/* ----------------------------------------------------------------------------
+   2. #inventory carousel buttons shrink below their declared 44px
+
+   :8617 declares `inline-size: 44px; block-size: 44px`, but the buttons sit in
+   `.cov-nav { display: flex }` (:8611) with default `flex-shrink: 1` and
+   `min-width: auto`, and the line does not fit at 375 — so they resolve to
+   41.2 x 44 and 41.1 x 44. This is the one tap-target defect on the site that
+   is a SHRINK bug rather than a missing size: the declared value is already
+   correct and is simply not being honoured.
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  #inventory.collection .cov-nav__btn { flex: none; }
+}
+
+/* ----------------------------------------------------------------------------
+   3. .cta-banner__media — the author fixed HALF of this leak
+
+   Worth reading as a cautionary case, because the hazard was KNOWN here: the
+   comment at :3907 says "Placed after [U.1]; the mobile override is re-asserted
+   so it is not lost to source order". It re-asserts `.cta-banner`'s margin-top
+   at :3913 — and misses `min-height` on the sibling.
+       :3859  @media (max-width:860px) .cta-banner__media { min-height: 190px }
+       :3905  UNSCOPED                 .cta-banner__media { min-height: 200px }  <- wins
+       :3913  @media (max-width:860px) .cta-banner { margin-top: -58px }  (rescued)
+   Re-asserting the mobile min-height in the same arm the author already built.
+   -------------------------------------------------------------------------- */
+@media (max-width: 860px) {
+  .cta-banner__media { min-height: 190px; }
+}
+
+/* ----------------------------------------------------------------------------
+   4. #industries tile deks sit BELOW the design system's own floor
+
+   :4215 sets the dek to `clamp(13px, 0.95vw, 14.5px)` — a 13px floor. :7583
+   then declares 12.5px UNSCOPED, as part of [AR]'s 1440 four-up cell tuning,
+   and out-cascades both the base and the @760 arm at :4247. So the smallest
+   body copy on the page is a desktop cell-width number applied to a phone.
+
+   After [BH] these tiles are full-width single-column banners at <=460px, so
+   there is no longer a narrow cell to justify 12.5px. 14px matches what :7584
+   already gives the feature tile.
+   -------------------------------------------------------------------------- */
+@media (max-width: 760px) {
+  #industries .ind-feature-grid .ind-tile__desc { font-size: 14px; line-height: 1.5; }
+}
+
+/* ----------------------------------------------------------------------------
+   5. .product-card__kicker — 11px uppercase with .09em tracking
+
+   :4280 sets this unscoped. Uppercase at 11px with wide tracking is the
+   hardest-to-read combination on the card, and it sits above every inventory
+   listing. 12px with tighter tracking keeps the same two-line wrap.
+   -------------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  .product-card__kicker { font-size: 12px; letter-spacing: .04em; }
+}
+
+/* ----------------------------------------------------------------------------
+   6. about #disciplines — the 53px photo sliver
+
+   The FOURTH instance of the dead-rule mechanism found this session, and the
+   clearest: four same-specificity (0,1,1,0) declarations for
+   `#disciplines .cap-showcase__media`, and the LAST one wins at every width.
+       :12821  aspect-ratio: 16 / 4     (unscoped)
+       :12915  aspect-ratio: 16 / 6     @media (max-width: 899px)   <- the mobile intent
+       :12945  aspect-ratio: 16 / 3.4   (unscoped)
+       :12966  aspect-ratio: 16 / 2.9   (unscoped)                  <- WINS everywhere
+   :12966's own comment shows it came from a DESKTOP viewport-fit exercise
+   ("1024 measured WORSE than 1440"). MEASURED at 375: both media boxes render
+   293.0 x 53.1 from 512x512 sources — 16/2.9 of a square photograph.
+
+   Re-asserting the author's own @899 value, 16/6, which its verifier measured
+   as restoring 293.0 x 109.9 at 375 while leaving 900, 1024, 1100 and 1440
+   bit-for-bit identical (at >=1024 the computed aspect-ratio is already `auto`,
+   because :13060's min-width block switches the row to a portrait column).
+   -------------------------------------------------------------------------- */
+@media (max-width: 899px) {
+  #disciplines .cap-showcase__media { aspect-ratio: 16 / 6; }
+}
+
+/* ----------------------------------------------------------------------------
+   7. [BM cont.] the qualifier form needs scroll room past the sticky bar
+
+   Companion to the site.js [BM] scroll fix. The wizard's Continue button can
+   sit inside the fixed CTA bar's band (measured at 375: step 2's button at
+   y 788-830 against a bar at 774-844, elementFromPoint returning the BAR).
+   Scrolling alone cannot always clear it — at the document end there may be no
+   further scroll available — so the form reserves the bar's height the same way
+   .site-footer does in [BI]. Same 981 ceiling, because that is the range over
+   which [BH] made the bar visible.
+   -------------------------------------------------------------------------- */
+@media (max-width: 981px) {
+  #qualifier form.qz { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+}
