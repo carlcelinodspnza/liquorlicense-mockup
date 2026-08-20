@@ -272,6 +272,9 @@ p { margin: 0; }
 .wc-banner-siblings { display: flex; gap: 14px; font-family: var(--ds-font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; flex-wrap: wrap; }
 .wc-banner-siblings a { color: var(--ds-ink-on-dark); opacity: .8; text-decoration: underline; text-decoration-color: var(--ds-accent); text-underline-offset: 4px; }
 .wc-banner-siblings a:hover { opacity: 1; color: var(--ds-accent); }
+/* the two sibling specimens were never built (see the banner comment) — these read
+   as a record, not as controls, so they take no link affordance */
+.wc-sib-unpub { color: var(--ds-ink-on-dark); opacity: .55; text-decoration: none; }
 .wc-doc-note { background: var(--ds-bg-warm); border-bottom: 1px solid var(--ds-line); padding: 12px clamp(20px, 4vw, 48px); font-family: var(--ds-font-mono); font-size: 11px; letter-spacing: .04em; color: var(--ds-ink-soft); text-align: center; }
 .wc-doc-note strong { color: var(--ds-ink-heading, var(--ds-primary-deep)); }
 
@@ -361,9 +364,20 @@ p { margin: 0; }
       <p class="wc-banner-vibe">Luminous. Depth from amber LIGHT falling across real layered elevation.</p>
     </div>
   </div>
+  <!-- DEAD SIBLING LINKS REMOVED 2026-08-20. This banner carried two anchors to
+       per-direction specimen pages for A and B. Those pages HAVE NEVER EXISTED —
+       both returned 404 on the public preview, and they were the only two broken
+       internal links in the whole 13-page site. The rejected directions were only
+       ever produced as PNG renders under the webcard-renders folder, and that
+       folder is gitignored (.gitignore line 16), so it is not deployed either:
+       repointing at the renders would have swapped two dead links for two more.
+       The NAMES are kept as plain text rather than deleted, because the record of
+       what was considered is the point of this banner — the direction shown below
+       is the PICK, and a pick only means something beside its alternatives.
+       Restore real anchors only if the A/B specimen pages are ever actually built. -->
   <div class="wc-banner-siblings">
-    <a href="web-card-A.html">&rarr; Direction A · Cellar Glass</a>
-    <a href="web-card-B.html">&rarr; Direction B · Brass Edge</a>
+    <span class="wc-sib-unpub">Direction A · Cellar Glass — not published</span>
+    <span class="wc-sib-unpub">Direction B · Brass Edge — not published</span>
   </div>
 </div>
 <div class="wc-doc-note">
