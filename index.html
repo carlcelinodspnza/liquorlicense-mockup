@@ -332,11 +332,71 @@
       <form class="cmdbar__form" role="search" aria-label="Search licences, licence types, industries and markets">
         <label class="cmdbar__label" for="cmdbar-q">Search live licences, licence types, business industries and markets</label>
         <div class="cmdbar__field">
-          <svg class="cmdbar__glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5l-4.2-4.2"/></svg>
-          <input class="cmdbar__input" id="cmdbar-q" name="q" type="text" autocomplete="off" spellcheck="false"
-                 placeholder="Business industry, licence type or location &mdash; try &ldquo;Type 47 San Diego&rdquo;"
-                 role="combobox" aria-expanded="false" aria-controls="cmdbar-panel" aria-autocomplete="list" aria-haspopup="listbox">
-          <kbd class="cmdbar__kbd" aria-hidden="true">/</kbd>
+          <!-- [BO] SEGMENTS. These are plain native select controls carrying the
+               shared ec-ctrl class, nothing more: site.js [BD] auto-enhances every
+               select.ec-ctrl into the .dsel listbox, so they need no behaviour code
+               of their own. Option sets are LIFTED VERBATIM from the shipped
+               canonical controls, so nothing is invented and the emitted params
+               already match: market = locations.html #qz-market, type + industry =
+               contact.html #q-type / #q-industry.
+               NOTE: no tag literals in this comment on purpose — a comment on this
+               page that spelled out neighbouring markup once desynchronised
+               verify-not-flat's parser, which does not strip comments (see the U1
+               ABOUT BAND note above). -->
+          <div class="cmdbar__segs">
+            <div class="cmdbar__seg cmdbar__seg--wide">
+              <span class="cmdbar__seg-l" id="cb-market-l">Market</span>
+              <select class="ec-ctrl" id="cb-market" name="market" aria-labelledby="cb-market-l">
+              <option value="">Any market</option>
+              <option value="california">California — statewide</option>
+              <option value="los-angeles">Los Angeles County</option>
+              <option value="orange">Orange County</option>
+              <option value="riverside">Riverside County</option>
+              <option value="sacramento">Sacramento County</option>
+              <option value="san-bernardino">San Bernardino County</option>
+              <option value="san-diego">San Diego County</option>
+              <option value="san-francisco">San Francisco County</option>
+              <option value="fresno">Fresno</option>
+              <option value="napa-valley">Napa Valley</option>
+              <option value="palm-springs">Palm Springs</option>
+              <option value="san-jose">San Jose</option>
+              <option value="santa-barbara">Santa Barbara</option>
+              <option value="ventura">Ventura</option>
+              </select>
+            </div>
+            <div class="cmdbar__seg">
+              <span class="cmdbar__seg-l" id="cb-type-l">Licence type</span>
+              <select class="ec-ctrl" id="cb-type" name="type" aria-labelledby="cb-type-l">
+              <option value="">Any type</option>
+              <option value="20">Type 20 — Off-Sale Beer &amp; Wine</option>
+              <option value="21">Type 21 — Off-Sale General</option>
+              <option value="41">Type 41 — On-Sale Beer &amp; Wine, Eating Place</option>
+              <option value="47">Type 47 — On-Sale General, Eating Place</option>
+              <option value="48">Type 48 — On-Sale General, Public Premises</option>
+              </select>
+            </div>
+            <div class="cmdbar__seg">
+              <span class="cmdbar__seg-l" id="cb-industry-l">Industry</span>
+              <select class="ec-ctrl" id="cb-industry" name="industry" aria-labelledby="cb-industry-l">
+              <option value="">Any industry</option>
+              <option value="restaurants">Restaurants</option>
+              <option value="bars-nightclubs">Bars &amp; nightclubs</option>
+              <option value="hotels">Hotels</option>
+              <option value="liquor-stores">Liquor stores</option>
+              <option value="grocery-stores">Grocery stores</option>
+              <option value="convenience-stores">Convenience stores</option>
+              <option value="franchise-operators">Franchise operators</option>
+              <option value="event-venues">Event venues</option>
+              </select>
+            </div>
+          </div>
+          <div class="cmdbar__q">
+            <svg class="cmdbar__glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5l-4.2-4.2"/></svg>
+            <input class="cmdbar__input" id="cmdbar-q" name="q" type="text" autocomplete="off" spellcheck="false"
+                   placeholder="or type anything &mdash; try &ldquo;Type 47 San Diego&rdquo;"
+                   role="combobox" aria-expanded="false" aria-controls="cmdbar-panel" aria-autocomplete="list" aria-haspopup="listbox">
+            <kbd class="cmdbar__kbd" aria-hidden="true">/</kbd>
+          </div>
           <button class="btn btn-primary wow-glow cmdbar__go" type="submit">Search</button>
         </div>
         <div class="cmdbar__panel" id="cmdbar-panel" role="listbox" aria-label="Suggestions" hidden></div>

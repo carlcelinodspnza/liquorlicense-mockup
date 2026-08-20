@@ -3594,3 +3594,150 @@
     init();
   }
 })();
+
+
+/* [BO] HERO COMMAND BAR — bridge the TWO panel systems that now share one bar.
+ *
+ * The hero bar now hosts two INDEPENDENT dropdown implementations:
+ *   · [AE] .cmdbar__panel  — the federated free-text suggestions
+ *   · [BD] .dsel__panel    — the three segment listboxes
+ * Neither knows the other exists, so MEASURED: opening MARKET and then typing
+ * left both panels open and overlapping (seg 460x354 @y649 vs suggestions
+ * 1152x99 @y659). Geometry alone would not have caught it — the test is that
+ * both are non-hidden at once.
+ *
+ * No internals are touched. [BD] exposes exactly one public handle: its field
+ * button's click listener TOGGLES (`if (panel.hidden) open(); else close();`),
+ * so clicking an open field closes it. [BD] also closes on POINTERDOWN, not
+ * click, which is why a synthetic document click did not dismiss it.
+ */
+(function () {
+  var root = document.querySelector('[data-cmdbar]');
+  if (!root) return;                       /* null-guarded exactly like [AE]/[AF] */
+  var input = root.querySelector('.cmdbar__input');
+  var sugg  = root.querySelector('.cmdbar__panel');
+  if (!input || !sugg) return;
+
+  function closeSegments() {
+    var open = root.querySelectorAll('.dsel.is-open');
+    for (var i = 0; i < open.length; i++) {
+      var b = open[i].querySelector('.dsel__field');
+      if (b) b.click();                    /* [BD]'s own toggle — not its internals */
+    }
+  }
+
+  /* typing or focusing the free-text half retires any open segment */
+  ['focus', 'input', 'click'].forEach(function (ev) {
+    input.addEventListener(ev, closeSegments);
+  });
+
+  /* and the reverse: reaching for a segment retires the suggestions. Capture +
+     pointerdown because [BD] acts on pointerdown and would otherwise win the race. */
+  root.addEventListener('pointerdown', function (e) {
+    var f = e.target && e.target.closest ? e.target.closest('.dsel__field') : null;
+    if (!f) return;
+    if (!sugg.hasAttribute('hidden')) {
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    }
+  }, true);
+})();
+
+/* ---------------------------------------------------------------------------
+ * [BO] COMPOSE — the segments actually search.
+ *
+ * They map onto the SAME params inventory.html already reads (verified in
+ * site.js invReadUrl: type / county / band / status / sort), so nothing new is
+ * invented on the destination page.
+ *
+ * ⚠ THE BOARD FILTERS ONLY SEVEN COUNTIES (#inv-county), but the Market segment
+ * offers FIFTEEN markets, because the site's coverage claim is wider than its
+ * live stock. Eight of them therefore CANNOT become a filter. Silently dropping
+ * them would be the exact dishonesty [AE] already guards against, so they take
+ * the same treatment it gives a market with no stock: say it, and route to a
+ * sourcing brief.
+ *
+ * ⚠ THERE IS NO INDUSTRY FILTER ON THE BOARD. Industry is a qualifier
+ * dimension, not a listing attribute. It is carried into the brief and SAID,
+ * never quietly discarded.
+ *
+ * PRECEDENCE: an explicit selection beats text inference. With no segment set
+ * at all this handler returns untouched and [AE]'s free-text path runs exactly
+ * as it does today — that is why the early return comes before preventDefault.
+ * ------------------------------------------------------------------------- */
+(function () {
+  var root = document.querySelector('[data-cmdbar]');
+  if (!root) return;
+  var form  = root.querySelector('.cmdbar__form');
+  var input = root.querySelector('.cmdbar__input');
+  var note  = root.querySelector('.cmdbar__note');
+  var live  = root.querySelector('.cmdbar__live');
+  var mkt = document.getElementById('cb-market');
+  var typ = document.getElementById('cb-type');
+  var ind = document.getElementById('cb-industry');
+  if (!form || !mkt || !typ || !ind) return;
+
+  /* verbatim from inventory.html #inv-county */
+  var FILTERABLE = ['los-angeles','orange','riverside','sacramento',
+                    'san-bernardino','san-diego','san-francisco'];
+
+  function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')
+                    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function textOf(sel) {
+    var o = sel.options[sel.selectedIndex];
+    return o ? o.text : '';
+  }
+
+  form.addEventListener('submit', function (e) {
+    var m = mkt.value, t = typ.value, i = ind.value;
+    if (!m && !t && !i) return;        /* -> [AE], untouched */
+
+    e.preventDefault();
+    e.stopImmediatePropagation();      /* this submit is ours */
+
+    var q = new URLSearchParams();
+    var applied = [], told = [], extraHref = null;
+
+    if (t) { q.set('type', t); applied.push('Type ' + t); }
+
+    if (m && m !== 'california') {
+      var mLabel = textOf(mkt);
+      if (FILTERABLE.indexOf(m) !== -1) { q.set('county', m); applied.push(mLabel); }
+      else {
+        told.push('We broker in ' + mLabel + ', but hold no live listings there today.');
+        extraHref = 'contact.html#quote';
+      }
+    }
+
+    if (i) {
+      told.push('The board is not filtered by industry, so ' + textOf(ind) +
+                ' has been carried into your brief rather than applied to the listings.');
+      extraHref = 'contact.html#quote';
+    }
+
+    var raw = (input.value || '').trim();
+    if (raw) {
+      told.push('Your selections were used, so the typed text “' + raw +
+                '” was not combined with them.');
+    }
+
+    var qs = q.toString();
+    var href = 'inventory.html' + (qs ? '?' + qs : '');
+
+    if (!told.length) { window.location.href = href; return; }
+
+    var lead = applied.length ? 'Showing ' + applied.join(' in ') + ' on the board. ' : '';
+    var goLabel = applied.length ? 'Show matching licences' : 'Show all 9 live licences';
+    if (!note) { window.location.href = href; return; }
+    note.innerHTML =
+      '<p class="cmdbar__note-txt">' + esc(lead + told.join(' ')) + '</p>' +
+      (extraHref ? '<a class="btn btn-secondary cmdbar__note-go" href="' + extraHref +
+                   '">Send a sourcing brief</a>' : '') +
+      '<a class="btn btn-primary cmdbar__note-go" href="' + esc(href) + '">' + goLabel + '</a>';
+    note.hidden = false;
+    if (live) live.textContent = lead + told.join(' ') + ' ' + goLabel + '.';
+    var go = note.querySelector('.btn-primary');
+    if (go) go.focus();
+  }, true);   /* CAPTURE: [AE] binds its own submit listener on this same form */
+})();

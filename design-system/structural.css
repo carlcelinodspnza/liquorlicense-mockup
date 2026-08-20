@@ -15295,3 +15295,269 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
 @media (max-width: 981px) {
   #qualifier form.qz { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
 }
+
+
+/* ----------------------------------------------------------------------------
+   [BN] #coverage — VERTICAL MAP + LEFT/RIGHT COLUMNS  (owner, 2026-08-20)
+
+   Owner: "make the map vertical and run the section as a left column / right
+   column layout. California's natural shape is tall and narrow, so a vertical
+   crop kills the dead space and gives you a second column for the market list
+   and copy."
+
+   CSS ONLY — no new asset. A pre-cropped file was measured and REJECTED: it
+   buys 0 retina (0.754x vs 0.755x) because the crop is exactly the region
+   object-fit:cover already selects, and assets/coverage-california-map.jpg is
+   SHARED with resources.html:342. Re-cropping in place would have moved that
+   page too. Deleting this block is a complete revert.
+   Backup: _backups/structural.css.pre-BN-2026-08-20
+
+   ----------------------------------------------------------------------------
+   THIS ALSO FIXES A CONTENT DEFECT, not just a layout.
+
+   `.cv-map` sets `aspect-ratio: 24/7` at :3997. [BJ] (:14965) corrected that to
+   4/3 but scoped it `max-width: 699px`, so from 700px UP the letterbox survived.
+   MEASURED on the pre-change file at 700/768/800/860/861/900/1024/1100/1280/
+   1440/1920: exactly **408 of the source's 933 pixel rows survive at every one
+   of them** (43.7%). The half that is thrown away is the SOUTHERN half — Los
+   Angeles, Orange County and San Diego — on the band whose own chip list opens
+   with Los Angeles, Orange County, San Diego, and for a brokerage whose office
+   is in LA. After this block the figure is 933/933 at every width measured.
+
+   ⚠ SPECIFICITY TRAP THIS BLOCK HAD TO AVOID. `#coverage .cv-map` is (1,0,1);
+   [BJ]'s `.cv-map` is (0,1,0). An unscoped rule here would therefore have BEATEN
+   [BJ] inside its own media query and silently killed the owner-picked 4/3 phone
+   crop. Every rule below is fenced in `min-width: 861px` for that reason.
+   VERIFIED: the 375 band height is 1254.8px before AND after — byte-for-byte the
+   same phone layout.
+
+   ----------------------------------------------------------------------------
+   MEASURED, candidate vs pre-change (12 widths, iframe sweep, lab
+   logs/labs/liquorlicense-coverage-2026-08-20/):
+
+     w      map box     whole state?   retina        band h       h-overflow
+     1920   385x513     yes (was no)   .61 -> .91    -11.3px      0
+     1440   386x515     yes (was no)   .61 -> .91     -9.1px      0
+     1280   389x518     yes (was no)   .61 -> .90     -5.8px      0
+     1100   356x475     yes (was no)   .67 -> .98    -43.9px      0
+     1024   330x440     yes (was no)   .72 -> 1.06   -75.1px      0
+      900   288x384     yes (was no)   .82 -> 1.21   -38.9px      0
+      861   274x366     yes (was no)   .86 -> 1.28   -52.3px      0
+      860   520x390     yes (was no)   .86 -> 1.20   +153.2px     0
+      768   520x390     yes (was no)   .97 -> 1.20   +180.0px     0
+      375   327x245     yes (was yes)  1.90 (same)     0.0px      0
+
+   The owner's premise is confirmed by the band heights: killing the dead ocean
+   and Nevada makes the two-column range SHORTER, 5.8-75.1px, while showing more
+   of the state, not less.
+
+   ⚠ STILL SUB-RETINA AT 1280-1920 (0.90-0.91x). Better than the 0.61x it
+   replaces, but 2x needs a HIGHER-RESOLUTION MAP SOURCE — an asset job, not a
+   CSS one. 1024 and below are over 1.0x.
+
+   WHY 3/4 AND NOT NARROWER. Rendered and read, not computed: at 2/3 the crop
+   cuts the "San Diego" label mid-word, the same defect class [BL] fixed on the
+   sticky CTA. 3/4 is the narrowest aspect that keeps the whole state AND every
+   label whole. `object-position: 37.9% 50%` puts the left edge of the visible
+   window at source x=265, the Pacific coastline at the Oregon border. That
+   percentage is STABLE at every viewport: at aspect 3/4 the visible window is
+   always exactly 50% of the source width, so the offset never drifts.
+
+   WHY .55fr FOR THE MAP COLUMN. Swept 6 fractions x 2 chip-column counts at
+   1440 and read the renders. .55fr + 2 chip columns leaves the smallest
+   trailing void (94px at 1440) while keeping a 702px measure for the copy.
+   Wider map columns push the void to 200-370px; `align-content: space-between`
+   was tried and REJECTED because it moves the void into the MIDDLE of the
+   column, between the CTA and the chips, which reads as a mistake rather than
+   as breathing room. Stretching the chips to close it was also rejected: it
+   inflates each chip row to 69px.
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 861px) {
+  #coverage .container {
+    display: grid;
+    /* OWNER 2026-08-20 (2nd pass): "reduce height of the map to match the height
+       of the texts". The map column is `auto`, NOT a fraction — its width is
+       DERIVED from its height via aspect-ratio, and its height is the stretched
+       row height, which the copy column sets. So the map cannot be taller than
+       the text; the two columns end flush by construction at every width, with
+       no magic number to retune when the copy rewraps. A .55fr column was the
+       first pass and left a 94px trailing void at 1440. */
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: clamp(40px, 4.4vw, 68px);
+    align-items: stretch;
+    row-gap: 0;
+  }
+  /* explicit row AND column on all four children — sparse auto-placement in a
+     grid is the trap documented for the [AN] #about rebuild */
+  #coverage .container > .eyebrow { grid-column: 1 / -1; grid-row: 1; }
+  #coverage .container > h2       { grid-column: 1 / -1; grid-row: 2;
+    /* the h2 now owns the gap above row 3. It CANNOT stay on .cv-map/.cv-copy as
+       a margin-top: a stretched item's own margin sits OUTSIDE the area it
+       stretches into, so the map's margin re-added itself to the row and the map
+       came out exactly 40px (= --ds-space-xl) taller than the copy at every
+       width. Measured 40.0 at all 7 desktop widths before this moved. */
+    margin-bottom: var(--ds-space-xl); }
+
+  #coverage .cv-map {
+    grid-column: 1; grid-row: 3;
+    aspect-ratio: 3 / 4;              /* keeps object-position 37.9% correct —
+                                         see the header note on the 50% window */
+    align-self: stretch;
+    height: auto; width: auto;        /* width follows height via aspect-ratio */
+    margin-top: 0;
+  }
+  #coverage .cv-map img { object-position: 37.9% 50%; }
+
+  #coverage .cv-copy {
+    grid-column: 2; grid-row: 3;
+    margin-top: 0;
+    grid-template-columns: 1fr;       /* was intro | markets side by side; in the
+                                         right column they stack */
+    gap: var(--ds-space-lg);
+    align-content: start;
+  }
+  #coverage .cv-markets { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* The 700-860 band is NOT two-column, but it carried the same 24/7 crop, so it
+   loses LA/OC/San Diego too. It takes the owner's already-approved 4/3 instead.
+   The width cap is what keeps the cost reasonable: uncapped, 4/3 at the full
+   812px container measured 812x609 and added 298-372px of scroll. Capped at
+   520 it adds 153-200px and the map reads as a deliberate plate. This is the
+   one part of [BN] the owner did not explicitly ask for — it is severable:
+   delete this rule and the band returns to the letterbox, with the crop. */
+@media (min-width: 700px) and (max-width: 860px) {
+  .cv-map { aspect-ratio: 4 / 3; max-width: 520px; margin-inline: auto; }
+}
+
+
+/* ----------------------------------------------------------------------------
+   [BO] HERO COMMAND BAR — DROPDOWN SEGMENTS LEFT, FREE TEXT RIGHT
+        (owner, 2026-08-20; reference: alcoholpermit.com)
+
+   Owner: integrate alcoholpermit.com's segmented dropdown search into the
+   enterprise bar we already have — segments left, "an option that user can type
+   in while keeping the suggestions dropdown" right — and "do not include the
+   mini map visuals" (their tiles pair each state with a state-outline
+   thumbnail; ours are text only).
+
+   NO NEW DROPDOWN CODE. site.js [BD] init() enhances EVERY select.ec-ctrl into
+   the .dsel listbox, so the three segments are plain native selects and the
+   keyboard, commit, ARIA and outside-click all come free. This block is only a
+   DARK SKIN for .dsel inside .cmdbar — the shipped .dsel is styled for LIGHT
+   form surfaces (--ds-bg-surface / --ds-ink / --ds-line).
+
+   SCOPE: this takes .ec-ctrl from SEVEN instances to TEN. Every rule below is
+   scoped `.cmdbar ...`, so the seven selects on contact / inventory / locations
+   are untouched. Counting instances of a shared class before styling it is the
+   rule [BD] and [BE] both exist because of.
+
+   Companion JS half: site.js block [BO]. Deleting both is a complete revert.
+   Backups: _backups/{index.html,structural.css,site.js}.pre-BO-2026-08-20
+   -------------------------------------------------------------------------- */
+
+/* ---- the bar becomes a segmented rail + a text field + the button --------- */
+.cmdbar__field { align-items: stretch; padding-left: 0; gap: 0; }
+
+.cmdbar__segs { display: flex; align-items: stretch; flex: 0 1 auto; min-width: 0; }
+.cmdbar__seg--wide { min-width: 196px; }
+
+.cmdbar__seg {
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 2px; flex: 0 1 auto; min-width: 178px;
+  padding: var(--ds-space-2xs) var(--ds-space-sm);
+  border-left: 1px solid var(--ds-glass-border);
+}
+.cmdbar__seg:first-child { border-left: 0; padding-left: var(--ds-space-md); }
+
+.cmdbar__seg-l {
+  font-family: var(--ds-font-body); font-size: 11px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ds-ink-on-dark); opacity: .82; white-space: nowrap;
+}
+
+/* ---- the .dsel skin, restated for the dark glass bar ---------------------- */
+.cmdbar .dsel { width: 100%; }
+.cmdbar .dsel__field {
+  min-height: 26px; padding: 0; gap: var(--ds-space-2xs);
+  background: transparent; border: 0; border-radius: 0; box-shadow: none;
+  font-size: 15px; color: var(--ds-ink-soft);
+}
+.cmdbar .dsel__field:hover { border: 0; color: var(--ds-ink-on-dark); }
+/* the ring belongs to .cmdbar__field, which already owns :focus-within — a
+   second ring inside it would draw a box inside a box */
+.cmdbar .dsel__field:focus-visible,
+.cmdbar .dsel.is-open .dsel__field {
+  outline: none; border: 0; box-shadow: none; color: var(--ds-ink-on-dark);
+}
+.cmdbar .dsel__field:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
+.cmdbar .dsel.is-open .dsel__chev { transform: rotate(180deg); }
+.cmdbar .dsel__chev { color: var(--ds-accent); }
+.cmdbar .dsel__value { font-weight: 600; }
+/* a segment that still holds its placeholder reads as unset */
+.cmdbar .dsel__value:empty::before { content: attr(data-ph); color: var(--ds-ink-soft); }
+
+/* ---- the panel — the reference's tiled card, in this build's dark idiom --- */
+.cmdbar .dsel__panel {
+  top: calc(100% + var(--ds-space-sm));
+  left: 0; right: auto; min-width: 300px;
+  padding: var(--ds-space-xs);
+  background: var(--ds-bg-elev, #221a15);
+  border: 1px solid var(--ds-glass-border);
+  border-radius: var(--ds-r-lg);
+  box-shadow: var(--ds-shadow-lift), var(--ds-inset-hi);
+  max-height: min(58vh, 420px);
+}
+.cmdbar .dsel__opt {
+  border-radius: var(--ds-r-md);
+  padding: 10px 12px;
+  color: var(--ds-ink-on-dark);
+}
+.cmdbar .dsel__opt[aria-selected="true"],
+.cmdbar .dsel__opt.is-active,
+.cmdbar .dsel__opt:hover {
+  background: color-mix(in srgb, var(--ds-accent) 18%, transparent);
+  color: var(--ds-ink-on-dark);
+}
+/* MARKET has 15 options — the reference tiles them two-up. The other two
+   segments carry long single-line labels ("Type 41 — On-Sale Beer & Wine,
+   Eating Place"), which is why they stay one column. */
+/* :not([hidden]) is LOAD-BEARING, not decoration. `.dsel__panel[hidden]{display:none}`
+   in [BD] is (0,2,0); so is `.cmdbar__seg--wide .dsel__panel`. Equal specificity +
+   later in the cascade = this rule wins, and the market panel painted OPEN at all
+   times. Measured: the panel was visible under the bar on first paint. */
+.cmdbar__seg--wide .dsel__panel:not([hidden]) {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px; align-content: start;
+  min-width: 460px;
+}
+
+/* ---- the free-text half --------------------------------------------------- */
+.cmdbar__q {
+  display: flex; align-items: center; gap: var(--ds-space-sm);
+  flex: 1 1 220px; min-width: 0;
+  padding: var(--ds-space-2xs) var(--ds-space-sm);
+  border-left: 1px solid var(--ds-glass-border);
+}
+.cmdbar__go { margin: var(--ds-space-2xs); }
+
+/* ---- narrow: the rail stacks above the text field ------------------------- */
+@media (max-width: 1023px) {
+  .cmdbar__field { flex-wrap: wrap; padding: var(--ds-space-2xs); }
+  /* MEASURED 26px at 375 — under the 44px floor [BI] shipped site-wide as an
+     accessibility minimum. The label sits above the control, so the tap target
+     is the .dsel__field alone, not the whole 53px segment. */
+  .cmdbar .dsel__field { min-height: 44px; }
+  .cmdbar__segs { flex: 1 1 100%; }
+  .cmdbar__seg:first-child { padding-left: var(--ds-space-sm); }
+  .cmdbar__q { flex: 1 1 200px; border-left: 0; border-top: 1px solid var(--ds-glass-border); }
+  .cmdbar__seg--wide .dsel__panel { min-width: 320px; grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .cmdbar__segs { flex-wrap: wrap; }
+  .cmdbar__seg { flex: 1 1 100%; border-left: 0; border-top: 1px solid var(--ds-glass-border); padding-left: var(--ds-space-sm); }
+  .cmdbar__seg:first-child { border-top: 0; }
+  .cmdbar .dsel__panel { min-width: 0; right: 0; }
+  .cmdbar__seg--wide .dsel__panel { min-width: 0; grid-template-columns: 1fr; }
+  .cmdbar__go { flex: 1 0 100%; }
+}
