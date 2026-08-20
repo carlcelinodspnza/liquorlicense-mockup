@@ -15853,3 +15853,31 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
 .closing-cta .cross-link-rail {
   margin-top: var(--ds-space-xl);
 }
+
+
+/* ----------------------------------------------------------------------------
+   [BV] .article-header__inner — centre the CAPPED child, not just the container
+        (owner audit, 2026-08-20: "check the other pages for similar centering
+        issues")
+
+   The audit of all distinct page shapes for the [BU] defect class found exactly
+   ONE more instance, and it is on an ORIGINAL page rather than one built today.
+
+   `.article-header__inner` (:257) already centres ITSELF — `max-width: 720px;
+   margin-inline: auto; text-align: center`. What it never did is centre a child
+   that carries its own cap. MEASURED on faq.html: the container is 720px with
+   216px margins each side (correctly centred), its `.eyebrow` and `h2` are
+   full-width and centre at offset 0, but its `.lede` is capped at 632.9px with
+   `margin: 0` and therefore sits 43.6px LEFT of the heading above it.
+
+   Identical root cause to [BU] and to [BG] before it: `text-align: center`
+   centres text INSIDE a box; it cannot centre the BOX. Any capped block inside a
+   centred band needs `margin-inline: auto` explicitly.
+
+   SCOPE: `.article-header__inner` appears exactly TWICE site-wide, both on
+   faq.html, and both contain a `.lede`. Counted before writing this rule. The
+   `> *` form also covers the full-width eyebrow and h2, where auto margins are a
+   no-op, so it is safe and it protects any capped child added later.
+   -------------------------------------------------------------------------- */
+
+.article-header__inner > * { margin-inline: auto; }
