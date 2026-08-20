@@ -249,6 +249,24 @@ industry_pages:
   - { slug: industry-franchise-operators, kind: industry, industry: "Franchise operators", indexable: false, placeholder: true }
   - { slug: industry-event-venues, kind: industry, industry: "Event venues", indexable: false, placeholder: true }
 
+
+# ── GUIDE PAGES — ADDED 2026-08-20 on owner instruction ──────────────────────
+# resources.html stays as the knowledge-base hub and deep-links into each guide.
+#
+# ALL FOUR ARE INDEXABLE WITH NO PLACEHOLDER AND NO CAVEAT — the only set of the
+# five that needed nothing held back. The test, run first as on every other set:
+# duplication average 16% / highest 19% / ZERO pairs over 50%, on 237-257 words
+# of real prose each. Compare industries at 20 words, or the markets set with a
+# 100%-identical pair.
+#
+# The prose is lifted as HTML rather than text, so its existing inline
+# cross-references to licence-types / services / inventory / faq survive.
+guide_pages:
+  - { slug: guide-classification, kind: guide, topic: "Choosing a classification", indexable: true }
+  - { slug: guide-pricing, kind: guide, topic: "What a licence costs", indexable: true }
+  - { slug: guide-resale-market, kind: guide, topic: "Why it is a resale market", indexable: true }
+  - { slug: guide-zoning, kind: guide, topic: "Zoning and local approval", indexable: true }
+
 templated: []
 funnels:   []
 
