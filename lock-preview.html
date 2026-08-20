@@ -338,6 +338,22 @@ p { margin: 0; }
   .wc-bento { grid-template-columns: repeat(2, 1fr); }
   .wc-bento__cell.tall { grid-row: span 1; aspect-ratio: 1 / 1; }
 }
+
+/* [BW] THE SPECIMEN NAV OVERFLOWED THE VIEWPORT ON PHONES (2026-08-20 mobile pass)
+   MEASURED, and it was the ONLY page-level horizontal overflow left on the site:
+   360 -> 160px, 375 -> 145px, 414 -> 106px. Cause: `.wc-nav__bar` is a
+   `space-between` flex row and `.wc-nav__links` is a flex row that never wrapped,
+   so its right edge landed at x=520 in a 375 viewport.
+   The 860px block above only tightened the GAP, which was never going to be
+   enough — five links plus the brand cannot fit 375px on one line at 15px.
+   These `.wc-*` rules are specimen-only and live in this file rather than in the
+   design system, so the fix lives here too.
+   Scoped to 700px so the desktop specimen — the thing this page exists to
+   present — is provably untouched. */
+@media (max-width: 700px) {
+  .wc-nav__bar { flex-wrap: wrap; row-gap: var(--ds-space-sm); }
+  .wc-nav__links { flex-wrap: wrap; gap: var(--ds-space-xs) var(--ds-space-md); }
+}
 </style>
   <noscript><style>
     /* NO-JS ESCAPE HATCH (2026-08-07). structural.css:939-942 starts
