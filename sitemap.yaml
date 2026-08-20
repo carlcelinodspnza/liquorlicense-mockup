@@ -199,6 +199,27 @@ service_pages:
   - { slug: service-escrow, kind: service-detail, service: "Escrow and transaction guidance", indexable: true }
   - { slug: service-new-business, kind: service-detail, service: "New business licence planning", indexable: false }   # noindex until the client confirms this scope
 
+
+# ── PER-CLASSIFICATION PAGES — ADDED 2026-08-20 on owner instruction ──────────
+# licence-types.html stays as the parent and deep-links into each one.
+#
+# Similarity was tested first, as on the other two sets: average pairwise overlap
+# 15%, ZERO pairs over 50%. Duplication is NOT the constraint here — THINNESS is.
+#
+# TYPE 20 AND TYPE 41 ARE noindex,follow, AND THAT IS NOT AN OVERSIGHT.
+# licence-types.html states it at their anchors: verified sources carry the
+# official designation and scope for these two, NOT the full authorisation
+# sentence recorded for 21/47/48. Measured 15 and 22 words against 126-148. Their
+# pages carry the matrix facts, say plainly why there is no more, and stay out of
+# the index. Writing an authorisation sentence for them would mean inventing
+# regulatory text about a licence class.
+classification_pages:
+  - { slug: licence-type-20, kind: classification, designation: "Off-Sale Beer & Wine", indexable: false }   # noindex — designation + scope only in verified sources
+  - { slug: licence-type-21, kind: classification, designation: "Off-Sale General", indexable: true }
+  - { slug: licence-type-41, kind: classification, designation: "On-Sale Beer & Wine, Eating Place", indexable: false }   # noindex — designation + scope only in verified sources
+  - { slug: licence-type-47, kind: classification, designation: "On-Sale General, Eating Place", indexable: true }
+  - { slug: licence-type-48, kind: classification, designation: "On-Sale General, Public Premises", indexable: true }
+
 templated: []
 funnels:   []
 
