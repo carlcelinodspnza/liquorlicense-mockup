@@ -141,6 +141,39 @@ pages:
   - { slug: faq,           template: about-1,  kind: about,   title: "California Liquor Licence FAQs | Cost, Timelines, City Approval" }
   - { slug: contact,       template: about-1,  kind: about,   title: "Contact a California Liquor Licence Broker | 800.799.9081" }
 
+
+# ── PER-MARKET PAGES — ADDED 2026-08-20 on owner instruction ──────────────────
+# This REVERSES the 2026-07-29 scoping note above ("explicitly NOT per-location
+# pages"). The owner asked for the market pages to be built; locations.html stays
+# as the statewide parent and now deep-links into each one.
+#
+# THIRTEEN pages, not fourteen. The "california" tab on locations.html is the ALL
+# view, not a market — locations.html already IS the statewide page, so a
+# california page would duplicate it against itself.
+#
+# SIX ARE noindex,follow BY DESIGN. Measured BEFORE building: with market names
+# stripped, 13 of 91 market-panel pairs shared >=90% of their vocabulary and
+# riverside/sacramento were 100% identical. The seven markets holding live stock
+# carry real, differing listings (city + classification + asking price, lifted
+# from inventory.html) and are indexable. The six with no stock carry no
+# market-specific fact the statewide page does not already carry, so they are
+# held out of the index until they gain live stock or real sourced local content.
+# Remove the robots tag per page at that point — see _build-market-pages.py.
+market_pages:
+  - { slug: liquor-license-los-angeles, kind: market, market: "Los Angeles County", indexable: true }
+  - { slug: liquor-license-orange, kind: market, market: "Orange County", indexable: true }
+  - { slug: liquor-license-riverside, kind: market, market: "Riverside County", indexable: true }
+  - { slug: liquor-license-sacramento, kind: market, market: "Sacramento County", indexable: true }
+  - { slug: liquor-license-san-bernardino, kind: market, market: "San Bernardino County", indexable: true }
+  - { slug: liquor-license-san-diego, kind: market, market: "San Diego County", indexable: true }
+  - { slug: liquor-license-san-francisco, kind: market, market: "San Francisco County", indexable: true }
+  - { slug: liquor-license-fresno, kind: market, market: "Fresno", indexable: false }   # noindex until stock or sourced local content
+  - { slug: liquor-license-napa-valley, kind: market, market: "Napa Valley", indexable: false }   # noindex until stock or sourced local content
+  - { slug: liquor-license-palm-springs, kind: market, market: "Palm Springs", indexable: false }   # noindex until stock or sourced local content
+  - { slug: liquor-license-san-jose, kind: market, market: "San Jose", indexable: false }   # noindex until stock or sourced local content
+  - { slug: liquor-license-santa-barbara, kind: market, market: "Santa Barbara", indexable: false }   # noindex until stock or sourced local content
+  - { slug: liquor-license-ventura, kind: market, market: "Ventura", indexable: false }   # noindex until stock or sourced local content
+
 templated: []
 funnels:   []
 
