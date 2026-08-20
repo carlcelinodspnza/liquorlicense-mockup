@@ -15791,3 +15791,65 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   max-width: 68ch; }
 .gd-deep { margin-top: var(--ds-space-xs); }
 .gd-deep a { color: var(--ds-accent-ink); font-weight: 600; }
+
+
+/* ----------------------------------------------------------------------------
+   [BU] THE CLOSING CTA BAND, WHEN ITS CONTENT SITS IN A .container
+        (owner, 2026-08-20 — "these should be centered stacked and observe
+        proper line spacing")
+
+   The 38 pages built today ([BP]-[BT]) wrap their closing band's content in a
+   `.container`, which the original 13 pages do not. That one structural
+   difference silently opted them out of TWO existing fixes:
+
+   1. [BG] centres the band's paragraphs with `.closing-cta > p` — a DIRECT CHILD
+      combinator. With a .container in between, the selector never matches.
+      MEASURED on licence-type-47: the `.lede` is capped at 632.9px with
+      `margin-left/right: 0`, putting BOTH its lines 259.6px LEFT of centre while
+      the h2 above it is centred. This is the same defect [BG] itself documents:
+      `text-align: center` centres text INSIDE a box, it cannot centre the BOX.
+      The cure is `margin-inline: auto`, and it has to be reachable.
+
+   2. [BE] centres a rail with `.closing-cta + .eyebrow + .cross-link-rail__rail`
+      — a SIBLING chain. Today's rails are INSIDE the band, so that chain misses
+      them too. And `text-align: center` is INERT here for a second reason:
+      `.cross-link-rail__rail` is `display: flex`, so alignment is
+      `justify-content`, not `text-align`. Computed was `justify-content: normal`.
+      MEASURED: rail line 1 sat 151.4px and line 2 410.9px left of centre while
+      reporting `text-align: center` — which is exactly why the box measurement
+      looked fine and only a per-LINE measurement caught it.
+
+   ⚠ SCOPE, counted before writing a line of this block. `.cross-link-rail__rail`
+   appears 86 times across the site. In a 15-page sample covering every distinct
+   page shape, 32 rails were found and only FOUR sit inside a `.closing-cta`.
+   The other 28 are correctly LEFT-ALIGNED and must not move — including the
+   guides', which live in `#related`, outside the band. Every selector below is
+   therefore anchored to `.closing-cta`, which is what makes this safe. This is
+   the rule [BE] exists because of: centring the class outright would have broken
+   28 rails to fix 4.
+
+   SPACING: the label measured a 0px gap from the buttons above it — it read as
+   attached to the CTA row rather than as the heading of the rail below it. The
+   band now spaces label and rail off the buttons, and wrapped rail lines get a
+   real row-gap instead of the 12px inherited from the generic rail.
+   -------------------------------------------------------------------------- */
+
+/* 1 — centre the BOX, not just the text inside it */
+.closing-cta > .container > p,
+.closing-cta > .container > .lede {
+  margin-inline: auto;
+}
+
+/* 2 — the rail is a flex container: alignment is justify-content */
+.closing-cta .cross-link-rail__rail {
+  justify-content: center;
+  row-gap: var(--ds-space-md);
+}
+.closing-cta .cross-link-rail__label {
+  margin-bottom: var(--ds-space-sm);
+}
+
+/* 3 — the rail block is its own thought, not a tail on the buttons */
+.closing-cta .cross-link-rail {
+  margin-top: var(--ds-space-xl);
+}
