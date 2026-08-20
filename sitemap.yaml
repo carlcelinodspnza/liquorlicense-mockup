@@ -220,6 +220,35 @@ classification_pages:
   - { slug: licence-type-47, kind: classification, designation: "On-Sale General, Eating Place", indexable: true }
   - { slug: licence-type-48, kind: classification, designation: "On-Sale General, Public Premises", indexable: true }
 
+
+# ── PER-INDUSTRY PAGES — ADDED 2026-08-20 on owner instruction ────────────────
+# Owner: "create a placeholder which I can replace later, or come up with
+# appropriate content." Both, in the honest order: the REAL kernel is lifted and
+# the rest is an explicit, visibly-flagged placeholder.
+#
+# ALL EIGHT ARE noindex,follow AND CARRY A PLACEHOLDER BLOCK (section#draft).
+# The test, run first as on the other three sets: duplication is NOT a risk
+# (average pairwise overlap 9%, zero pairs over 50%) but this is BY FAR the
+# thinnest source — mean 20 words per industry (min 16, max 25) against 99-200
+# for the other sets. Twenty words is a tile caption, not a page.
+#
+# REAL on these pages: the industry name, its one-line description, its photo,
+# and ONLY the classifications NAMED IN THAT DESCRIPTION (regex-extracted, never
+# inferred — Restaurants names 41 and 47 so the page says so; Hotels names none
+# so the page claims none and says why).
+#
+# TO PUBLISH ONE: replace section#draft with real copy, THEN remove that page's
+# robots tag. In that order.
+industry_pages:
+  - { slug: industry-restaurants, kind: industry, industry: "Restaurants", indexable: false, placeholder: true }
+  - { slug: industry-bars-nightclubs, kind: industry, industry: "Bars & nightclubs", indexable: false, placeholder: true }
+  - { slug: industry-hotels, kind: industry, industry: "Hotels", indexable: false, placeholder: true }
+  - { slug: industry-liquor-stores, kind: industry, industry: "Liquor stores", indexable: false, placeholder: true }
+  - { slug: industry-grocery-stores, kind: industry, industry: "Grocery stores", indexable: false, placeholder: true }
+  - { slug: industry-convenience-stores, kind: industry, industry: "Convenience stores", indexable: false, placeholder: true }
+  - { slug: industry-franchise-operators, kind: industry, industry: "Franchise operators", indexable: false, placeholder: true }
+  - { slug: industry-event-venues, kind: industry, industry: "Event venues", indexable: false, placeholder: true }
+
 templated: []
 funnels:   []
 
