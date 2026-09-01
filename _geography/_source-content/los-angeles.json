@@ -1,0 +1,331 @@
+{
+  "market": "los-angeles",
+  "label": "Los Angeles County",
+  "sourceNote": "Extracted 2026-09-01 from the client's live site, liquorlicenseagents.com. URLs resolved from https://liquorlicenseagents.com/sitemaps/sitemap-cities.xml (not guessed); fetched over HTTPS with a browser User-Agent, all 200. Content taken from the <main> element's single <article> only (no nav/header/footer). Prose is VERBATIM except: (1) HTML tags, <br> and &nbsp; normalised to plain text; (2) the leading '1.'-'6.' enumerators stripped from FAQ question headings; (3) the unverifiable firm self-descriptor 'with an experienced advisor' excised from the CTA of types 20, 21, 47 and 48 and recorded in firmClaimsFlagged. No competitor name (e.g. liquorlicense.com) appears anywhere on these pages — a case-insensitive scan of the FULL HTML of all six fetched pages returned 0 hits. wordCount counts the extracted article body as stored here, after the exclusion above.",
+  "firmClaimsFlagged": [
+    {
+      "type": "20",
+      "verbatim": "with an experienced advisor",
+      "inSentence": "If you are opening, buying, or repositioning a convenience store, small market, or gas station in Los Angeles County and want to sell beer and wine off-sale, you can call (800) 799-9081 to schedule an appointment and walk through Type 20 licensing strategy, timing, and budget with an experienced advisor."
+    },
+    {
+      "type": "21",
+      "verbatim": "with an experienced advisor",
+      "inSentence": "If you are opening, acquiring, or selling a liquor store or full-liquor market in Los Angeles County, you can call (800) 799-9081 to schedule an appointment and review Type 21 strategy, pricing, and timelines with an experienced advisor."
+    },
+    {
+      "type": "47",
+      "verbatim": "with an experienced advisor",
+      "inSentence": "If you are planning a full-service restaurant or lounge in Los Angeles County and need a Type 47 license, you can call (800) 799-9081 to schedule an appointment and review license options, CUP conditions, and deal structures with an experienced advisor."
+    },
+    {
+      "type": "48",
+      "verbatim": "with an experienced advisor",
+      "inSentence": "If you are planning, buying, or selling a bar, lounge, or nightclub in Los Angeles County and need a Type 48 license, you can call (800) 799-9081 to schedule an appointment and review licensing strategies, CUP issues, and deal terms with an experienced advisor."
+    }
+  ],
+  "types": {
+    "20": {
+      "url": "https://liquorlicenseagents.com/cities/los-angeles/los-angeles-county-type-20-liquor-license-for-beer-and-wine-off-sale/",
+      "h1": "Los Angeles County Type 20 Liquor License For Beer And Wine Off Sale",
+      "title": "Los Angeles Type 20 Liquor License: Off-Sale Beer & Wine",
+      "metaDescription": "Explore the Type 20 liquor license for off-premises sale of packaged beer and wine in Los Angeles. Contact us for expert assistance in obtaining or selling your license.",
+      "intro": "From dense urban neighborhoods to freeway-adjacent retail centers, Los Angeles County supports thousands of convenience stores, gas stations, and small markets that sell beer and wine to-go. The California Type 20 beer and wine off-sale license is often the most efficient way to add packaged alcohol sales to these concepts.\n\nLiquor License Agents works with Los Angeles County operators, franchisees, and investors to plan, acquire, and transfer Type 20 licenses so licensing, leasing, and build-outs stay aligned.",
+      "authorizes": {
+        "heading": "What The Type 20 Beer And Wine Off Sale License Authorizes In Los Angeles",
+        "lead": "A Type 20 license authorizes the retail sale of beer and wine for off-sale consumption. In Los Angeles County, a Type 20 license typically allows you to:",
+        "bullets": [
+          "Sell beer, malt beverages, and wine in sealed containers to-go",
+          "Stock both refrigerated and shelf-stable products in coolers, end caps, and standard grocery shelving",
+          "Integrate beer and wine into a convenience, grocery, or fuel-focused business",
+          "Operate strictly as an off-sale premises, with no on-site consumption of alcoholic beverages"
+        ],
+        "closing": "Because it excludes spirits, a Type 20 license is often more accessible and cost-effective than a full liquor license for many neighborhood stores."
+      },
+      "rightFor": {
+        "heading": "Is A Type 20 License Right For Your Convenience Store, Market, Or Gas Station",
+        "body": "A Type 20 license may be the right fit if:\n\n- Your core business is groceries, convenience items, or fuel, and beer and wine are complementary offerings\n- You do not plan to stock spirits, or you are comfortable building your alcohol set around beer and wine only\n- Your store layout and customer base are geared toward quick, off-sale purchases rather than on-premises service\n- You want to remain competitive with nearby stores that already sell packaged beer and wine\n\nIf you are opening a dedicated liquor store, or expect spirits to drive a significant share of revenue, a Type 21 license may be more appropriate. We help you compare cost, timing, and operational differences between Type 20 and Type 21 for your Los Angeles County site."
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Helps Type 20 Buyers And Sellers In Los Angeles County",
+        "body": "In Los Angeles County, Type 20 licenses frequently change hands when existing stores are sold, remodeled, or repositioned. Handling the license properly is critical to protecting the value of the deal.\n\nLiquor License Agents helps by:\n\n- Reviewing your store design, merchandising plan, and neighborhood to confirm a Type 20 license is appropriate\n- Determining whether you should apply for a new license or focus on purchasing and transferring an existing license\n- Assisting with valuation, negotiation, and escrow when a Type 20 license is included in a business sale\n- Preparing California ABC applications, premises diagrams, and ownership disclosures that match your actual operations\n- Coordinating with Los Angeles city or county staff on zoning, conditional use permits (CUPs), and corridor plans\n- Tracking your ABC file through background checks, public notice, and final decision, and helping you respond to any questions or protests\n\nOur goal is to keep license work in sync with your lease, tenant improvements, and store opening so alcohol permissions are not the last piece to fall into place."
+      },
+      "faqsHeading": "Los Angeles County Type 20 Liquor License FAQs",
+      "faqs": [
+        {
+          "q": "What products can I sell with a California Type 20 beer and wine license?",
+          "a": "A Type 20 license allows you to sell beer, malt beverages, and wine in sealed containers for off-sale consumption. Spirits and distilled liquor are not permitted under this license. If you want to sell spirits, you will need a Type 21 license instead."
+        },
+        {
+          "q": "Can I sell chilled beer and wine to go with a Type 20 license in Los Angeles?",
+          "a": "Yes. Chilled beer and wine sales are common for Type 20 licensees in Los Angeles County, particularly at high-traffic convenience stores and gas stations. Products must remain sealed, and all ABC and local rules regarding hours, age verification, and display still apply."
+        },
+        {
+          "q": "Do I need a minimum percentage of food or grocery sales for a Type 20 license?",
+          "a": "There is no single statewide percentage requirement, but ABC and local planning staff will look at your overall business model and premises. Your store should obviously operate as a bona fide convenience, grocery, or similar retail environment, not as an unlicensed bar. We review your product mix and layout to make sure your concept supports a Type 20 license."
+        },
+        {
+          "q": "Can I transfer a Type 20 license when I buy or sell a store in Los Angeles County?",
+          "a": "Yes. Many Los Angeles County convenience store and small market transactions involve transferring an existing Type 20 license to the buyer. These transfers usually run through escrow and require a formal ABC transfer application, public posting, and review. We help coordinate timing so license approval and escrow closing line up."
+        },
+        {
+          "q": "How long does it typically take to obtain or transfer a Type 20 license in Los Angeles?",
+          "a": "You should expect a process of several months, whether you are applying for a new license or transferring an existing one. ABC review, background checks, public notice, CUP conditions, and city or county approvals can all affect the schedule. Beginning license work early is the best way to avoid last-minute delays."
+        },
+        {
+          "q": "What zoning, CUP, or proximity rules affect Type 20 licenses near schools or churches?",
+          "a": "Los Angeles jurisdictions often apply detailed zoning rules, CUP conditions, and proximity guidelines for alcohol outlets near schools, churches, parks, and residential areas. These rules can affect your hours, product mix, security measures, and even the feasibility of adding alcohol at a specific address. We review your location in detail, and, where needed, coordinate with land use professionals so you understand your options before you commit to a site."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are opening, buying, or repositioning a convenience store, small market, or gas station in Los Angeles County and want to sell beer and wine off-sale, you can call (800) 799-9081 to schedule an appointment and walk through Type 20 licensing strategy, timing, and budget."
+      },
+      "localNames": [],
+      "localSpecificity": "NONE — no real neighbourhoods, landmarks or districts are named. All 'local' signal is the string 'Los Angeles' / 'Los Angeles County' dropped into otherwise generic statewide prose, plus unnamed generic categories (e.g. 'neighborhoods', 'corridors', 'entertainment districts').",
+      "wordCount": 1001
+    },
+    "21": {
+      "url": "https://liquorlicenseagents.com/cities/los-angeles/los-angeles-county-type-21-full-liquor-license-for-liquor-stores/",
+      "h1": "Los Angeles County Type 21 Full Liquor License For Liquor Stores",
+      "title": "Los Angeles Type 21 Liquor License – Off-Sale General",
+      "metaDescription": "Explore the requirements and benefits of obtaining a Type 21 liquor license in Los Angeles. Contact us today to start your application process.",
+      "intro": "Los Angeles County’s neighborhoods, corridors, and commercial centers support a huge range of dedicated liquor stores and high-volume markets that depend on full spirits, beer, and wine sales. The California Type 21 full liquor off-sale license is the foundation of that business model and is often one of the most valuable assets in a store sale or expansion.\n\nLiquor License Agents helps Los Angeles County owners, buyers, and investors evaluate Type 21 options, structure purchase or transfer deals, and navigate California ABC requirements so the license and the business move forward together.",
+      "authorizes": {
+        "heading": "What The California Type 21 Full Liquor Off Sale License Authorizes",
+        "lead": "A Type 21 license is a general off-sale license that allows a liquor store or market to sell:",
+        "bullets": [
+          "Distilled spirits, such as whiskey, vodka, tequila, rum, and gin",
+          "Beer, malt beverages, and wine in packaged form",
+          "Sealed containers only, strictly for off-sale consumption",
+          "A broad, competitive product mix, from value brands to premium and limited releases"
+        ],
+        "closing": "Under a Type 21 license, no on-sale consumption is allowed. The license is tied to a specific, approved location, and each premises requires its own license."
+      },
+      "rightFor": {
+        "heading": "Is A Type 21 License Right For Your Los Angeles Liquor Store Or Market",
+        "body": "A Type 21 license is usually the best fit if you intend to operate as:\n\n- A dedicated liquor store or package store\n- A high-volume market where spirits are a core part of your revenue\n- A specialty retailer focused on curated spirits, craft products, or imported selections\n- A rebranded or expanded store that is clearly more than a standard convenience outlet\n\nIf your concept looks more like a neighborhood convenience store or grocery where beer and wine are secondary to groceries or fuel, a Type 20 beer-and-wine off-sale license might be more cost-effective. We help you compare the operational impact, price, and timing of Type 20 versus Type 21 for your specific Los Angeles County location."
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Supports Type 21 Buyers And Sellers In Los Angeles County",
+        "body": "Type 21 licenses are frequently bought and sold as part of larger business or real estate transactions. Each deal requires coordination between ABC, escrow, landlords, and local planning staff.\n\nLiquor License Agents supports you by:\n\n- Reviewing your site, competition, and security plan to confirm the location is appropriate for a Type 21 license\n- Advising whether a new Type 21 license is realistic under current quotas, or whether you need to buy an existing license\n- Assisting with license valuation and negotiation when a Type 21 license is part of an asset or stock sale\n- Preparing ABC applications, premises diagrams, and ownership disclosures tailored to your operation\n- Coordinating with city and county land use staff on zoning, CUP conditions, hours, and security expectations\n- Tracking your file through ABC review and helping you respond to questions, protests, or proposed conditions\n\nOur goal is to protect the value of the license while keeping your project on a realistic but efficient schedule."
+      },
+      "faqsHeading": "Los Angeles County Type 21 Full Liquor License FAQs",
+      "faqs": [
+        {
+          "q": "What can I sell with a California Type 21 full liquor off sale license?",
+          "a": "A Type 21 license allows you to sell spirits, beer, and wine in sealed containers for off-sale consumption. That includes everything allowed under a Type 20 license, plus distilled spirits, so you can operate as a full liquor retailer rather than a beer-and-wine-only store."
+        },
+        {
+          "q": "How is a Type 21 license different from a Type 20 beer and wine license?",
+          "a": "A Type 20 license permits only beer and wine sales for off-sale consumption. A Type 21 license authorizes spirits in addition to beer and wine. Because of that broader privilege, Type 21 licenses typically carry higher acquisition costs and may face tighter quota and land use scrutiny."
+        },
+        {
+          "q": "Are there population quotas limiting new Type 21 licenses in Los Angeles County?",
+          "a": "Yes. California ABC uses population-based formulas and other criteria to determine how many off-sale general licenses are allowed in a given area. In many parts of Los Angeles County, those quotas are already met, which means new applicants often need to purchase and transfer an existing Type 21 license instead of obtaining a brand-new one."
+        },
+        {
+          "q": "Can I transfer a Type 21 license when I buy or sell a liquor store in Los Angeles?",
+          "a": "Yes. Type 21 licenses are routinely transferred as part of liquor store and market sales. Transfers usually go through escrow and require a formal ABC transfer application, public posting, and local review. Properly timing the transfer with the closing of your sale is critical to minimizing downtime."
+        },
+        {
+          "q": "How long does it typically take to obtain or transfer a Type 21 license in Los Angeles County?",
+          "a": "Most operators should expect a process measured in months. ABC background checks, public notice, CUP or zoning conditions, and inspections can all affect timing. Starting early and submitting a complete, accurate file are the best ways to avoid avoidable delays."
+        },
+        {
+          "q": "What factors influence the market price of a Type 21 license in Los Angeles?",
+          "a": "Type 21 pricing is driven by supply and demand in your part of Los Angeles County, recent comparable sales, neighborhood demographics, traffic patterns, and any conditions on the license. Broader economic trends and changes in local policy can also move prices. We help you interpret current market data so you can make informed decisions as a buyer or seller."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are opening, acquiring, or selling a liquor store or full-liquor market in Los Angeles County, you can call (800) 799-9081 to schedule an appointment and review Type 21 strategy, pricing, and timelines."
+      },
+      "localNames": [],
+      "localSpecificity": "NONE — no real neighbourhoods, landmarks or districts are named. All 'local' signal is the string 'Los Angeles' / 'Los Angeles County' dropped into otherwise generic statewide prose, plus unnamed generic categories (e.g. 'neighborhoods', 'corridors', 'entertainment districts').",
+      "wordCount": 938
+    },
+    "41": {
+      "url": "https://liquorlicenseagents.com/cities/los-angeles/los-angeles-county-type-41-beer-and-wine-license-for-restaurants/",
+      "h1": "Los Angeles County Type 41 Beer And Wine License For Restaurants",
+      "title": "Los Angeles Type 41 Liquor License: Beer & Wine for Restaurants",
+      "metaDescription": "Secure your Los Angeles Type 41 liquor license for on-premises beer and wine sales. Contact us today for expert assistance and a free consultation.",
+      "intro": "Los Angeles County’s restaurant scene spans casual cafés, family eateries, and neighborhood spots where guests expect beer or wine with their meal but not necessarily a full bar. The Type 41 beer-and-wine license is often the best match for these food-driven operations.\n\nLiquor License Agents works with Los Angeles County restaurant owners, chefs, and buyers to decide whether a Type 41 license fits their concept and to manage new applications or transfers.",
+      "authorizes": {
+        "heading": "What The Type 41 Beer And Wine Eating Place License Authorizes",
+        "lead": "A California Type 41 license is an on-sale beer-and-wine license tied to a bona fide eating place. In Los Angeles County, a Type 41 license typically allows you to:",
+        "bullets": [
+          "Serve beer and wine for on-premises consumption with meals",
+          "Offer draft, bottled, and canned beer, as well as still and sparkling wines",
+          "Provide alcohol service as part of a restaurant or café environment rather than a bar-only model",
+          "Potentially offer limited to-go options as regulations allow, subject to ABC and local rules"
+        ],
+        "closing": "Spirits and distilled liquor are not authorized under a Type 41 license, which keeps your beverage program focused and easier to manage."
+      },
+      "rightFor": {
+        "heading": "When A Type 41 License Makes Sense For Your Los Angeles Restaurant Or Café",
+        "body": "A Type 41 license may be the right fit if:\n\n- Your primary identity is a restaurant, café, or pizzeria, not a cocktail bar or nightclub\n- You want beer and wine to complement your menu without adding a full spirits program\n- Families, daytime guests, or casual diners make up a large portion of your traffic\n- Your space or budget does not support the build-out and staffing of a full bar\n\nIf your concept relies heavily on cocktails, spirits, or lounge-style service, a Type 47 license might be more appropriate. We help you evaluate whether the additional cost and complexity of Type 47 are justified by your projected sales."
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Helps With Type 41 Licensing And Transfers In Los Angeles",
+        "body": "For both new openings and acquisitions, aligning your license, CUP conditions, and operations is essential.\n\nLiquor License Agents assists by:\n\n- Reviewing your menu, kitchen, and floor plan to confirm that you meet bona fide eating place standards\n- Advising whether to apply for a new Type 41 license or pursue a transfer from an existing operator\n- Coordinating license valuation and escrow when a Type 41 license is part of a restaurant sale\n- Preparing ABC applications, premises diagrams, and ownership disclosures tailored to your concept\n- Working with city or county planning departments on outdoor dining, hours, and parking conditions\n- Monitoring your ABC file and helping you respond to inspections, questions, or proposed conditions\n\nOur goal is to make licensing a predictable part of your opening schedule, not a last-minute surprise."
+      },
+      "faqsHeading": "Los Angeles County Type 41 Beer And Wine Restaurant License FAQs",
+      "faqs": [
+        {
+          "q": "What can I serve with a California Type 41 beer and wine license?",
+          "a": "With a Type 41 license, you may serve beer and wine for on-premises consumption in connection with your restaurant operation. That includes draft beer, packaged beer, and a range of wines, but not spirits or cocktails that require distilled liquor."
+        },
+        {
+          "q": "Do I need a full kitchen and bona fide food service to qualify for a Type 41 license?",
+          "a": "Yes. A Type 41 license is reserved for bona fide eating places, which means you must have a working kitchen and a menu of complete meals. Prepackaged snacks or minimal food offerings alone will not satisfy ABC’s expectations for this license type."
+        },
+        {
+          "q": "Can I upgrade from a Type 41 beer and wine license to a Type 47 full liquor license?",
+          "a": "Many operators start with Type 41 and later pursue a Type 47 license when they are ready to add a full bar. Upgrading generally requires obtaining a Type 47 license (either a new issue or transfer) and going through the ABC process, not just filing a simple change form. We help you understand timing, cost, and feasibility before you take that step."
+        },
+        {
+          "q": "Are there restrictions on outdoor dining, patios, or sidewalk service with a Type 41 license?",
+          "a": "Yes. Any outdoor area where alcohol is served typically must be included in your licensed premises diagram and may require separate city approvals or a specific CUP. Fencing, clear boundaries, and control points are often required. We coordinate with planning staff so your patio or sidewalk dining operates legally under your license."
+        },
+        {
+          "q": "How long does it usually take to obtain or transfer a Type 41 license in Los Angeles County?",
+          "a": "Most restaurants should plan for a process of several months. ABC review, background checks, public notice, city approvals, and build-out schedules all affect timing. Starting early and submitting complete, accurate documents can significantly reduce delays."
+        },
+        {
+          "q": "Can I offer happy hour, drink specials, or bottomless brunch with a Type 41 license?",
+          "a": "You may offer promotions as long as they comply with ABC’s rules on advertising, pricing, and responsible service. For example, certain “all you can drink” formats can raise compliance concerns. We help you understand typical conditions so your happy hours and brunch specials support your brand without creating regulatory risk."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are opening or acquiring a restaurant or café in Los Angeles County and want to add beer-and-wine service, you can call (800) 799-9081 to schedule an appointment and discuss whether a Type 41 license is the right fit for your concept, location, and budget."
+      },
+      "localNames": [],
+      "localSpecificity": "NONE — no real neighbourhoods, landmarks or districts are named. All 'local' signal is the string 'Los Angeles' / 'Los Angeles County' dropped into otherwise generic statewide prose, plus unnamed generic categories (e.g. 'neighborhoods', 'corridors', 'entertainment districts').",
+      "wordCount": 911,
+      "alternateUrlSameType": "https://liquorlicenseagents.com/cities/los-angeles/los-angeles-county-type-41-beer-and-wine-eating-place-license/",
+      "alternateUrlNote": "The client publishes TWO separate, self-canonicalising, index,follow Type 41 pages for this market. The one extracted here is the '-license-for-restaurants' page, chosen because it matches the sibling naming/framing of types 20/21/47/48. The alternate '-eating-place-license' page is near-duplicate coverage of the same licence type with a different angle."
+    },
+    "47": {
+      "url": "https://liquorlicenseagents.com/cities/los-angeles/los-angeles-county-type-47-full-liquor-license-for-restaurants/",
+      "h1": "Los Angeles County Type 47 Full Liquor License For Restaurants",
+      "title": "Los Angeles Type 47 Liquor License: Essential Guide",
+      "metaDescription": "Discover the requirements and benefits of the Los Angeles Type 47 liquor license for your restaurant. Contact us today for expert assistance!",
+      "intro": "Los Angeles County’s dining scene includes countless restaurants and lounges where craft cocktails, spirits, and wine are central to the guest experience. For these concepts, the Type 47 on-sale general eating place license is the standard tool that allows full liquor service in a restaurant setting.\n\nLiquor License Agents helps Los Angeles County restaurateurs, hospitality groups, and buyers plan, acquire, and transfer Type 47 licenses so bar programs, kitchens, and CUP conditions all align.",
+      "authorizes": {
+        "heading": "What The California Type 47 On Sale General Eating Place License Authorizes",
+        "lead": "A Type 47 license is a general on-sale license tied to a bona fide eating place. In Los Angeles County, a Type 47 license generally allows you to:",
+        "bullets": [
+          "Serve spirits, beer, and wine for on-premises consumption with your restaurant operation",
+          "Pair cocktails, wine lists, and beer programs with a full menu of meals",
+          "Operate as a dining-focused business that also offers a robust bar and lounge experience",
+          "Welcome families and minors, since the premises is an eating place rather than a bar-only environment"
+        ],
+        "closing": "The Type 47 license sits at the intersection of serious food and serious beverage programs, making it the standard for full-service restaurants with bars."
+      },
+      "rightFor": {
+        "heading": "Is A Type 47 License Right For Your Los Angeles Restaurant Or Lounge",
+        "body": "A Type 47 license may be the right move if:\n\n- Cocktails and spirits-forward drinks are important to your menu, not just an afterthought\n- You have, or plan to build, a full kitchen capable of producing complete meals on a regular basis\n- Your layout supports a bar, lounge, and dining areas under a single, coordinated concept\n- You are targeting dinner, late-night dining, or special events where a full bar drives experience and revenue\n\nIf your concept is intentionally beer-and-wine only, or operates with a very small kitchen and limited food, Type 41 or a bar-oriented license might be better. We help you weigh the added cost and complexity of a Type 47 license against the upside of a strong bar program."
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Supports Type 47 Buyers And Sellers In Los Angeles County",
+        "body": "Type 47 licenses are high-value assets that can materially affect the sale price of a restaurant. They demand careful handling in both new applications and transfers.\n\nLiquor License Agents supports Type 47 projects by:\n\n- Reviewing your kitchen, menu, and floor plan to confirm that you meet eating place criteria\n- Advising whether a new Type 47 license is realistic in your area, or whether you will need to purchase an existing license\n- Coordinating license valuation and escrow when a Type 47 license is included in a restaurant sale\n- Preparing ABC applications, diagrams, and ownership disclosures that reflect your actual operations\n- Working with planning departments on parking, hours, entertainment, and conditions that may attach to your CUP\n- Monitoring ABC review and helping you respond to questions, protests, or proposed conditions\n\nOur focus is to keep your license strategy synchronized with lease negotiations, construction, and staffing so you can open with the bar program you planned."
+      },
+      "faqsHeading": "Los Angeles County Type 47 Full Liquor License FAQs",
+      "faqs": [
+        {
+          "q": "What can I serve with a California Type 47 on sale general eating place license?",
+          "a": "A Type 47 license allows you to serve spirits, beer, and wine for on-premises consumption in connection with a bona fide eating place. Guests can enjoy cocktails, mixed drinks, beer, and wine alongside their meals."
+        },
+        {
+          "q": "What food and kitchen requirements apply to a Type 47 restaurant license in Los Angeles?",
+          "a": "You must operate a bona fide eating place, which means a full kitchen, appropriate equipment, and a regular menu of meals, not just snacks or prepackaged items. Food service should be a consistent part of your operation, and ABC may consider your food-to-alcohol sales mix, hours, and CUP conditions."
+        },
+        {
+          "q": "How is a Type 47 license different from a Type 41 beer and wine license?",
+          "a": "A Type 41 license authorizes only beer and wine, while a Type 47 license authorizes spirits, beer, and wine. Type 47 licenses generally carry higher acquisition costs and more scrutiny, but they allow a full bar program that can materially increase check averages in many Los Angeles concepts."
+        },
+        {
+          "q": "Can I transfer a Type 47 license when I buy or sell a restaurant in Los Angeles County?",
+          "a": "Yes. Type 47 licenses are frequently transferred as part of restaurant asset sales or ownership changes. Transfers go through ABC and usually run in parallel with escrow. Coordinating closing, license posting, and ABC approval is essential to avoid disruption in service."
+        },
+        {
+          "q": "How long does it usually take to obtain or transfer a Type 47 license in Los Angeles?",
+          "a": "Expect a process of several months, particularly in sensitive neighborhoods or where CUP conditions are involved. ABC review, public notice, local planning requirements, and any build-out work all influence timing. Starting the licensing process early gives you a better chance of opening with your bar in place."
+        },
+        {
+          "q": "What neighborhood, CUP, or parking conditions might affect my Type 47 approval?",
+          "a": "Conditional use permits often regulate hours, patio use, entertainment, signage, and parking ratios. Some neighborhoods have additional alcohol policies or overlay zones. We review existing CUPs, proposed conditions, and neighborhood sensitivities so you understand the operating framework before finalizing your plans."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are planning a full-service restaurant or lounge in Los Angeles County and need a Type 47 license, you can call (800) 799-9081 to schedule an appointment and review license options, CUP conditions, and deal structures."
+      },
+      "localNames": [],
+      "localSpecificity": "NONE — no real neighbourhoods, landmarks or districts are named. All 'local' signal is the string 'Los Angeles' / 'Los Angeles County' dropped into otherwise generic statewide prose, plus unnamed generic categories (e.g. 'neighborhoods', 'corridors', 'entertainment districts').",
+      "wordCount": 917
+    },
+    "48": {
+      "url": "https://liquorlicenseagents.com/cities/los-angeles/los-angeles-county-type-48-full-liquor-license-for-bars-and-nightclubs/",
+      "h1": "Los Angeles County Type 48 Full Liquor License For Bars And Nightclubs",
+      "title": "Los Angeles Liquor License Type 48: Essential Guide",
+      "metaDescription": "Discover the requirements and benefits of obtaining a Type 48 liquor license in Los Angeles. Contact us today for expert assistance in securing your license.",
+      "intro": "Los Angeles County’s bars, live music venues, and nightclubs rely on the Type 48 license to serve spirits, beer, and wine in adult-only settings where entertainment and nightlife are the main attraction. Because these licenses are both valuable and tightly regulated, planning is essential.\n\nLiquor License Agents helps Los Angeles County bar and nightclub operators evaluate Type 48 feasibility, structure purchases and sales, and guide projects through ABC and local review.",
+      "authorizes": {
+        "heading": "What The Type 48 General On Sale Public Premises License Authorizes",
+        "lead": "A Type 48 license is a general on-sale public premises license. In Los Angeles County, it typically allows you to:",
+        "bullets": [
+          "Serve spirits, beer, and wine for on-premises consumption at a bar, lounge, or nightclub",
+          "Operate as a public premises where minors generally are not allowed to remain",
+          "Focus on nightlife, entertainment, and alcohol sales without maintaining a full restaurant kitchen",
+          "Offer bottle service, VIP areas, and other nightlife features, subject to ABC rules and local conditions"
+        ],
+        "closing": "Type 48 is the standard license for bar-forward venues where alcohol and entertainment are the primary draw rather than meals."
+      },
+      "rightFor": {
+        "heading": "When A Type 48 License Makes Sense For Your Los Angeles Bar, Lounge, Or Nightclub",
+        "body": "A Type 48 license may be the right choice if:\n\n- Your business model is centered on alcoholic beverage sales and entertainment\n- You plan to control access at the door, check IDs, and maintain a dedicated security program\n- Food service, if offered, is limited or supplemental rather than the heart of the concept\n- You are targeting nightlife neighborhoods, hospitality corridors, or entertainment districts\n\nIf your concept is a restaurant first, with a strong bar but a significant food program and family dining, a Type 47 restaurant license may be more appropriate. We help you choose the license that best reflects how you actually plan to operate."
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Assists Type 48 Buyers And Sellers In Los Angeles County",
+        "body": "Type 48 licenses in Los Angeles nightlife areas can command significant prices and attract close regulatory scrutiny. Every step of a deal matters.\n\nLiquor License Agents assists by:\n\n- Evaluating your site, floor plan, and neighborhood to see whether a Type 48 license is viable and supportable\n- Advising whether a new license is available or if you must acquire an existing Type 48 license\n- Supporting negotiations, valuation, and escrow when a Type 48 license is part of a bar or club sale\n- Preparing ABC applications, security and operations descriptions, and detailed premises diagrams\n- Coordinating with planning, police, and neighborhood bodies on CUPs, security plans, entertainment permits, and hours\n- Tracking ABC review through public notice, potential protests, and final decisions, helping you respond at each step\n\nOur goal is to give you a clear picture of regulatory expectations before you build out or brand a nightlife concept around a Type 48 license."
+      },
+      "faqsHeading": "Los Angeles County Type 48 Full Liquor Bar License FAQs",
+      "faqs": [
+        {
+          "q": "What can I serve with a California Type 48 general on sale liquor license?",
+          "a": "A Type 48 license allows you to serve spirits, beer, and wine for on-premises consumption in a bar or nightclub environment. It is a full liquor license for public premises, not restricted to beer and wine."
+        },
+        {
+          "q": "Do I need to serve food or operate a kitchen with a Type 48 bar license?",
+          "a": "No. A Type 48 license does not require a full kitchen or bona fide eating place. Many Type 48 venues offer limited food, host food trucks, or partner with nearby restaurants, but extensive food service is not mandated by the license. Local CUPs may still encourage or require some food options in specific districts."
+        },
+        {
+          "q": "Are minors allowed anywhere on the premises under a Type 48 license in Los Angeles?",
+          "a": "Generally, no. Type 48 licenses are for public premises where minors may not remain. You will need strong ID-check procedures, trained staff, and clear signage to enforce this rule. We help you build these elements into your operating plan and license submissions."
+        },
+        {
+          "q": "Can I host live music, DJs, and bottle service with a Type 48 license?",
+          "a": "Yes. Many Type 48 venues are built around live music, DJs, dancing, and bottle service. These activities can trigger additional conditions regarding security, capacity, hours, and noise control. We coordinate your licensing with any entertainment and bottle-service approvals needed from the city or county."
+        },
+        {
+          "q": "How long does it typically take to obtain or transfer a Type 48 license in Los Angeles County?",
+          "a": "Nightlife-focused applications often take several months, and sometimes longer, depending on neighborhood sensitivity, CUP requirements, and whether protests are filed. Starting early, engaging with local stakeholders, and providing detailed plans can help keep the process moving."
+        },
+        {
+          "q": "What factors influence the market price of a Type 48 license in Los Angeles nightlife areas?",
+          "a": "Pricing is shaped by demand in specific corridors, scarcity of available licenses, recent comparable transactions, economic trends, and any existing conditions on the license. Locations in highly sought-after nightlife districts may see significantly higher values. We help you understand current pricing patterns so you can budget realistically."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are planning, buying, or selling a bar, lounge, or nightclub in Los Angeles County and need a Type 48 license, you can call (800) 799-9081 to schedule an appointment and review licensing strategies, CUP issues, and deal terms."
+      },
+      "localNames": [],
+      "localSpecificity": "NONE — no real neighbourhoods, landmarks or districts are named. All 'local' signal is the string 'Los Angeles' / 'Los Angeles County' dropped into otherwise generic statewide prose, plus unnamed generic categories (e.g. 'neighborhoods', 'corridors', 'entertainment districts').",
+      "wordCount": 891
+    }
+  }
+}

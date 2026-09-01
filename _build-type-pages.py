@@ -1,240 +1,270 @@
 #!/usr/bin/env python3
 """
-Generate the 5 per-classification pages from licence-types.html.
+_build-type-pages.py -- [BZ] generate the 50 market x licence-type pages.
 
-SIMILARITY: run first, as on the other two sets. Average pairwise vocabulary
-overlap 15%, ZERO pairs over 50% (worst is 45%, type-20/type-41). So duplication
-is NOT the constraint here — thinness is.
+LAYOUT (owner choice): mirror the client's own seven-section template, rebuilt in our
+design system. Their order, our chrome, our band rhythm.
 
-⚠ TYPE 20 AND TYPE 41 ARE noindex,follow, AND THAT IS NOT AN OVERSIGHT.
-licence-types.html states it outright in a comment at their anchors: "our
-verified sources carry the official designation and scope for these two, not the
-full authorisation sentence recorded for 21, 47 and 48. The matrix row is
-therefore the fullest thing the site can honestly say about them." Measured: 15
-and 22 words, against 126-148 for the other three. Their pages therefore carry
-the matrix facts, say plainly why there is no more, and stay out of the index.
-Writing an authorisation sentence for them would be inventing regulatory text
-about a licence class — the single worst place on this site to guess.
+CONTENT: extracted verbatim from the client's live pages into
+_geography/_source-content/<market>.json by the extraction workflow. Nothing here is
+invented -- if a field is missing the page is not written.
 
-ANTI-INVENTION: every classification sentence and bullet is LIFTED from
-licence-types.html. The only authored text is navigational scaffolding and the
-sourcing note, which describes the project's own evidence state rather than
-asserting anything about the licences.
+INDEXABILITY is decided by MEASURED local content, not by taste. The extraction scored
+every page for concrete local references. Markets whose pages name no real place get
+noindex,follow with the reason inline -- the same convention already carried by the six
+no-stock market pages ("noindex until stock or sourced local content"). The measurement
+that justifies it: the highest-overlap pair in the sampled set was san-diego-type-20 vs
+los-angeles-type-20 at 48%, and both scored NONE for local content.
+
+CHROME comes from liquor-license-san-diego.html: everything outside <main> is copied
+verbatim, so the header, drawer, footer and mega menus stay identical site-wide and any
+future header change re-stamps through the existing menu scripts.
 """
-import re, html, json
+import io, json, os, re, html
 
-SRC = open('licence-types.html', encoding='utf-8').read()
+HERE = os.path.dirname(os.path.abspath(__file__))
+SRC = os.path.join(HERE, '_geography', '_source-content')
+DONOR = os.path.join(HERE, 'liquor-license-san-diego.html')
 
-HEAD_TAIL  = SRC[SRC.index('<meta name="theme-color"'):SRC.index('</head>')]
-CHROME_TOP = SRC[SRC.index('<body>') + len('<body>'):SRC.index('<main id="main">')]
-CHROME_BOT = SRC[SRC.index('<footer'):SRC.index('</body>')]
-assert 'site-header' in CHROME_TOP and 'site-footer' in CHROME_BOT
+TYPES = ['20', '21', '41', '47', '48']
+TYPE_NAME = {
+    '20': 'Off-Sale Beer &amp; Wine',
+    '21': 'Off-Sale General',
+    '41': 'On-Sale Beer &amp; Wine, Eating Place',
+    '47': 'On-Sale General, Eating Place',
+    '48': 'On-Sale General, Public Premises',
+}
+# markets whose extracted pages scored NONE for concrete local references
+NOINDEX = {('los-angeles', t) for t in TYPES} | {('san-diego', t) for t in TYPES} | {('orange', '21')}
+NOINDEX_WHY = ('NOINDEX ON PURPOSE: the source content for this market names no concrete local place '
+               '(no neighbourhood, district or landmark), so this page carries nothing that '
+               'distinguishes it from the same classification in another market. MEASURED: the '
+               'highest-overlap pair in the sampled set was san-diego-type-20 vs los-angeles-type-20 '
+               'at 48% vocabulary overlap, and both scored NONE for local content. Remove this tag '
+               'the moment real sourced local content is written for this market.')
 
-# code -> (page label, the official designation as the site words it)
-TYPES = [
-    ('20', 'Type 20', 'Off-Sale Beer &amp; Wine'),
-    ('21', 'Type 21', 'Off-Sale General'),
-    ('41', 'Type 41', 'On-Sale Beer &amp; Wine, Eating Place'),
-    ('47', 'Type 47', 'On-Sale General, Eating Place'),
-    ('48', 'Type 48', 'On-Sale General, Public Premises'),
+MARKET_TAB = {  # market slug -> the locations.html tab it belongs to
+    'los-angeles': 'los-angeles', 'orange': 'orange', 'riverside': 'riverside',
+    'sacramento': 'sacramento', 'san-bernardino': 'san-bernardino', 'san-diego': 'san-diego',
+    'san-francisco': 'san-francisco', 'fresno': 'fresno', 'santa-barbara': 'santa-barbara',
+    'ventura': 'ventura',
+}
+
+
+# Unverifiable claims about this firm's people. Stripped HERE rather than trusting the
+# extraction, because the agents applied it inconsistently -- 3 of 11 removed
+# "with an experienced advisor", the other 8 did not, and it reached 34 of 50 pages.
+CLAIM_PATTERNS = [
+    r',?\s*(?:and\s+)?with an experienced advisor',
+    r'\s*and engaging experienced representation',
+    r'Engaging experienced representation early is the best way to\s*',
+    r'\s*with a team familiar with [^.,]+',
+    r'\s*with our experienced (?:team|advisors|brokers)',
 ]
-THIN = {'20', '41'}          # designation + scope only in verified sources
 
-MARKETS = [('los-angeles','Los Angeles County'),('orange','Orange County'),
-           ('riverside','Riverside County'),('sacramento','Sacramento County'),
-           ('san-bernardino','San Bernardino County'),('san-diego','San Diego County'),
-           ('san-francisco','San Francisco County'),('fresno','Fresno'),
-           ('napa-valley','Napa Valley'),('palm-springs','Palm Springs'),
-           ('san-jose','San Jose'),('santa-barbara','Santa Barbara'),('ventura','Ventura')]
 
-def clean(t):
-    return re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]*>', ' ', t))).strip()
+def strip_claims(t):
+    if not t:
+        return t
+    for c in CLAIM_PATTERNS:
+        t = re.sub(c, '', t, flags=re.I)
+    t = re.sub(r'\s{2,}', ' ', t)
+    t = re.sub(r'\s+([.,;])', r'\1', t)
+    t = re.sub(r'\b([Ss]tarting early)\s+is the best way', r'\1 helps', t)
+    return t.strip()
 
-def element(idv):
-    """Return the whole element carrying id=<idv>, balanced on its own tag."""
-    m = re.search(r'<(\w+)([^>]*\bid="%s")' % re.escape(idv), SRC)
-    if not m:
+
+def esc(s):
+    return html.escape(strip_claims(str(s or '')), quote=False)
+
+
+def clean_title(h1, label, ty):
+    """Their titles repeat themselves: 'X Type 47 Full On-Sale... - X Type 47 License'."""
+    t = re.sub(r'\s*[-–—]\s*%s Type %s License\s*$' % (re.escape(label), ty), '', h1).strip()
+    return t
+
+
+def para(text):
+    """Their body fields sometimes carry '•' bullets inline; split those out."""
+    out = []
+    for chunk in re.split(r'\s*•\s*', text or ''):
+        c = chunk.strip()
+        if c:
+            out.append(c)
+    return out
+
+
+def bullets(sec):
+    b = sec.get('bullets')
+    if b:
+        return b
+    parts = para(sec.get('body', ''))
+    return parts[1:] if len(parts) > 1 else []
+
+
+def lead_of(sec):
+    if sec.get('lead'):
+        return sec['lead']
+    parts = para(sec.get('body', ''))
+    return parts[0] if parts else ''
+
+
+def ul(items):
+    if not items:
         return ''
-    tag, start = m.group(1), m.start()
-    depth = 0
-    for mm in re.finditer(r'<(/?)%s\b' % tag, SRC[start:]):
-        depth += -1 if mm.group(1) else 1
-        if depth == 0:
-            return SRC[start:start + mm.end() + len(tag)]
-    return SRC[start:start + 6000]
+    return ('<ul class="tp-points" role="list">%s</ul>' %
+            ''.join('<li>%s</li>' % esc(i) for i in items))
 
-def lift(code):
-    seg = element('type-' + code)
-    # skip any deep link this generator previously injected (idempotence — the
-    # circular-contamination bug the service build hit)
-    raw = re.findall(r'(<p\b[^>]*>)(.*?)</p>', seg, re.S)
-    SKIP = re.compile(r'class="[^"]*\b(tp-deep|sv-deep|lm-deep|eyebrow)\b')
-    paras = [inner for tag, inner in raw if not SKIP.search(tag) and len(clean(inner).split()) >= 6]
-    lis = [l for l in re.findall(r'<li[^>]*>(.*?)</li>', seg, re.S) if clean(l)]
-    h3 = re.search(r'<h3[^>]*>(.*?)</h3>', seg, re.S)
-    cells = [clean(c) for c in re.findall(r'<td[^>]*>(.*?)</td>', seg, re.S)]
-    return paras, lis, (clean(h3.group(1)) if h3 else ''), cells
 
-def build(code, label, designation):
-    paras, lis, h3name, cells = lift(code)
-    thin = code in THIN
-    others = [(c, l, d) for c, l, d in TYPES if c != code]
+def body_for(market, label, ty, t):
+    tab = MARKET_TAB.get(market, market)
+    h1 = clean_title(t['h1'], label, ty)
+    intro = esc(t['intro'])
+    a, rf, hw = t['authorizes'], t['rightFor'], t['howWeHelp']
+    faqs = t['faqs']
+    cta = t['cta']
+    local = t.get('localNames') or []
 
-    lede = clean(paras[0]) if paras else ''
-    if thin:
-        # the matrix row IS the source of truth for these two
-        scope = ' &middot; '.join(html.escape(c) for c in cells if c)
-        lede = (f'The official designation is {designation}. '
-                + (f'Scope on record: {scope}.' if scope else ''))
+    s = []
+    s.append(
+        '<section class="section hero hero--editorial section--dark wow-bloom">\n'
+        '  <div class="container">\n'
+        '    <p class="eyebrow"><a href="locations.html">Markets</a> &rsaquo; '
+        '<a href="liquor-license-%s.html">%s</a> &rsaquo; Type %s</p>\n'
+        '    <h1>%s</h1>\n'
+        '    <p class="lede">%s</p>\n'
+        '    <div class="cta-row">\n'
+        '      <a class="btn btn-primary wow-glow" href="contact.html">Talk to a broker</a>\n'
+        '      <a class="btn btn-secondary" href="licence-types.html#type-%s">What a Type %s authorises</a>\n'
+        '    </div>\n'
+        '  </div>\n'
+        '</section>' % (tab, esc(label), ty, esc(h1), intro, ty, ty))
 
-    body = '\n'.join('      <p>%s</p>' % p.strip() for p in paras[1:]) if len(paras) > 1 else ''
-    bullets = '\n'.join('        <li>%s</li>' % l.strip() for l in lis) if lis else ''
+    s.append(
+        '<section class="section section--warm" id="authorizes">\n'
+        '  <div class="container">\n'
+        '    <p class="eyebrow">What it permits</p>\n'
+        '    <h2>%s</h2>\n'
+        '    <p class="lede">%s</p>\n'
+        '    %s\n'
+        '    <p class="tp-note">The full ABC authorisation wording for every classification is on the '
+        '<a href="licence-types.html#type-%s">classifications page</a>.</p>\n'
+        '  </div>\n'
+        '</section>' % (esc(a['heading']), esc(a['lead']), ul(a['bullets']), ty))
 
-    sourcing = ''
-    robots = ''
-    if thin:
-        sourcing = f'''    <p class="tp-caveat"><strong>What this site can say about {label} is limited on purpose.</strong>
-      Our verified sources carry the official designation and scope for {label}, not the full
-      authorisation sentence recorded for Types 21, 47 and 48. Rather than write one, this page states
-      what is on record and stops there. For the operative wording, the Department of Alcoholic Beverage
-      Control is the authority; for what it means for a specific site,
-      <a href="contact.html#quote">talk to a broker</a>.</p>'''
-        robots = ('\n<meta name="robots" content="noindex,follow">'
-                  '\n<!-- NOINDEX ON PURPOSE: licence-types.html records that verified sources carry only\n'
-                  '     the designation and scope for this classification, not the full authorisation\n'
-                  '     sentence held for 21/47/48 — measured at 15-22 words against 126-148. The page\n'
-                  '     exists so the classification has a destination, but it is not indexed while it\n'
-                  '     is that thin. Remove this tag if a sourced authorisation sentence is added. -->')
+    s.append(
+        '<section class="section" id="fit">\n'
+        '  <div class="container">\n'
+        '    <p class="eyebrow">Is it the right one</p>\n'
+        '    <h2>%s</h2>\n'
+        '    <p class="lede">%s</p>\n'
+        '    %s\n'
+        '  </div>\n'
+        '</section>' % (esc(rf['heading']), esc(lead_of(rf)), ul(bullets(rf))))
 
-    covers = ''
-    if bullets:
-        covers = f'''
-<section class="section" id="covers">
-  <div class="container">
-    <p class="eyebrow">In practice</p>
-    <h2>What a {label} actually covers</h2>
-    <ul class="tp-list">
-{bullets}
-    </ul>
-  </div>
-</section>
-'''
+    closing = hw.get('closing', '')
+    s.append(
+        '<section class="section section--dark" id="how">\n'
+        '  <div class="container">\n'
+        '    <p class="eyebrow">How we work it</p>\n'
+        '    <h2>%s</h2>\n'
+        '    <p class="lede">%s</p>\n'
+        '    %s\n'
+        '    %s\n'
+        '  </div>\n'
+        '</section>' % (esc(hw['heading']), esc(lead_of(hw)), ul(bullets(hw)),
+                        ('<p class="tp-note">%s</p>' % esc(closing)) if closing else ''))
 
-    market_links = ' &middot; '.join(
-        f'<a href="liquor-license-{m}.html">{html.escape(l)}</a>' for m, l in MARKETS)
-    other_links = ' &middot; '.join(
-        f'<a href="licence-type-{c}.html">{l} &mdash; {d}</a>' for c, l, d in others)
+    items = ''.join(
+        '      <details class="faq-item">\n'
+        '        <summary class="faq-item__q">%s</summary>\n'
+        '        <div class="faq-item__a">%s</div>\n'
+        '      </details>\n' % (esc(f['q']), esc(f['a'])) for f in faqs)
+    s.append(
+        '<section class="section" id="faqs">\n'
+        '  <div class="container">\n'
+        '    <p class="eyebrow">Asked most</p>\n'
+        '    <h2>%s</h2>\n'
+        '    <div class="faq__list">\n%s    </div>\n'
+        '    <p class="tp-note">Broader questions &mdash; cost, timelines, city approval &mdash; are '
+        'answered on the <a href="faq.html">FAQ page</a>.</p>\n'
+        '  </div>\n'
+        '</section>' % (esc(t.get('faqHeading') or ('%s Type %s FAQs' % (label, ty))), items))
 
-    # ⚠ MEASURED: on the two thin classifications `body` is empty (their source is a
-    # table row, not prose), and the earlier fallback re-printed the hero lede here — the
-    # SAME sentence twice on one page, confirmed by comparing the two strings. The section
-    # is not empty without it: the sourcing caveat and the note both live there. So the
-    # body div is rendered only when there is genuinely a second paragraph to put in it.
-    body_block = ('    <div class="tp-body">\n' + body + '\n    </div>') if body.strip() else ''
+    s.append(
+        '<section class="section closing-cta" id="next">\n'
+        '  <div class="container">\n'
+        '    <h2>%s</h2>\n'
+        '    <p class="lede">%s</p>\n'
+        '    <div class="cta-row">\n'
+        '      <a class="btn btn-primary wow-glow" href="contact.html">Talk to a broker</a>\n'
+        '      <a class="btn btn-secondary" href="liquor-license-%s.html">Everything we broker in %s</a>\n'
+        '    </div>\n'
+        '  </div>\n'
+        '</section>' % (esc(cta['heading']), esc(cta['body']), tab, esc(label)))
 
-    plain = html.unescape(designation)
-    title = f'{label} Liquor Licence &mdash; {designation} | California ABC'
-    desc = (lede[:150].rsplit(' ', 1)[0] + '…') if len(lede) > 150 else lede
-    desc = desc or f'{label} — {plain}. California ABC classification.'
+    return '\n\n'.join(s), h1, local
 
-    ld = {"@context": "https://schema.org", "@type": "Product",
-          "name": f"{label} — {plain}",
-          "category": "California ABC liquor licence",
-          "brand": {"@type": "Brand", "name": "California Department of Alcoholic Beverage Control"},
-          "offers": {"@type": "AggregateOffer", "availability": "https://schema.org/LimitedAvailability",
-                     "priceCurrency": "USD",
-                     "seller": {"@type": "ProfessionalService", "name": "Liquor License Agents"}}}
 
-    return f'''<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title}</title>
-<meta name="description" content="{html.escape(desc, quote=True)}">
-<link rel="canonical" href="licence-type-{code}.html">{robots}
-<link rel="preload" href="assets/fonts/ff-8ca9c2a4.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/ff-c52e5cbb.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/fonts.css">
-<link rel="stylesheet" href="design-system/tokens.css">
-<link rel="stylesheet" href="design-system/structural.css">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Liquor License Agents">
-<meta property="og:title" content="{title}">
-<meta property="og:description" content="{html.escape(desc, quote=True)}">
-<meta property="og:image" content="assets/og-liquorlicense.jpg">
-<script type="application/ld+json">
-{json.dumps(ld, indent=2)}
-</script>
-{HEAD_TAIL}</head>
-<body>{CHROME_TOP}<main id="main">
+def main():
+    donor = io.open(DONOR, encoding='utf-8').read()
+    pre = donor[:donor.index('<main id="main">') + len('<main id="main">')]
+    post = donor[donor.index('</main>'):]
 
-<section class="section hero hero--editorial section--dark wow-bloom">
-  <div class="container">
-    <p class="eyebrow"><a href="licence-types.html">Classifications</a> &rsaquo; {label}</p>
-    <h1>{label} &mdash; {designation}</h1>
-    <p class="lede">{lede}</p>
-    <div class="cta-row">
-      <a class="btn btn-primary wow-glow" href="inventory.html?type={code}">See {label} on the board</a>
-      <a class="btn btn-secondary" href="contact.html#quote">Ask a broker</a>
-    </div>
-  </div>
-</section>
+    written = idx = noidx = 0
+    for f in sorted(os.listdir(SRC)):
+        if not f.endswith('.json'):
+            continue
+        d = json.load(io.open(os.path.join(SRC, f), encoding='utf-8'))
+        if 'types' not in d:
+            continue
+        market, label = d['market'], d['label']
+        if market not in MARKET_TAB:
+            print('  skip %s (not one of the ten county markets)' % market)
+            continue
+        for ty in TYPES:
+            t = d['types'].get(ty)
+            if not t:
+                print('  MISSING %s type %s -- not written' % (market, ty))
+                continue
+            body, h1, local = body_for(market, label, ty, t)
+            head = pre
+            title = '%s | ABC Licence Brokers' % clean_title(t['h1'], label, ty)
+            if len(title) > 70:
+                title = '%s Type %s Licence | ABC Licence Brokers' % (label, ty)
+            desc = re.sub(r'\s+', ' ', t['metaDescription'] or t['intro']).strip()
+            if len(desc) > 158:
+                desc = desc[:155].rsplit(' ', 1)[0] + '…'
+            slug = 'liquor-license-%s-type-%s.html' % (market, ty)
 
-<section class="section section--warm" id="detail">
-  <div class="container">
-{sourcing}
-{body_block}
-    <p class="tp-note">All five classifications are set side by side on the
-      <a href="licence-types.html">licence types page</a>. Which one a business needs is decided by what is
-      poured, whether it is consumed where it is bought, and what the room is for &mdash; not by size.</p>
-  </div>
-</section>
-{covers}
-<section class="section section--dark" id="where">
-  <div class="container">
-    <p class="eyebrow">Where</p>
-    <h2>{label} across California</h2>
-    <p class="lede">Availability is a local question. What a classification is worth, and whether one is even
-      obtainable, turns on the county rather than the state.</p>
-    <p class="cross-link-rail__rail">{market_links}</p>
-  </div>
-</section>
+            head = re.sub(r'<title>.*?</title>', '<title>%s</title>' % esc(title), head, count=1, flags=re.S)
+            head = re.sub(r'<meta name="description" content="[^"]*">',
+                          '<meta name="description" content="%s">' % html.escape(desc, quote=True),
+                          head, count=1)
+            head = re.sub(r'<link rel="canonical" href="[^"]*">',
+                          '<link rel="canonical" href="%s">' % slug, head, count=1)
+            if (market, ty) in NOINDEX:
+                head = head.replace('<link rel="canonical"',
+                                    '<meta name="robots" content="noindex,follow">\n<!-- %s -->\n<link rel="canonical"' % NOINDEX_WHY, 1)
+                noidx += 1
+            else:
+                idx += 1
+            # per-page Service node
+            head = re.sub(
+                r'(<script type="application/ld\+json">\s*\{\s*"@context"[^<]*?"@type": "Service".*?</script>)',
+                ('<script type="application/ld+json">\n{\n'
+                 '  "@context": "https://schema.org",\n  "@type": "Service",\n'
+                 '  "name": "California ABC Type %s licence brokerage in %s",\n'
+                 '  "serviceType": "California ABC liquor licence brokerage",\n'
+                 '  "areaServed": { "@type": "AdministrativeArea", "name": "%s" },\n'
+                 '  "provider": { "@type": "ProfessionalService", "name": "Liquor License Agents" }\n'
+                 '}\n</script>') % (ty, label, label),
+                head, count=1, flags=re.S)
 
-<section class="section closing-cta" id="next">
-  <div class="container">
-    <p class="eyebrow">Next</p>
-    <h2>Working towards a {label}?</h2>
-    <p class="lede">Tell us the market and the number you are working to. If it is not on the board we source
-      against it.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary wow-glow" href="contact.html#quote">Send a sourcing brief</a>
-      <a class="btn btn-secondary" href="tel:+18007999081">800.799.9081</a>
-    </div>
-    <div class="cross-link-rail">
-      <p class="cross-link-rail__label">The other four classifications</p>
-      <p class="cross-link-rail__rail">{other_links}</p>
-    </div>
-  </div>
-</section>
+            io.open(os.path.join(HERE, slug), 'w', encoding='utf-8').write(head + '\n\n' + body + '\n\n' + post)
+            written += 1
+    print('written %d pages  (%d indexable, %d noindex)' % (written, idx, noidx))
 
-</main>
-{CHROME_BOT}</body>
-</html>
-'''
 
 if __name__ == '__main__':
-    out = []
-    for code, label, designation in TYPES:
-        page = build(code, label, designation)
-        fn = f'licence-type-{code}.html'
-        assert 'site-header' in page and 'site-footer' in page, 'chrome lost: ' + fn
-        assert page.count('<h1>') == 1, 'h1: ' + fn
-        assert 'design-system/structural.css' in page, 'css lost: ' + fn
-        assert 'Full detail on this' not in page, 'deep-link leaked: ' + fn
-        assert len(page) > 20000, 'too small: ' + fn
-        open(fn, 'w', encoding='utf-8').write(page)
-        out.append((fn, len(page), code in THIN))
-    print('wrote %d classification pages' % len(out))
-    for fn, n, thin in out:
-        print('   %-30s %6d bytes%s' % (fn, n, '  [noindex — designation+scope only]' if thin else ''))
+    main()

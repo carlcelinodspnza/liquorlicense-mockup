@@ -273,3 +273,79 @@ funnels:   []
 # Services / B2B site with no platform surface (no auth, no cart, no checkout).
 # The conversion goal is `request_quote`; its destination is the real `contact` page.
 platform_pages: []
+
+# <<< SESSION-PAGES:BEGIN >>>
+# ---- ADDED THIS SESSION. Regenerate with _build-sitemap-entries.py ----------
+# indexable is read from each shipped page, not re-derived, so this file cannot
+# drift from what actually has a robots tag.
+
+state_pages:
+  - { slug: california-liquor-license-services, kind: state_services, state: "California", indexable: true }
+  - { slug: arizona-liquor-license, kind: state, state: "Arizona", indexable: true }
+  - { slug: florida-liquor-license, kind: state, state: "Florida", indexable: true }
+  - { slug: new-jersey-liquor-license, kind: state, state: "New Jersey", indexable: false }   # noindex: source states California licence law on a non-California state
+  - { slug: ohio-liquor-license, kind: state, state: "Ohio", indexable: false }   # noindex: source states California licence law on a non-California state
+  - { slug: pennsylvania-liquor-license, kind: state, state: "Pennsylvania", indexable: false }   # noindex: source states California licence law on a non-California state
+
+market_type_pages:
+  # 50 pages: 10 county markets x ABC Types 20/21/41/47/48. Content extracted
+  # verbatim from the client's own per-type pages. 11 ship noindex because their
+  # source names no concrete local place -- see the inline reason on each page.
+  - { slug: liquor-license-fresno-type-20, kind: market_type, market: "Fresno County", type: 20, name: "Off-Sale Beer & Wine", indexable: true }
+  - { slug: liquor-license-fresno-type-21, kind: market_type, market: "Fresno County", type: 21, name: "Off-Sale General", indexable: true }
+  - { slug: liquor-license-fresno-type-41, kind: market_type, market: "Fresno County", type: 41, name: "On-Sale Beer & Wine, Eating Place", indexable: true }
+  - { slug: liquor-license-fresno-type-47, kind: market_type, market: "Fresno County", type: 47, name: "On-Sale General, Eating Place", indexable: true }
+  - { slug: liquor-license-fresno-type-48, kind: market_type, market: "Fresno County", type: 48, name: "On-Sale General, Public Premises", indexable: true }
+  - { slug: liquor-license-los-angeles-type-20, kind: market_type, market: "Los Angeles County", type: 20, name: "Off-Sale Beer & Wine", indexable: false }
+  - { slug: liquor-license-los-angeles-type-21, kind: market_type, market: "Los Angeles County", type: 21, name: "Off-Sale General", indexable: false }
+  - { slug: liquor-license-los-angeles-type-41, kind: market_type, market: "Los Angeles County", type: 41, name: "On-Sale Beer & Wine, Eating Place", indexable: false }
+  - { slug: liquor-license-los-angeles-type-47, kind: market_type, market: "Los Angeles County", type: 47, name: "On-Sale General, Eating Place", indexable: false }
+  - { slug: liquor-license-los-angeles-type-48, kind: market_type, market: "Los Angeles County", type: 48, name: "On-Sale General, Public Premises", indexable: false }
+  - { slug: liquor-license-orange-type-20, kind: market_type, market: "Orange County", type: 20, name: "Off-Sale Beer & Wine", indexable: true }
+  - { slug: liquor-license-orange-type-21, kind: market_type, market: "Orange County", type: 21, name: "Off-Sale General", indexable: false }
+  - { slug: liquor-license-orange-type-41, kind: market_type, market: "Orange County", type: 41, name: "On-Sale Beer & Wine, Eating Place", indexable: true }
+  - { slug: liquor-license-orange-type-47, kind: market_type, market: "Orange County", type: 47, name: "On-Sale General, Eating Place", indexable: true }
+  - { slug: liquor-license-orange-type-48, kind: market_type, market: "Orange County", type: 48, name: "On-Sale General, Public Premises", indexable: true }
+  - { slug: liquor-license-riverside-type-20, kind: market_type, market: "Riverside County", type: 20, name: "Off-Sale Beer & Wine", indexable: true }
+  - { slug: liquor-license-riverside-type-21, kind: market_type, market: "Riverside County", type: 21, name: "Off-Sale General", indexable: true }
+  - { slug: liquor-license-riverside-type-41, kind: market_type, market: "Riverside County", type: 41, name: "On-Sale Beer & Wine, Eating Place", indexable: true }
+  - { slug: liquor-license-riverside-type-47, kind: market_type, market: "Riverside County", type: 47, name: "On-Sale General, Eating Place", indexable: true }
+  - { slug: liquor-license-riverside-type-48, kind: market_type, market: "Riverside County", type: 48, name: "On-Sale General, Public Premises", indexable: true }
+  - { slug: liquor-license-sacramento-type-20, kind: market_type, market: "Sacramento County", type: 20, name: "Off-Sale Beer & Wine", indexable: true }
+  - { slug: liquor-license-sacramento-type-21, kind: market_type, market: "Sacramento County", type: 21, name: "Off-Sale General", indexable: true }
+  - { slug: liquor-license-sacramento-type-41, kind: market_type, market: "Sacramento County", type: 41, name: "On-Sale Beer & Wine, Eating Place", indexable: true }
+  - { slug: liquor-license-sacramento-type-47, kind: market_type, market: "Sacramento County", type: 47, name: "On-Sale General, Eating Place", indexable: true }
+  - { slug: liquor-license-sacramento-type-48, kind: market_type, market: "Sacramento County", type: 48, name: "On-Sale General, Public Premises", indexable: true }
+  - { slug: liquor-license-san-bernardino-type-20, kind: market_type, market: "San Bernardino County", type: 20, name: "Off-Sale Beer & Wine", indexable: true }
+  - { slug: liquor-license-san-bernardino-type-21, kind: market_type, market: "San Bernardino County", type: 21, name: "Off-Sale General", indexable: true }
+  - { slug: liquor-license-san-bernardino-type-41, kind: market_type, market: "San Bernardino County", type: 41, name: "On-Sale Beer & Wine, Eating Place", indexable: true }
+  - { slug: liquor-license-san-bernardino-type-47, kind: market_type, market: "San Bernardino County", type: 47, name: "On-Sale General, Eating Place", indexable: true }
+  - { slug: liquor-license-san-bernardino-type-48, kind: market_type, market: "San Bernardino County", type: 48, name: "On-Sale General, Public Premises", indexable: true }
+  - { slug: liquor-license-san-diego-type-20, kind: market_type, market: "San Diego County", type: 20, name: "Off-Sale Beer & Wine", indexable: false }
+  - { slug: liquor-license-san-diego-type-21, kind: market_type, market: "San Diego County", type: 21, name: "Off-Sale General", indexable: false }
+  - { slug: liquor-license-san-diego-type-41, kind: market_type, market: "San Diego County", type: 41, name: "On-Sale Beer & Wine, Eating Place", indexable: false }
+  - { slug: liquor-license-san-diego-type-47, kind: market_type, market: "San Diego County", type: 47, name: "On-Sale General, Eating Place", indexable: false }
+  - { slug: liquor-license-san-diego-type-48, kind: market_type, market: "San Diego County", type: 48, name: "On-Sale General, Public Premises", indexable: false }
+  - { slug: liquor-license-san-francisco-type-20, kind: market_type, market: "San Francisco County", type: 20, name: "Off-Sale Beer & Wine", indexable: true }
+  - { slug: liquor-license-san-francisco-type-21, kind: market_type, market: "San Francisco County", type: 21, name: "Off-Sale General", indexable: true }
+  - { slug: liquor-license-san-francisco-type-41, kind: market_type, market: "San Francisco County", type: 41, name: "On-Sale Beer & Wine, Eating Place", indexable: true }
+  - { slug: liquor-license-san-francisco-type-47, kind: market_type, market: "San Francisco County", type: 47, name: "On-Sale General, Eating Place", indexable: true }
+  - { slug: liquor-license-san-francisco-type-48, kind: market_type, market: "San Francisco County", type: 48, name: "On-Sale General, Public Premises", indexable: true }
+  - { slug: liquor-license-santa-barbara-type-20, kind: market_type, market: "Santa Barbara County", type: 20, name: "Off-Sale Beer & Wine", indexable: true }
+  - { slug: liquor-license-santa-barbara-type-21, kind: market_type, market: "Santa Barbara County", type: 21, name: "Off-Sale General", indexable: true }
+  - { slug: liquor-license-santa-barbara-type-41, kind: market_type, market: "Santa Barbara County", type: 41, name: "On-Sale Beer & Wine, Eating Place", indexable: true }
+  - { slug: liquor-license-santa-barbara-type-47, kind: market_type, market: "Santa Barbara County", type: 47, name: "On-Sale General, Eating Place", indexable: true }
+  - { slug: liquor-license-santa-barbara-type-48, kind: market_type, market: "Santa Barbara County", type: 48, name: "On-Sale General, Public Premises", indexable: true }
+  - { slug: liquor-license-ventura-type-20, kind: market_type, market: "Ventura County", type: 20, name: "Off-Sale Beer & Wine", indexable: true }
+  - { slug: liquor-license-ventura-type-21, kind: market_type, market: "Ventura County", type: 21, name: "Off-Sale General", indexable: true }
+  - { slug: liquor-license-ventura-type-41, kind: market_type, market: "Ventura County", type: 41, name: "On-Sale Beer & Wine, Eating Place", indexable: true }
+  - { slug: liquor-license-ventura-type-47, kind: market_type, market: "Ventura County", type: 47, name: "On-Sale General, Eating Place", indexable: true }
+  - { slug: liquor-license-ventura-type-48, kind: market_type, market: "Ventura County", type: 48, name: "On-Sale General, Public Premises", indexable: true }
+
+place_pages:
+  # these three REPLACED their former market_pages entries: the client publishes no
+  # licence-type pages for them, so they carry a place-level page instead.
+  - { slug: liquor-license-palm-springs, kind: city, place: "Palm Springs", indexable: false }
+  - { slug: liquor-license-san-jose, kind: city, place: "San Jose", indexable: false }
+  - { slug: liquor-license-napa-valley, kind: area, place: "Napa Valley", indexable: false }
+# <<< SESSION-PAGES:END >>>

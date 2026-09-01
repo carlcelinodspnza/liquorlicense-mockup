@@ -1,0 +1,473 @@
+{
+  "market": "santa-barbara",
+  "label": "Santa Barbara County",
+  "sourceNote": "Extracted 2026-09-01 from the client's own live pages at https://liquorlicenseagents.com/counties/santa-barbara-county/santa-barbara-county-type-{20,21,41,47,48}/ (URLs taken from https://liquorlicenseagents.com/sitemaps/sitemap-counties.xml, all 5 returned HTTP 200). Content is the <main> > single <article> only; no nav/header/footer. Text is verbatim from the source EXCEPT the sentences listed in firmClaimsFlagged, which were removed and their surrounding sentence rewritten so the copy still reads. No competitor name appears anywhere on these 5 pages (checked for the known competitor domain and for superiority/insider/case-history phrasing; none present).",
+  "firmClaimsFlagged": [
+    {
+      "type": "20",
+      "where": "CTA body",
+      "verbatim": "If you are opening, acquiring, or planning a business in Santa Barbara County that needs a Type 20 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps with an experienced advisor.",
+      "reason": "unverifiable firm-expertise claim ('an experienced advisor')",
+      "replacedWith": "If you are opening, acquiring, or planning a business in Santa Barbara County that needs a Type 20 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps."
+    },
+    {
+      "type": "21",
+      "where": "FAQ: How long does it take to complete a Type 21 transfer in Santa Barbara?",
+      "verbatim": "Engaging experienced representation early is the best way to align licensing with your store opening.",
+      "reason": "unverifiable firm-expertise claim framed as a superlative ('the best way')",
+      "replacedWith": "Starting the process early helps align licensing with your store opening."
+    },
+    {
+      "type": "21",
+      "where": "CTA body",
+      "verbatim": "If you are opening, acquiring, or planning a business in Santa Barbara County that needs a Type 21 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps with an experienced advisor.",
+      "reason": "unverifiable firm-expertise claim ('an experienced advisor')",
+      "replacedWith": "If you are opening, acquiring, or planning a business in Santa Barbara County that needs a Type 21 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps."
+    },
+    {
+      "type": "41",
+      "where": "CTA body",
+      "verbatim": "If you are opening, acquiring, or planning a business in Santa Barbara County that needs a Type 41 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps with an experienced advisor.",
+      "reason": "unverifiable firm-expertise claim ('an experienced advisor')",
+      "replacedWith": "If you are opening, acquiring, or planning a business in Santa Barbara County that needs a Type 41 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps."
+    },
+    {
+      "type": "47",
+      "where": "FAQ: How long does it take to complete a Type 47 transfer in Santa Barbara?",
+      "verbatim": "Starting early and engaging experienced representation is the best way to align the license with your lease, build-out, and opening timeline.",
+      "reason": "unverifiable firm-expertise claim framed as a superlative ('the best way')",
+      "replacedWith": "Starting early helps align the license with your lease, build-out, and opening timeline."
+    },
+    {
+      "type": "47",
+      "where": "CTA body",
+      "verbatim": "If you are opening, acquiring, or planning a business in Santa Barbara County that needs a Type 47 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps with an experienced advisor.",
+      "reason": "unverifiable firm-expertise claim ('an experienced advisor')",
+      "replacedWith": "If you are opening, acquiring, or planning a business in Santa Barbara County that needs a Type 47 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps."
+    },
+    {
+      "type": "48",
+      "where": "CTA body",
+      "verbatim": "If you are opening, acquiring, or planning a business in Santa Barbara County that needs a Type 48 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps with an experienced advisor.",
+      "reason": "unverifiable firm-expertise claim ('an experienced advisor')",
+      "replacedWith": "If you are opening, acquiring, or planning a business in Santa Barbara County that needs a Type 48 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps."
+    }
+  ],
+  "types": {
+    "20": {
+      "url": "https://liquorlicenseagents.com/counties/santa-barbara-county/santa-barbara-county-type-20/",
+      "h1": "Santa Barbara County Type 20 Liquor License for Beer and Wine Off Sale",
+      "title": "Santa Barbara County Type 20 Liquor License for Beer and Wine Off Sale",
+      "metaDescription": "Santa Barbara County's convenience stores, neighborhood markets, and fuel stations rely on Type 20 licenses to offer packaged beer and wine to go.",
+      "intro": "Santa Barbara County's convenience stores, neighborhood markets, and fuel stations rely on Type 20 licenses to offer packaged beer and wine to go. From corner stores in Santa Barbara to retail locations across Downtown Santa Barbara, the Funk Zone, State Street, Santa Maria, and the Santa Ynez Valley wine country, the Type 20 supports operators whose alcohol program is centered on beer and wine for off-site consumption. Whether you are opening a new store or purchasing an existing one, your off-sale beer-and-wine strategy will have a major impact on competitiveness and value.",
+      "introBrandLine": "Liquor License Agents helps Santa Barbara County owners and buyers evaluate Type 20 opportunities, navigate ABC requirements, and coordinate licensing with city or county land use approvals.",
+      "authorizes": {
+        "heading": "What the Type 20 License Authorizes in Santa Barbara County",
+        "lead": "A Type 20 license in Santa Barbara County generally allows you to:",
+        "bullets": [
+          "Sell beer, malt beverages, and wine in sealed containers for off-site consumption",
+          "Stock chilled and shelf-stable products in coolers, aisles, and end caps",
+          "Integrate beer and wine sections into convenience stores, small markets, and grocery formats",
+          "Operate strictly as an off-sale premises, without on-premises alcohol consumption"
+        ]
+      },
+      "rightFor": {
+        "heading": "Is a Type 20 License Right for Your Santa Barbara County Business?",
+        "lead": "A Type 20 license may be the right fit if:",
+        "bullets": [
+          "Your main business is groceries, convenience items, or fuel, and alcohol is an important but secondary revenue stream",
+          "You do not need to sell spirits, or you are comfortable focusing on beer and wine only",
+          "Your store layout supports a modest but competitive packaged beer-and-wine set",
+          "You want to match or exceed nearby stores that already offer beer and wine to go"
+        ],
+        "body": "A Type 20 license may be the right fit if:\n- Your main business is groceries, convenience items, or fuel, and alcohol is an important but secondary revenue stream\n- You do not need to sell spirits, or you are comfortable focusing on beer and wine only\n- Your store layout supports a modest but competitive packaged beer-and-wine set\n- You want to match or exceed nearby stores that already offer beer and wine to go"
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Helps Type 20 Applicants and Buyers in Santa Barbara County",
+        "lead": "Liquor License Agents supports Type 20 projects in Santa Barbara County by:",
+        "bullets": [
+          "Reviewing your Santa Barbara County location, store layout, and competition to confirm a Type 20 strategy makes sense",
+          "Explaining whether a new license is realistic, or whether you should focus on buying and transferring an existing license",
+          "Assisting with valuation and negotiation when a Type 20 is part of a purchase or sale",
+          "Preparing ABC applications, premises diagrams, and ownership disclosures that accurately represent your operations",
+          "Coordinating with Santa Barbara or Santa Barbara County planning staff on zoning, CUP conditions, security, and proximity to sensitive uses",
+          "Tracking ABC review, monitoring public posting periods, and helping you respond to any questions or protests"
+        ],
+        "closing": "Our goal is to keep license work in sync with your lease, build-out, and opening timeline so your alcohol permissions are not the last piece to fall into place in Santa Barbara County.",
+        "body": "Liquor License Agents supports Type 20 projects in Santa Barbara County by:\n- Reviewing your Santa Barbara County location, store layout, and competition to confirm a Type 20 strategy makes sense\n- Explaining whether a new license is realistic, or whether you should focus on buying and transferring an existing license\n- Assisting with valuation and negotiation when a Type 20 is part of a purchase or sale\n- Preparing ABC applications, premises diagrams, and ownership disclosures that accurately represent your operations\n- Coordinating with Santa Barbara or Santa Barbara County planning staff on zoning, CUP conditions, security, and proximity to sensitive uses\n- Tracking ABC review, monitoring public posting periods, and helping you respond to any questions or protests\n\nOur goal is to keep license work in sync with your lease, build-out, and opening timeline so your alcohol permissions are not the last piece to fall into place in Santa Barbara County."
+      },
+      "faqsHeading": "Santa Barbara County Type 20 License FAQs",
+      "faqs": [
+        {
+          "q": "What products can I sell with a California Type 20 beer and wine license in Santa Barbara County?",
+          "a": "With a Type 20 license, you can sell beer, malt beverages, and wine in sealed containers for off-site consumption at your Santa Barbara County retail location. Spirits and distilled liquor are not authorized under this license."
+        },
+        {
+          "q": "Can I sell chilled beer and wine to go with a Type 20 license in Santa Barbara?",
+          "a": "Yes. Chilled beer and wine sales are standard for Type 20 licensees, especially at convenience stores and gas stations. You must still comply with ABC rules and local regulations regarding age verification, display, and hours of sale."
+        },
+        {
+          "q": "Do I need a minimum percentage of grocery or food sales for a Type 20 license in Santa Barbara County?",
+          "a": "There is no single statewide percentage requirement written into the Type 20 statute, but ABC and local jurisdictions look at your overall business model. Your store should clearly function as a legitimate retail operation, not an unlicensed bar. We help you align your product mix and layout with the expectations for a retail off-sale license."
+        },
+        {
+          "q": "Can I transfer a Type 20 license when I buy or sell a store in Santa Barbara County?",
+          "a": "Yes. Type 20 licenses are often transferred along with the sale of a convenience store, market, or fuel station. Transfers require ABC approval, background review, and public posting. Properly coordinating escrow and license transfer prevents gaps in your ability to sell beer and wine."
+        },
+        {
+          "q": "How long does it typically take to obtain or transfer a Type 20 license in Santa Barbara County?",
+          "a": "Plan for several months from application to final approval. ABC review workload, local approvals, build-out schedules, and any protests can all affect timing. Starting early and submitting complete, accurate paperwork is one of the best ways to keep your project on schedule."
+        },
+        {
+          "q": "What zoning, CUP, or proximity rules affect Type 20 licenses near schools or churches in Santa Barbara?",
+          "a": "Santa Barbara County jurisdictions commonly apply zoning rules, CUP conditions, and distance guidelines for alcohol outlets near schools, churches, parks, and residential areas. These rules may affect your hours, security plan, and store design. We review your site's zoning and any applicable CUP to clarify what is required before you commit to a license strategy."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are opening, acquiring, or planning a business in Santa Barbara County that needs a Type 20 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps."
+      },
+      "localNames": [
+        "Downtown Santa Barbara",
+        "the Funk Zone",
+        "State Street",
+        "Santa Maria",
+        "the Santa Ynez Valley wine country"
+      ],
+      "wordCount": 892,
+      "sourceWordCount": 855
+    },
+    "21": {
+      "url": "https://liquorlicenseagents.com/counties/santa-barbara-county/santa-barbara-county-type-21/",
+      "h1": "Santa Barbara County Type 21 Full Liquor License for Liquor Stores",
+      "title": "Santa Barbara County Type 21 Full Liquor License for Liquor Stores",
+      "metaDescription": "Retail liquor stores, package stores, and spirits retailers in Santa Barbara County that want to sell the full range of packaged beer, wine, and distilled spirits for off-premises consumption need a California Type 21 Off-Sale General license.",
+      "intro": "Retail liquor stores, package stores, and spirits retailers in Santa Barbara County that want to sell the full range of packaged beer, wine, and distilled spirits for off-premises consumption need a California Type 21 Off-Sale General license. Santa Barbara County's retail spirits market, from specialty bottle shops to package stores serving Downtown Santa Barbara, the Funk Zone, State Street, Santa Maria, and the Santa Ynez Valley wine country, requires the Type 21 to sell the complete range of packaged alcohol for off-premises consumption. The Type 21 is generally subject to county-by-county quotas under California law, and in well-developed counties the quota is typically exhausted, meaning the most reliable path to a Type 21 is purchasing an existing license and transferring it through ABC.",
+      "introBrandLine": "Liquor License Agents helps Santa Barbara County retailers and buyers analyze the Type 21 market and execute transfers on realistic timelines.",
+      "authorizes": {
+        "heading": "What the Type 21 License Authorizes in Santa Barbara County",
+        "lead": "A Type 21 license in Santa Barbara County generally allows you to:",
+        "bullets": [
+          "Sell beer, wine, and distilled spirits in sealed containers for off-site consumption",
+          "Operate a dedicated retail liquor store or package store",
+          "Carry full-proof spirits including vodka, whiskey, tequila, rum, gin, and other distilled beverages",
+          "Transfer the license to a new owner or, where permitted, to a different location within the same county"
+        ]
+      },
+      "rightFor": {
+        "heading": "Is a Type 21 License Right for Your Santa Barbara County Business?",
+        "lead": "A Type 21 license may be the right fit if:",
+        "bullets": [
+          "Your business is a dedicated liquor store, package store, or specialty spirits retailer",
+          "You want to sell the full range of spirits, wine, and beer for off-premises consumption",
+          "You want a transferable license that holds long-term value",
+          "Your business model centers on retail spirits sales rather than on-premises consumption"
+        ],
+        "body": "A Type 21 license may be the right fit if:\n- Your business is a dedicated liquor store, package store, or specialty spirits retailer\n- You want to sell the full range of spirits, wine, and beer for off-premises consumption\n- You want a transferable license that holds long-term value\n- Your business model centers on retail spirits sales rather than on-premises consumption"
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Helps Type 21 Applicants and Buyers in Santa Barbara County",
+        "lead": "Liquor License Agents supports Type 21 projects in Santa Barbara County by:",
+        "bullets": [
+          "Evaluating current Type 21 availability and open-market pricing in Santa Barbara County",
+          "Brokering the purchase and transfer of existing Type 21 licenses from sellers in the Santa Barbara market",
+          "Assisting with valuation, negotiation, escrow coordination, and ABC transfer applications",
+          "Reviewing your Santa Barbara location for zoning compliance, proximity restrictions, and any local approval requirements",
+          "Preparing ABC applications, premises diagrams, and ownership disclosures",
+          "Managing the ABC transfer process and helping you respond to any requests or issues that arise"
+        ],
+        "closing": "Our goal is to keep license work in sync with your lease, build-out, and opening timeline so your alcohol permissions are not the last piece to fall into place in Santa Barbara County.",
+        "body": "Liquor License Agents supports Type 21 projects in Santa Barbara County by:\n- Evaluating current Type 21 availability and open-market pricing in Santa Barbara County\n- Brokering the purchase and transfer of existing Type 21 licenses from sellers in the Santa Barbara market\n- Assisting with valuation, negotiation, escrow coordination, and ABC transfer applications\n- Reviewing your Santa Barbara location for zoning compliance, proximity restrictions, and any local approval requirements\n- Preparing ABC applications, premises diagrams, and ownership disclosures\n- Managing the ABC transfer process and helping you respond to any requests or issues that arise\n\nOur goal is to keep license work in sync with your lease, build-out, and opening timeline so your alcohol permissions are not the last piece to fall into place in Santa Barbara County."
+      },
+      "faqsHeading": "Santa Barbara County Type 21 License FAQs",
+      "faqs": [
+        {
+          "q": "What is a Type 21 license and what can I sell in Santa Barbara?",
+          "a": "A California Type 21 Off-Sale General license allows you to sell beer, wine, and distilled spirits in sealed containers for off-site consumption at your Santa Barbara County retail location. It is the standard license for liquor stores and package stores selling a full product range."
+        },
+        {
+          "q": "Is the Type 21 license subject to quota restrictions in Santa Barbara County?",
+          "a": "Generally yes. Type 21 licenses are subject to county-by-county quotas under California law. In well-developed counties like Santa Barbara County, the quota is typically exhausted, meaning the most reliable path to a Type 21 is purchasing an existing license and transferring it through ABC."
+        },
+        {
+          "q": "How does the Type 21 differ from the Type 20 in Santa Barbara?",
+          "a": "The Type 21 covers beer, wine, and distilled spirits for off-sale, while the Type 20 covers only beer and wine. If you intend to sell vodka, whiskey, tequila, rum, gin, or other distilled beverages at your retail store, you need a Type 21. If your product mix stops at beer and wine, the Type 20 is the appropriate license."
+        },
+        {
+          "q": "Can I transfer a Type 21 license when I buy or sell a store in Santa Barbara County?",
+          "a": "Yes. Type 21 licenses are routinely transferred when a liquor store or package store is sold, subject to ABC approval, background review, and public posting. We coordinate escrow and ABC transfer steps so the license follows the business transition."
+        },
+        {
+          "q": "How much does a Type 21 license cost in Santa Barbara County?",
+          "a": "Open-market prices for Type 21 licenses in Santa Barbara County depend on local supply, recent transaction activity, and overall demand. Where the quota is exhausted, prices reflect scarcity and the value of operating a full-spirit retail format. We provide current market pricing as part of our brokerage service."
+        },
+        {
+          "q": "How long does it take to complete a Type 21 transfer in Santa Barbara?",
+          "a": "Most ABC transfers take months from a complete submission. Timelines depend on ABC workload, the accuracy of your application package, background review, and any local approvals needed in Santa Barbara County or Santa Barbara. Starting the process early helps align licensing with your store opening."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are opening, acquiring, or planning a business in Santa Barbara County that needs a Type 21 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps."
+      },
+      "localNames": [
+        "Downtown Santa Barbara",
+        "the Funk Zone",
+        "State Street",
+        "Santa Maria",
+        "the Santa Ynez Valley wine country"
+      ],
+      "wordCount": 885,
+      "sourceWordCount": 838
+    },
+    "41": {
+      "url": "https://liquorlicenseagents.com/counties/santa-barbara-county/santa-barbara-county-type-41/",
+      "h1": "Santa Barbara County Type 41 Beer and Wine License for Restaurants",
+      "title": "Santa Barbara County Type 41 Beer and Wine License for Restaurants",
+      "metaDescription": "Restaurants in Santa Barbara County that want to serve beer and wine with meals need a California Type 41 On-Sale Beer and Wine Eating Place license.",
+      "intro": "Restaurants in Santa Barbara County that want to serve beer and wine with meals need a California Type 41 On-Sale Beer and Wine Eating Place license. From neighborhood bistros to chef-driven concepts across Santa Barbara and Downtown Santa Barbara, the Funk Zone, State Street, Santa Maria, and the Santa Ynez Valley wine country, the Type 41 is the standard entry point into on-premises alcohol service for restaurants that do not need full bar privileges. The Type 41 is a non-quota license in most California counties, meaning it is generally available directly through ABC without a secondary market purchase, so long as the premises functions as a bona fide eating place with a kitchen and complete meals.",
+      "introBrandLine": "Liquor License Agents helps Santa Barbara County restaurants prepare Type 41 applications, document the eating place operation ABC requires, and coordinate licensing with city or county approvals.",
+      "authorizes": {
+        "heading": "What the Type 41 License Authorizes in Santa Barbara County",
+        "lead": "A Type 41 license in Santa Barbara County generally allows you to:",
+        "bullets": [
+          "Serve beer and wine by the drink for on-premises consumption at a bona fide eating place",
+          "Sell sealed containers of beer and wine for off-premises consumption",
+          "Operate a restaurant that maintains a functioning kitchen and serves complete meals",
+          "Support beer and wine programs that complement the restaurant's food offering"
+        ]
+      },
+      "rightFor": {
+        "heading": "Is a Type 41 License Right for Your Santa Barbara County Business?",
+        "lead": "A Type 41 license may be the right fit if:",
+        "bullets": [
+          "Your concept is a bona fide restaurant with a kitchen and a meal-focused menu",
+          "Beer and wine service satisfies your customer base without requiring spirits",
+          "You want a non-quota license obtainable directly from ABC without a secondary market purchase",
+          "You want a faster, lower-cost entry point into on-premises alcohol service than a Type 47"
+        ],
+        "body": "A Type 41 license may be the right fit if:\n- Your concept is a bona fide restaurant with a kitchen and a meal-focused menu\n- Beer and wine service satisfies your customer base without requiring spirits\n- You want a non-quota license obtainable directly from ABC without a secondary market purchase\n- You want a faster, lower-cost entry point into on-premises alcohol service than a Type 47"
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Helps Type 41 Applicants and Buyers in Santa Barbara County",
+        "lead": "Liquor License Agents supports Type 41 projects in Santa Barbara County by:",
+        "bullets": [
+          "Reviewing your Santa Barbara County restaurant concept, kitchen plan, and menu against bona fide eating place standards",
+          "Preparing the ABC application with floor plans, menu documentation, and ownership disclosures",
+          "Coordinating with Santa Barbara or Santa Barbara County on zoning, CUP conditions, and any local approvals required",
+          "Advising on ongoing compliance with eating place and operational standards",
+          "Assisting with transfers when a Type 41 restaurant changes ownership",
+          "Tracking ABC review and helping you respond to questions or conditions during the process"
+        ],
+        "closing": "Our goal is to keep license work in sync with your lease, build-out, and opening timeline so your alcohol permissions are not the last piece to fall into place in Santa Barbara County.",
+        "body": "Liquor License Agents supports Type 41 projects in Santa Barbara County by:\n- Reviewing your Santa Barbara County restaurant concept, kitchen plan, and menu against bona fide eating place standards\n- Preparing the ABC application with floor plans, menu documentation, and ownership disclosures\n- Coordinating with Santa Barbara or Santa Barbara County on zoning, CUP conditions, and any local approvals required\n- Advising on ongoing compliance with eating place and operational standards\n- Assisting with transfers when a Type 41 restaurant changes ownership\n- Tracking ABC review and helping you respond to questions or conditions during the process\n\nOur goal is to keep license work in sync with your lease, build-out, and opening timeline so your alcohol permissions are not the last piece to fall into place in Santa Barbara County."
+      },
+      "faqsHeading": "Santa Barbara County Type 41 License FAQs",
+      "faqs": [
+        {
+          "q": "What does a Type 41 license allow in Santa Barbara County?",
+          "a": "A California Type 41 license allows you to serve beer and wine by the drink for on-premises consumption at a bona fide eating place in Santa Barbara County, along with sealed containers for off-premises consumption. The premises must operate as a real restaurant with a functioning kitchen and complete meals."
+        },
+        {
+          "q": "Is the Type 41 subject to quota restrictions in Santa Barbara County?",
+          "a": "In most California counties, the Type 41 is a non-quota license, meaning ABC can issue new Type 41 licenses directly without a secondary market purchase, so long as the restaurant qualifies as a bona fide eating place. This makes the Type 41 one of the most accessible on-premises licenses for restaurants in Santa Barbara County."
+        },
+        {
+          "q": "How does the Type 41 differ from the Type 47 in Santa Barbara?",
+          "a": "The Type 41 covers beer and wine only, while the Type 47 covers beer, wine, and distilled spirits. Both require operation as a bona fide eating place. If your concept depends on cocktails and full bar service, you need a Type 47; if beer and wine service is sufficient, the Type 41 is typically faster and less costly to obtain."
+        },
+        {
+          "q": "What does \"bona fide eating place\" mean for a Type 41 in Santa Barbara County?",
+          "a": "A bona fide eating place is a premises that operates as a real restaurant with a functioning kitchen, a menu of complete meals, and ongoing meal service during business hours. ABC and local jurisdictions can review whether the operation looks like a restaurant in practice, not just on paper."
+        },
+        {
+          "q": "Can I transfer a Type 41 license when a restaurant is sold in Santa Barbara County?",
+          "a": "Yes. Type 41 licenses transfer with restaurant sales subject to ABC approval. The buyer must continue to operate the premises as a bona fide eating place. We help coordinate ABC transfer steps with the overall sale closing."
+        },
+        {
+          "q": "How long does it take to get a Type 41 in Santa Barbara?",
+          "a": "Timelines depend on ABC workload, the completeness of your application, the readiness of your premises, and any local approvals required in Santa Barbara County or Santa Barbara. A clean application package and a clearly documented eating place operation help reduce review time."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are opening, acquiring, or planning a business in Santa Barbara County that needs a Type 41 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps."
+      },
+      "localNames": [
+        "Downtown Santa Barbara",
+        "the Funk Zone",
+        "State Street",
+        "Santa Maria",
+        "the Santa Ynez Valley wine country"
+      ],
+      "wordCount": 886,
+      "sourceWordCount": 846
+    },
+    "47": {
+      "url": "https://liquorlicenseagents.com/counties/santa-barbara-county/santa-barbara-county-type-47/",
+      "h1": "Santa Barbara County Type 47 Full Liquor License for Restaurants",
+      "title": "Santa Barbara County Type 47 Full Liquor License for Restaurants",
+      "metaDescription": "Restaurants in Santa Barbara County that want full bar service, including beer, wine, and spirits by the drink with meals, need a California Type 47 On-Sale General Eating Place license.",
+      "intro": "Restaurants in Santa Barbara County that want full bar service, including beer, wine, and spirits by the drink with meals, need a California Type 47 On-Sale General Eating Place license. From signature Santa Barbara hospitality concepts to full-service dining rooms in Downtown Santa Barbara, the Funk Zone, State Street, Santa Maria, and the Santa Ynez Valley wine country, the Type 47 is the standard full-liquor restaurant license. The Type 47 is subject to county-by-county quotas under California law, and in well-developed counties the quota is typically exhausted, so most Santa Barbara County operators acquire a Type 47 by purchasing an existing license and transferring it through ABC.",
+      "introBrandLine": "Liquor License Agents helps Santa Barbara County buyers evaluate Type 47 availability and pricing, negotiate transfers, and align licensing with build-out and opening timelines.",
+      "authorizes": {
+        "heading": "What the Type 47 License Authorizes in Santa Barbara County",
+        "lead": "A Type 47 license in Santa Barbara County generally allows you to:",
+        "bullets": [
+          "Serve beer, wine, and distilled spirits by the drink for on-premises consumption at a bona fide eating place",
+          "Operate a full-liquor restaurant with a functioning kitchen and complete meal service",
+          "Support cocktail programs, wine lists, and full bar service alongside the food menu",
+          "Transfer the license to a new owner or, where permitted, to a different location within the same county"
+        ]
+      },
+      "rightFor": {
+        "heading": "Is a Type 47 License Right for Your Santa Barbara County Business?",
+        "lead": "A Type 47 license may be the right fit if:",
+        "bullets": [
+          "Your concept is a full-service restaurant where cocktails and spirits are part of the experience",
+          "You want full bar service tied to a kitchen and complete meal operation",
+          "You want a transferable license that holds long-term value",
+          "Your business model can support the acquisition cost of a Type 47 in a county where the quota is exhausted"
+        ],
+        "body": "A Type 47 license may be the right fit if:\n- Your concept is a full-service restaurant where cocktails and spirits are part of the experience\n- You want full bar service tied to a kitchen and complete meal operation\n- You want a transferable license that holds long-term value\n- Your business model can support the acquisition cost of a Type 47 in a county where the quota is exhausted"
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Helps Type 47 Applicants and Buyers in Santa Barbara County",
+        "lead": "Liquor License Agents supports Type 47 projects in Santa Barbara County by:",
+        "bullets": [
+          "Evaluating current Type 47 availability and open-market pricing in Santa Barbara County",
+          "Brokering the purchase and transfer of existing Type 47 licenses from sellers in the Santa Barbara market",
+          "Assisting with valuation, negotiation, escrow coordination, and ABC transfer applications",
+          "Reviewing your Santa Barbara location for zoning compliance, proximity restrictions, and any local approval requirements",
+          "Preparing ABC applications, premises diagrams, and ownership disclosures",
+          "Managing the ABC transfer process and helping you respond to any requests or issues that arise"
+        ],
+        "closing": "Our goal is to keep license work in sync with your lease, build-out, and opening timeline so your alcohol permissions are not the last piece to fall into place in Santa Barbara County.",
+        "body": "Liquor License Agents supports Type 47 projects in Santa Barbara County by:\n- Evaluating current Type 47 availability and open-market pricing in Santa Barbara County\n- Brokering the purchase and transfer of existing Type 47 licenses from sellers in the Santa Barbara market\n- Assisting with valuation, negotiation, escrow coordination, and ABC transfer applications\n- Reviewing your Santa Barbara location for zoning compliance, proximity restrictions, and any local approval requirements\n- Preparing ABC applications, premises diagrams, and ownership disclosures\n- Managing the ABC transfer process and helping you respond to any requests or issues that arise\n\nOur goal is to keep license work in sync with your lease, build-out, and opening timeline so your alcohol permissions are not the last piece to fall into place in Santa Barbara County."
+      },
+      "faqsHeading": "Santa Barbara County Type 47 License FAQs",
+      "faqs": [
+        {
+          "q": "What does a Type 47 license allow in Santa Barbara County?",
+          "a": "A California Type 47 license allows you to serve beer, wine, and distilled spirits by the drink at a bona fide eating place in Santa Barbara County. It supports full bar service tied to a restaurant operation with a functioning kitchen and complete meals."
+        },
+        {
+          "q": "Is the Type 47 subject to quota restrictions in Santa Barbara County?",
+          "a": "Yes. The Type 47 is subject to county-by-county quotas under California law. In well-developed counties like Santa Barbara County, the quota is typically exhausted, meaning most operators acquire a Type 47 by purchasing an existing license and transferring it through ABC."
+        },
+        {
+          "q": "How does the Type 47 differ from the Type 48 in Santa Barbara?",
+          "a": "The Type 47 is an on-sale general eating place license tied to a bona fide restaurant, while the Type 48 is an on-sale general public premises license for bars, taverns, and nightclubs that do not operate as restaurants. Restaurants serving meals use a Type 47; venues centered on alcohol service use a Type 48."
+        },
+        {
+          "q": "How much does a Type 47 license cost in Santa Barbara County?",
+          "a": "Open-market prices for Type 47 licenses in Santa Barbara County depend on local supply and demand, recent transaction volume, and the overall strength of the Santa Barbara hospitality market. In counties where the quota is exhausted, prices can be substantial, particularly in prime dining and nightlife districts. We provide current market pricing as part of our brokerage service."
+        },
+        {
+          "q": "Can a Type 47 license be transferred to a different location in Santa Barbara County?",
+          "a": "Yes. Type 47 licenses are generally transferable to a different location within the same county, subject to ABC approval and local zoning compliance at the new address. This transferability supports relocations and is one of the features that gives Type 47 licenses long-term value."
+        },
+        {
+          "q": "How long does it take to complete a Type 47 transfer in Santa Barbara?",
+          "a": "ABC license transfers typically take months from submission of a complete application. Timelines depend on ABC workload, the accuracy of the application package, background review, and any local approvals required in Santa Barbara County or Santa Barbara. Starting early helps align the license with your lease, build-out, and opening timeline."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are opening, acquiring, or planning a business in Santa Barbara County that needs a Type 47 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps."
+      },
+      "localNames": [
+        "Downtown Santa Barbara",
+        "the Funk Zone",
+        "State Street",
+        "Santa Maria",
+        "the Santa Ynez Valley wine country"
+      ],
+      "wordCount": 885,
+      "sourceWordCount": 849
+    },
+    "48": {
+      "url": "https://liquorlicenseagents.com/counties/santa-barbara-county/santa-barbara-county-type-48/",
+      "h1": "Santa Barbara County Type 48 Full Liquor License for Bars and Nightclubs",
+      "title": "Santa Barbara County Type 48 Full Liquor License for Bars and Nightclubs",
+      "metaDescription": "Bars, taverns, lounges, and nightclubs in Santa Barbara County that want to serve the full range of beer, wine, and spirits as a public premises need a California Type 48 On-Sale General Public Premises license.",
+      "intro": "Bars, taverns, lounges, and nightclubs in Santa Barbara County that want to serve the full range of beer, wine, and spirits as a public premises need a California Type 48 On-Sale General Public Premises license. From neighborhood bars in Santa Barbara to high-volume nightlife venues across Downtown Santa Barbara, the Funk Zone, State Street, Santa Maria, and the Santa Ynez Valley wine country, the Type 48 supports operators whose business model is centered on alcohol service rather than a bona fide eating place. The Type 48 is subject to county-by-county quotas under California law, and access to patrons is generally limited to those 21 and older.",
+      "introBrandLine": "Liquor License Agents helps Santa Barbara County buyers evaluate Type 48 availability and pricing, broker transfers, and coordinate licensing with local approvals for entertainment, hours, and security.",
+      "authorizes": {
+        "heading": "What the Type 48 License Authorizes in Santa Barbara County",
+        "lead": "A Type 48 license in Santa Barbara County generally allows you to:",
+        "bullets": [
+          "Serve beer, wine, and distilled spirits by the drink for on-premises consumption at a public premises",
+          "Operate a bar, tavern, lounge, or nightclub where alcohol service is the primary purpose",
+          "Restrict access to patrons 21 and older, as required for Type 48 venues",
+          "Transfer the license to a new owner or, where permitted, to a different location within the same county"
+        ]
+      },
+      "rightFor": {
+        "heading": "Is a Type 48 License Right for Your Santa Barbara County Business?",
+        "lead": "A Type 48 license may be the right fit if:",
+        "bullets": [
+          "Your concept is a bar, nightclub, lounge, or tavern where alcohol service is the primary revenue driver",
+          "You do not plan to operate as a bona fide eating place or maintain a full kitchen",
+          "Your customer base is 21 and older and the venue can operate as an adults-only premises",
+          "You want a transferable license that holds long-term value in a busy nightlife district"
+        ],
+        "body": "A Type 48 license may be the right fit if:\n- Your concept is a bar, nightclub, lounge, or tavern where alcohol service is the primary revenue driver\n- You do not plan to operate as a bona fide eating place or maintain a full kitchen\n- Your customer base is 21 and older and the venue can operate as an adults-only premises\n- You want a transferable license that holds long-term value in a busy nightlife district"
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Helps Type 48 Applicants and Buyers in Santa Barbara County",
+        "lead": "Liquor License Agents supports Type 48 projects in Santa Barbara County by:",
+        "bullets": [
+          "Evaluating current Type 48 availability and open-market pricing in Santa Barbara County",
+          "Brokering the purchase and transfer of existing Type 48 licenses from sellers in the Santa Barbara market",
+          "Assisting with valuation, negotiation, escrow coordination, and ABC transfer applications",
+          "Reviewing your Santa Barbara location for zoning compliance, proximity restrictions, and any local approval requirements",
+          "Preparing ABC applications, premises diagrams, and ownership disclosures",
+          "Managing the ABC transfer process and helping you respond to any requests or issues that arise"
+        ],
+        "closing": "Our goal is to keep license work in sync with your lease, build-out, and opening timeline so your alcohol permissions are not the last piece to fall into place in Santa Barbara County.",
+        "body": "Liquor License Agents supports Type 48 projects in Santa Barbara County by:\n- Evaluating current Type 48 availability and open-market pricing in Santa Barbara County\n- Brokering the purchase and transfer of existing Type 48 licenses from sellers in the Santa Barbara market\n- Assisting with valuation, negotiation, escrow coordination, and ABC transfer applications\n- Reviewing your Santa Barbara location for zoning compliance, proximity restrictions, and any local approval requirements\n- Preparing ABC applications, premises diagrams, and ownership disclosures\n- Managing the ABC transfer process and helping you respond to any requests or issues that arise\n\nOur goal is to keep license work in sync with your lease, build-out, and opening timeline so your alcohol permissions are not the last piece to fall into place in Santa Barbara County."
+      },
+      "faqsHeading": "Santa Barbara County Type 48 License FAQs",
+      "faqs": [
+        {
+          "q": "What does a Type 48 license allow in Santa Barbara County?",
+          "a": "A California Type 48 On-Sale General Public Premises license allows you to serve beer, wine, and distilled spirits by the drink at a public premises in Santa Barbara County, such as a bar, tavern, lounge, or nightclub. Access is generally limited to patrons 21 and older."
+        },
+        {
+          "q": "Is the Type 48 subject to quota restrictions in Santa Barbara County?",
+          "a": "Yes. The Type 48 is subject to county-by-county quotas under California law. In well-developed counties like Santa Barbara County, the quota is typically exhausted, so most operators acquire a Type 48 by purchasing an existing license and transferring it through ABC."
+        },
+        {
+          "q": "How does the Type 48 differ from the Type 47 in Santa Barbara?",
+          "a": "The Type 48 is a public premises license that does not require operation as a bona fide eating place, while the Type 47 is tied to a restaurant with a kitchen and complete meals. If your concept is centered on alcohol service rather than food, the Type 48 is typically the right fit. If you operate as a restaurant, you need a Type 47."
+        },
+        {
+          "q": "Are minors allowed on a Type 48 premises in Santa Barbara?",
+          "a": "Generally no. Type 48 premises are limited to patrons 21 and older. This is one of the key operational differences between a Type 48 bar and a Type 47 restaurant, and it affects how the venue can be designed, marketed, and staffed."
+        },
+        {
+          "q": "Can a Type 48 license be transferred to a different location in Santa Barbara County?",
+          "a": "Yes. Type 48 licenses are generally transferable to a different location within the same county, subject to ABC approval and local zoning compliance at the new address. Many nightlife operators relocate Type 48 licenses to support new concepts or address neighborhood compatibility."
+        },
+        {
+          "q": "How long does it take to complete a Type 48 transfer in Santa Barbara?",
+          "a": "ABC license transfers typically take months from submission of a complete application. Timelines depend on ABC workload, the accuracy of the application package, background review, and any local approvals required in Santa Barbara County or Santa Barbara for entertainment, hours, and security. Starting early is the most reliable way to align licensing with your opening plan."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are opening, acquiring, or planning a business in Santa Barbara County that needs a Type 48 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps."
+      },
+      "localNames": [
+        "Downtown Santa Barbara",
+        "the Funk Zone",
+        "State Street",
+        "Santa Maria",
+        "the Santa Ynez Valley wine country"
+      ],
+      "wordCount": 900,
+      "sourceWordCount": 851
+    }
+  }
+}

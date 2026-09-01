@@ -1,0 +1,5553 @@
+{
+  "source": "https://liquorlicenseagents.com/",
+  "method": "parsed from the site's own sitemap.xml tree; no place name is invented",
+  "layering": "ROOT -> PLACE -> LICENCE TYPE (the source publishes /cities/ and /counties/ as parallel namespaces; it publishes no city->county link, so none is asserted here)",
+  "sitemaps": {
+    "sitemap-arizona.xml": 1,
+    "sitemap-california.xml": 4,
+    "sitemap-cities-categories.xml": 24,
+    "sitemap-cities.xml": 508,
+    "sitemap-counties-categories.xml": 36,
+    "sitemap-counties.xml": 405,
+    "sitemap-ecommerce.xml": 1,
+    "sitemap-florida.xml": 1,
+    "sitemap-pages.xml": 28
+  },
+  "total_urls": 1008,
+  "country": {
+    "name": "United States",
+    "code": "US"
+  },
+  "counts": {
+    "AZ:city": 10,
+    "AZ:county": 15,
+    "AZ:state": 1,
+    "CA:city": 171,
+    "CA:city-county": 1,
+    "CA:county": 53,
+    "CA:state": 1,
+    "FL:city": 10,
+    "FL:county": 66,
+    "FL:state": 1,
+    "NJ:state": 1,
+    "OH:state": 1,
+    "PA:state": 1
+  },
+  "places": [
+    {
+      "slug": "california",
+      "label": "California",
+      "tier": "state",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/california/",
+      "pages": 15,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-23",
+        "type-40",
+        "type-41",
+        "type-42",
+        "type-47",
+        "type-48",
+        "type-75",
+        "type-85"
+      ],
+      "in_nav": true,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "arizona",
+      "label": "Arizona",
+      "tier": "state",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/arizona/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "florida",
+      "label": "Florida",
+      "tier": "state",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/florida/",
+      "pages": 2,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "new-jersey",
+      "label": "New Jersey",
+      "tier": "state",
+      "state": [
+        "NJ"
+      ],
+      "namespace": "/new-jersey-liquor-license/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "orphan",
+      "flags": [
+        "orphan-no-counties-or-cities"
+      ]
+    },
+    {
+      "slug": "ohio",
+      "label": "Ohio",
+      "tier": "state",
+      "state": [
+        "OH"
+      ],
+      "namespace": "/ohio-liquor-license/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "orphan",
+      "flags": [
+        "orphan-no-counties-or-cities"
+      ]
+    },
+    {
+      "slug": "pennsylvania",
+      "label": "Pennsylvania",
+      "tier": "state",
+      "state": [
+        "PA"
+      ],
+      "namespace": "/pennsylvania-liquor-license/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "orphan",
+      "flags": [
+        "orphan-no-counties-or-cities"
+      ]
+    },
+    {
+      "slug": "alachua-county",
+      "label": "Alachua County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "alameda-county",
+      "label": "Alameda County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 6,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "amador-county",
+      "label": "Amador County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "apache-county",
+      "label": "Apache County",
+      "tier": "county",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/counties/",
+      "pages": 10,
+      "licence_types": [
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-14",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-az-bucket"
+      ]
+    },
+    {
+      "slug": "baker-county",
+      "label": "Baker County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "bay-county",
+      "label": "Bay County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "bradford-county",
+      "label": "Bradford County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "brevard-county",
+      "label": "Brevard County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/",
+      "pages": 9,
+      "licence_types": [
+        "1COP",
+        "2COP",
+        "3PS",
+        "4COP",
+        "6COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-fl-bucket"
+      ]
+    },
+    {
+      "slug": "broward-county",
+      "label": "Broward County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/",
+      "pages": 9,
+      "licence_types": [
+        "1COP",
+        "2COP",
+        "3PS",
+        "4COP",
+        "6COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-fl-bucket"
+      ]
+    },
+    {
+      "slug": "butte-county",
+      "label": "Butte County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "calaveras-county",
+      "label": "Calaveras County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "calhoun-county",
+      "label": "Calhoun County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "charlotte-county",
+      "label": "Charlotte County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "citrus-county",
+      "label": "Citrus County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "clay-county",
+      "label": "Clay County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "cochise-county",
+      "label": "Cochise County",
+      "tier": "county",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/counties/",
+      "pages": 10,
+      "licence_types": [
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-14",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-az-bucket"
+      ]
+    },
+    {
+      "slug": "coconino-county",
+      "label": "Coconino County",
+      "tier": "county",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/counties/",
+      "pages": 10,
+      "licence_types": [
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-14",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-az-bucket"
+      ]
+    },
+    {
+      "slug": "collier-county",
+      "label": "Collier County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "columbia-county",
+      "label": "Columbia County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "colusa-county",
+      "label": "Colusa County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "contra-costa-county",
+      "label": "Contra Costa County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 7,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "desoto-county",
+      "label": "Desoto County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "dixie-county",
+      "label": "Dixie County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "duval-county",
+      "label": "Duval County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/",
+      "pages": 9,
+      "licence_types": [
+        "1COP",
+        "2COP",
+        "3PS",
+        "4COP",
+        "6COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-fl-bucket"
+      ]
+    },
+    {
+      "slug": "el-dorado-county",
+      "label": "El Dorado County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "escambia-county",
+      "label": "Escambia County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "flagler-county",
+      "label": "Flagler County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "franklin-county",
+      "label": "Franklin County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "fresno-county",
+      "label": "Fresno County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 6,
+      "licence_types": [
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "gadsden-county",
+      "label": "Gadsden County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "gila-county",
+      "label": "Gila County",
+      "tier": "county",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/counties/arizona-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "gilchrist-county",
+      "label": "Gilchrist County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "glades-county",
+      "label": "Glades County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "glenn-county",
+      "label": "Glenn County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "graham-county",
+      "label": "Graham County",
+      "tier": "county",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/counties/arizona-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "greenlee-county",
+      "label": "Greenlee County",
+      "tier": "county",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/counties/arizona-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "gulf-county",
+      "label": "Gulf County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "hamilton-county",
+      "label": "Hamilton County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "hardee-county",
+      "label": "Hardee County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "hendry-county",
+      "label": "Hendry County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "hernando-county",
+      "label": "Hernando County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "highlands-county",
+      "label": "Highlands County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "hillsborough-county",
+      "label": "Hillsborough County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/",
+      "pages": 9,
+      "licence_types": [
+        "1COP",
+        "2COP",
+        "3PS",
+        "4COP",
+        "6COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-fl-bucket"
+      ]
+    },
+    {
+      "slug": "holmes-county",
+      "label": "Holmes County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "humboldt-county",
+      "label": "Humboldt County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "imperial-county",
+      "label": "Imperial County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "indian-river-county",
+      "label": "Indian River County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "inyo-county",
+      "label": "Inyo County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "jackson-county",
+      "label": "Jackson County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "jefferson-county",
+      "label": "Jefferson County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "kern-county",
+      "label": "Kern County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 6,
+      "licence_types": [
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "kings-county",
+      "label": "Kings County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "la-paz-county",
+      "label": "La Paz County",
+      "tier": "county",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/counties/arizona-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "lafayette-county",
+      "label": "Lafayette County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "lake-county",
+      "label": "Lake County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "lake-county",
+      "label": "Lake County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "lassen-county",
+      "label": "Lassen County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "lee-county",
+      "label": "Lee County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/",
+      "pages": 9,
+      "licence_types": [
+        "1COP",
+        "2COP",
+        "3PS",
+        "4COP",
+        "6COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-fl-bucket"
+      ]
+    },
+    {
+      "slug": "leon-county",
+      "label": "Leon County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "levy-county",
+      "label": "Levy County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "liberty-county",
+      "label": "Liberty County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "los-angeles-county",
+      "label": "Los Angeles County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 8,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "madera-county",
+      "label": "Madera County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "madison-county",
+      "label": "Madison County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "manatee-county",
+      "label": "Manatee County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "maricopa-county",
+      "label": "Maricopa County",
+      "tier": "county",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/counties/",
+      "pages": 10,
+      "licence_types": [
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-14",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-az-bucket"
+      ]
+    },
+    {
+      "slug": "marin-county",
+      "label": "Marin County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "marion-county",
+      "label": "Marion County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "martin-county",
+      "label": "Martin County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "mendocino-county",
+      "label": "Mendocino County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "merced-county",
+      "label": "Merced County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "miami-dade-county",
+      "label": "Miami Dade County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/",
+      "pages": 9,
+      "licence_types": [
+        "1COP",
+        "2COP",
+        "3PS",
+        "4COP",
+        "6COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-fl-bucket"
+      ]
+    },
+    {
+      "slug": "modoc-county",
+      "label": "Modoc County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "mohave-county",
+      "label": "Mohave County",
+      "tier": "county",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/counties/",
+      "pages": 11,
+      "licence_types": [
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-14",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-az-bucket"
+      ]
+    },
+    {
+      "slug": "mono-county",
+      "label": "Mono County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "monroe-county",
+      "label": "Monroe County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "monterey-county",
+      "label": "Monterey County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "napa-county",
+      "label": "Napa County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "nassau-county",
+      "label": "Nassau County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "navajo-county",
+      "label": "Navajo County",
+      "tier": "county",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/counties/",
+      "pages": 10,
+      "licence_types": [
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-14",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-az-bucket"
+      ]
+    },
+    {
+      "slug": "nevada-county",
+      "label": "Nevada County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "okaloosa-county",
+      "label": "Okaloosa County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "okeechobee-county",
+      "label": "Okeechobee County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "orange-county",
+      "label": "Orange County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 19,
+      "licence_types": [
+        "1COP",
+        "2COP",
+        "3PS",
+        "4COP",
+        "6COP",
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": true,
+      "depth": "full",
+      "flags": [
+        "merged-slug-across-states"
+      ]
+    },
+    {
+      "slug": "orange-county",
+      "label": "Orange County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/",
+      "pages": 20,
+      "licence_types": [
+        "1COP",
+        "2COP",
+        "3PS",
+        "4COP",
+        "6COP",
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "merged-slug-across-states",
+        "also-in-fl-bucket"
+      ]
+    },
+    {
+      "slug": "osceola-county",
+      "label": "Osceola County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "palm-beach-county",
+      "label": "Palm Beach County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/",
+      "pages": 9,
+      "licence_types": [
+        "1COP",
+        "2COP",
+        "3PS",
+        "4COP",
+        "6COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-fl-bucket"
+      ]
+    },
+    {
+      "slug": "pasco-county",
+      "label": "Pasco County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "pima-county",
+      "label": "Pima County",
+      "tier": "county",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/counties/",
+      "pages": 10,
+      "licence_types": [
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-14",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-az-bucket"
+      ]
+    },
+    {
+      "slug": "pinal-county",
+      "label": "Pinal County",
+      "tier": "county",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/counties/",
+      "pages": 10,
+      "licence_types": [
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-14",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-az-bucket"
+      ]
+    },
+    {
+      "slug": "pinellas-county",
+      "label": "Pinellas County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/",
+      "pages": 9,
+      "licence_types": [
+        "1COP",
+        "2COP",
+        "3PS",
+        "4COP",
+        "6COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-fl-bucket"
+      ]
+    },
+    {
+      "slug": "polk-county",
+      "label": "Polk County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/",
+      "pages": 9,
+      "licence_types": [
+        "1COP",
+        "2COP",
+        "3PS",
+        "4COP",
+        "6COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-fl-bucket"
+      ]
+    },
+    {
+      "slug": "putnam-county",
+      "label": "Putnam County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "riverside-county",
+      "label": "Riverside County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 7,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "sacramento-county",
+      "label": "Sacramento County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 7,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "san-benito-county",
+      "label": "San Benito County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "san-bernardino-county",
+      "label": "San Bernardino County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 7,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "san-diego-county",
+      "label": "San Diego County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 7,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "san-francisco-county",
+      "label": "San Francisco County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 6,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "san-joaquin-county",
+      "label": "San Joaquin County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 7,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "san-luis-obispo-county",
+      "label": "San Luis Obispo County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "san-mateo-county",
+      "label": "San Mateo County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 7,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "santa-barbara-county",
+      "label": "Santa Barbara County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 7,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "santa-clara-county",
+      "label": "Santa Clara County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 7,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "santa-cruz-county",
+      "label": "Santa Cruz County",
+      "tier": "county",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/counties/arizona-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "santa-cruz-county",
+      "label": "Santa Cruz County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "santa-rosa-county",
+      "label": "Santa Rosa County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "sarasota-county",
+      "label": "Sarasota County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "seminole-county",
+      "label": "Seminole County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "shasta-county",
+      "label": "Shasta County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "sierra-county",
+      "label": "Sierra County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "siskiyou-county",
+      "label": "Siskiyou County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "solano-county",
+      "label": "Solano County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 7,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "sonoma-county",
+      "label": "Sonoma County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 7,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "st-johns-county",
+      "label": "St. Johns County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "st-lucie-county",
+      "label": "St. Lucie County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "stanislaus-county",
+      "label": "Stanislaus County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 7,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "sumter-county",
+      "label": "Sumter County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "sutter-county",
+      "label": "Sutter County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "suwannee-county",
+      "label": "Suwannee County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "taylor-county",
+      "label": "Taylor County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "tehama-county",
+      "label": "Tehama County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "tulare-county",
+      "label": "Tulare County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 7,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "tuolumne-county",
+      "label": "Tuolumne County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "union-county",
+      "label": "Union County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "ventura-county",
+      "label": "Ventura County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 7,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": true,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "volusia-county",
+      "label": "Volusia County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "wakulla-county",
+      "label": "Wakulla County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "walton-county",
+      "label": "Walton County",
+      "tier": "county",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/counties/florida-county/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "in-state-bucket"
+      ]
+    },
+    {
+      "slug": "yavapai-county",
+      "label": "Yavapai County",
+      "tier": "county",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/counties/",
+      "pages": 10,
+      "licence_types": [
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-14",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "also-in-az-bucket"
+      ]
+    },
+    {
+      "slug": "yolo-county",
+      "label": "Yolo County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "yuba-county",
+      "label": "Yuba County",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/counties/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "yuma-county",
+      "label": "Yuma County",
+      "tier": "county",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/counties/",
+      "pages": 9,
+      "licence_types": [
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-14",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "agoura-hills",
+      "label": "Agoura Hills",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "alameda",
+      "label": "Alameda",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 8,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-48",
+        "type-57",
+        "type-75",
+        "type-85"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "county-named-children-under-city-folder"
+      ]
+    },
+    {
+      "slug": "alhambra",
+      "label": "Alhambra",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "aliso-viejo",
+      "label": "Aliso Viejo",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "anaheim",
+      "label": "Anaheim",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "antioch",
+      "label": "Antioch",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "arcadia",
+      "label": "Arcadia",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "artesia",
+      "label": "Artesia",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "avalon",
+      "label": "Avalon",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "azusa",
+      "label": "Azusa",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "baldwin-park",
+      "label": "Baldwin Park",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "bell",
+      "label": "Bell",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "bell-gardens",
+      "label": "Bell Gardens",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "bellflower",
+      "label": "Bellflower",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "berkeley",
+      "label": "Berkeley",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "beverly-hills",
+      "label": "Beverly Hills",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 8,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "bradbury",
+      "label": "Bradbury",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "brea",
+      "label": "Brea",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "buena-park",
+      "label": "Buena Park",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "burbank",
+      "label": "Burbank",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 8,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "calabasas",
+      "label": "Calabasas",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "calistoga",
+      "label": "Calistoga",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "camarillo",
+      "label": "Camarillo",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "cape-coral",
+      "label": "Cape Coral",
+      "tier": "city",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "2COP",
+        "3PS",
+        "4COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "carlsbad",
+      "label": "Carlsbad",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "carpinteria",
+      "label": "Carpinteria",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "carson",
+      "label": "Carson",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "cerritos",
+      "label": "Cerritos",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "chandler",
+      "label": "Chandler",
+      "tier": "city",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "series-1",
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "chino-hills",
+      "label": "Chino Hills",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 8,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "chula-vista",
+      "label": "Chula Vista",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 8,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "claremont",
+      "label": "Claremont",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "commerce",
+      "label": "Commerce",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "compton",
+      "label": "Compton",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 8,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "concord",
+      "label": "Concord",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "coronado",
+      "label": "Coronado",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "costa-mesa",
+      "label": "Costa Mesa",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "covina",
+      "label": "Covina",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "cudahy",
+      "label": "Cudahy",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "culver-city",
+      "label": "Culver City",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "cypress",
+      "label": "Cypress",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "daly-city",
+      "label": "Daly City",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "dana-point",
+      "label": "Dana Point",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 2,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "has-duplicate-page"
+      ]
+    },
+    {
+      "slug": "del-mar",
+      "label": "Del Mar",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "diamond-bar",
+      "label": "Diamond Bar",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "downey",
+      "label": "Downey",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "duarte",
+      "label": "Duarte",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "el-cajon",
+      "label": "El Cajon",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "el-monte",
+      "label": "El Monte",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 8,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "el-segundo",
+      "label": "El Segundo",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 2,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "elk-grove",
+      "label": "Elk Grove",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "encinitas",
+      "label": "Encinitas",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 8,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "escondido",
+      "label": "Escondido",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 8,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "fontana",
+      "label": "Fontana",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 2,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "fort-lauderdale",
+      "label": "Fort Lauderdale",
+      "tier": "city",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "2COP",
+        "3PS",
+        "4COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "fountain-valley",
+      "label": "Fountain Valley",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "fremont",
+      "label": "Fremont",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "fresno",
+      "label": "Fresno",
+      "tier": "county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 8,
+      "licence_types": [
+        "type-02",
+        "type-20",
+        "type-23",
+        "type-48",
+        "type-75",
+        "type-85"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "tier-mismatch-filed-as-city-all-pages-county",
+        "has-duplicate-page"
+      ]
+    },
+    {
+      "slug": "fullerton",
+      "label": "Fullerton",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "garden-grove",
+      "label": "Garden Grove",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "gardena",
+      "label": "Gardena",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "gilbert",
+      "label": "Gilbert",
+      "tier": "city",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "series-1",
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "glendale",
+      "label": "Glendale",
+      "tier": "city",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/cities/",
+      "pages": 15,
+      "licence_types": [
+        "series-1",
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-6",
+        "series-7",
+        "series-9",
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "merged-slug-across-states"
+      ]
+    },
+    {
+      "slug": "glendale",
+      "label": "Glendale",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 15,
+      "licence_types": [
+        "series-1",
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-6",
+        "series-7",
+        "series-9",
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": [
+        "merged-slug-across-states"
+      ]
+    },
+    {
+      "slug": "glendora",
+      "label": "Glendora",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "goleta",
+      "label": "Goleta",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "guadalupe",
+      "label": "Guadalupe",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "hawaiian-gardens",
+      "label": "Hawaiian Gardens",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "hawthorne",
+      "label": "Hawthorne",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "hayward",
+      "label": "Hayward",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "hermosa-beach",
+      "label": "Hermosa Beach",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "hialeah",
+      "label": "Hialeah",
+      "tier": "city",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "2COP",
+        "3PS",
+        "4COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "hidden-hills",
+      "label": "Hidden Hills",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "huntington-beach",
+      "label": "Huntington Beach",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "huntington-park",
+      "label": "Huntington Park",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "imperial-beach",
+      "label": "Imperial Beach",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "irvine",
+      "label": "Irvine",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "irwindale",
+      "label": "Irwindale",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "jacksonville",
+      "label": "Jacksonville",
+      "tier": "city",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "2COP",
+        "3PS",
+        "4COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "la-canada-flintridge",
+      "label": "La Cañada Flintridge",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "slug-drift"
+      ]
+    },
+    {
+      "slug": "la-habra",
+      "label": "La Habra",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 2,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "la-habra-heights",
+      "label": "La Habra Heights",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "la-mesa",
+      "label": "La Mesa",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "la-mirada",
+      "label": "La Mirada",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 2,
+      "licence_types": [
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "la-palma",
+      "label": "La Palma",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "la-puente",
+      "label": "La Puente",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "la-verne",
+      "label": "La Verne",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "laguna-beach",
+      "label": "Laguna Beach",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 8,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "laguna-hills",
+      "label": "Laguna Hills",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "laguna-niguel",
+      "label": "Laguna Niguel",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "laguna-woods",
+      "label": "Laguna Woods",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 7,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "lake-forest",
+      "label": "Lake Forest",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "lakewood",
+      "label": "Lakewood",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "lancaster",
+      "label": "Lancaster",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "lawndale",
+      "label": "Lawndale",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "lemon-grove",
+      "label": "Lemon Grove",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "lomita",
+      "label": "Lomita",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "lompoc",
+      "label": "Lompoc",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "long-beach",
+      "label": "Long Beach",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "los-alamitos",
+      "label": "Los Alamitos",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "los-angeles",
+      "label": "Los Angeles",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 13,
+      "licence_types": [
+        "type-02",
+        "type-20",
+        "type-21",
+        "type-23",
+        "type-40",
+        "type-41",
+        "type-42",
+        "type-47",
+        "type-48",
+        "type-75",
+        "type-85"
+      ],
+      "in_nav": true,
+      "depth": "full",
+      "flags": [
+        "county-named-children-under-city-folder"
+      ]
+    },
+    {
+      "slug": "lynwood",
+      "label": "Lynwood",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "malibu",
+      "label": "Malibu",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 7,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "manhattan-beach",
+      "label": "Manhattan Beach",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "maywood",
+      "label": "Maywood",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "mesa",
+      "label": "Mesa",
+      "tier": "city",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "series-1",
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "miami",
+      "label": "Miami",
+      "tier": "city",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/cities/",
+      "pages": 8,
+      "licence_types": [
+        "2COP",
+        "3PS",
+        "4COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "mission-viejo",
+      "label": "Mission Viejo",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "monrovia",
+      "label": "Monrovia",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "montebello",
+      "label": "Montebello",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "monterey-park",
+      "label": "Monterey Park",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "moreno-valley",
+      "label": "Moreno Valley",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "murrieta",
+      "label": "Murrieta",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "national-city",
+      "label": "National City",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "newport-beach",
+      "label": "Newport Beach",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 8,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "norwalk",
+      "label": "Norwalk",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 8,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "oakland",
+      "label": "Oakland",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 8,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "oceanside",
+      "label": "Oceanside",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 8,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "ontario",
+      "label": "Ontario",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "orange",
+      "label": "City of Orange",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "orlando",
+      "label": "Orlando",
+      "tier": "city",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "2COP",
+        "3PS",
+        "4COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "oxnard",
+      "label": "Oxnard",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 8,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48",
+        "type-57",
+        "type-61"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "palm-desert",
+      "label": "Palm Desert",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "palm-springs",
+      "label": "Palm Springs",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "palmdale",
+      "label": "Palmdale",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "palo-alto",
+      "label": "Palo Alto",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "palos-verdes-estates",
+      "label": "Palos Verdes Estates",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "paramount",
+      "label": "Paramount",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "pasadena",
+      "label": "Pasadena",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "peoria",
+      "label": "Peoria",
+      "tier": "city",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "series-1",
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "phoenix",
+      "label": "Phoenix",
+      "tier": "city",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "series-1",
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "pico-rivera",
+      "label": "Pico Rivera",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "placentia",
+      "label": "Placentia",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "pomona",
+      "label": "Pomona",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "port-st-lucie",
+      "label": "Port St. Lucie",
+      "tier": "city",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "2COP",
+        "3PS",
+        "4COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "rancho-mirage",
+      "label": "Rancho Mirage",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 2,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "has-duplicate-page"
+      ]
+    },
+    {
+      "slug": "rancho-palos-verdes",
+      "label": "Rancho Palos Verdes",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "rancho-santa-margarita",
+      "label": "Rancho Santa Margarita",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "redondo-beach",
+      "label": "Redondo Beach",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "richmond",
+      "label": "Richmond",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "rolling-hills",
+      "label": "Rolling Hills",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "rolling-hills-estates",
+      "label": "Rolling Hills Estates",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "rosemead",
+      "label": "Rosemead",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "san-clemente",
+      "label": "San Clemente",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 2,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "has-duplicate-page"
+      ]
+    },
+    {
+      "slug": "san-diego",
+      "label": "San Diego",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 13,
+      "licence_types": [
+        "type-02",
+        "type-20",
+        "type-21",
+        "type-23",
+        "type-40",
+        "type-41",
+        "type-42",
+        "type-47",
+        "type-48",
+        "type-75",
+        "type-85"
+      ],
+      "in_nav": true,
+      "depth": "full",
+      "flags": [
+        "county-named-children-under-city-folder",
+        "has-duplicate-page"
+      ]
+    },
+    {
+      "slug": "san-dimas",
+      "label": "San Dimas",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 2,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "has-duplicate-page"
+      ]
+    },
+    {
+      "slug": "san-fernando",
+      "label": "San Fernando",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 2,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "has-duplicate-page"
+      ]
+    },
+    {
+      "slug": "san-francisco",
+      "label": "San Francisco",
+      "tier": "city-county",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 6,
+      "licence_types": [
+        "type-20",
+        "type-21",
+        "type-41",
+        "type-47",
+        "type-48"
+      ],
+      "in_nav": true,
+      "depth": "full",
+      "flags": [
+        "consolidated-city-county"
+      ]
+    },
+    {
+      "slug": "san-gabriel",
+      "label": "San Gabriel",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 2,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "has-duplicate-page"
+      ]
+    },
+    {
+      "slug": "san-jose",
+      "label": "San Jose",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "san-juan-capistrano",
+      "label": "San Juan Capistrano",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 2,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "has-duplicate-page"
+      ]
+    },
+    {
+      "slug": "san-marcos",
+      "label": "San Marcos",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "san-marino",
+      "label": "San Marino",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "santa-ana",
+      "label": "Santa Ana",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "santa-barbara",
+      "label": "City of Santa Barbara",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "santa-clarita",
+      "label": "Santa Clarita",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "santa-fe-springs",
+      "label": "Santa Fe Springs",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "santa-maria",
+      "label": "Santa Maria",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "santa-monica",
+      "label": "Santa Monica",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "santa-rosa",
+      "label": "Santa Rosa",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "santee",
+      "label": "Santee",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "scottsdale",
+      "label": "Scottsdale",
+      "tier": "city",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "series-1",
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "seal-beach",
+      "label": "Seal Beach",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "sierra-madre",
+      "label": "Sierra Madre",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "signal-hill-estates",
+      "label": "Signal Hill",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": [
+        "slug-drift"
+      ]
+    },
+    {
+      "slug": "simi-valley",
+      "label": "Simi Valley",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 2,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "solana-beach",
+      "label": "Solana Beach",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "solvang",
+      "label": "Solvang",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "south-el-monte",
+      "label": "South El Monte",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "south-gate",
+      "label": "South Gate",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "south-pasadena",
+      "label": "South Pasadena",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "st-petersburg",
+      "label": "St. Petersburg",
+      "tier": "city",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "2COP",
+        "3PS",
+        "4COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "surprise",
+      "label": "Surprise",
+      "tier": "city",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "series-1",
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "tallahassee",
+      "label": "Tallahassee",
+      "tier": "city",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "2COP",
+        "3PS",
+        "4COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "tampa",
+      "label": "Tampa",
+      "tier": "city",
+      "state": [
+        "FL"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "2COP",
+        "3PS",
+        "4COP"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "temecula",
+      "label": "Temecula",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "tempe",
+      "label": "Tempe",
+      "tier": "city",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "series-1",
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "temple-city",
+      "label": "Temple City",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "thousand-oaks",
+      "label": "Thousand Oaks",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "torrance",
+      "label": "Torrance",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "tucson",
+      "label": "Tucson",
+      "tier": "city",
+      "state": [
+        "AZ"
+      ],
+      "namespace": "/cities/",
+      "pages": 9,
+      "licence_types": [
+        "series-1",
+        "series-10",
+        "series-11",
+        "series-12",
+        "series-6",
+        "series-7",
+        "series-9"
+      ],
+      "in_nav": false,
+      "depth": "full",
+      "flags": []
+    },
+    {
+      "slug": "tustin",
+      "label": "Tustin",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "vernon",
+      "label": "Vernon",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "villa-park",
+      "label": "Villa Park",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "visalia",
+      "label": "Visalia",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "vista",
+      "label": "Vista",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "walnut",
+      "label": "Walnut",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "west-covina",
+      "label": "West Covina",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "west-hollywood",
+      "label": "West Hollywood",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "westlake-village",
+      "label": "Westlake Village",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "westminster",
+      "label": "Westminster",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "whittier",
+      "label": "Whittier",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    },
+    {
+      "slug": "yorba-linda",
+      "label": "Yorba Linda",
+      "tier": "city",
+      "state": [
+        "CA"
+      ],
+      "namespace": "/cities/",
+      "pages": 1,
+      "licence_types": [],
+      "in_nav": false,
+      "depth": "overview-only",
+      "flags": []
+    }
+  ],
+  "gaps": [
+    {
+      "name": "Alpine County",
+      "state": "CA",
+      "tier": "county",
+      "reason": "no page published"
+    },
+    {
+      "name": "Del Norte County",
+      "state": "CA",
+      "tier": "county",
+      "reason": "no page published"
+    },
+    {
+      "name": "Mariposa County",
+      "state": "CA",
+      "tier": "county",
+      "reason": "no page published"
+    },
+    {
+      "name": "Placer County",
+      "state": "CA",
+      "tier": "county",
+      "reason": "no page published"
+    },
+    {
+      "name": "Plumas County",
+      "state": "CA",
+      "tier": "county",
+      "reason": "no page published"
+    },
+    {
+      "name": "Trinity County",
+      "state": "CA",
+      "tier": "county",
+      "reason": "no page published"
+    },
+    {
+      "name": "Washington County",
+      "state": "FL",
+      "tier": "county",
+      "reason": "no page published"
+    }
+  ],
+  "duplicates": [
+    "/cities/fresno-county-type-40-on-sale-beer-license/",
+    "/counties/arizona-county/yavapai-county-arizona-liquor-licenses-for-restaurants-bars-and-retailers-1",
+    "/counties/florida-county/walton-county-florida-liquor-licenses-for-restaurants-bars-and-retailers-1",
+    "/counties/fresno-county-type-20/",
+    "/counties/kern-county-1/",
+    "/counties/riverside-county-1/",
+    "/counties/sacramento-county-1/",
+    "/counties/san-bernardino-county-1/",
+    "/counties/san-joaquin-county-1/",
+    "/counties/san-mateo-county-1/",
+    "/counties/santa-barbara-county-1/",
+    "/counties/santa-clara-county-1/",
+    "/counties/solano-county-1/",
+    "/counties/sonoma-county-1/",
+    "/counties/stanislaus-county-1/",
+    "/counties/tulare-county-1/",
+    "/counties/ventura-county-1/"
+  ]
+}

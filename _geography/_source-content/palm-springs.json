@@ -1,0 +1,201 @@
+{
+  "market": "palm-springs",
+  "label": "Palm Springs",
+  "tier": "city",
+  "sourceUrl": "https://liquorlicenseagents.com/cities/palm-springs/palm-springs-liquor-licenses-for-restaurants-bars-and-retailers/",
+  "sourceNote": "Extracted 2026-09-01 from the client's live site via curl with a desktop Chrome User-Agent (HTTP 200). <main> > <article> ONLY; no nav/header/footer sits inside <main>. Fetched TWICE and the two <main> blocks were byte-identical, so the capture is stable. title/metaDescription come from <head>. wordCount (854) counts the extracted article text (h1 + intro + all headings, paragraphs, bullets, FAQs and CTA) and excludes head metadata and the trailing <hr> + empty <p>. CAVEAT: the first intro paragraph contains a live Google-redirect anchor carrying 'utm_source=chatgpt.com', and the markup uses Google Docs 'c8' classes - the copy was drafted in ChatGPT, pasted through a Google Doc, and published with the tracking artifact intact. That anchor wraps only a non-breaking space and is stripped from the extracted text here.",
+  "page": {
+    "h1": "Palm Springs Liquor Licenses For Restaurants, Bars, And Retailers",
+    "title": "Palm Springs Liquor License | Buy, Sell, Transfer",
+    "metaDescription": "Buy, sell, or transfer a liquor license in Palm Springs, California. Contact Liquor License Agents for expert help with ABC applications, purchases, and license transfers.",
+    "wordCount": 854,
+    "structure": "Single <article>: h1 + 2 unheaded intro paragraphs, 3 <h2> body sections (2 of them carry a 6-item <ul>), 1 <h2> FAQ section holding 6 numbered <h3>/<p> pairs, then an <h3> CTA + 2 <p>, then an <hr> and one empty <p>. No <table> anywhere. NOTE: unlike the county/licence-type pages, the CTA heading here is a real <h3>, not a <p>.",
+    "headingsInOrder": [
+      "How Liquor Licensing Works In Palm Springs",
+      "Common California Liquor License Types In Palm Springs",
+      "How Liquor License Agents Supports Palm Springs Buyers And Sellers",
+      "Palm Springs Liquor License FAQs",
+      "1. What types of liquor licenses are available in Palm Springs?",
+      "2. How do I choose the right license for my Palm Springs restaurant, bar, or resort venue?",
+      "3. Can I purchase and transfer an existing liquor license in Palm Springs or the Coachella Valley?",
+      "4. How long does the liquor license process usually take in Palm Springs?",
+      "5. What downtown, resort, or tourism-area zoning rules affect licensing in Palm Springs?",
+      "6. What should I budget for a liquor license in Palm Springs and surrounding desert cities?",
+      "Schedule an Appointment | (800) 799-9081"
+    ],
+    "intro": [
+      "Palm Springs is a tourism centered market where liquor licensing often intersects with downtown nightlife, resort venues, and seasonal visitor demand. If you are opening a new concept, purchasing an existing business, or transferring a license as part of a sale, working with Liquor License Agents helps you select the right California license type and manage the transfer process with realistic milestones.",
+      "In visitor driven markets, small details, such as patio boundaries, event plans, and operating conditions, can materially affect how your business can serve guests."
+    ],
+    "sections": [
+      {
+        "heading": "How Liquor Licensing Works In Palm Springs",
+        "level": "h2",
+        "paragraphs": [
+          "Liquor licenses in Palm Springs are regulated by the California Department of Alcoholic Beverage Control. Many operators obtain the privileges they need through a person to person transfer, purchasing an existing license and applying to transfer it into the buyer’s name, and sometimes to a new address.",
+          "Transfers typically include background review, posting and notice requirements, ownership and financing disclosures, and a clear definition of the licensed premises. For restaurant license types, it is important to confirm whether the business must qualify as a bona fide eating place, including kitchen operations and complete meal service."
+        ],
+        "bullets": []
+      },
+      {
+        "heading": "Common California Liquor License Types In Palm Springs",
+        "level": "h2",
+        "paragraphs": [
+          "Common license types in Palm Springs include",
+          "Choosing correctly affects spirits privileges, minors, kitchen requirements, and operational expectations."
+        ],
+        "bullets": [
+          "Type 20, Off Sale Beer and Wine, for markets selling beer and wine off premises",
+          "Type 21, Off Sale General, for stores selling beer, wine, and spirits off premises",
+          "Type 41, On Sale Beer and Wine Eating Place, for restaurants serving beer and wine",
+          "Type 47, On Sale General Eating Place, for restaurants serving beer, wine, and spirits",
+          "Type 48, On Sale General Public Premises, for bars and nightlife venues",
+          "Type 58, Caterer, for qualifying off site privileges tied to an underlying on sale license"
+        ]
+      },
+      {
+        "heading": "How Liquor License Agents Supports Palm Springs Buyers And Sellers",
+        "level": "h2",
+        "paragraphs": [
+          "Palm Springs transactions often involve high visibility locations and timelines tied to seasonal business cycles. We help you",
+          "Our goal is a clean, predictable transfer process that supports your opening or transition."
+        ],
+        "bullets": [
+          "Confirm the correct license type based on your concept and service plan",
+          "Review the target license for conditions and restrictions that may affect operations",
+          "Coordinate escrow timing and licensing milestones so the transaction stays aligned",
+          "Prepare transfer applications, disclosures, and premises documentation accurately",
+          "Track the file and respond quickly to reduce avoidable delays"
+        ]
+      }
+    ],
+    "faqSection": {
+      "heading": "Palm Springs Liquor License FAQs",
+      "items": [
+        {
+          "number": 1,
+          "questionVerbatim": "1. What types of liquor licenses are available in Palm Springs?",
+          "question": "What types of liquor licenses are available in Palm Springs?",
+          "answer": "Palm Springs commonly involves restaurant licenses for beer and wine or full liquor, retail off sale licenses for stores, and public premises licenses for bar focused nightlife concepts. The right license depends on whether alcohol is served on site or sold off premises, and whether the business qualifies as a bona fide eating place."
+        },
+        {
+          "number": 2,
+          "questionVerbatim": "2. How do I choose the right license for my Palm Springs restaurant, bar, or resort venue?",
+          "question": "How do I choose the right license for my Palm Springs restaurant, bar, or resort venue?",
+          "answer": "Start with your operating model. Restaurants that serve complete meals typically choose beer and wine only or full liquor depending on whether spirits and cocktails are essential. Resort venues should plan patios, poolside service, and events so the licensed premises matches actual guest flow. Bars and nightlife concepts generally require a public premises structure and should not be planned under a restaurant license if alcohol service is the primary focus."
+        },
+        {
+          "number": 3,
+          "questionVerbatim": "3. Can I purchase and transfer an existing liquor license in Palm Springs or the Coachella Valley?",
+          "question": "Can I purchase and transfer an existing liquor license in Palm Springs or the Coachella Valley?",
+          "answer": "Yes. Transfers are common throughout the Coachella Valley and are often coordinated through escrow. ABC reviews ownership disclosures, financing, and premises details, so accurate documentation and clear premises definitions help prevent delays."
+        },
+        {
+          "number": 4,
+          "questionVerbatim": "4. How long does the liquor license process usually take in Palm Springs?",
+          "question": "How long does the liquor license process usually take in Palm Springs?",
+          "answer": "Most transfers take months rather than weeks. Timelines depend on background review, posting requirements, application completeness, and whether corrections are requested. Early planning helps align licensing with lease dates, remodel schedules, and peak season opening targets."
+        },
+        {
+          "number": 5,
+          "questionVerbatim": "5. What downtown, resort, or tourism-area zoning rules affect licensing in Palm Springs?",
+          "question": "What downtown, resort, or tourism-area zoning rules affect licensing in Palm Springs?",
+          "answer": "Downtown and tourism areas can involve sensitivity around hours, patios, noise, and security planning. Resort venues may also be affected by event schedules and outdoor service areas. Some projects require local approvals that shape operating conditions even after the state license is issued, so identifying these factors early helps keep your licensing plan realistic."
+        },
+        {
+          "number": 6,
+          "questionVerbatim": "6. What should I budget for a liquor license in Palm Springs and surrounding desert cities?",
+          "question": "What should I budget for a liquor license in Palm Springs and surrounding desert cities?",
+          "answer": "Budget for the license market price, escrow and transaction expenses, application related costs, and any operational changes required by license conditions. Pricing varies by license type and demand, especially for full liquor privileges in prime corridors, so realistic ranges should be established early."
+        }
+      ]
+    },
+    "cta": {
+      "heading": "Schedule an Appointment | (800) 799-9081",
+      "paragraphs": [
+        "If you are opening, buying, or selling in Palm Springs, a consultation can help you avoid delays tied to wrong license selection, incomplete disclosures, and premises issues that require rework. We will review your concept, confirm the best licensing path, and outline practical next steps for a clean transfer and approval process that supports your timeline.",
+        "To schedule a confidential appointment, call (800) 799-9081."
+      ]
+    },
+    "lists": [
+      {
+        "underHeading": "Common California Liquor License Types In Palm Springs",
+        "type": "ul",
+        "itemCount": 6,
+        "items": [
+          "Type 20, Off Sale Beer and Wine, for markets selling beer and wine off premises",
+          "Type 21, Off Sale General, for stores selling beer, wine, and spirits off premises",
+          "Type 41, On Sale Beer and Wine Eating Place, for restaurants serving beer and wine",
+          "Type 47, On Sale General Eating Place, for restaurants serving beer, wine, and spirits",
+          "Type 48, On Sale General Public Premises, for bars and nightlife venues",
+          "Type 58, Caterer, for qualifying off site privileges tied to an underlying on sale license"
+        ]
+      },
+      {
+        "underHeading": "How Liquor License Agents Supports Palm Springs Buyers And Sellers",
+        "type": "ul",
+        "itemCount": 5,
+        "items": [
+          "Confirm the correct license type based on your concept and service plan",
+          "Review the target license for conditions and restrictions that may affect operations",
+          "Coordinate escrow timing and licensing milestones so the transaction stays aligned",
+          "Prepare transfer applications, disclosures, and premises documentation accurately",
+          "Track the file and respond quickly to reduce avoidable delays"
+        ]
+      }
+    ],
+    "tables": [],
+    "localNames": [
+      "Coachella Valley"
+    ],
+    "localNamesNote": "EXHAUSTIVE. 'Coachella Valley' (2 mentions) is the ONLY concrete named geography on the page besides the city name itself. ZERO neighbourhoods, ZERO landmarks, ZERO named districts, ZERO named venues, ZERO streets. The page says 'downtown' (3x) and 'resort venues' but never names Palm Canyon Drive, Arenas Road, the Uptown Design District, or any actual resort. 'surrounding desert cities' is a vague gesture, not a name. 'California Department of Alcoholic Beverage Control' is a state agency, not a local reference.",
+    "placeMentionCounts": {
+      "Palm Springs": 17,
+      "Coachella Valley": 2,
+      "downtown/Downtown": 3,
+      "resort/Resort": 5,
+      "tourism": 3,
+      "desert": 1
+    }
+  },
+  "firmClaimsFlagged": [],
+  "competitorNamesFound": [],
+  "reviewNotes": {
+    "step3Screen": "Screened the full <main> text for unverifiable firm claims (superiority, asserted insider relationships with ABC staff, unverifiable case history, guarantees) and for competitor names (grepped the ENTIRE page HTML, not just <main>). ZERO hits in every category. Nothing needed excluding and no sentence needed rewriting - every field in page.* is verbatim source text.",
+    "borderlineKept": [
+      "CTA: 'We will review your concept, confirm the best licensing path...' - 'best' here modifies the client's licensing path, not the firm versus competitors. Not a superiority claim; kept verbatim.",
+      "Section 3 bullet: 'Track the file and respond quickly to reduce avoidable delays' - a service-conduct description, hedged with 'avoidable'. No guarantee asserted; kept verbatim.",
+      "Section 3 closing: 'Our goal is a clean, predictable transfer process that supports your opening or transition.' - stated as a goal, not an outcome promise; kept verbatim."
+    ],
+    "structuralNotes": [
+      "1 <article>, 3 content <h2> + 1 FAQ <h2>, 6 numbered FAQ <h3>/<p> pairs, 2 <ul> (6 items = licence types, 5 items = how-we-help). No <table> on the page.",
+      "DIVERGENCE from the county/licence-type pages: the CTA heading 'Schedule an Appointment | (800) 799-9081' is a real <h3> here, whereas on the Riverside County licence-type pages it is marked up as a <p>. Do not assume the rigid 7-section licence-type skeleton - this overview page has its own shape.",
+      "The how-we-help list has 5 bullets here; the licence-type pages carry 6.",
+      "Trailing <hr> plus one empty <p> close the article; both excluded from wordCount.",
+      "PROVENANCE ARTIFACT: intro paragraph 1 contains a live Google-redirect anchor whose URL carries 'utm_source=chatgpt.com', and the markup uses Google Docs 'c8' classes. The copy was drafted in ChatGPT, pasted through a Google Doc, and shipped with the tracker intact. The anchor wraps only a non-breaking space, so it is invisible to readers but it is a real, indexable outbound link on the client's live page."
+    ],
+    "localSpecificity": {
+      "verdict": "MARKET-ARCHETYPE TAILORED, BUT LOCALLY FACTLESS. Not the pure noun-swap of the earlier two pages - but not real local content either, and it CANNOT ship indexable as written.",
+      "placeNameMentions": {
+        "Palm Springs": 17,
+        "Coachella Valley": 2
+      },
+      "concreteLocalReferences": 1,
+      "ratio": "17 city-name mentions to exactly 1 concrete named local place (Coachella Valley). No neighbourhood, landmark, district, street or venue is named anywhere on the page.",
+      "whatIsGenuinelyLocal": [
+        "'Coachella Valley' named twice (FAQ 3), correctly placing Palm Springs in its real sub-region.",
+        "Resort/tourism framing is a genuine and apt read of the market: 'tourism centered market', 'seasonal visitor demand', 'patio boundaries, event plans', 'poolside service', 'peak season opening targets', 'timelines tied to seasonal business cycles'.",
+        "Type 58 (Caterer) appears in the licence-type list where the San Jose sibling page carries Type 75 (Brewpub). That is a deliberate, sensible substitution for a resort-and-events market, not a mechanical copy."
+      ],
+      "whatIsMissing": [
+        "ZERO verifiable Palm Springs facts. No Palm Canyon Drive, no Arenas Road (the actual nightlife strip), no Uptown Design District, no named resort or hotel.",
+        "No Palm Springs municipal code, CUP process, entertainment permit, or hours ordinance cited - even though FAQ 5 is explicitly about 'downtown, resort, or tourism-area zoning rules' and answers it entirely in generalities ('can involve sensitivity around hours, patios, noise').",
+        "No local ABC district office named, no Riverside County-specific process, no local pricing data despite FAQ 6 promising budget guidance.",
+        "Every sentence would remain true verbatim if 'Palm Springs' were replaced with Scottsdale, Napa or Key West. The tailoring is to a TYPE of market, not to this city."
+      ],
+      "templateEvidence": "Diffed against the client's own San Jose sibling page (same URL pattern, fetched from the same site). After normalising city/county/region tokens, word-level similarity is 59.2%. Per-sentence over 42 Palm Springs sentences: 12 identical (7 of which are trivial list numerals '1.'..'6.' and 'Yes.', so 5 substantive), 13 near-duplicates (>0.75), 17 unique. Section headings, the licence-type list, the how-we-help list and the whole FAQ spine are a shared template with per-city slots for [city], [county/region] and one [regional descriptor] - Palm Springs gets 'Coachella Valley' / 'desert cities' / 'resort', San Jose gets 'Santa Clara County' / 'Silicon Valley' / 'tech corridor'.",
+      "shipRecommendation": "DO NOT ship indexable on this source alone. It is measurably better than the two pure noun-swap pages in the earlier sample - roughly 40% of the prose is genuinely rewritten for a resort market - but it carries no local fact a Riverside County page would not already cover, so as an indexable city page under a county page we already publish it is thin-content and cannibalisation risk. To ship it indexable, inject real Palm Springs specifics: named districts (Palm Canyon Drive, Arenas Road, Uptown Design District), the city's actual CUP/entertainment-permit path, and real local licence pricing. Otherwise keep it noindex or fold it into the Riverside County page."
+    },
+    "differentiationFromParent": "Parent Riverside County page set is sourced separately from /counties/riverside-county/. The only content here that a county page would not naturally own is the Coachella Valley/resort-season framing and the Type 58 Caterer mention. That is a thin basis for a separate indexable URL."
+  }
+}

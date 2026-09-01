@@ -6135,17 +6135,12 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
    The taxonomy they carried is not lost: DOM order still states it, and the
    preview pane reads each item out in full, one at a time. */
 
-/* ledger hairlines: every row except the first. [AM] flows nine items two
-   across, so row 1 is items 1-2 and the rule starts at item 3. Item 6 JOINED
-   this list when the ledger went from eight items in two columns to nine in five
-   rows — it used to be column 2's head, and a headless row needs the line. */
-#mm-dd-licensing > ul > li:nth-child(3),
-#mm-dd-licensing > ul > li:nth-child(4),
-#mm-dd-licensing > ul > li:nth-child(5),
-#mm-dd-licensing > ul > li:nth-child(6),
-#mm-dd-licensing > ul > li:nth-child(7),
-#mm-dd-licensing > ul > li:nth-child(8),
-#mm-dd-licensing > ul > li:nth-child(9) {
+/* ledger hairlines: every row except the first. [CC] the ledger is now EIGHT items
+   flowing two across, so row 1 is items 1-2 and every item from 3 on opens a row that
+   needs the line. Written as a range rather than an enumeration so it cannot go stale
+   again the way the old 3..9 list did when the count changed — the previous version
+   still named item 9 after the ledger had dropped to eight. */
+#mm-dd-licensing > ul > li:nth-child(n + 3) {
   border-top: 1px solid var(--ds-hairline);
 }
 
@@ -6322,11 +6317,15 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
    what [AL] built it to do and scrolling. */
 #mm-dd-licensing > ul {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  /* [CC] FOUR rows, not five. The ledger was authored for nine items with the ninth
+     spanning both columns to close it. Removing the three individual licence-type rows
+     and replacing them with one leaves EIGHT — which fills 2x4 exactly, with no odd item
+     to close and no empty fifth row. The nth-child(9) span is removed with them: at eight
+     items it matches nothing, and leaving a rule that silently stops applying is how the
+     next person inherits a mystery. */
+  grid-template-rows: repeat(4, 1fr);
   grid-auto-flow: row;
 }
-/* the tenth cell is not a hole — item 9 closes the ledger across both columns */
-#mm-dd-licensing > ul > li:nth-child(9) { grid-column: 1 / -1; }
 
 /* ── 3 · THE PREVIEW PANE ────────────────────────────────────────────────────
    EVERY RULE HERE IS SCOPED THROUGH THE ID ON PURPOSE. The pane is an <a> inside
@@ -15881,3 +15880,819 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
    -------------------------------------------------------------------------- */
 
 .article-header__inner > * { margin-inline: auto; }
+
+/* ==========================================================================
+   [BX] THE STATE TIER on locations.html
+   --------------------------------------------------------------------------
+   One level ABOVE the fourteen market tabs. The client publishes six states,
+   so the page needed an outer rail; California's panel still holds the
+   hand-authored market matrix untouched inside it.
+
+   Two things here are load-bearing:
+
+   1. `.loc-panel--state` STRIPS the card treatment off `.loc-panel`. The
+      California state panel wraps `.loc-tabs`, whose own `.loc-panel`
+      children are cards — without this reset that renders a card inside a
+      card. It sits after `.loc-panel` in the file, so equal specificity
+      resolves the right way; `.loc-panel[hidden]` is (0,2,0) and still wins,
+      which is what keeps panel switching working.
+
+   2. The state rail is deliberately NOT the same pill as `.loc-tab`. A rail
+      that looked identical to the one below it would read as one flat set of
+      twenty options rather than two tiers.
+   -------------------------------------------------------------------------- */
+
+.loc-states { margin-top: var(--ds-space-xl); }
+
+.loc-staterail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-xs);
+  margin-bottom: var(--ds-space-lg);
+}
+@media (max-width: 640px) {
+  .loc-staterail {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    padding-bottom: var(--ds-space-xs);
+  }
+  .loc-staterail::-webkit-scrollbar { height: 6px; }
+  .loc-staterail::-webkit-scrollbar-thumb { background: var(--ds-line); border-radius: var(--ds-r-pill); }
+}
+
+.loc-state {
+  flex: 0 0 auto;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  min-height: 56px;                       /* the same 40px tap floor as .loc-tab */
+  padding: var(--ds-space-sm) var(--ds-space-md);
+  font-family: var(--ds-font-body);
+  color: var(--ds-ink);
+  background: transparent;
+  border: 0;
+  border-bottom: 3px solid transparent;   /* underline, not pill — this is the outer tier */
+  border-radius: var(--ds-r-sm) var(--ds-r-sm) 0 0;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--ds-dur-fast) var(--ds-ease-out),
+              background var(--ds-dur-fast) var(--ds-ease-out);
+}
+.loc-state:hover { background: color-mix(in srgb, var(--ds-bg-surface) 60%, transparent); }
+.loc-state:focus-visible { outline: 3px solid var(--ds-accent); outline-offset: 2px; }
+.loc-state[aria-selected="true"] {
+  border-bottom-color: var(--ds-accent);
+  background: color-mix(in srgb, var(--ds-accent-soft) 55%, transparent);
+}
+.loc-state__name {
+  font-family: var(--ds-font-display);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.15;
+  white-space: nowrap;
+  color: var(--ds-ink);
+}
+.loc-state__sub {
+  font-size: 12px;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: var(--ds-accent-ink);
+  font-variant-numeric: tabular-nums;
+}
+/* a state with nothing published never reads amber — same honesty rule as the market rail */
+.loc-state__sub[data-thin] { color: var(--ds-ink-soft); font-style: italic; }
+
+/* ---- the state panel is a container, not a card (see note 1 above) ---------- */
+.loc-panel--state {
+  background: none;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* ---- the zero-stock statement, carried by every non-California state -------- */
+.loc-empty {
+  margin-bottom: var(--ds-space-lg);
+  padding: var(--ds-space-md) var(--ds-space-lg);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ds-ink-soft);
+  background: var(--ds-bg-surface-2);
+  border: 1px solid var(--ds-hairline);
+  border-left: 3px solid var(--ds-ink-soft);
+  border-radius: 0 var(--ds-r-md) var(--ds-r-md) 0;
+  max-width: 78ch;
+}
+.loc-empty b { color: var(--ds-ink); }
+.loc-empty--thin { margin-bottom: var(--ds-space-md); }
+
+/* ---- counties and cities, side by side ------------------------------------- */
+.loc-geo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--ds-space-md);
+  margin-bottom: var(--ds-space-lg);
+}
+.loc-geo__col {
+  min-width: 0;
+  padding: var(--ds-space-md) var(--ds-space-lg);
+  background: var(--ds-bg-surface-2);
+  border: 1px solid var(--ds-hairline);
+  border-radius: var(--ds-r-lg);
+  box-shadow: var(--ds-shadow-card);
+}
+.loc-geo__col h4 {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-space-xs);
+  margin-bottom: var(--ds-space-sm);
+  padding-bottom: var(--ds-space-xs);
+  font-size: 14px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ds-ink-soft);
+  border-bottom: 1px solid var(--ds-glass-border);
+}
+.loc-geo__n {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--ds-accent-ink);
+  font-variant-numeric: tabular-nums;
+}
+.loc-geo__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 2px var(--ds-space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 340px;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+}
+.loc-geo__list li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-space-xs);
+  padding: 3px 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--ds-ink);
+  min-width: 0;
+}
+.loc-geo__name { overflow-wrap: anywhere; }
+.loc-geo__flag {
+  flex: 0 0 auto;
+  font-size: 10px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--ds-ink-soft);
+  border: 1px solid var(--ds-glass-border);
+  border-radius: var(--ds-r-sm);
+  padding: 0 4px;
+}
+
+/* ==========================================================================
+   [BY] LOCATIONS CASCADE MENU
+   --------------------------------------------------------------------------
+   Mirrors the client's own nav: a list of STATES on the left, and a right
+   column that swaps to the active state's contents. All six states are peers
+   — California sits in alphabetical position with no feature panel and no
+   headline treatment.
+
+   It reuses the .mm-mega shell (position, width, open/close transition, and
+   the generic .mm-has-panel controller) and replaces only what sits inside
+   .mm-mega__layout.
+
+   Height: .mm-mega caps at min(76vh, 560px) with `overflow: hidden`. A
+   cascade is naturally short — only ONE pane is ever in flow — so the panel
+   sizes to the tallest pane (California, 7 rows) rather than to the sum of
+   everything, which is the structural reason this shape fits where a single
+   long grid did not. `min-height: 0` on the panes column keeps that true if a
+   pane ever outgrows the cap.
+   -------------------------------------------------------------------------- */
+
+/* THREE columns now: the general location info as a card, the state rail, then that
+   state's licence types. Owner asked for the type options per location to be in the
+   menu and the general location info to sit left-most. */
+/* FOUR columns: the state card, the state rail, that state's options, and what sits
+   under the hovered option. The fourth is where the 50 market x type pages surface —
+   Type 47 -> the ten markets that each have a Type 47 page, two hovers from the header. */
+.mm-casc { grid-template-columns: 252px 206px 292px minmax(0, 1fr); }
+@media (max-width: 1180px) { .mm-casc { grid-template-columns: 214px 184px 250px minmax(0, 1fr); } }
+
+/* ---- column 1: the states ---------------------------------------------- */
+.mm-casc__rail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px 12px;
+  background: color-mix(in srgb, var(--ds-bg-surface) 55%, transparent);
+  border-right: 1px solid var(--ds-line);
+  min-height: 0;
+  overflow-y: auto;
+}
+/* Name OVER sub, not beside it. MEASURED at a 292px rail: "Pennsylvania" beside
+   "No markets published" collided — flex:1 with min-width:0 lets the name grow into
+   the sub, and neither had an ellipsis. Stacking removes the failure mode entirely
+   instead of truncating a state's name. */
+.mm-casc__state {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "name chev" "sub chev";
+  align-items: center;
+  column-gap: 10px;
+  row-gap: 1px;
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid transparent;
+  border-radius: var(--ds-r-md);
+  background: transparent;
+  font-family: var(--ds-font-body);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--ds-dur-fast) var(--ds-ease),
+              border-color var(--ds-dur-fast) var(--ds-ease);
+}
+.mm-casc__state:focus-visible { outline: 3px solid var(--ds-accent); outline-offset: 2px; }
+.mm-casc__state:hover { background: var(--ds-primary-soft); }
+.mm-casc__state[aria-selected="true"] {
+  background: var(--ds-accent-soft);
+  border-color: color-mix(in srgb, var(--ds-accent) 45%, transparent);
+}
+.mm-casc__name {
+  grid-area: name;
+  min-width: 0;
+  font-family: var(--ds-font-display);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--ds-ink);
+  overflow-wrap: anywhere;
+}
+.mm-casc__state[aria-selected="true"] .mm-casc__name { color: var(--ds-accent-ink); }
+.mm-casc__sub {
+  grid-area: sub;
+  min-width: 0;
+  font-size: 11.5px;
+  line-height: 1.25;
+  color: var(--ds-accent-ink);
+  font-variant-numeric: tabular-nums;
+}
+/* a state with nothing published never reads amber — the rail's honesty rule */
+.mm-casc__sub[data-thin] { color: var(--ds-ink-soft); font-style: italic; }
+.mm-casc__chev {
+  grid-area: chev;
+  width: 15px;
+  height: 15px;
+  color: var(--ds-ink-soft);
+  opacity: .55;
+  transition: opacity var(--ds-dur-fast) var(--ds-ease), transform var(--ds-dur-fast) var(--ds-ease);
+}
+.mm-casc__state[aria-selected="true"] .mm-casc__chev { opacity: 1; color: var(--ds-accent-ink); transform: translateX(2px); }
+
+/* ---- column 2: the active state's contents ------------------------------ */
+/* MEASURED: California's pane (7 rows + note) ran 572px into the 560px cap, leaving
+   12px unreachable. Trimmed here rather than dropping a row. */
+.mm-casc__panes { min-height: 0; overflow-y: auto; padding: 14px 20px 14px; }
+.mm-casc__pane { display: flex; flex-direction: column; gap: 2px; }
+.mm-casc__pane[hidden] { display: none; }
+
+.mm-casc__row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  border-radius: var(--ds-r-md);
+  text-decoration: none;
+  transition: background var(--ds-dur-fast) var(--ds-ease),
+              border-color var(--ds-dur-fast) var(--ds-ease),
+              transform var(--ds-dur-fast) var(--ds-ease);
+}
+.mm-casc__row:hover, .mm-casc__row:focus-visible {
+  background: var(--ds-primary-soft);
+  border-color: var(--ds-line);
+  transform: translateX(2px);
+  text-decoration: none;
+}
+.mm-casc__row:focus-visible { outline: 3px solid var(--ds-accent); outline-offset: 1px; }
+.mm-casc__mark {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--ds-r-md);
+  background: color-mix(in srgb, var(--ds-accent) 11%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ds-accent) 24%, transparent);
+  font-family: var(--ds-font-display);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ds-accent-ink);
+  font-variant-numeric: tabular-nums;
+}
+.mm-casc__txt { min-width: 0; flex: 1; }
+.mm-casc__txt .t {
+  display: block;
+  font-family: var(--ds-font-display);
+  font-weight: 600;
+  font-size: 15.5px;
+  line-height: 1.25;
+  color: var(--ds-ink);
+}
+.mm-casc__row:hover .t, .mm-casc__row:focus-visible .t { color: var(--ds-accent-ink); }
+.mm-casc__txt .s {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--ds-font-body);
+  font-size: 12.5px;
+  line-height: 1.3;
+  color: var(--ds-ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* the honest note: classifications we can NAME but have no page for, and the states
+   that publish no markets at all. Deliberately not a link — it goes nowhere because
+   there is nowhere for it to go. */
+.mm-casc__note {
+  margin: 8px 2px 0;
+  padding-top: 9px;
+  border-top: 1px solid var(--ds-line);
+  font-family: var(--ds-font-body);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ds-ink-soft);
+  max-width: 62ch;
+}
+
+/* ==========================================================================
+   [BX-fix] THE STATE TIER'S GRID PLACEMENT
+   --------------------------------------------------------------------------
+   REGRESSION THIS REPAIRS, and why it was invisible in the earlier checks.
+
+   structural.css:13264 places the market matrix with a DIRECT-CHILD selector:
+
+       @media (min-width: 800px) {
+         #markets > .container > .loc-tabs { grid-column: 1 / -1; grid-row: 4; }
+       }
+
+   `#markets > .container` is a two-column grid (1.32fr / 1fr) and `.loc-tabs`
+   earned its full width only by being a direct child of it. Wrapping the matrix
+   in `.loc-states` + `.loc-panel--state` for the state tier broke that chain:
+   `.loc-tabs` stopped matching, fell back to auto placement, and rendered inside
+   a single 633px column — MEASURED at 1440: rail 256px, panel 337px, the
+   fourteen market tabs stacked one per row.
+
+   Every gate I had ran on markup, JSON-LD, link targets and the MENU's own box.
+   None of them looked at the PAGE's layout, which is why this survived a
+   15/15 pass and only showed up on a screenshot. The lesson is in the log.
+
+   `.loc-states` is now the direct child, so it takes the placement.
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 800px) {
+  #markets > .container > .loc-states { grid-column: 1 / -1; grid-row: 4; }
+}
+
+/* ==========================================================================
+   [BZ] TYPE-PAGE POINT LISTS
+   --------------------------------------------------------------------------
+   The 50 market x licence-type pages carry three bulleted blocks each — what
+   the classification authorises, who it suits, and how we work it. Everything
+   else those pages need already existed (.tp-note, .faq__list/.faq-item,
+   .closing-cta, .cta-row, the hero), so this is the only new component.
+
+   Sits in the `.tp-` namespace, which is the type-page vocabulary added by
+   [BR]; additive-only, nothing already on the site is reachable by it.
+   -------------------------------------------------------------------------- */
+
+.tp-points {
+  display: grid;
+  gap: var(--ds-space-sm);
+  margin: var(--ds-space-lg) 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: 74ch;
+}
+.tp-points li {
+  position: relative;
+  padding-left: 30px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ds-ink-soft);
+}
+/* the marker is a rule, not a disc — it matches the hairline language the rest
+   of the design system uses and stays legible on the dark bands */
+.tp-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .72em;
+  width: 16px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--ds-accent);
+}
+.tp-points li > strong { color: var(--ds-ink); font-weight: 600; }
+.section--dark .tp-points li { color: var(--ds-ink-soft); }
+.tp-points + .tp-note { margin-top: var(--ds-space-lg); }
+
+/* [BZ] cont. — the FAQ block on the 50 type pages is LEFT-aligned, not centred.
+   .faq__list ships `margin-inline: auto` for faq.html, where [O] pairs it with a
+   centred .faq__head so both axes agree. The type pages have a left-rail heading
+   like every other band on them, so inheriting the centring reproduced exactly the
+   defect [O] was written to fix: a centred list under a left-aligned heading, with
+   a dead quadrant lower-left. Scoped to #faqs, which is this page kind's own id —
+   faq.html uses #faq and is untouched. */
+#faqs .faq__list { margin-inline: 0; max-width: 820px; }
+
+/* ==========================================================================
+   [BZ] cont. — THE LOCATION CARD, left-most column of the Locations mega
+   --------------------------------------------------------------------------
+   The owner pointed at the Licensing dropdown's preview pane as the treatment.
+   One deliberate difference: THAT pane is aria-hidden / tabindex="-1" and
+   carries no role="menuitem", because it duplicates a row sitting beside it.
+   This card duplicates nothing — it is the ONLY route to a state's services
+   page — so it is a real, focusable menu item and must never inherit that
+   hidden-from-AT treatment.
+
+   All of the Licensing pane's styling is scoped through #mm-dd-licensing, so
+   none of it reaches here; this is authored in the .mm-casc namespace.
+   -------------------------------------------------------------------------- */
+
+.mm-casc__cards {
+  position: relative;
+  min-height: 0;
+  padding: 16px;
+  border-right: 1px solid var(--ds-line);
+  background: color-mix(in srgb, var(--ds-bg-surface) 40%, transparent);
+}
+.mm-casc__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+  height: 100%;
+  min-height: 190px;
+  padding: 20px;
+  overflow: hidden;
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-r-lg);
+  background: var(--ds-bg-surface-2);
+  box-shadow: var(--ds-shadow-card);
+  text-decoration: none;
+  isolation: isolate;
+  transition: border-color var(--ds-dur-fast) var(--ds-ease),
+              box-shadow var(--ds-dur-fast) var(--ds-ease);
+}
+.mm-casc__card[hidden] { display: none; }
+.mm-casc__card:hover, .mm-casc__card:focus-visible {
+  border-color: var(--ds-accent);
+  box-shadow: var(--ds-shadow-card), var(--ds-glow);
+  text-decoration: none;
+}
+.mm-casc__card:focus-visible { outline: 3px solid var(--ds-accent); outline-offset: 2px; }
+
+/* the state code as a watermark, the same device the Licensing pane uses for its
+   licence number — big, low-contrast, clipped by the card */
+.mm-casc__cardmark {
+  position: absolute;
+  z-index: -1;
+  top: -16px;
+  right: -6px;
+  font-family: var(--ds-font-display);
+  font-weight: 700;
+  font-size: 116px;
+  line-height: .82;
+  letter-spacing: -.05em;
+  color: color-mix(in srgb, var(--ds-accent) 16%, transparent);
+  pointer-events: none;
+  user-select: none;
+}
+.mm-casc__cardt {
+  font-family: var(--ds-font-display);
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.2;
+  color: var(--ds-ink);
+  text-wrap: balance;
+}
+.mm-casc__card:hover .mm-casc__cardt { color: var(--ds-accent-ink); }
+.mm-casc__cardd {
+  font-family: var(--ds-font-body);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ds-ink-soft);
+}
+.mm-casc__cardgo {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin-top: 10px;
+  border-radius: 50%;
+  background: var(--ds-primary-soft);
+  border: 1px solid var(--ds-line);
+  color: var(--ds-ink);
+  font-size: 15px;
+  transition: background var(--ds-dur-fast) var(--ds-ease),
+              transform var(--ds-dur-fast) var(--ds-ease);
+}
+.mm-casc__card:hover .mm-casc__cardgo {
+  background: var(--ds-accent);
+  color: var(--ds-bg-surface);
+  transform: translateX(3px);
+}
+@media (max-width: 900px) { .mm-casc__cards { display: none; } }
+
+/* [CA] the persistent route to the Locations page itself. The nav trigger is a
+   <button> that opens the panel and cannot also navigate — the disclosure controller
+   calls preventDefault in eight places, so making it an <a> would be a coin-flip on
+   whether the click ever reaches the browser. This link sits under the card instead,
+   visible whichever state is active. */
+.mm-casc__all {
+  display: block;
+  margin-top: 12px;
+  padding: 11px 14px;
+  border-radius: var(--ds-r-md);
+  border: 1px solid var(--ds-line);
+  background: var(--ds-primary-soft);
+  font-family: var(--ds-font-body);
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--ds-ink);
+  text-decoration: none;
+  transition: background var(--ds-dur-fast) var(--ds-ease), color var(--ds-dur-fast) var(--ds-ease);
+}
+.mm-casc__all:hover, .mm-casc__all:focus-visible {
+  background: var(--ds-accent); color: var(--ds-bg-surface); text-decoration: none;
+}
+.mm-casc__all:focus-visible { outline: 3px solid var(--ds-accent); outline-offset: 2px; }
+.mm-casc__cards { display: flex; flex-direction: column; }
+.mm-casc__card { flex: 1; height: auto; }
+
+/* ==========================================================================
+   [CA] cont. — COLUMN 4 of the Locations cascade
+   --------------------------------------------------------------------------
+   Hovering an option in column 3 reveals what sits under it. For California
+   that is the real depth: a classification opens onto the ten market pages
+   that carry it. For Arizona and Florida it is the published county and city
+   lists — rendered as TEXT, not links, because the client publishes no page
+   for an individual AZ or FL county, and a dead link is worse than a name.
+   -------------------------------------------------------------------------- */
+
+.mm-casc__details {
+  min-height: 0;
+  overflow-y: auto;
+  padding: 18px 22px 20px;
+  border-left: 1px solid var(--ds-line);
+  background: color-mix(in srgb, var(--ds-bg-surface) 30%, transparent);
+}
+.mm-casc__detail[hidden] { display: none; }
+.mm-casc__dfall {
+  margin: 0;
+  font-family: var(--ds-font-body);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ds-ink-soft);
+  font-style: italic;
+}
+.mm-casc__dhead {
+  margin: 0 0 4px;
+  font-family: var(--ds-font-display);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.25;
+  color: var(--ds-ink);
+}
+.mm-casc__dnote {
+  margin: 0 0 12px;
+  font-family: var(--ds-font-body);
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--ds-ink-soft);
+}
+.mm-casc__dlist {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mm-casc__dlist[data-cols="1"] { grid-template-columns: minmax(0, 1fr); }
+.mm-casc__dlist[data-cols="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.mm-casc__dlist li { min-width: 0; }
+.mm-casc__dlist a,
+.mm-casc__dlist span {
+  display: block;
+  padding: 5px 8px;
+  border-radius: var(--ds-r-sm);
+  font-family: var(--ds-font-body);
+  font-size: 13px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.mm-casc__dlist a { color: var(--ds-ink); text-decoration: none; }
+.mm-casc__dlist a:hover, .mm-casc__dlist a:focus-visible {
+  background: var(--ds-primary-soft); color: var(--ds-accent-ink); text-decoration: none;
+}
+.mm-casc__dlist a:focus-visible { outline: 2px solid var(--ds-accent); outline-offset: 1px; }
+/* a published place with no page of its own — deliberately not a link */
+.mm-casc__dlist span { color: var(--ds-ink-soft); }
+@media (max-width: 1000px) { .mm-casc__details { display: none; } }
+
+/* [CA] cont. — every cascade column must be able to SCROLL, not push the panel past its cap.
+   MEASURED: Florida's 66-county detail list overflowed the panel by 194px and 66 names were
+   unreachable. `min-height: 0` alone is not enough — these are grid items whose row is sized
+   by content, so each also needs an explicit max-height for its `overflow-y: auto` to engage.
+   This is the same failure the Locations menu hit once before with .mm-mega__cards; the
+   pattern is: min-height:0 lets it shrink, max-height makes it actually bounded. */
+.mm-casc__rail,
+.mm-casc__panes,
+.mm-casc__details { max-height: min(76vh, 560px); }
+
+/* ==========================================================================
+   [CB] SERVICES SPLIT — the Brokerage band on the state services page
+   --------------------------------------------------------------------------
+   Replaces a full-width .doc-list of eight stacked rows. MEASURED at 1440:
+   the old band was 1410px tall and its prose occupied 633px of the 1200px
+   container, leaving the right half empty for its whole height. This puts the
+   eight services in that space and holds the copy to a 46ch measure.
+   After: 582px, a 59% cut, with one extra route (All services) that the old
+   band did not have.
+
+   Its own `.svc-` namespace; nothing on the site is reachable by it.
+   -------------------------------------------------------------------------- */
+
+.svc-split {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: 0 var(--ds-space-xl);
+  /* STRETCH, not start: the copy column is the taller of the two, and with `start` the
+     card grid stopped at its natural ~450px and left ~350px of dead space beneath it.
+     Stretching lets the grid fill the row so both columns end on the same line. */
+  align-items: stretch;
+}
+@media (max-width: 900px) { .svc-split { grid-template-columns: 1fr; gap: var(--ds-space-lg); } }
+.svc-split__copy .lede { max-width: 46ch; }
+.svc-split__copy .btn { margin-top: var(--ds-space-md); }
+
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* four equal rows that share whatever height the copy column sets, so the cards grow
+     into the space instead of the space sitting empty */
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  height: 100%;
+}
+@media (max-width: 900px) {
+  /* stacked, the copy no longer sets the height — let the cards size to their content.
+     The card overrides that go with this live AFTER .svc-card at the end of the block:
+     placed here they sat BEFORE it and lost the cascade on equal specificity, so
+     min-height never applied and the column stayed 64px. MEASURED at 375 before the move. */
+  .svc-grid { grid-template-columns: 1fr; grid-template-rows: none; height: auto; }
+}
+
+
+/* ==========================================================================
+   [CB] SERVICE CARD — the Licensing preview pane's material, at grid scale
+   --------------------------------------------------------------------------
+   Owner asked for the treatment used by `#mm-dd-licensing .mm-dd-preview`:
+   a clipped numeral watermark, the layered warm ground, copy anchored to the
+   bottom, and a gradient arrow as the affordance.
+
+   The pane's own rules are ALL scoped through `#mm-dd-licensing`, so none of
+   them reach here — the material is carried over deliberately rather than
+   inherited, and re-tuned for eight cards in a grid instead of one 268px pane:
+   watermark 186px -> 104px, title 26px -> 19px, arrow 44px -> 38px.
+
+   TWO DIFFERENCES FROM THE PANE, BOTH DELIBERATE:
+   1. The pane is `aria-hidden="true" tabindex="-1"` with no role, because it
+      duplicates a list item beside it. These cards duplicate nothing — each is
+      the only route to its service page — so they stay real, focusable links.
+      Only the watermark and the arrow glyph are aria-hidden.
+   2. The pane shows "§" for non-numbered items so a code is never invented.
+      Here every card has a real sequence position, so the numeral is honest.
+   -------------------------------------------------------------------------- */
+
+.svc-card {
+  --svc-bg:
+    var(--ds-grain),
+    var(--ds-glow-wash),
+    linear-gradient(158deg, color-mix(in srgb, var(--ds-accent) 13%, transparent) 0%,
+                            transparent 58%),
+    linear-gradient(0deg, color-mix(in srgb, var(--ds-primary-deep) 82%, transparent),
+                          color-mix(in srgb, var(--ds-primary-deep) 82%, transparent)),
+    var(--ds-bg-surface-2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--ds-space-2xs);
+  min-width: 0;
+  min-height: 0;
+  padding: var(--ds-space-md);
+  isolation: isolate;
+  overflow: hidden;
+  text-decoration: none;
+  border-radius: var(--ds-r-md);
+  border: 1px solid color-mix(in srgb, var(--ds-accent) 30%, transparent);
+  background: var(--svc-bg);
+  box-shadow: var(--ds-inset-hi), var(--ds-shadow-rest);
+  transition: border-color var(--ds-dur) var(--ds-ease),
+              box-shadow var(--ds-dur) var(--ds-ease);
+}
+.svc-card:hover,
+.svc-card:focus-visible {
+  border-color: color-mix(in srgb, var(--ds-accent) 62%, transparent);
+  box-shadow: var(--ds-inset-hi), var(--ds-shadow-rest), var(--ds-glow);
+  text-decoration: none;
+}
+.svc-card:focus-visible { outline: 3px solid var(--ds-accent); outline-offset: 2px; }
+
+/* the numeral sits OVER the card's background and UNDER its text — the same
+   z-index:-1 + isolation:isolate pairing the pane uses */
+.svc-card__mark {
+  position: absolute;
+  z-index: -1;
+  top: -18px;
+  right: -8px;
+  font-family: var(--ds-font-display);
+  font-weight: 800;
+  font-size: 104px;
+  line-height: .72;
+  letter-spacing: -.05em;
+  color: color-mix(in srgb, var(--ds-accent) 22%, transparent);
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: color var(--ds-dur) var(--ds-ease),
+              transform var(--ds-dur-slow) var(--ds-ease-out);
+}
+.svc-card:hover .svc-card__mark {
+  color: color-mix(in srgb, var(--ds-accent) 32%, transparent);
+  transform: translateY(3px);
+}
+
+.svc-card__t {
+  font-family: var(--ds-font-display);
+  font-weight: 800;
+  font-size: 19px;
+  line-height: 1.14;
+  letter-spacing: -.015em;
+  /* pretty, not balance — the pane's note applies here too: balancing breaks a
+     hyphenated service name at the wrong point */
+  text-wrap: pretty;
+  color: var(--ds-ink-heading);
+}
+.svc-card__d {
+  font-family: var(--ds-font-body);
+  font-weight: 400;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ds-ink-soft);
+  overflow-wrap: anywhere;
+}
+/* a glyph, no words — the card is already obviously a link, and a label repeated
+   eight times in one band is noise */
+.svc-card__go {
+  align-self: flex-start;
+  flex: none;
+  margin-top: var(--ds-space-xs);
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--ds-r-pill);
+  font-family: var(--ds-font-body);
+  font-size: 16px;
+  line-height: 1;
+  color: var(--ds-ink-on-dark);
+  background-image: var(--ds-grad-brand);
+  border: 1px solid color-mix(in srgb, var(--ds-accent) 55%, transparent);
+  box-shadow: var(--ds-glow);
+  transition: transform var(--ds-dur-fast) var(--ds-ease);
+}
+.svc-card:hover .svc-card__go { transform: translateX(3px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .svc-card__mark, .svc-card__go { transition: none; }
+  .svc-card:hover .svc-card__mark { transform: none; }
+  .svc-card:hover .svc-card__go { transform: none; }
+}
+/* stacked: the grid no longer stretches, so give the card a floor or the watermark
+   has nothing to sit above. MUST stay after the base rules — placing it earlier
+   lost the cascade on equal specificity once already this session. */
+@media (max-width: 900px) {
+  .svc-card { min-height: 148px; }
+  .svc-card__mark { font-size: 88px; }
+}

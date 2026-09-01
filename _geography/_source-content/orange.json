@@ -1,0 +1,450 @@
+{
+  "market": "orange",
+  "label": "Orange County",
+  "sourceNote": "Extracted 2026-09-01 from the client's own live pages at liquorlicenseagents.com, <main> element only (each contains exactly one <article>; no nav/header/footer inside). URLs taken from https://liquorlicenseagents.com/sitemaps/sitemap-counties.xml (the cities sitemap contains no orange-county entries). The '-license' slug variant was used per spec: /counties/orange-county/orange-county-type-NN-license/. NOTE: a second, shorter slug (/orange-county-type-NN/) also returns HTTP 200 for all five types with DIFFERENT h1/title and body copy - the client has two parallel page sets per type for this county. Orange County is the only county in the sitemap using the '-license' suffix; every other county uses the short form. Content copied verbatim; bullet markers ('•\\t') stripped. STEP 3 scan for unverifiable firm claims (superiority, insider ABC relationships, case history, competitor-beating) and for competitor names (liquorlicense.com) returned ZERO hits across all five pages - nothing was excluded or rewritten.",
+  "extractedAt": "2026-09-01",
+  "types": {
+    "20": {
+      "url": "https://liquorlicenseagents.com/counties/orange-county/orange-county-type-20-license/",
+      "h1": "Orange County Type 20 Beer and Wine Off-Sale License – Orange County Type 20 License",
+      "title": "Orange County Type 20 Beer and Wine Off-Sale License – Orange County Type 20 License",
+      "metaDescription": "Grocery stores, convenience retailers, delis, and neighborhood markets in Orange County that want to sell packaged beer and wine for off-premises consumption need a California Liquor License Type 20.",
+      "intro": "Grocery stores, convenience retailers, delis, and neighborhood markets in Orange County that want to sell packaged beer and wine for off-premises consumption need a California Liquor License Type 20. Orange County's dense network of grocery stores, specialty food markets, gourmet delis, and neighborhood convenience retailers—from the Vietnamese supermarkets of Little Saigon in Westminster and Garden Grove to the upscale organic grocers of Newport Beach and Laguna Beach—depends on the Type 20 license to sell packaged beer and wine for off-premises consumption across one of California's most affluent and diverse counties. This license does not permit on-premises consumption, the sale of spirits, or open containers, but it is often faster and more accessible than a full-liquor license.",
+      "authorizes": {
+        "heading": "What the Type 20 License Authorizes in Orange County",
+        "lead": "A Type 20 license in Orange County generally allows you to:",
+        "bullets": [
+          "Sell beer, malt beverages, and wine in sealed containers for off-site consumption",
+          "Stock both refrigerated and shelf-stable products in coolers, aisles, and displays",
+          "Integrate beer-and-wine sections into markets, delis, and corner stores",
+          "Operate strictly as an off-sale premises, with no on-premises alcohol consumption"
+        ]
+      },
+      "rightFor": {
+        "heading": "Is a Type 20 License Right for Your Orange County Business?",
+        "body": "A Type 20 license may be the right fit if: • Your core business in Orange County is a grocery store, convenience store, deli, or similar food retail operation • You do not plan to stock spirits or run a dedicated liquor store • Your location is in a neighborhood where residents expect packaged beer-and-wine at local markets • You are balancing alcohol sales with a strong focus on food, groceries, and daily essentials",
+        "lead": "A Type 20 license may be the right fit if:",
+        "bullets": [
+          "Your core business in Orange County is a grocery store, convenience store, deli, or similar food retail operation",
+          "You do not plan to stock spirits or run a dedicated liquor store",
+          "Your location is in a neighborhood where residents expect packaged beer-and-wine at local markets",
+          "You are balancing alcohol sales with a strong focus on food, groceries, and daily essentials"
+        ]
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Helps Type 20 Buyers and Applicants in Orange County",
+        "body": "Orange County spans multiple jurisdictions—including the cities of Anaheim, Irvine, Santa Ana, Newport Beach, Huntington Beach, and dozens of others—each with their own local zoning, conditional use permit requirements, and proximity rules layered on top of ABC standards. Liquor License Agents helps Orange County Type 20 buyers and sellers by: • Reviewing your Orange County site, zoning, and neighborhood plans to identify any alcohol restrictions specific to your city or unincorporated county area • Determining whether you should pursue a new license or purchase an existing Type 20 license by transfer • Assisting with valuation, negotiations, and escrow when a Type 20 license is part of a business sale • Preparing ABC applications, premises diagrams, and ownership disclosures that align with city and county filings • Coordinating with your specific Orange County city or county planning staff on zoning, CUPs, security, and neighborhood conditions • Tracking ABC processing and helping you respond to public comments, protests, or proposed conditions Our goal is to keep license work in sync with your lease, build-out, and opening timeline so alcohol permissions are not the last piece to fall into place.",
+        "lead": "Orange County spans multiple jurisdictions—including the cities of Anaheim, Irvine, Santa Ana, Newport Beach, Huntington Beach, and dozens of others—each with their own local zoning, conditional use permit requirements, and proximity rules layered on top of ABC standards. Liquor License Agents helps Orange County Type 20 buyers and sellers by:",
+        "bullets": [
+          "Reviewing your Orange County site, zoning, and neighborhood plans to identify any alcohol restrictions specific to your city or unincorporated county area",
+          "Determining whether you should pursue a new license or purchase an existing Type 20 license by transfer",
+          "Assisting with valuation, negotiations, and escrow when a Type 20 license is part of a business sale",
+          "Preparing ABC applications, premises diagrams, and ownership disclosures that align with city and county filings",
+          "Coordinating with your specific Orange County city or county planning staff on zoning, CUPs, security, and neighborhood conditions",
+          "Tracking ABC processing and helping you respond to public comments, protests, or proposed conditions"
+        ],
+        "closing": "Our goal is to keep license work in sync with your lease, build-out, and opening timeline so alcohol permissions are not the last piece to fall into place."
+      },
+      "faqHeading": "Orange County Type 20 Liquor License FAQs",
+      "faqs": [
+        {
+          "q": "What products can I sell with a California Type 20 beer and wine license in Orange County?",
+          "a": "A Type 20 license allows you to sell beer, malt beverages, and wine in sealed containers for off-site consumption at your Orange County retail location. Spirits and hard liquor are not permitted under a Type 20 license. If you want to sell spirits, you will need a Type 21 license instead."
+        },
+        {
+          "q": "Can I sell chilled beer and wine to go with a Type 20 license in Orange County?",
+          "a": "Yes. Chilled beer and wine are common in Type 20 locations, especially markets and convenience stores throughout Orange County. You must still follow ABC rules and any city-specific conditions—which vary across Orange County's many incorporated cities and unincorporated areas—regarding display, signage, and responsible retailing."
+        },
+        {
+          "q": "Do I need a minimum percentage of grocery or food sales for a Type 20 license in Orange County?",
+          "a": "There is no single statewide percentage requirement, but ABC and local planning staff in your specific Orange County city will look at your overall business model. Your store should clearly function as a bona fide convenience, grocery, or similar retail environment, not as an unlicensed bar."
+        },
+        {
+          "q": "Can I transfer a Type 20 license when I buy or sell a store in Orange County?",
+          "a": "Yes. Type 20 licenses are often transferred along with the sale of markets, corner stores, and delis throughout Orange County. Transfers must go through ABC and usually require the applicable city's review. Coordinating the timing of your license transfer with your lease and escrow is essential."
+        },
+        {
+          "q": "How long does it take to obtain or transfer a Type 20 license in Orange County?",
+          "a": "Expect a process of several months, sometimes longer in sensitive neighborhoods or when conditional use filings are required. ABC review, local city planning approvals, community input, and any build-out work all contribute to the timeline. Timelines can vary significantly across Orange County's many cities and unincorporated areas."
+        },
+        {
+          "q": "What zoning, CUP, or local restrictions affect Type 20 licenses in Orange County?",
+          "a": "Orange County encompasses dozens of incorporated cities—each with its own zoning code, distance requirements from schools and churches, and conditional use authorization processes for off-sale alcohol. Unincorporated county areas have their own rules as well. We help you understand how local policies at your specific address affect your application before you commit."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are opening, acquiring, or planning a business in Orange County that needs a Type 20 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps with an experienced advisor."
+      },
+      "localNames": [
+        "Little Saigon (Westminster / Garden Grove)"
+      ],
+      "citiesNamed": [
+        "Westminster",
+        "Garden Grove",
+        "Newport Beach",
+        "Laguna Beach",
+        "Anaheim",
+        "Irvine",
+        "Santa Ana",
+        "Huntington Beach"
+      ],
+      "localSpecificity": "REAL local place named, but only one and only in the intro: 'Little Saigon' (Westminster/Garden Grove). Everything after the intro is county-generic prose plus a flat list of city names (Anaheim, Irvine, Santa Ana, Newport Beach, Huntington Beach). No landmark, district or neighbourhood appears in authorizes, rightFor, howWeHelp or any of the 6 FAQs.",
+      "firmClaimsFlagged": [],
+      "wordCount": 919
+    },
+    "21": {
+      "url": "https://liquorlicenseagents.com/counties/orange-county/orange-county-type-21-license/",
+      "h1": "Orange County Type 21 Full Off-Sale Liquor License – Orange County Type 21 License",
+      "title": "Orange County Type 21 Full Off-Sale Liquor License – Orange County Type 21 License",
+      "metaDescription": "A California Liquor License Type 21 is required for any retail store in Orange County that wants to sell a full range of packaged alcoholic beverages—including beer, wine, and spirits—for off-premises consumption.",
+      "intro": "A California Liquor License Type 21 is required for any retail store in Orange County that wants to sell a full range of packaged alcoholic beverages—including beer, wine, and spirits—for off-premises consumption. Orange County's premium retail spirits market—spanning the boutique wine shops of Laguna Beach and Dana Point to the specialty liquor retailers serving the upscale communities of Irvine, Newport Beach, and Mission Viejo—makes the Type 21 full off-sale license essential for any retailer wanting to carry the complete range of packaged beer, wine, and distilled spirits. Unlike the Type 20, the Type 21 covers distilled spirits and is the standard license for full-service liquor stores, premium wine shops, and grocery retailers carrying a comprehensive spirits selection.",
+      "authorizes": {
+        "heading": "What the Type 21 License Authorizes in Orange County",
+        "lead": "A Type 21 license in Orange County generally allows you to:",
+        "bullets": [
+          "Sell beer, wine, and distilled spirits in sealed containers for off-site consumption",
+          "Stock a full range of spirits, including vodka, whiskey, tequila, rum, and more",
+          "Operate as a dedicated liquor store or include a full spirits section within a larger retail format",
+          "Sell all packaged alcohol products with no on-premises consumption permitted"
+        ]
+      },
+      "rightFor": {
+        "heading": "Is a Type 21 License Right for Your Orange County Business?",
+        "body": "A Type 21 license may be the right fit if: • Your business model in Orange County centers on a full-service liquor store or spirits-forward retail experience • You want to stock a complete range of beer, wine, and distilled spirits • Your clientele expects access to a curated spirits selection, not just beer and wine • You want the flexibility to grow into premium spirits curation, rare whiskeys, or specialty liquors",
+        "lead": "A Type 21 license may be the right fit if:",
+        "bullets": [
+          "Your business model in Orange County centers on a full-service liquor store or spirits-forward retail experience",
+          "You want to stock a complete range of beer, wine, and distilled spirits",
+          "Your clientele expects access to a curated spirits selection, not just beer and wine",
+          "You want the flexibility to grow into premium spirits curation, rare whiskeys, or specialty liquors"
+        ]
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Helps Type 21 Buyers and Applicants in Orange County",
+        "body": "The Type 21 license is one of the most regulated and quota-restricted licenses in California. Orange County is a competitive market with many cities at or near their census tract quotas, meaning purchasing on the open market is often the only path to a new Type 21. Liquor License Agents helps by: • Evaluating your Orange County address for proximity restrictions, quota availability by census tract, and local city zoning compliance • Advising whether to purchase an existing Type 21 license on the open market or apply for a new one • Assisting with valuation, negotiation, and escrow when acquiring a Type 21 as part of a business sale • Preparing complete ABC applications, premises diagrams, and all required ownership disclosures • Coordinating with your Orange County city or county staff on conditional use permits, security plans, and hours of operation • Monitoring public posting periods and responding to any protests or neighborhood objections Our goal is to keep license work in sync with your lease, build-out, and opening timeline so alcohol permissions are not the last piece to fall into place.",
+        "lead": "The Type 21 license is one of the most regulated and quota-restricted licenses in California. Orange County is a competitive market with many cities at or near their census tract quotas, meaning purchasing on the open market is often the only path to a new Type 21. Liquor License Agents helps by:",
+        "bullets": [
+          "Evaluating your Orange County address for proximity restrictions, quota availability by census tract, and local city zoning compliance",
+          "Advising whether to purchase an existing Type 21 license on the open market or apply for a new one",
+          "Assisting with valuation, negotiation, and escrow when acquiring a Type 21 as part of a business sale",
+          "Preparing complete ABC applications, premises diagrams, and all required ownership disclosures",
+          "Coordinating with your Orange County city or county staff on conditional use permits, security plans, and hours of operation",
+          "Monitoring public posting periods and responding to any protests or neighborhood objections"
+        ],
+        "closing": "Our goal is to keep license work in sync with your lease, build-out, and opening timeline so alcohol permissions are not the last piece to fall into place."
+      },
+      "faqHeading": "Orange County Type 21 Liquor License FAQs",
+      "faqs": [
+        {
+          "q": "What is the difference between a Type 20 and a Type 21 license in Orange County?",
+          "a": "A Type 20 allows only packaged beer and wine for off-sale consumption, while a Type 21 allows the full range of packaged alcoholic beverages including distilled spirits. If you want to sell vodka, whiskey, tequila, or any other spirits at your Orange County retail location, you need a Type 21."
+        },
+        {
+          "q": "Are Type 21 licenses subject to quota restrictions in Orange County?",
+          "a": "Yes. Type 21 licenses are quota-restricted in California, with availability capped by census tract population. In many of Orange County's most densely developed cities—including Santa Ana, Anaheim, and Garden Grove—census tract quotas are exhausted, making the open secondary market the only practical path to obtaining a Type 21."
+        },
+        {
+          "q": "Can I transfer a Type 21 license when buying a liquor store in Orange County?",
+          "a": "Yes. Type 21 transfers are common throughout Orange County when convenience stores or liquor retailers change ownership. The transfer must go through ABC and typically requires background checks, premises review, and public posting. Local city review is also required. We help ensure the transfer is properly timed with your escrow and lease."
+        },
+        {
+          "q": "What local zoning or CUP requirements apply to Type 21 licenses in Orange County?",
+          "a": "Each city in Orange County has its own zoning code and may require conditional use authorization, impose hours restrictions, mandate security measures, or apply distance rules from schools, parks, or residential zones. Requirements vary significantly between cities like Newport Beach, Santa Ana, and Irvine. We review your specific address before you commit."
+        },
+        {
+          "q": "How long does it take to get a Type 21 license in Orange County?",
+          "a": "Transfers typically take several months. New applications in over-concentrated or sensitive areas may face protests and take considerably longer. Some Orange County cities add their own review processes on top of ABC, extending timelines further. Starting early is essential."
+        },
+        {
+          "q": "What is the typical cost of a Type 21 license in Orange County?",
+          "a": "Type 21 license prices in Orange County vary based on quota availability, census tract, and market conditions. Licenses in premium, under-quota areas—such as parts of Newport Beach, Irvine, and Laguna Beach—can command significantly higher prices than those in areas with greater availability. We provide current market valuations as part of our brokerage service."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are opening, acquiring, or planning a business in Orange County that needs a Type 21 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps with an experienced advisor."
+      },
+      "localNames": [],
+      "citiesNamed": [
+        "Laguna Beach",
+        "Dana Point",
+        "Irvine",
+        "Newport Beach",
+        "Mission Viejo",
+        "Santa Ana",
+        "Anaheim",
+        "Garden Grove"
+      ],
+      "localSpecificity": "NO real local places named anywhere on the page. Zero neighbourhoods, districts or landmarks. The only 'local' content is Orange County city names (Laguna Beach, Dana Point, Irvine, Newport Beach, Mission Viejo, Santa Ana, Anaheim, Garden Grove) dropped into otherwise generic statewide Type 21 prose. This is the weakest of the five and the one that reads as templated.",
+      "firmClaimsFlagged": [],
+      "wordCount": 913
+    },
+    "41": {
+      "url": "https://liquorlicenseagents.com/counties/orange-county/orange-county-type-41-license/",
+      "h1": "Orange County Type 41 Beer and Wine Eating Place License – Orange County Type 41 License",
+      "title": "Orange County Type 41 Beer and Wine Eating Place License – Orange County Type 41 License",
+      "metaDescription": "Restaurants, cafés, pizzerias, brunch spots, and casual dining establishments in Orange County that want to serve beer and wine on-premises with meals typically need a California Liquor License Type 41.",
+      "intro": "Restaurants, cafés, pizzerias, brunch spots, and casual dining establishments in Orange County that want to serve beer and wine on-premises with meals typically need a California Liquor License Type 41. Orange County's celebrated restaurant landscape—from the beachfront dining of Huntington Beach and Laguna Beach to the internationally diverse restaurant corridors of Irvine's Diamond Jamboree and Little Saigon in Westminster—relies on the Type 41 beer-and-wine eating place license for the many food-first dining concepts that want to offer craft beers and curated wine lists without the overhead of a full bar program. The Type 41 is an on-sale beer-and-wine license issued to bona fide eating places. It does not permit the sale of distilled spirits, but it is a cost-effective and manageable way for food-first businesses to add alcohol service without the complexity of a full bar program.",
+      "authorizes": {
+        "heading": "What the Type 41 License Authorizes in Orange County",
+        "lead": "A Type 41 license in Orange County generally allows you to:",
+        "bullets": [
+          "Serve beer and wine for on-premises consumption with meals",
+          "Offer draft, bottled, and canned beer, plus still and sparkling wine",
+          "Provide table, counter, or bar service as part of your restaurant operation",
+          "Welcome families and minors, as long as you are operating as a true eating place"
+        ]
+      },
+      "rightFor": {
+        "heading": "Is a Type 41 License Right for Your Orange County Business?",
+        "body": "A Type 41 license may be the right fit if: • Your identity in Orange County is food-first, and alcohol is meant to complement your menu • You are running a café, pizzeria, casual restaurant, or brunch spot rather than a cocktail lounge • You expect a mix of families, tourists, and neighborhood regulars • Your space, budget, and staffing do not justify a full liquor bar or bar-centric buildout",
+        "lead": "A Type 41 license may be the right fit if:",
+        "bullets": [
+          "Your identity in Orange County is food-first, and alcohol is meant to complement your menu",
+          "You are running a café, pizzeria, casual restaurant, or brunch spot rather than a cocktail lounge",
+          "You expect a mix of families, tourists, and neighborhood regulars",
+          "Your space, budget, and staffing do not justify a full liquor bar or bar-centric buildout"
+        ]
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Helps Type 41 Buyers and Applicants in Orange County",
+        "body": "In Orange County, ABC requirements sit on top of individual city planning, zoning, and conditional use rules—each city from Anaheim to San Clemente administers its own review process. Coordinating these layers is essential. Liquor License Agents assists by: • Reviewing your kitchen, menu, and floor plan in Orange County to confirm bona fide eating place status • Advising whether to apply for a new Type 41 license or purchase and transfer an existing license • Coordinating Type 41 transfers as part of restaurant acquisitions, asset sales, or partnership changes • Preparing ABC applications, premises diagrams, and ownership disclosures tailored to your location • Working with your Orange County city's planning and related departments on outdoor dining, parklets, and hours of operation • Monitoring ABC review, responding to questions, and helping you manage neighborhood input or proposed conditions Our goal is to keep license work in sync with your lease, build-out, and opening timeline so alcohol permissions are not the last piece to fall into place.",
+        "lead": "In Orange County, ABC requirements sit on top of individual city planning, zoning, and conditional use rules—each city from Anaheim to San Clemente administers its own review process. Coordinating these layers is essential. Liquor License Agents assists by:",
+        "bullets": [
+          "Reviewing your kitchen, menu, and floor plan in Orange County to confirm bona fide eating place status",
+          "Advising whether to apply for a new Type 41 license or purchase and transfer an existing license",
+          "Coordinating Type 41 transfers as part of restaurant acquisitions, asset sales, or partnership changes",
+          "Preparing ABC applications, premises diagrams, and ownership disclosures tailored to your location",
+          "Working with your Orange County city's planning and related departments on outdoor dining, parklets, and hours of operation",
+          "Monitoring ABC review, responding to questions, and helping you manage neighborhood input or proposed conditions"
+        ],
+        "closing": "Our goal is to keep license work in sync with your lease, build-out, and opening timeline so alcohol permissions are not the last piece to fall into place."
+      },
+      "faqHeading": "Orange County Type 41 Liquor License FAQs",
+      "faqs": [
+        {
+          "q": "What can I serve with a California Type 41 beer and wine license in Orange County?",
+          "a": "With a Type 41 license, you can serve beer and wine for guests to enjoy on-site with their meals at your Orange County restaurant. That typically includes draft and packaged beer, plus a range of wines by the glass and bottle. Spirits and hard liquor are not allowed under this license."
+        },
+        {
+          "q": "Do I need a full kitchen and bona fide food service to qualify for a Type 41 license in Orange County?",
+          "a": "Yes. A Type 41 is reserved for bona fide eating places. You must operate a real kitchen with equipment and a menu capable of producing complete meals, not just snacks or prepackaged items. ABC and your local Orange County city will look at how your restaurant actually functions on a day-to-day basis."
+        },
+        {
+          "q": "Can I upgrade from a Type 41 beer and wine license to a Type 47 full liquor license in Orange County?",
+          "a": "Many operators in Orange County start with a Type 41 and later pursue a Type 47 when they are ready for a full bar. Upgrading usually means applying for, or acquiring, a Type 47 license rather than simply amending the existing license. We help you evaluate costs, timing, and feasibility before you change strategy."
+        },
+        {
+          "q": "Are there restrictions on outdoor dining with a Type 41 license in Orange County?",
+          "a": "Yes. Any outdoor area where beer and wine are served must be included in your licensed premises diagram and usually needs city approval. In Orange County, outdoor dining regulations vary significantly by city—from beachside communities like Huntington Beach to inland cities like Irvine and Anaheim—and parklet or patio programs often require separate local approvals."
+        },
+        {
+          "q": "How long does it take to obtain or transfer a Type 41 license in Orange County?",
+          "a": "Most projects should plan for a process measured in months, not weeks. ABC review, posting requirements, and local city approvals—which vary across Orange County's many jurisdictions—all affect timing. Starting early and submitting complete, accurate documents improves your chances of staying on schedule."
+        },
+        {
+          "q": "What neighborhood, CUP, or zoning conditions might affect my Type 41 approval in Orange County?",
+          "a": "Orange County's many cities each have their own alcohol overlay zones, entertainment districts, and neighborhood-specific conditions related to hours, outdoor seating, live entertainment, and noise. We review your specific address and city's entitlement history so you understand conditions before committing to a lease or purchase."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are opening, acquiring, or planning a business in Orange County that needs a Type 41 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps with an experienced advisor."
+      },
+      "localNames": [
+        "Little Saigon (Westminster)",
+        "Diamond Jamboree (Irvine)"
+      ],
+      "citiesNamed": [
+        "Huntington Beach",
+        "Laguna Beach",
+        "Irvine",
+        "Westminster",
+        "Anaheim",
+        "San Clemente"
+      ],
+      "localSpecificity": "REAL local places named, both only in the intro: 'Little Saigon in Westminster' and \"Irvine's Diamond Jamboree\" (a genuine, specific dining centre). Body and all 6 FAQs revert to county-generic prose plus city names (Anaheim, San Clemente, Huntington Beach, Irvine).",
+      "firmClaimsFlagged": [],
+      "wordCount": 935
+    },
+    "47": {
+      "url": "https://liquorlicenseagents.com/counties/orange-county/orange-county-type-47-license/",
+      "h1": "Orange County Type 47 Full On-Sale Liquor License for Restaurants – Orange County Type 47 License",
+      "title": "Orange County Type 47 Full On-Sale Liquor License for Restaurants – Orange County Type 47 License",
+      "metaDescription": "Restaurants and dining establishments in Orange County that want to serve a full bar—including cocktails, spirits, beer, and wine—alongside food typically need a California Liquor License Type 47.",
+      "intro": "Restaurants and dining establishments in Orange County that want to serve a full bar—including cocktails, spirits, beer, and wine—alongside food typically need a California Liquor License Type 47. Orange County's world-class dining scene—home to destination restaurants along Laguna Beach's Coast Highway, the Fashion Island corridor in Newport Beach, the Irvine Spectrum, and the Anaheim Resort district—depends on Type 47 licenses to offer the complete cocktail and spirits programs that the county's affluent residents and millions of annual visitors expect. The Type 47 is one of the most sought-after on-sale licenses in California. It permits the sale and service of all alcoholic beverages for on-premises consumption at a bona fide eating place, making it essential for restaurants, hotel restaurants, and supper clubs that want to offer a complete hospitality experience.",
+      "authorizes": {
+        "heading": "What the Type 47 License Authorizes in Orange County",
+        "lead": "A Type 47 license in Orange County generally allows you to:",
+        "bullets": [
+          "Serve beer, wine, and distilled spirits for on-premises consumption with meals",
+          "Operate a full bar as part of a bona fide eating place",
+          "Offer cocktails, craft spirits, premium wine programs, and beer service",
+          "Welcome minors as long as the establishment operates primarily as a restaurant"
+        ]
+      },
+      "rightFor": {
+        "heading": "Is a Type 47 License Right for Your Orange County Business?",
+        "body": "A Type 47 license may be the right fit if: • Your Orange County concept is a full-service restaurant that wants to offer a complete cocktail and spirits program • You have or plan to build a full commercial kitchen capable of producing complete meals • Your revenue model depends on food sales comprising a significant portion of overall sales • You want the flexibility to offer craft cocktails, premium spirits, and a curated wine and beer list",
+        "lead": "A Type 47 license may be the right fit if:",
+        "bullets": [
+          "Your Orange County concept is a full-service restaurant that wants to offer a complete cocktail and spirits program",
+          "You have or plan to build a full commercial kitchen capable of producing complete meals",
+          "Your revenue model depends on food sales comprising a significant portion of overall sales",
+          "You want the flexibility to offer craft cocktails, premium spirits, and a curated wine and beer list"
+        ]
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Helps Type 47 Buyers and Applicants in Orange County",
+        "body": "The Type 47 is quota-restricted in California and subject to each city's own conditional use, zoning, and proximity rules layered on top of ABC requirements. Orange County's premium restaurant markets—particularly Newport Beach, Laguna Beach, and Irvine—are competitive for Type 47 licenses. Liquor License Agents assists by: • Evaluating whether a new Type 47 license is available in your Orange County census tract or whether purchasing an existing license is necessary • Brokering the purchase or transfer of existing Type 47 licenses from sellers throughout the Orange County market • Assisting with valuation, negotiation, escrow, and ABC transfer applications • Preparing complete premises diagrams, ownership disclosures, and ABC application packages • Coordinating with your Orange County city's planning department on CUPs, security plans, hours of operation, and outdoor service areas • Monitoring the public posting period and responding to any protests or proposed conditions Our goal is to keep license work in sync with your lease, build-out, and opening timeline so alcohol permissions are not the last piece to fall into place.",
+        "lead": "The Type 47 is quota-restricted in California and subject to each city's own conditional use, zoning, and proximity rules layered on top of ABC requirements. Orange County's premium restaurant markets—particularly Newport Beach, Laguna Beach, and Irvine—are competitive for Type 47 licenses. Liquor License Agents assists by:",
+        "bullets": [
+          "Evaluating whether a new Type 47 license is available in your Orange County census tract or whether purchasing an existing license is necessary",
+          "Brokering the purchase or transfer of existing Type 47 licenses from sellers throughout the Orange County market",
+          "Assisting with valuation, negotiation, escrow, and ABC transfer applications",
+          "Preparing complete premises diagrams, ownership disclosures, and ABC application packages",
+          "Coordinating with your Orange County city's planning department on CUPs, security plans, hours of operation, and outdoor service areas",
+          "Monitoring the public posting period and responding to any protests or proposed conditions"
+        ],
+        "closing": "Our goal is to keep license work in sync with your lease, build-out, and opening timeline so alcohol permissions are not the last piece to fall into place."
+      },
+      "faqHeading": "Orange County Type 47 Liquor License FAQs",
+      "faqs": [
+        {
+          "q": "What is the difference between a Type 41 and a Type 47 license in Orange County?",
+          "a": "A Type 41 permits only beer and wine service at a bona fide eating place, while a Type 47 allows the full range of alcoholic beverages including distilled spirits at a restaurant. If you want to serve cocktails, whiskey, tequila, or any spirits at your Orange County restaurant, you need a Type 47."
+        },
+        {
+          "q": "Is the Type 47 license quota-restricted in Orange County?",
+          "a": "Yes. Type 47 licenses are quota-restricted in California based on census tract population. In many of Orange County's premium markets—including Newport Beach, Laguna Beach, Irvine, and parts of Anaheim—census tract quotas are exhausted, making the open secondary market the primary path to obtaining a Type 47."
+        },
+        {
+          "q": "Do I still need to serve food with a Type 47 license in Orange County?",
+          "a": "Yes. A Type 47 is issued to a bona fide eating place, which means your Orange County establishment must operate primarily as a restaurant. Food service must be available whenever alcohol is served, and food sales must represent a meaningful portion of your overall business revenue."
+        },
+        {
+          "q": "Can I serve alcohol at a bar area with a Type 47 license in Orange County?",
+          "a": "Yes. A Type 47 license permits a full bar area within your licensed premises, as long as the establishment as a whole qualifies as a bona fide eating place. Local Orange County city conditions may impose specific restrictions on bar seating for minors, outdoor bar areas, and hours of service."
+        },
+        {
+          "q": "How long does it take to get a Type 47 license in Orange County?",
+          "a": "Acquiring a Type 47 license in Orange County typically takes several months, whether through an ABC application or a broker-facilitated transfer. Timelines vary based on whether protests are filed, how quickly the applicable city processes its local review, and how complete your application documents are at submission."
+        },
+        {
+          "q": "What zoning or CUP conditions apply to Type 47 restaurants in Orange County?",
+          "a": "Orange County's cities each have their own entitlement processes for new on-sale alcohol uses, and conditions vary widely—from the strict neighborhood protections of certain Anaheim residential adjacencies to the more tourism-oriented frameworks of Huntington Beach and Newport Beach. We review your specific address and city history before you commit."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are opening, acquiring, or planning a business in Orange County that needs a Type 47 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps with an experienced advisor."
+      },
+      "localNames": [
+        "Laguna Beach's Coast Highway",
+        "Fashion Island corridor (Newport Beach)",
+        "Irvine Spectrum",
+        "Anaheim Resort district"
+      ],
+      "citiesNamed": [
+        "Laguna Beach",
+        "Newport Beach",
+        "Irvine",
+        "Anaheim",
+        "Huntington Beach"
+      ],
+      "localSpecificity": "STRONGEST of the five. Four real, specific landmarks/districts named: Laguna Beach's Coast Highway, the Fashion Island corridor, the Irvine Spectrum, the Anaheim Resort district. BUT all four sit in the intro paragraph only; the FAQs and howWeHelp fall back to city-name lists and one vague gesture ('certain Anaheim residential adjacencies') with no named neighbourhood.",
+      "firmClaimsFlagged": [],
+      "wordCount": 912
+    },
+    "48": {
+      "url": "https://liquorlicenseagents.com/counties/orange-county/orange-county-type-48-license/",
+      "h1": "Orange County Type 48 On-Sale General License for Bars and Nightclubs – Orange County Type 48 License",
+      "title": "Orange County Type 48 On-Sale General License for Bars and Nightclubs – Orange County Type 48 License",
+      "metaDescription": "Bars, nightclubs, cocktail lounges, and entertainment venues in Orange County that want to serve a full range of alcoholic beverages without the requirement to operate primarily as a food service establishment need a California Liquor License Type 48.",
+      "intro": "Bars, nightclubs, cocktail lounges, and entertainment venues in Orange County that want to serve a full range of alcoholic beverages without the requirement to operate primarily as a food service establishment need a California Liquor License Type 48. Orange County's vibrant nightlife economy—spanning the bars of Huntington Beach's Main Street, the clubs of Anaheim's entertainment corridor near the Honda Center and Angel Stadium, the Seal Beach and Newport Beach bar scenes, and Old Town Orange—relies on Type 48 licenses to serve full cocktail programs until 2:00 AM across Southern California's premier suburban entertainment county. Unlike the Type 47, the Type 48 does not require a bona fide eating place designation—making it the go-to license for venues where the bar is the primary attraction. The Type 48 permits service until 2:00 AM and allows closed containers of beer or wine to be sold for off-premises consumption.",
+      "authorizes": {
+        "heading": "What the Type 48 License Authorizes in Orange County",
+        "lead": "A Type 48 license in Orange County generally allows you to:",
+        "bullets": [
+          "Serve beer, wine, and distilled spirits for on-premises consumption without a food service requirement",
+          "Operate a bar, nightclub, cocktail lounge, or entertainment venue",
+          "Serve alcohol until 2:00 AM",
+          "Sell closed containers of beer or wine for off-premises consumption"
+        ]
+      },
+      "rightFor": {
+        "heading": "Is a Type 48 License Right for Your Orange County Business?",
+        "body": "A Type 48 license may be the right fit if: • Your Orange County concept is a bar, nightclub, lounge, or entertainment venue where alcohol is the primary draw • You do not plan to operate primarily as a food service establishment • You want to serve cocktails, spirits, beer, and wine until 2:00 AM • Your business model centers on bar revenue, cover charges, or a nightlife-oriented experience",
+        "lead": "A Type 48 license may be the right fit if:",
+        "bullets": [
+          "Your Orange County concept is a bar, nightclub, lounge, or entertainment venue where alcohol is the primary draw",
+          "You do not plan to operate primarily as a food service establishment",
+          "You want to serve cocktails, spirits, beer, and wine until 2:00 AM",
+          "Your business model centers on bar revenue, cover charges, or a nightlife-oriented experience"
+        ]
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Helps Type 48 Buyers and Applicants in Orange County",
+        "body": "Type 48 licenses are among the most scrutinized by ABC, local city officials, and neighborhood groups throughout Orange County. Cities like Anaheim, Huntington Beach, and Newport Beach each have their own nightlife regulations, security requirements, and entertainment permit processes. Liquor License Agents assists by: • Evaluating your Orange County location for zoning eligibility, distance requirements, and CUP history specific to your city • Advising on whether to purchase an existing Type 48 license or apply for a new one • Brokering the purchase and transfer of existing Type 48 licenses from sellers throughout Orange County • Preparing ABC applications, premises diagrams, security plans, and ownership disclosures • Coordinating with your Orange County city on operating conditions, entertainment permits, and hours of operation • Representing you during public posting, protest hearings, and ABC enforcement proceedings Our goal is to keep license work in sync with your lease, build-out, and opening timeline so alcohol permissions are not the last piece to fall into place.",
+        "lead": "Type 48 licenses are among the most scrutinized by ABC, local city officials, and neighborhood groups throughout Orange County. Cities like Anaheim, Huntington Beach, and Newport Beach each have their own nightlife regulations, security requirements, and entertainment permit processes. Liquor License Agents assists by:",
+        "bullets": [
+          "Evaluating your Orange County location for zoning eligibility, distance requirements, and CUP history specific to your city",
+          "Advising on whether to purchase an existing Type 48 license or apply for a new one",
+          "Brokering the purchase and transfer of existing Type 48 licenses from sellers throughout Orange County",
+          "Preparing ABC applications, premises diagrams, security plans, and ownership disclosures",
+          "Coordinating with your Orange County city on operating conditions, entertainment permits, and hours of operation",
+          "Representing you during public posting, protest hearings, and ABC enforcement proceedings"
+        ],
+        "closing": "Our goal is to keep license work in sync with your lease, build-out, and opening timeline so alcohol permissions are not the last piece to fall into place."
+      },
+      "faqHeading": "Orange County Type 48 Liquor License FAQs",
+      "faqs": [
+        {
+          "q": "What is the difference between a Type 47 and a Type 48 license in Orange County?",
+          "a": "A Type 47 is issued to a bona fide eating place and requires regular food service alongside alcohol, while a Type 48 is issued to bars and nightclubs where food service is not the primary activity. If your Orange County venue is primarily a bar or lounge rather than a restaurant, a Type 48 is the appropriate license."
+        },
+        {
+          "q": "Does a Type 48 license require me to serve food in Orange County?",
+          "a": "No. Unlike the Type 47, a Type 48 does not require you to operate as a bona fide eating place. You may still choose to serve food at your Orange County bar or nightclub, but food service is not a condition of maintaining your license."
+        },
+        {
+          "q": "Are minors allowed in a Type 48 licensed establishment in Orange County?",
+          "a": "Generally, minors are not permitted on the premises of a Type 48 licensed establishment unless specific conditions are met or they are accompanied by a parent or guardian. Individual cities within Orange County may impose additional restrictions. Always review your specific license conditions and city operating requirements."
+        },
+        {
+          "q": "Is the Type 48 license quota-restricted in Orange County?",
+          "a": "Yes. Type 48 licenses are quota-restricted based on census tract population. In many parts of Orange County, new Type 48 licenses are difficult to obtain directly from ABC, making the open secondary market the primary path. Prices vary significantly depending on the city and neighborhood."
+        },
+        {
+          "q": "What security and operating conditions typically come with a Type 48 license in Orange County?",
+          "a": "Type 48 licensees throughout Orange County frequently face conditions including security personnel requirements, camera systems, hours restrictions below the 2:00 AM statutory limit, entertainment permit requirements, and regular compliance checks. Requirements vary by city—Anaheim, Huntington Beach, and Newport Beach each have distinct frameworks. We help you understand and negotiate conditions before you commit to a location."
+        },
+        {
+          "q": "How long does it take to obtain or transfer a Type 48 license in Orange County?",
+          "a": "Acquiring a Type 48 in Orange County typically takes several months. Given the scrutiny bars and nightclubs receive from ABC, local government, and community groups—particularly in Orange County's entertainment-dense cities—protests are relatively common. Having complete, well-prepared applications significantly helps speed the process."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are opening, acquiring, or planning a business in Orange County that needs a Type 48 license, call (800) 799-9081 to schedule an appointment and review your options, local requirements, and next steps with an experienced advisor."
+      },
+      "localNames": [
+        "Huntington Beach's Main Street",
+        "Anaheim's entertainment corridor near the Honda Center and Angel Stadium",
+        "Honda Center",
+        "Angel Stadium",
+        "Old Town Orange"
+      ],
+      "citiesNamed": [
+        "Huntington Beach",
+        "Anaheim",
+        "Seal Beach",
+        "Newport Beach"
+      ],
+      "localSpecificity": "STRONG. Five real local references: Huntington Beach's Main Street, Anaheim's entertainment corridor near the Honda Center and Angel Stadium, and Old Town Orange. All confined to the intro paragraph. The 6 FAQs name only cities (Anaheim, Huntington Beach, Newport Beach) inside otherwise generic Type 48 prose.",
+      "firmClaimsFlagged": [],
+      "wordCount": 904
+    }
+  }
+}

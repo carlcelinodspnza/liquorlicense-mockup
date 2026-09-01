@@ -1,0 +1,59 @@
+{
+  "market": "california",
+  "label": "California",
+  "tier": "state",
+  "sourceUrl": "https://liquorlicenseagents.com/california-liquor-license-services/",
+  "sourceNote": "Extracted from the client's California Liquor License Services page. The source has NO <h1> and a broken H2->H4 hierarchy; ours promotes the page title to a real h1. The source also ends its Brokerage block with \"assistance in the following areas of liquor licensing:\" and then delivers no list — 46 of its 52 <p> tags are empty. That gap is not reproduced; the routing list is built from our own services.",
+  "firmClaimsFlagged": [
+    "Because of the unique relationships that we have established, we are able to collaborate with our clients and the ABC to obtain such important permits as conditional use permits in even the most competitive markets.",
+    "In the past, we were able to use our good standing to benefit our clients’ applications by creating and submitting an approval letter, along with the application, from all neighbors and business owners in the area, giving a hearing in the city of the business, working with city officials to obtain proof of conditions, networking with local members of city council, communicating with local police contacts, drafting and maintaining extensions for filing (if applicable), drafting a Radius Map, etc.",
+    "our relationships with those in ABC that actually process all of the applications",
+    "we know that we can assist you better than anyone else"
+  ],
+  "sections": [
+    {
+      "level": "h2",
+      "heading": "California Liquor License Services",
+      "paragraphs": [
+        "At LiquorLicenseAgents.com, we handle any and all aspects of liquor licensing. We pride ourselves on our in-depth knowledge in the field and – no matter what aspect of the California liquor license process you’re needing assistance with."
+      ]
+    },
+    {
+      "level": "h4",
+      "heading": "Brokerage",
+      "paragraphs": [
+        "Starting a new business often requires a dizzying amount of licensing – especially in the hospitality industry. This is especially true if your business intends to serve any form of alcohol. In order to follow your county’s compliance laws, it is important that you obtain a California liquor license. LiquorLicenseAgents.com is here to make that easier for you. Our firm offers comprehensive liquor license brokering across all counties in California. We can aid you in obtaining just about any type of California liquor license that you could need, as well as unparalleled customer service and assistance in the following areas of liquor licensing:"
+      ]
+    },
+    {
+      "level": "h4",
+      "heading": "Qualification",
+      "paragraphs": [
+        "Many brokerages are only interested in finding a buyer or seller for your California liquor license so that they can get paid. Not us! Our agents are not only committed to ensuring that your experience with us is second to none. We believe that, in order to do this, we must not only find a buyer or seller – we have to find the right buyer or seller. At LiquorLicenseAgents.com, all of the buyers and sellers that we deal with are properly vetted and qualified before we even consider any liquor license transactions with them. Our stringent vetting process means that we ensure that all of the licenses that we consider presenting to you are free of liens, transferrable and secure. This enables us to provide a stress-free service for you that runs quickly, efficiently and smoothly. Our experienced and highly-skilled agents are here to remove the hassle and worry from the entire process so that you can focus on more important areas of your business."
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "CONSULTING",
+      "paragraphs": [
+        "Many of our clients have expressed to us over the years that the process of obtaining their California liquor license was not anywhere near as off-putting as the many factors that are introduced with actually owning the liquor license. As a liquor license holder, you now have to ensure that your business operates in compliance with the regulations in your city, county, and state. Unfortunately, many business owners do not realize this until they have actually started running their business after receiving their license. Without fully understanding all of the compliance requirements, some find themselves caught with the rude awakening of thousands of dollars in fines or revocation of their business license, or having their business shut down because they failed to abide by the laws surrounding their license. LiquorLicenseAgents.com removes this scenario entirely for our clients. We provide our expert consulting during every step of the licensing process – including after you have obtained your California liquor license.",
+        "We begin this process by establishing direct correspondence with the California Department of Alcoholic Beverage Control and compile and file all the necessary paperwork for each of our clients. We also navigate the many pitfalls of the licensing process through."
+      ]
+    },
+    {
+      "level": "h4",
+      "heading": "Corporate Applications",
+      "paragraphs": [
+        "In addition to providing the standard licensing services, our agents at LiquorLicenseAgents.com are equipped to handle companies of any size. These include LLCs, corporations, general partnerships, LPs, domestic partnerships, joint ventures, etc. Our corporate-level services vary from changes in Articles of Incorporation, Articles of Organization, Statement of Information, Stock Transfer, Stock Updates, Equity Transfer, Equity Updates, LLC Operating Agreement Changes, Corporate Minute Changes, Stock Certificate Changes, Secretary of State Update Changes and P-12 Company Updates & Filings."
+      ]
+    },
+    {
+      "level": "h2",
+      "heading": "Don’t Wait! Contact Us Today!",
+      "paragraphs": [
+        "As you can see, we offer an unparalleled level of service. We can handle any and all of your California liquor license needs, and we do so with the utmost care, respect and integrity for you and for your business.",
+        "If your business is in need of liquor licensing services, then do not wait! Our stellar team of liquor license specialists is standing by to assist you. Whatever your needs are, not only can we help you, we know that we can do so better than any of our competitors. Give us a call today and find out why we’re the best!"
+      ]
+    }
+  ]
+}

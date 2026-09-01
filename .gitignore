@@ -18,3 +18,12 @@ _webcard-renders/
 .DS_Store
 **/.DS_Store
 Thumbs.db
+
+# The rendered Service Area Register is INTERNAL ANALYSIS, not client-facing work: it
+# documents defects in the client's own live site (duplicate pages, a competitor mention,
+# a ChatGPT tracking artefact, coverage claims that exceed what they publish). The repo is
+# the public preview, so publishing it there would put that analysis on a URL the client's
+# own team browses. The DATA and the generators stay committed so it is reproducible with
+# one command; only the rendered page is withheld. It is already published privately as an
+# Artifact for the owner.
+_geography/service-area-register.html

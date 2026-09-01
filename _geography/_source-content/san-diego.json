@@ -1,0 +1,348 @@
+{
+  "market": "san-diego",
+  "label": "San Diego County",
+  "sourceNote": "Extracted 2026-09-01 from the client's own live pages on liquorlicenseagents.com: the five /cities/san-diego/ Type 20/21/41/47/48 pages. URLs were taken from the client sitemap https://liquorlicenseagents.com/sitemaps/sitemap-cities.xml (not guessed); all five returned HTTP 200. Content comes from the <main> <article> region only (one article per page; no nav/header/footer inside it). Body copy is the client's verbatim text. The only alteration: FAQ questions had their presentational leading numbering ('1. ', '2. ' ...) stripped. Nothing was excluded or rewritten for firm-claim or competitor reasons because none were present -- see extraction.firmClaimsFlagged / competitorNamesFound.",
+  "extraction": {
+    "extractedAt": "2026-09-01",
+    "pagesAttempted": 5,
+    "pagesExtracted": 5,
+    "failures": [],
+    "firmClaimsFlagged": [],
+    "firmClaimsNote": "ZERO hits. All five pages were read in full. None contains a 'better than anyone else' claim, an insider/ABC-staff relationship claim, an unverifiable case history ('in the past we were able to...'), or a competitor-beating claim. The only self-descriptive phrase is 'with an experienced advisor', which closes each of the five CTAs; it is a mild unverifiable descriptor but fits none of the four flag categories, so it was RETAINED rather than flagged. Flagged here for the owner's awareness only.",
+    "competitorNamesFound": [],
+    "competitorNote": "ZERO hits. A case-insensitive scan for 'liquorlicense.com' across each full page (not just <main>) returned 0 matches on all five pages.",
+    "localSpecificity": "NONE of the five pages names a real San Diego neighbourhood, landmark, or district. A scan of the <main> text against 60 known San Diego County places (Gaslamp, La Jolla, North Park, Hillcrest, Little Italy, Chula Vista, Oceanside, Carlsbad, Escondido, Coronado, Point Loma, El Cajon, Mira Mesa, Balboa Park, Petco Park, Embarcadero, etc.) returned 0 matches on all five. The 'local' content is the metro/county name inserted into generic California statewide prose, plus unnamed descriptors ('coastal bistros', 'nightlife districts', 'downtown areas', 'specific neighborhoods'). CONSEQUENCE: as-is these five pages are near-duplicate templated copy differentiated only by the market string, and should NOT ship indexable without real local detail added.",
+    "structuralNote": "Every page: 5 x h2, exactly 6 FAQs, 2 intro paragraphs. Authorize-bullet counts are 4 on types 20/41/47/48 but 3 on type 21 -- the brief's assumption of 4 everywhere does not hold; see types['21'].authorizes.bulletCount."
+  },
+  "types": {
+    "20": {
+      "type": "20",
+      "sourceUrl": "https://liquorlicenseagents.com/cities/san-diego/san-diego-county-type-20-liquor-license-for-beer-and-wine-off-sale/",
+      "h1": "San Diego County Type 20 Liquor License For Beer And Wine Off Sale",
+      "title": "San Diego Type 20 Liquor License: Off-Sale Beer & Wine",
+      "metaDescription": "Explore the Type 20 liquor license for off-premises sale of packaged beer and wine in San Diego. Contact us today for expert assistance in obtaining or selling your license.",
+      "intro": [
+        "San Diego County’s convenience stores, neighborhood markets, and fuel stations rely on Type 20 licenses to offer packaged beer and wine to-go. Whether you are opening a new store or purchasing an existing one, your off-sale beer-and-wine strategy will have a major impact on competitiveness and value.",
+        "Liquor License Agents helps San Diego County owners and buyers evaluate Type 20 opportunities, navigate ABC requirements, and coordinate licensing with city or county land use approvals."
+      ],
+      "authorizes": {
+        "heading": "What The Type 20 Beer And Wine Off Sale License Authorizes In San Diego",
+        "lead": "A Type 20 license authorizes the off-sale of beer and wine. In San Diego County, a Type 20 license generally allows you to:",
+        "bullets": [
+          "Sell beer, malt beverages, and wine in sealed containers for off-site consumption",
+          "Stock chilled and shelf-stable products in coolers, aisles, and end caps",
+          "Integrate beer-and-wine sections into convenience stores, small markets, and grocery formats",
+          "Operate strictly as an off-sale premises, without on-premises alcohol consumption"
+        ],
+        "closing": [
+          "Because it excludes spirits, the Type 20 license is often more accessible and less costly than a Type 21 full-liquor license, while still supporting solid alcohol sales."
+        ],
+        "bulletCount": 4
+      },
+      "rightFor": {
+        "heading": "Is A Type 20 License Right For Your Convenience Store, Market, Or Gas Station",
+        "body": "A Type 20 license may be the best fit if:\n- Your main business is groceries, convenience items, or fuel, and alcohol is an important but secondary revenue stream\n- You do not need to sell spirits, or you are comfortable focusing on beer and wine only\n- Your store layout supports a modest but competitive packaged beer-and-wine set\n- You want to match or exceed nearby stores that already offer beer and wine to-go\nIf your concept is a dedicated liquor store or you want a large spirits selection, a Type 21 license may be more appropriate. We help you compare Type 20 and Type 21 options using your actual store design and financial projections."
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Helps Type 20 Buyers And Sellers In San Diego County",
+        "body": "Type 20 licenses frequently move with business sales, franchise transfers, and store remodels. Each step must be handled carefully to protect license value and avoid disruptions.\nLiquor License Agents supports Type 20 projects by:\n- Reviewing your location, store layout, and competition to confirm a Type 20 strategy makes sense\n- Explaining whether a new license is realistic, or whether you should focus on buying and transferring an existing license\n- Assisting with valuation and negotiation when a Type 20 license is part of a purchase or sale\n- Preparing ABC applications, premises diagrams, and ownership disclosures that accurately represent your operations\n- Coordinating with city and county planning staff on zoning, CUP conditions, security, and proximity to sensitive uses\n- Tracking ABC review, monitoring public posting periods, and helping you respond to any questions or protests\nOur goal is to keep licensing aligned with your lease dates, tenant improvements, and grand opening plans."
+      },
+      "faqs": [
+        {
+          "q": "What products can I sell with a California Type 20 beer and wine license?",
+          "a": "With a Type 20 license, you can sell beer, malt beverages, and wine in sealed containers for off-sale consumption. Spirits and hard liquor are not authorized under this license."
+        },
+        {
+          "q": "Can I sell chilled beer and wine to go with a Type 20 license in San Diego?",
+          "a": "Yes. Chilled beer and wine sales are standard for Type 20 licensees, especially at convenience stores and gas stations. You must still comply with ABC rules and local regulations regarding age verification, display, and hours of sale."
+        },
+        {
+          "q": "Do I need a minimum percentage of grocery or food sales for a Type 20 license?",
+          "a": "There is no single statewide percentage requirement written into the Type 20 statute, but ABC and local jurisdictions look at your overall business model. Your store should clearly function as a legitimate retail operation, not as an unlicensed bar. We help you align your product mix and layout with the expectations for a retail off-sale license."
+        },
+        {
+          "q": "Can I transfer a Type 20 license when I buy or sell a store in San Diego County?",
+          "a": "Yes. Type 20 licenses are often transferred along with the sale of a convenience store, market, or fuel station. Transfers require ABC approval, background review, and public posting. Properly coordinating escrow and license transfer prevents gaps in your ability to sell beer and wine."
+        },
+        {
+          "q": "How long does it typically take to obtain or transfer a Type 20 license in San Diego?",
+          "a": "Plan for several months from application to final approval. ABC review workload, local approvals, build-out schedules, and any protests can all affect timing. Starting early and submitting complete, accurate paperwork is one of the best ways to keep your project on schedule."
+        },
+        {
+          "q": "What zoning, CUP, or proximity rules affect Type 20 licenses near schools or churches?",
+          "a": "San Diego jurisdictions commonly apply zoning rules, CUP conditions, and distance guidelines for alcohol outlets near schools, churches, parks, and residential areas. These rules may affect your hours, security plan, and store design. We review your site’s zoning and any applicable CUP to clarify what is required before you commit to a license strategy."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are planning to open, acquire, or remodel a convenience store, market, or gas station in San Diego County and want to add or keep beer-and-wine sales, you can call (800) 799-9081 to schedule an appointment and review Type 20 options, pricing, and timelines with an experienced advisor."
+      },
+      "localNames": [],
+      "localSpecificity": "NO real local place names. The only local signal is the strings 'San Diego County' / 'San Diego' / 'San Diego jurisdictions' dropped into otherwise generic statewide Type 20 prose. Business descriptors are unnamed categories ('convenience stores, neighborhood markets, and fuel stations'). NOT locally unique.",
+      "wordCount": 884
+    },
+    "21": {
+      "type": "21",
+      "sourceUrl": "https://liquorlicenseagents.com/cities/san-diego/san-diego-county-type-21-full-liquor-license-for-liquor-stores/",
+      "h1": "San Diego County Type 21 Full Liquor License For Liquor Stores",
+      "title": "San Diego Type 21 Liquor License: Off-Sale General",
+      "metaDescription": "Explore the requirements and benefits of obtaining a Type 21 liquor license in San Diego. Contact us today to start your application process with Liquor License Agents.",
+      "intro": [
+        "From neighborhood liquor stores to high-traffic corridor markets, many San Diego County retailers depend on full spirits, beer, and wine sales to stay competitive. The California Type 21 full liquor off-sale license is the core asset that allows those businesses to operate.",
+        "Liquor License Agents helps San Diego County owners, buyers, and investors evaluate Type 21 opportunities, negotiate license purchases, and coordinate ABC and local approvals."
+      ],
+      "authorizes": {
+        "heading": "What The California Type 21 Full Liquor Off Sale License Authorizes",
+        "lead": "A Type 21 license is a general off-sale license that authorizes:",
+        "bullets": [
+          "Packaged sales of distilled spirits, such as whiskey, vodka, rum, tequila, and gin",
+          "Off-sale beer-and-wine sales in bottles, cans, and other sealed containers",
+          "Operation as a liquor store or full-liquor market, with no on-premises consumption"
+        ],
+        "closing": [
+          "Because it allows spirits in addition to beer and wine, a Type 21 license is typically more valuable and more tightly regulated than a beer-and-wine-only Type 20 license."
+        ],
+        "bulletCount": 3
+      },
+      "rightFor": {
+        "heading": "Is A Type 21 License Right For Your San Diego Liquor Store Or Market",
+        "body": "A Type 21 license is usually appropriate if:\n- You intend to operate a dedicated liquor store or a full-liquor market with spirits, beer, and wine\n- Spirits will represent a significant portion of your projected alcohol revenue\n- Your location, zoning, and center mix support a higher-impact off-sale alcohol use\n- You want the flexibility to offer a wide range of packaged products, including premium and specialty spirits\nIf your concept is more grocery- or convenience-driven, and spirits are not essential, a Type 20 license may be more cost-effective. We help you compare the financial and regulatory differences between Type 20 and Type 21 in your part of San Diego County."
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Supports Type 21 Buyers And Sellers In San Diego County",
+        "body": "Type 21 licenses regularly change hands as liquor stores and markets are sold, consolidated, or repositioned. Each transfer must be structured carefully to protect both buyer and seller.\nLiquor License Agents supports Type 21 transactions by:\n- Reviewing your site, demographics, and competition to confirm that a Type 21 license strategy makes sense\n- Determining whether quotas and local conditions favor the purchase of an existing license rather than a new issue\n- Assisting with license valuation and negotiation when a Type 21 license is part of a business or asset sale\n- Preparing ABC applications, diagrams, and ownership disclosures that match your actual operations\n- Coordinating with city or county planning staff on zoning, CUPs, security, and proximity to sensitive uses\n- Tracking ABC review and helping you respond to questions, conditions, or protests until the license is approved\nOur aim is to ensure that the license portion of your transaction is managed just as carefully as the real estate and business terms."
+      },
+      "faqs": [
+        {
+          "q": "What can I sell with a California Type 21 full liquor off sale license?",
+          "a": "With a Type 21 license, you may sell spirits, beer, and wine in sealed containers for off-sale consumption. This includes everything covered by a Type 20 license plus the full range of distilled spirits."
+        },
+        {
+          "q": "How is a Type 21 license different from a Type 20 beer and wine license?",
+          "a": "A Type 20 license limits you to beer-and-wine sales, while a Type 21 license includes spirits. Because Type 21 offers broader privileges, it usually carries higher acquisition costs and may trigger closer review of security, location, and community impact."
+        },
+        {
+          "q": "Are there population quotas limiting new Type 21 licenses in San Diego County?",
+          "a": "Yes. California ABC uses population and other criteria to determine how many general off-sale licenses are allowed in a given area. Many San Diego County neighborhoods are at or above these limits, which means new applicants often must purchase and transfer an existing Type 21 license instead of obtaining a brand-new one."
+        },
+        {
+          "q": "Can I transfer a Type 21 license when I buy or sell a liquor store in San Diego?",
+          "a": "Yes. It is common for Type 21 licenses to be transferred with liquor store or full-liquor market sales. Transfers are handled through ABC, with public posting, background checks, and local review. Coordinating the transfer with your escrow closing is critical to minimizing downtime."
+        },
+        {
+          "q": "How long does it usually take to obtain or transfer a Type 21 license in San Diego County?",
+          "a": "Most applicants should plan for several months, though timing varies based on ABC workload, local CUP requirements, and whether any protests are filed. Early planning and detailed, accurate applications help keep the process as efficient as possible."
+        },
+        {
+          "q": "What factors influence the market price of a Type 21 license in San Diego?",
+          "a": "Pricing reflects supply and demand in specific neighborhoods, recent comparable sales, demographic trends, crime data, and any conditions attached to the license. Locations with strong traffic, visibility, and limited competing licenses may see higher values. We help you interpret recent sales and market indicators so you can set realistic expectations."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are opening, acquiring, or selling a liquor store or full-liquor market in San Diego County and want to use a Type 21 license, you can call (800) 799-9081 to schedule an appointment and review licensing options, pricing, and timing with an experienced advisor."
+      },
+      "localNames": [],
+      "localSpecificity": "NO real local place names. Local signal is 'San Diego County' / 'San Diego' inserted into generic statewide Type 21 prose. The copy twice gestures at neighbourhoods ('Many San Diego County neighborhoods are at or above these limits', 'supply and demand in specific neighborhoods') without ever naming one. NOT locally unique.",
+      "wordCount": 843
+    },
+    "41": {
+      "type": "41",
+      "sourceUrl": "https://liquorlicenseagents.com/cities/san-diego/san-diego-county-type-41-beer-and-wine-license-for-restaurants/",
+      "h1": "San Diego County Type 41 Beer And Wine License For Restaurants",
+      "title": "San Diego Type 41 Liquor License: Beer & Wine for Restaurants",
+      "metaDescription": "Secure your San Diego Type 41 liquor license for on-premises beer and wine sales. Contact us today for expert assistance and a free consultation.",
+      "intro": [
+        "San Diego County is packed with neighborhood cafés, coastal bistros, and casual restaurants where guests expect beer or wine with their meal. The California Type 41 beer-and-wine license is often the most efficient way to add alcohol service to a food-led concept without taking on the complexity of a full bar.",
+        "Liquor License Agents works with San Diego restaurant owners, buyers, and landlords to decide whether a Type 41 license is the right fit, then manages new applications and transfers from start to finish."
+      ],
+      "authorizes": {
+        "heading": "What The Type 41 Beer And Wine Eating Place License Authorizes",
+        "lead": "A Type 41 license is an on-sale beer-and-wine license tied to a bona fide eating place. In San Diego County, it typically allows you to:",
+        "bullets": [
+          "Serve beer and wine for on-premises consumption with meals",
+          "Offer draft, bottled, and canned beer, plus still and sparkling wine",
+          "Integrate beverage service into table, counter, or quick-service formats",
+          "Maintain a family-friendly atmosphere where minors are allowed with their parents or guardians"
+        ],
+        "closing": [
+          "Spirits are not permitted under a Type 41 license, which keeps your beverage program focused and easier to manage."
+        ],
+        "bulletCount": 4
+      },
+      "rightFor": {
+        "heading": "When A Type 41 License Makes Sense For Your San Diego Restaurant Or Café",
+        "body": "A Type 41 license may be ideal if:\n- Your primary identity is a restaurant, café, pizzeria, or brunch spot, not a bar\n- Beer and wine are intended to complement your menu, not drive a nightlife model\n- You expect significant family, daytime, or tourist traffic\n- Your space and budget do not justify a full bar build-out or bar-focused staffing\nIf your concept leans heavily on cocktails and spirits, a Type 47 license may better match your business plan. We help you compare both options using your actual floor plan, hours, and target clientele."
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Helps With Type 41 Licensing And Transfers In San Diego County",
+        "body": "For both new openings and acquisitions, aligning your Type 41 license with city approvals, coastal or downtown rules, and your lease is critical.\nLiquor License Agents helps by:\n- Reviewing your kitchen, menu, and layout to confirm bona fide eating place status\n- Advising whether to apply for a new Type 41 license or purchase an existing license by transfer\n- Supporting lease and purchase negotiations when a Type 41 license is part of a restaurant sale\n- Preparing ABC applications, premises diagrams, and ownership disclosures tailored to your operation\n- Coordinating with city and county planning staff on patios, outdoor dining, and parking requirements\n- Monitoring ABC review and helping you respond to questions, protests, or proposed operating conditions\nOur goal is to make licensing a predictable part of your opening timeline, not a last-minute obstacle."
+      },
+      "faqs": [
+        {
+          "q": "What can I serve with a California Type 41 beer and wine license?",
+          "a": "A Type 41 license allows you to serve beer and wine for on-premises consumption in connection with your restaurant operation. Draft beer, bottled and canned beer, and a range of wines are typical offerings, but distilled spirits and hard liquor are not allowed."
+        },
+        {
+          "q": "Do I need a full kitchen and bona fide food service to qualify for a Type 41 license?",
+          "a": "Yes. ABC reserves the Type 41 category for bona fide eating places. You need a working kitchen, proper equipment, and a menu of complete meals, not just snacks or prepackaged items. Regulators look at how your business actually operates, not just what is on paper."
+        },
+        {
+          "q": "Can I upgrade from a Type 41 beer and wine license to a Type 47 full liquor license?",
+          "a": "Many operators start with a Type 41 license and later pursue a Type 47 license when they are ready to add a full bar. Upgrading usually means applying for, or purchasing, a Type 47 license and going through ABC review, rather than filing a simple change form. We help you understand cost, timing, and feasibility before you commit."
+        },
+        {
+          "q": "Are there restrictions on outdoor dining, patios, or sidewalk service with a Type 41 license?",
+          "a": "Yes. Any area where alcohol is served must generally be included in your licensed premises diagram and may require separate city approvals or a conditional use permit (CUP). Fencing, defined boundaries, and clear access points are often required, especially in coastal or downtown areas."
+        },
+        {
+          "q": "How long does it usually take to obtain or transfer a Type 41 license in San Diego County?",
+          "a": "Most projects should plan for a process measured in months. ABC review, public posting, local approvals, and construction schedules all affect timing. Starting early, and submitting complete, accurate documents, gives you the best chance to stay on track."
+        },
+        {
+          "q": "Can I offer happy hour, drink specials, or brunch cocktails with a Type 41 license?",
+          "a": "You may offer beer-and-wine promotions as long as they comply with ABC rules on pricing, advertising, and responsible service. “Bottomless” formats and aggressive discounting can create issues if not handled carefully. We help you understand typical conditions so your promotions stay compliant."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are opening or acquiring a restaurant or café in San Diego County and want to add beer-and-wine service, you can call (800) 799-9081 to schedule an appointment and review whether a Type 41 license aligns with your concept, site, and budget."
+      },
+      "localNames": [],
+      "localSpecificity": "NO real local place names. Local signal is 'San Diego County' / 'San Diego' plus unnamed geographic flavour ('coastal bistros', 'coastal or downtown rules', 'especially in coastal or downtown areas'). No neighbourhood, district, or landmark is named. NOT locally unique.",
+      "wordCount": 851
+    },
+    "47": {
+      "type": "47",
+      "sourceUrl": "https://liquorlicenseagents.com/cities/san-diego/san-diego-county-type-47-full-liquor-license-for-restaurants/",
+      "h1": "San Diego County Type 47 Full Liquor License For Restaurants",
+      "title": "San Diego Type 47 Liquor License: Essential Guide",
+      "metaDescription": "Discover the requirements and benefits of the San Diego Type 47 liquor license for your restaurant. Contact us today for expert assistance in securing your license.",
+      "intro": [
+        "San Diego County’s dining scene includes everything from waterfront restaurants to neighborhood lounges where cocktails, spirits, and wine are essential to the guest experience. For these concepts, the Type 47 on-sale general eating place license is usually the right tool.",
+        "Liquor License Agents helps San Diego restaurateurs, groups, and buyers evaluate Type 47 options, source licenses, and coordinate ABC and local approvals."
+      ],
+      "authorizes": {
+        "heading": "What The California Type 47 On Sale General Eating Place License Authorizes",
+        "lead": "A Type 47 license is a general on-sale license tied to a bona fide eating place. In San Diego County, it usually allows you to:",
+        "bullets": [
+          "Serve spirits, beer, and wine for on-premises consumption alongside a full menu",
+          "Operate a bar, lounge, and dining room under one coordinated restaurant concept",
+          "Welcome families and minors, because the premises is a bona fide eating place, not a bar-only site",
+          "Develop a complete beverage program, including cocktails, wine lists, and beer offerings"
+        ],
+        "closing": [
+          "Type 47 privileges sit at the intersection of serious food and a robust bar program."
+        ],
+        "bulletCount": 4
+      },
+      "rightFor": {
+        "heading": "Is A Type 47 License Right For Your San Diego Restaurant Or Lounge",
+        "body": "A Type 47 license is often the best fit if:\n- Cocktails, spirits, and wine pairings are central to your brand and check average\n- You have, or plan to build, a full kitchen that can produce complete meals consistently\n- You intend to operate as a restaurant first, with an integrated bar and lounge component\n- You are targeting dinner, late-night dining, or special events where a full bar is expected\nIf you prefer a lighter beverage program focused on beer and wine, a Type 41 license may be more efficient. We help you compare both routes based on your menu, floor plan, and projected revenue mix."
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Supports Type 47 Buyers And Sellers In San Diego County",
+        "body": "Type 47 licenses are high-value assets that must be handled carefully in both new applications and transfers.\nLiquor License Agents supports Type 47 projects by:\n- Reviewing your kitchen capacity, menu, and layout to confirm eating place qualifications\n- Advising whether to pursue a new Type 47 license or purchase an existing license subject to quotas and demand\n- Assisting with valuation and negotiations when a Type 47 license is part of a restaurant sale or portfolio deal\n- Preparing ABC applications, premises diagrams, and ownership disclosures tailored to your operating plan\n- Coordinating with city and county planning staff on CUPs, coastal rules, parking, and entertainment approvals\n- Tracking ABC review from posting to final decision, and helping you address questions or protests\nWe focus on integrating licensing with your lease, build-out, and staffing plan so your bar program is ready when your doors open."
+      },
+      "faqs": [
+        {
+          "q": "What can I serve with a California Type 47 on sale general eating place license?",
+          "a": "A Type 47 license allows you to serve spirits, beer, and wine for on-premises consumption in connection with a bona fide eating place. Guests can order cocktails, mixed drinks, beer, and wine with their meals."
+        },
+        {
+          "q": "What food and kitchen requirements apply to a Type 47 restaurant license in San Diego?",
+          "a": "You must operate a bona fide eating place with a functioning kitchen and a menu of complete meals, not just snacks or prepackaged food. Regulators will consider your menu, hours, and food-to-alcohol sales mix, along with any CUP conditions, to confirm that you are truly operating as a restaurant."
+        },
+        {
+          "q": "How is a Type 47 license different from a Type 41 beer and wine license?",
+          "a": "A Type 41 license permits only beer and wine, while a Type 47 license includes spirits. Type 47 licenses usually cost more to acquire and may come with closer scrutiny, but they support a full bar program that can significantly increase revenue in many San Diego restaurant concepts."
+        },
+        {
+          "q": "Can I transfer a Type 47 license when I buy or sell a restaurant in San Diego County?",
+          "a": "Yes. Type 47 licenses are regularly transferred as part of restaurant sales and reorganizations. Transfers require ABC approval, public posting, and local review. Coordinating the transfer with your escrow closing is essential to avoid any gap in your ability to serve alcohol."
+        },
+        {
+          "q": "How long does it usually take to obtain or transfer a Type 47 license in San Diego?",
+          "a": "Most operators should plan for several months, though timing varies by neighborhood, agency workload, and complexity. Coastal or downtown locations may require additional review. Early preparation and well-documented applications help keep the process on track."
+        },
+        {
+          "q": "What neighborhood, CUP, or parking conditions might affect my Type 47 approval?",
+          "a": "CUP conditions can govern hours, patio use, music, occupancy, and parking ratios. Some neighborhoods and coastal zones have extra rules around alcohol and entertainment. We review your site’s existing approvals and proposed conditions so you understand the operating framework before finalizing your license strategy."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are planning a full-service restaurant or lounge in San Diego County and need a Type 47 license, you can call (800) 799-9081 to schedule an appointment and review license availability, pricing, and local requirements with an experienced advisor."
+      },
+      "localNames": [],
+      "localSpecificity": "NO real local place names. Local signal is 'San Diego County' / 'San Diego' plus unnamed flavour ('waterfront restaurants', 'Coastal or downtown locations may require additional review', 'Some neighborhoods and coastal zones'). No neighbourhood, district, or landmark is named. NOT locally unique.",
+      "wordCount": 828
+    },
+    "48": {
+      "type": "48",
+      "sourceUrl": "https://liquorlicenseagents.com/cities/san-diego/san-diego-county-type-48-full-liquor-license-for-bars-and-nightclubs/",
+      "h1": "San Diego County Type 48 Full Liquor License For Bars And Nightclubs",
+      "title": "San Diego Type 48 Liquor License: Essential Guide",
+      "metaDescription": "Discover the requirements and benefits of obtaining a Type 48 liquor license in San Diego. Contact us today for expert assistance in securing your license.",
+      "intro": [
+        "San Diego County is known for its nightlife districts, music venues, and bars that rely on full liquor service in adult-only settings. The Type 48 general on-sale public premises license is the core license for these bar-forward concepts.",
+        "Liquor License Agents works with bar owners, nightlife groups, and investors to evaluate Type 48 feasibility, structure purchases, and manage licensing through ABC and local agencies."
+      ],
+      "authorizes": {
+        "heading": "What The Type 48 General On Sale Public Premises License Authorizes",
+        "lead": "A Type 48 license is a general on-sale public premises license. In San Diego County, it generally allows you to:",
+        "bullets": [
+          "Serve spirits, beer, and wine for on-premises consumption at a bar, club, or similar venue",
+          "Operate as a public premises where minors typically may not remain",
+          "Focus on alcohol sales, entertainment, and nightlife without running a full restaurant kitchen",
+          "Offer bottle service, DJs, and live entertainment, subject to CUP and city permits"
+        ],
+        "closing": [
+          "Type 48 is the standard license for high-energy bar and nightclub concepts."
+        ],
+        "bulletCount": 4
+      },
+      "rightFor": {
+        "heading": "When A Type 48 License Makes Sense For Your San Diego Bar, Lounge, Or Nightclub",
+        "body": "A Type 48 license may be appropriate if:\n- Your primary identity is a bar, nightclub, or entertainment venue rather than a restaurant\n- You plan to control access at the door, check IDs, and maintain a robust security plan\n- Food, if offered, will be secondary or supplied through limited menus or outside vendors\n- You are targeting nightlife corridors or entertainment districts where bar uses are common\nIf your concept is food-first with a strong bar, a Type 47 restaurant license might align better with your operations and neighborhood expectations. We help you weigh these options for each site."
+      },
+      "howWeHelp": {
+        "heading": "How Liquor License Agents Assists Type 48 Buyers And Sellers In San Diego County",
+        "body": "Type 48 licenses are often among the most valuable and closely reviewed licenses in a nightlife market.\nLiquor License Agents assists by:\n- Evaluating your location, floor plan, and neighborhood context to gauge Type 48 feasibility\n- Determining whether you should purchase an existing Type 48 license, given quotas and local conditions\n- Assisting with valuation, negotiation, and escrow when a Type 48 license is part of a bar or club sale\n- Preparing ABC applications, security plans, and premises diagrams that reflect your operating model\n- Coordinating with city planning, police, and code enforcement on CUPs, entertainment permits, and conditions\n- Monitoring ABC review, public posting, and any protests, and helping you respond effectively\nOur focus is on building a licensing plan that supports your nightlife concept while satisfying regulators and stakeholders."
+      },
+      "faqs": [
+        {
+          "q": "What can I serve with a California Type 48 general on sale liquor license?",
+          "a": "A Type 48 license allows you to serve spirits, beer, and wine for on-premises consumption in a bar or nightclub setting. It is a full liquor license for public premises."
+        },
+        {
+          "q": "Do I need to serve food or operate a kitchen with a Type 48 bar license?",
+          "a": "No. A Type 48 license does not require a full kitchen or bona fide eating place. Many Type 48 venues offer light food, pop-ups, or food trucks, but extensive meal service is not required by the license itself. CUP conditions may still address food in particular neighborhoods."
+        },
+        {
+          "q": "Are minors allowed anywhere on the premises under a Type 48 license in San Diego?",
+          "a": "Generally, no. A Type 48 license covers public premises where minors may not remain. You will need strong ID procedures, trained staff, and clear signage. We help you integrate these requirements into your operations, security policies, and ABC filings."
+        },
+        {
+          "q": "Can I host live music, DJs, and bottle service with a Type 48 license?",
+          "a": "Yes. Many Type 48 venues are built around live music, DJs, dancing, and bottle service. These uses can trigger additional requirements for security, crowd management, and noise control. Local permits and CUPs will often detail what is allowed and under what conditions."
+        },
+        {
+          "q": "How long does it typically take to obtain or transfer a Type 48 license in San Diego County?",
+          "a": "You should plan for several months, sometimes longer in sensitive areas or nightlife districts. ABC review, neighborhood input, CUP approvals, and build-out schedules all affect timing. Early planning and thorough documentation can help keep the process moving."
+        },
+        {
+          "q": "What factors influence the market price of a Type 48 license in San Diego nightlife areas?",
+          "a": "Pricing depends on demand in specific districts, scarcity of available licenses, recent comparable sales, and any existing conditions on the license. High-traffic nightlife neighborhoods, or areas with strict quotas, tend to see higher values. We help you interpret current market data before you commit."
+        }
+      ],
+      "cta": {
+        "heading": "Schedule an Appointment | (800) 799-9081",
+        "body": "If you are planning, acquiring, or selling a bar or nightclub in San Diego County and need a Type 48 license, you can call (800) 799-9081 to schedule an appointment and review licensing strategy, CUP issues, and transaction structures with an experienced advisor."
+      },
+      "localNames": [],
+      "localSpecificity": "NO real local place names. Local signal is 'San Diego County' / 'San Diego' plus unnamed flavour ('nightlife districts', 'nightlife corridors or entertainment districts', 'High-traffic nightlife neighborhoods'). No neighbourhood, district, or landmark is named. NOT locally unique.",
+      "wordCount": 795
+    }
+  }
+}

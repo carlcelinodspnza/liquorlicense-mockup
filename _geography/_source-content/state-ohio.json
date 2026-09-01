@@ -1,0 +1,46 @@
+{
+  "market": "ohio",
+  "label": "Ohio",
+  "code": "OH",
+  "tier": "state",
+  "sourceUrl": "https://liquorlicenseagents.com/ohio-liquor-license/",
+  "sourceNote": "Extracted from the client's live page. The source has NO <h1>; ours adds one.",
+  "title": "Ohio Liquor License Services | Buy & Sell with Experts",
+  "metaDescription": "Navigate Ohio's liquor license process with our expert services. Contact us today for a free consultation and ensure a smooth transaction.",
+  "firmClaimsFlagged": [],
+  "intro": [],
+  "sections": [
+    {
+      "level": "h2",
+      "heading": "OHIO LIQUOR LICENSE",
+      "paragraphs": [
+        "From start to finish, idea to opening, we’re the best in the industry to help you make it all happen.",
+        "Whether you are buying or selling an Ohio liquor license, it is important to consider that the process is often costly, complicated and time-consuming. To ensure that the sale or purchase of an Ohio liquor license goes smoothly, it is important to know the ins and outs of how the open market works, and how to navigate the requirements of the Ohio Department of Alcoholic Beverage Control (ABC). Without this knowledge, you risk losing valuable time and money – as a buyer or a seller.",
+        "At Liquor License Agents, we pride ourselves on our skills in finding qualified buyers and sellers for liquor licenses, as well as consulting, brokering and facilitating liquor license applications with the ABC. Our NALCP-certified agency has over 10 years of experience in the hospitality industry and is up to 30% cheaper than our competition. Whether you are in the market to buy a liquor license, or you are thinking of selling one that you already own, we guarantee that our services will make the process simple and stress-free.",
+        "Ohio liquor licenses are managed by the Ohio Department of Alcoholic Beverage Control. Depending on the type of business that you are running, there are many different kinds of permits. So, when buying an Ohio liquor license, it is important to take into consideration the different types of permits available as they relate to your specific business. For example, some licenses require no less than half of your income to originate from food sales. Other licenses are designated for only selling closed containers to be consumed off the premises."
+      ]
+    },
+    {
+      "level": "h4",
+      "heading": "Type 20 & 21 Liquor\nLicense",
+      "paragraphs": [
+        "Both Type 20 and Type 21 licenses are designated for the sale of alcohol for off-premises consumption. Minors are allowed on the premises of businesses that are issued this type of license. The Type 20 license is issued for the sale of packaged beer and wine, while the Type 21 is designated for the sale of general packaged alcohol, including spirits and liquor."
+      ]
+    },
+    {
+      "level": "h4",
+      "heading": "Type 41 & 47 Liquor\nLicense",
+      "paragraphs": [
+        "Probably some of the most common types of liquor licenses, the Type 41 and Type 47 licenses are specifically designated for businesses that primarily serve food. The California Department of Alcoholic Beverage Control states that, in order to be issued a Type 41 or Type 47 license, your facility must be a “bona fide eating place.” 51% of the total sales should come from food."
+      ]
+    },
+    {
+      "level": "h4",
+      "heading": "Type 48 Liquor\nLicense",
+      "paragraphs": [
+        "Type 48 licenses differ from Type 41 and Type 47 licenses as they are used in establishments that are not primarily eateries. Type 48 Licenses are typically issued for bars and nightclubs. The Type 48 license permits the holder to serve liquor until 2:00 AM. Unique to this license, the Type 48 allows closed containers of beer or wine to be sold for “off-premises” consumption."
+      ]
+    }
+  ],
+  "wordCount": 475
+}

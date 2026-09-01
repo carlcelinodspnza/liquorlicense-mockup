@@ -1,0 +1,206 @@
+{
+  "market": "san-jose",
+  "label": "San Jose",
+  "tier": "city",
+  "sourceUrl": "https://liquorlicenseagents.com/cities/san-jose/san-jose-liquor-licenses-for-restaurants-bars-and-retailers/",
+  "sourceNote": "Re-extracted 2026-09-01 from the <main><article> of the client's own live page (HTTP 200, curl with a desktop Chrome User-Agent, 121386 bytes). Written to san-jose-city.json, NOT san-jose.json: an earlier run of this extraction was destroyed by a filename collision when the Santa Clara County TYPE-PAGE workflow (5 type pages, label 'San Jose') wrote san-jose.json last and overwrote the city-level file. san-jose.json is the still-wanted county-type file and was NOT touched by this run. This file is the CITY-tier page only - one URL, one article. All prose in page.* is VERBATIM source text; only HTML tags and the two <a> wrappers were stripped. Nothing was excluded and no sentence needed rewriting (firmClaimsFlagged is empty - see reviewNotes).",
+  "indexable": false,
+  "noindexReason": "Ship noindex: this page is near-duplicate boilerplate with no local substance - measured this run at 80.6% word-identical to the client's San Francisco city page (difflib SequenceMatcher over 802 vs 826 tokens, 656 matching, after normalising place names; 78.7% with place names left in, and 18 of its 44 sentences are character-for-character identical to a San Francisco sentence once the place name is swapped), while carrying ZERO concrete local references (0 neighbourhoods, 0 landmarks, 0 districts, 0 venues across all 844 words) and a leftover Google-Docs redirect link carrying utm_source=chatgpt.com inside <main>.",
+  "firmClaimsFlagged": [],
+  "competitorNamesFound": [],
+  "extraction": {
+    "fetchedAt": "2026-09-01",
+    "httpStatus": 200,
+    "bytes": 121386,
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "scope": "<main> only - exactly 1 <main> and exactly 1 <article> in the document; no header, nav, sidebar or footer captured.",
+    "sourceCanonical": "https://liquorlicenseagents.com/cities/san-francisco-liquor-licenses-for-restaurants-bars-and-retailers/",
+    "sourceCanonicalNote": "SOURCE-SIDE DEFECT, verbatim from the live page: the canonical on the San Jose URL points at a SAN FRANCISCO path, and also drops the /cities/<city>/ segment. The client's own canonical therefore de-duplicates this page away to a different city. Recorded as evidence; not corrected here.",
+    "sourceRobots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "chatgptArtifact": {
+      "confirmed": true,
+      "location": "inside <main>, first intro paragraph, wrapping a single &nbsp; between 'alcohol privileges,' and the 'Liquor License Agents' anchor",
+      "verbatimHtml": "<a class=\"c8\" href=\"https://www.google.com/url?q=/?utm_source%3Dchatgpt.com&amp;sa=D&amp;source=editors&amp;ust=1769051204179239&amp;usg=AOvVaw0d3csVJAhNZguwBkk4TrKW\">&nbsp;</a>",
+      "href": "https://www.google.com/url?q=/?utm_source%3Dchatgpt.com&sa=D&source=editors&ust=1769051204179239&usg=AOvVaw0d3csVJAhNZguwBkk4TrKW",
+      "note": "CONFIRMED - the earlier finding is correct. It is a Google-Docs export artifact: source=editors is the signature of a doc pasted out of Google Docs, and the redirect target q=/?utm_source%3Dchatgpt.com is a URL-encoded relative '/' carrying a ChatGPT utm tag. The anchor's visible text is one non-breaking space, so it renders as an invisible link. The identical artifact (same shape, different ust/usg) is present on the San Francisco city page, which is further evidence both pages came out of one generated document."
+    },
+    "duplicationAudit": {
+      "comparedAgainst": "https://liquorlicenseagents.com/cities/san-francisco/san-francisco-liquor-licenses-for-restaurants-bars-and-retailers/",
+      "comparedAgainstNote": "Fetched live this run for the comparison (HTTP 200, 121628 bytes). NOTE: the local san-francisco.json is the San Francisco COUNTY type-page file, not this city page, so the city page had to be re-fetched rather than read from disk.",
+      "method": "Tags stripped, entities unescaped, lowercased, punctuation removed, place names normalised (san jose/san francisco -> CITY, santa clara county/san francisco county -> COUNTY, silicon valley/bay area -> REGION), then difflib.SequenceMatcher over the token lists.",
+      "sanJoseTokens": 802,
+      "sanFranciscoTokens": 826,
+      "matchingTokens": 656,
+      "similarityPlaceNormalised": "80.6%",
+      "similarityRaw": "78.7%",
+      "matchedOverLongerDoc": "79.4%",
+      "identicalSentences": "18 of 44 (40.9%) San Jose sentences are character-for-character identical to a San Francisco sentence after place-name normalisation",
+      "priorClaim": "77.7% word-identical vs the San Francisco city page",
+      "verdict": "CONFIRMED in substance, CORRECTED in the digit. The page is overwhelmingly duplicated, but my own measurement is 80.6% (place-normalised SequenceMatcher ratio), not 77.7%. The 77.7% figure is reachable only with a different tokenisation - my raw, un-normalised run lands at 78.7%, which brackets it. Treat the finding as sound and the exact percentage as method-dependent; the honest range across the methods I ran is 78-81%. The two pages share identical h2 architecture, an identical 6-item Type list, an identical 5-item service list, identical FAQ numbering and near-identical FAQ answers; the divergence is almost entirely local colour (Silicon Valley/buildouts/tech corridor vs neighborhood/conditional use/Bay Area)."
+    }
+  },
+  "reviewNotes": {
+    "step3Screen": "Screened the full <main> text for unverifiable firm claims (superiority/superlatives, asserted insider or privileged relationships with ABC staff, unverifiable case history, guarantees, experience claims) with a keyword sweep over best|leading|top|expert|experienced|decades|years of|trusted|premier|insider|relationships with ABC|we have helped|success rate|guarantee|fastest|proven|award - ZERO hits. Also grepped the ENTIRE page HTML (not just <main>) for competitor names and domains - ZERO hits. Nothing was excluded and no sentence needed rewriting, so every field in page.* is verbatim source text. NOTE: this page carries none of the 'with an experienced advisor' / 'the best way' phrasing that WAS flagged on the Ventura, Santa Barbara and Los Angeles county files.",
+    "borderlineKept": [
+      "Section 3 closing: 'Our goal is a predictable process that keeps your opening or transition on schedule.' - a stated goal, not an asserted outcome or a comparison to any other firm. Kept verbatim, consistent with the same call on the Palm Springs page.",
+      "Section 3 bullet: 'Monitoring the file and responding quickly to reduce avoidable delays' - service-conduct description, hedged by 'avoidable'. No guarantee asserted. Kept verbatim.",
+      "Intro: 'Liquor License Agents helps you choose the right California license type and manage the transfer process with a clear plan.' - a capability statement about the firm's own service, with no superiority or experience assertion. Kept verbatim."
+    ],
+    "collisionGuard": "This run wrote ONLY san-jose-city.json. san-jose.json (Santa Clara County, 5 type pages) was read for schema comparison and left byte-identical - it was never opened for writing."
+  },
+  "page": {
+    "h1": "San Jose Liquor Licenses For Restaurants, Bars, And Retailers",
+    "title": "San Jose Liquor License | Buy, Sell, Transfer",
+    "metaDescription": "Buy, sell, or transfer a liquor license in San Jose, California. Learn about your licensing options and how Liquor License Agents can support your ABC compliance.",
+    "wordCount": 844,
+    "structure": "Single <article> inside <main>, no page chrome. h1 + 2 unheaded intro paragraphs, then 3 <h2> body sections (the 2nd and 3rd each carry a <ul> plus a one-sentence closing paragraph), then 1 <h2> FAQ section holding 6 numbered <h3>/<p> pairs, then an <h3> CTA heading + 2 <p>, then an <hr> and one EMPTY <p>. The CTA heading is an <h3>, not an <h2> - identical block order to the Palm Springs and San Francisco city pages.",
+    "headingsInOrder": [
+      "How Liquor Licensing Works In San Jose",
+      "Common California Liquor License Types In San Jose",
+      "How Liquor License Agents Supports San Jose Buyers And Sellers",
+      "San Jose Liquor License FAQs",
+      "1. What types of liquor licenses are most common in San Jose?",
+      "2. How do I choose the right license for my San Jose restaurant, bar, or nightlife concept?",
+      "3. Can I purchase and transfer an existing liquor license in San Jose or Santa Clara County?",
+      "4. How long does the liquor license process usually take in San Jose?",
+      "5. What downtown, tech corridor, or neighborhood zoning rules affect licensing in San Jose?",
+      "6. What should I budget for a liquor license in San Jose and the Silicon Valley region?",
+      "Schedule an Appointment | (800) 799-9081"
+    ],
+    "intro": [
+      "San Jose is a major Silicon Valley market where liquor licensing supports everything from neighborhood dining to high volume downtown concepts and retail bottle shops. If you are opening, buying, or selling a business that needs alcohol privileges, Liquor License Agents helps you choose the right California license type and manage the transfer process with a clear plan.",
+      "In large markets like San Jose, the biggest risk is assuming a license can be “swapped in” quickly. Licensing timelines and premises requirements should be built into your project plan from the start."
+    ],
+    "introNote": "Unheaded. Paragraph 1 contains the only two links in <main>: a dead Google-Docs redirect wrapping a single &nbsp; (see extraction.chatgptArtifact) and an anchor on 'Liquor License Agents' pointing at '/'. Link markup stripped; the sentence text is verbatim and unaltered.",
+    "sections": [
+      {
+        "heading": "How Liquor Licensing Works In San Jose",
+        "level": "h2",
+        "paragraphs": [
+          "Liquor licenses in San Jose are regulated by the California Department of Alcoholic Beverage Control. Many operators obtain the privileges they need through a person to person transfer, purchasing an existing license and transferring it into the buyer’s name, sometimes with a location change.",
+          "Transfers typically include background review, required posting and notice periods, ownership and financing disclosures, and accurate premises documentation. Restaurant licenses generally require bona fide eating place operations with complete meals and a functioning kitchen."
+        ]
+      },
+      {
+        "heading": "Common California Liquor License Types In San Jose",
+        "level": "h2",
+        "lead": "Common liquor license types used in San Jose include",
+        "bullets": [
+          "Type 20, Off Sale Beer and Wine, for off premises beer and wine retail",
+          "Type 21, Off Sale General, for off premises beer, wine, and spirits retail",
+          "Type 41, On Sale Beer and Wine Eating Place, for restaurants serving beer and wine with meals",
+          "Type 47, On Sale General Eating Place, for restaurants serving beer, wine, and spirits",
+          "Type 48, On Sale General Public Premises, for bars and nightlife venues",
+          "Type 75, Brewpub, for qualifying brewpub operations"
+        ],
+        "closing": "Choosing correctly affects spirits privileges, minors, kitchen expectations, and operating requirements."
+      },
+      {
+        "heading": "How Liquor License Agents Supports San Jose Buyers And Sellers",
+        "level": "h2",
+        "lead": "San Jose transactions often involve buildouts, multi tenant projects, and tight timelines tied to leasing and financing. We support buyers and sellers by",
+        "bullets": [
+          "Confirming the license type that fits your concept and service plan",
+          "Reviewing the target license for conditions that could restrict hours, service areas, or entertainment",
+          "Coordinating escrow timing so purchase terms and transfer milestones stay aligned",
+          "Preparing and filing ABC applications, disclosures, and premises documentation accurately",
+          "Monitoring the file and responding quickly to reduce avoidable delays"
+        ],
+        "closing": "Our goal is a predictable process that keeps your opening or transition on schedule."
+      }
+    ],
+    "faqSection": {
+      "heading": "San Jose Liquor License FAQs",
+      "items": [
+        {
+          "number": 1,
+          "questionVerbatim": "1. What types of liquor licenses are most common in San Jose?",
+          "question": "What types of liquor licenses are most common in San Jose?",
+          "answer": "San Jose commonly involves restaurant licenses for beer and wine or full liquor, public premises licenses for bars and nightlife venues, and off sale licenses for retail bottle shops and markets. Brewpub licensing can also be relevant depending on the operating model. The right license depends on whether you are primarily a restaurant, a bar, or a retail operator."
+        },
+        {
+          "number": 2,
+          "questionVerbatim": "2. How do I choose the right license for my San Jose restaurant, bar, or nightlife concept?",
+          "question": "How do I choose the right license for my San Jose restaurant, bar, or nightlife concept?",
+          "answer": "Start with the operating model. Restaurants serving complete meals typically choose beer and wine or full liquor depending on whether spirits and cocktails are essential. Bar and nightlife venues where alcohol is the primary purpose usually require a public premises structure rather than a restaurant license. If you plan patios, entertainment, or late hours, define the premises and service plan early because these details often influence conditions and approvals."
+        },
+        {
+          "number": 3,
+          "questionVerbatim": "3. Can I purchase and transfer an existing liquor license in San Jose or Santa Clara County?",
+          "question": "Can I purchase and transfer an existing liquor license in San Jose or Santa Clara County?",
+          "answer": "Yes. Many operators purchase an existing license and transfer it through ABC, typically coordinated through escrow. ABC reviews ownership disclosures, financing, and premises details, so accurate documentation and a clear premises plan help keep the process moving."
+        },
+        {
+          "number": 4,
+          "questionVerbatim": "4. How long does the liquor license process usually take in San Jose?",
+          "question": "How long does the liquor license process usually take in San Jose?",
+          "answer": "Most transfers take months rather than weeks. Timelines depend on background review, posting periods, application completeness, and whether corrections are needed. Planning early helps align licensing with lease timelines, inspections, and buildout schedules."
+        },
+        {
+          "number": 5,
+          "questionVerbatim": "5. What downtown, tech corridor, or neighborhood zoning rules affect licensing in San Jose?",
+          "question": "What downtown, tech corridor, or neighborhood zoning rules affect licensing in San Jose?",
+          "answer": "Downtown and high activity corridors can involve added sensitivity around patios, noise, hours, security planning, and entertainment. Some projects require local approvals that shape operating conditions in addition to ABC rules. Identifying those items early helps you avoid selecting a license or premises plan that does not fit the site."
+        },
+        {
+          "number": 6,
+          "questionVerbatim": "6. What should I budget for a liquor license in San Jose and the Silicon Valley region?",
+          "question": "What should I budget for a liquor license in San Jose and the Silicon Valley region?",
+          "answer": "Your budget typically includes the license market price, escrow and transaction costs, ABC related fees and filing expenses, and any operational upgrades required by license conditions. Pricing varies by license type and local demand, so establishing realistic ranges early helps you plan accurately."
+        }
+      ]
+    },
+    "cta": {
+      "heading": "Schedule an Appointment | (800) 799-9081",
+      "level": "h3",
+      "paragraphs": [
+        "If you are buying, selling, or opening in San Jose, a consultation can help you confirm the correct license type, anticipate conditions that could affect operations, and understand the transfer steps that typically control timing. We will review your concept and location strategy and outline practical next actions to move forward.",
+        "To schedule a confidential appointment, call (800) 799-9081."
+      ],
+      "phone": "(800) 799-9081"
+    },
+    "lists": [
+      {
+        "underHeading": "Common California Liquor License Types In San Jose",
+        "type": "ul",
+        "itemCount": 6,
+        "items": [
+          "Type 20, Off Sale Beer and Wine, for off premises beer and wine retail",
+          "Type 21, Off Sale General, for off premises beer, wine, and spirits retail",
+          "Type 41, On Sale Beer and Wine Eating Place, for restaurants serving beer and wine with meals",
+          "Type 47, On Sale General Eating Place, for restaurants serving beer, wine, and spirits",
+          "Type 48, On Sale General Public Premises, for bars and nightlife venues",
+          "Type 75, Brewpub, for qualifying brewpub operations"
+        ]
+      },
+      {
+        "underHeading": "How Liquor License Agents Supports San Jose Buyers And Sellers",
+        "type": "ul",
+        "itemCount": 5,
+        "items": [
+          "Confirming the license type that fits your concept and service plan",
+          "Reviewing the target license for conditions that could restrict hours, service areas, or entertainment",
+          "Coordinating escrow timing so purchase terms and transfer milestones stay aligned",
+          "Preparing and filing ABC applications, disclosures, and premises documentation accurately",
+          "Monitoring the file and responding quickly to reduce avoidable delays"
+        ]
+      }
+    ],
+    "tables": [],
+    "localNames": [],
+    "localNamesNote": "EXHAUSTIVE and EMPTY - CONFIRMED. Every proper-noun place string in <main> was enumerated: 'San Jose', 'Santa Clara County', 'Silicon Valley', 'California'. NOT ONE is a concrete neighbourhood, landmark, district, or venue: the first is the city name itself, the second its county, the third a regional label, the fourth the state. ZERO named neighbourhoods (no Japantown, Willow Glen, Santana Row, SoFA, Alum Rock, Little Portugal), ZERO landmarks, ZERO named districts, ZERO named venues, ZERO street or corridor names. 'downtown', 'tech corridor', 'high activity corridors' and 'neighborhood dining' are GENERIC nouns and are excluded per the extraction rule. This independently CONFIRMS the earlier finding of zero concrete local references.",
+    "placeMentionCounts": {
+      "San Jose": 18,
+      "Santa Clara County": 1,
+      "Silicon Valley": 2,
+      "California": 3,
+      "downtown/Downtown": 3,
+      "neighborhood": 2,
+      "tech corridor": 1
+    },
+    "trailingEmptyElements": [
+      "<hr>",
+      "<p></p>"
+    ]
+  }
+}

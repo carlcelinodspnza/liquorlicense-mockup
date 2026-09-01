@@ -111,7 +111,15 @@
     var triggerOf = function (group) { return group.querySelector('.mm-trigger'); };
     var itemsOf = function (group) {
       var p = panelOf(group);
-      return p ? Array.prototype.slice.call(p.querySelectorAll('a[href]')) : [];
+      if (!p) return [];
+      // [BY] Only RENDERED links. The Locations cascade keeps five of its six panes
+      // hidden at any moment; without this filter ArrowUp/Down would step onto a link
+      // inside a display:none pane, .focus() would silently do nothing, and keyboard
+      // focus would be stranded mid-menu. Panels whose content is all visible — Services,
+      // Licensing — are unaffected, since every link passes the filter.
+      return Array.prototype.slice.call(p.querySelectorAll('a[href]')).filter(function (a) {
+        return a.offsetParent !== null || a.getClientRects().length > 0;
+      });
     };
     var closeGroup = function (group, focusTrigger) {
       if (!group.classList.contains('is-open')) return;
@@ -3740,4 +3748,247 @@
     var go = note.querySelector('.btn-primary');
     if (go) go.focus();
   }, true);   /* CAPTURE: [AE] binds its own submit listener on this same form */
+})();
+
+/* ==========================================================================
+   [BX] THE STATE TIER on locations.html
+   --------------------------------------------------------------------------
+   A second, OUTER tab controller sitting above the fourteen market tabs.
+
+   Why this is a separate IIFE rather than an edit to part A: part A resolves
+   its panels with `locRoot.querySelectorAll('.loc-panel')` where locRoot is
+   `[data-loc-tabs]`. The California state panel is that element's PARENT and
+   the other five are its SIBLINGS, so none of them are descendants of locRoot
+   and part A cannot see them. Wrapping the matrix therefore changed nothing
+   about how the market tabs behave, and this block adds the outer tier
+   without touching a line of the code that drives them.
+
+   Deep links: the market tabs own the bare `#fresno` form of the hash, which
+   part A already handles. A bare market hash arriving while another state is
+   selected has to snap back to California first, or part A would un-hide a
+   panel inside a container that is itself hidden. States use `#state-<slug>`
+   so the two hash namespaces cannot collide.
+   -------------------------------------------------------------------------- */
+(function () {
+  'use strict';
+
+  var root = document.querySelector('[data-loc-states]');
+  if (!root) return;
+
+  var slice = function (n) { return Array.prototype.slice.call(n); };
+  var tabs = slice(root.querySelectorAll('.loc-state'));
+  var panels = slice(root.querySelectorAll('[data-loc-statepanel]'));
+  if (!tabs.length || !panels.length) return;
+
+  // Every market slug California owns, read off the markup rather than hard-coded,
+  // so adding a market tab never needs a matching edit here.
+  var marketSlugs = slice(root.querySelectorAll('.loc-tab')).map(function (t) {
+    return t.getAttribute('data-loc-tab') || '';
+  });
+
+  var slugOf = function (t) { return t.getAttribute('data-loc-state') || ''; };
+  var indexOf = function (slug) {
+    for (var i = 0; i < tabs.length; i++) if (slugOf(tabs[i]) === slug) return i;
+    return -1;
+  };
+
+  function activate(slug, opts) {
+    opts = opts || {};
+    var idx = indexOf(slug);
+    if (idx === -1) return false;
+
+    tabs.forEach(function (t, i) {
+      var on = i === idx;
+      t.setAttribute('aria-selected', String(on));
+      t.setAttribute('tabindex', on ? '0' : '-1');   // roving tabindex, as part A
+    });
+    panels.forEach(function (p) {
+      p.hidden = p.getAttribute('data-loc-statepanel') !== slug;
+    });
+
+    if (opts.focus) tabs[idx].focus();
+
+    // Below 640px the rail is one overflow-x row. Keep the selected state in
+    // view on EVERY activation path, not only the focused one — the same bug
+    // [AF] fixed on the market rail.
+    var rail = tabs[idx].parentElement;
+    if (rail && rail.scrollWidth > rail.clientWidth) {
+      var tb = tabs[idx].getBoundingClientRect();
+      var rb = rail.getBoundingClientRect();
+      if (tb.left < rb.left || tb.right > rb.right) {
+        rail.scrollLeft += (tb.left - rb.left) - (rb.width - tb.width) / 2;
+      }
+    }
+
+    // Hand a non-California state to the qualifier so step 1 is never left
+    // saying "California — statewide" to someone who just told us they are in
+    // Florida. The select carries a matching st-<slug> option; the market tabs
+    // keep ownership of step 1 whenever California is the active state.
+    if (slug !== 'california' && typeof window.__llaQzSyncMarket === 'function') {
+      window.__llaQzSyncMarket('st-' + slug);
+    }
+
+    if (opts.hash && window.history && window.history.replaceState) {
+      window.history.replaceState(null, '', '#state-' + slug);
+    }
+    return true;
+  }
+
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener('click', function () {
+      activate(slugOf(tab), { hash: true });
+    });
+    tab.addEventListener('keydown', function (e) {
+      var next = -1;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') next = 0;
+      else if (e.key === 'End') next = tabs.length - 1;
+      if (next === -1) return;
+      e.preventDefault();
+      activate(slugOf(tabs[next]), { focus: true, hash: true });
+    });
+  });
+
+  function fromHash(focus) {
+    var h = (location.hash || '').replace(/^#/, '');
+    if (!h) return false;
+    if (h.indexOf('state-') === 0) {
+      return activate(h.slice(6), { focus: !!focus, hash: false });
+    }
+    // A bare market hash means California, whatever was selected before.
+    if (marketSlugs.indexOf(h) !== -1) {
+      return activate('california', { focus: false, hash: false });
+    }
+    return false;
+  }
+
+  if (!fromHash(false)) {
+    var pre = tabs.filter(function (t) {
+      return t.getAttribute('aria-selected') === 'true';
+    })[0] || tabs[0];
+    if (pre) activate(slugOf(pre), { hash: false });
+  }
+  window.addEventListener('hashchange', function () { fromHash(true); });
+})();
+
+/* ==========================================================================
+   [BY] LOCATIONS CASCADE — the column-2 swap
+   --------------------------------------------------------------------------
+   Opening and closing the panel is still the generic .mm-has-panel controller
+   above; this block only swaps which pane is in flow as you move down the
+   state rail.
+
+   Pointer AND keyboard both drive it, because the rail is a tablist: hovering
+   or focusing a state shows its pane, Arrow keys move between states with a
+   roving tabindex, and ArrowRight/Enter steps into the pane's first link.
+
+   NULL-GUARDED: a page without [data-mm-cascade] skips the whole block.
+   -------------------------------------------------------------------------- */
+(function () {
+  'use strict';
+
+  var roots = Array.prototype.slice.call(document.querySelectorAll('[data-mm-cascade]'));
+  if (!roots.length) return;
+
+  roots.forEach(function (root) {
+    var states = Array.prototype.slice.call(root.querySelectorAll('.mm-casc__state'));
+    var panes = Array.prototype.slice.call(root.querySelectorAll('.mm-casc__pane'));
+    // the left-most card swaps with the state too — it carries that state's general
+    // location info, so it must never be showing one state while the rail shows another
+    var cards = Array.prototype.slice.call(root.querySelectorAll('[data-mmcard]'));
+    // column 4: what sits under the hovered option in column 3
+    var details = Array.prototype.slice.call(root.querySelectorAll('[data-mmdetail]'));
+    var fallback = root.querySelector('.mm-casc__dfall');
+    if (!states.length || !panes.length) return;
+
+    function showDetail(key) {
+      var found = false;
+      details.forEach(function (d) {
+        var on = d.getAttribute('data-mmdetail') === key;
+        d.hidden = !on;
+        if (on) found = true;
+      });
+      // never blank the column: with no panel for this option, fall back to the prompt
+      if (fallback) fallback.hidden = found;
+    }
+    // Switching state opens that state's DEFAULT detail rather than a prompt. An empty
+    // fourth column that says "hover something" is an empty state, not a design — and it
+    // was showing for three of the six states before you hovered anything at all.
+    function showDefault(btn) {
+      var key = btn && btn.getAttribute('data-mmdefault');
+      if (key) { showDetail(key); return; }
+      details.forEach(function (d) { d.hidden = true; });
+      if (fallback) fallback.hidden = false;
+    }
+    // a row reveals its detail on hover AND on focus, so the keyboard path matches the pointer
+    Array.prototype.slice.call(root.querySelectorAll('[data-mmopt]')).forEach(function (r) {
+      var key = r.getAttribute('data-mmopt');
+      r.addEventListener('mouseenter', function () { showDetail(key); });
+      r.addEventListener('focus', function () { showDetail(key); });
+    });
+
+    var slugOf = function (b) { return b.getAttribute('data-mmstate') || ''; };
+
+    function show(slug, opts) {
+      opts = opts || {};
+      var idx = -1;
+      for (var i = 0; i < states.length; i++) if (slugOf(states[i]) === slug) { idx = i; break; }
+      if (idx === -1) return false;
+
+      states.forEach(function (b, i) {
+        var on = i === idx;
+        b.setAttribute('aria-selected', String(on));
+        b.setAttribute('tabindex', on ? '0' : '-1');
+      });
+      panes.forEach(function (p) { p.hidden = p.getAttribute('data-mmpane') !== slug; });
+      cards.forEach(function (c) { c.hidden = c.getAttribute('data-mmcard') !== slug; });
+      showDefault(states[idx]);
+      if (opts.focus) states[idx].focus();
+      return true;
+    }
+
+    states.forEach(function (btn, i) {
+      // Pointer: showing on hover is what makes it read as a cascade rather than a
+      // set of tabs. It never navigates — the rows in column 2 are the links.
+      btn.addEventListener('mouseenter', function () { show(slugOf(btn)); });
+      btn.addEventListener('focus', function () { show(slugOf(btn)); });
+      btn.addEventListener('click', function (e) { e.preventDefault(); show(slugOf(btn)); });
+
+      btn.addEventListener('keydown', function (e) {
+        var next = -1;
+        if (e.key === 'ArrowDown') next = (i + 1) % states.length;
+        else if (e.key === 'ArrowUp') next = (i - 1 + states.length) % states.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = states.length - 1;
+        else if (e.key === 'ArrowRight' || e.key === 'Enter' || e.key === ' ') {
+          // step into the pane this state controls
+          var pane = panes.filter(function (p) {
+            return p.getAttribute('data-mmpane') === slugOf(btn);
+          })[0];
+          var first = pane && pane.querySelector('a[href]');
+          if (first) { e.preventDefault(); first.focus(); }
+          return;
+        }
+        if (next === -1) return;
+        e.preventDefault();
+        show(slugOf(states[next]), { focus: true });
+      });
+    });
+
+    // INITIALISE. Without this the block only ever reacts to hover, so the very first
+    // time the menu opens column 4 sits empty — every detail hidden by the markup and the
+    // fallback prompt hidden too. Open on the selected state's default straight away.
+    showDefault(states.filter(function (b) {
+      return b.getAttribute('aria-selected') === 'true';
+    })[0] || states[0]);
+
+    // ArrowLeft from anywhere in the pane returns to the rail.
+    root.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowLeft') return;
+      if (!e.target.closest || !e.target.closest('.mm-casc__pane')) return;
+      var sel = states.filter(function (b) { return b.getAttribute('aria-selected') === 'true'; })[0];
+      if (sel) { e.preventDefault(); sel.focus(); }
+    });
+  });
 })();

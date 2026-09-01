@@ -1,0 +1,342 @@
+{
+  "market": "napa-valley",
+  "label": "Napa Valley",
+  "tier": "area",
+  "sourceUrl": "https://liquorlicenseagents.com/counties/napa-county/napa-county-liquor-licenses-for-restaurants-bars-and-retailers/",
+  "sourceNote": "THE SOURCE IS A COUNTY PAGE, NOT A NAPA VALLEY PAGE. Napa Valley is an AVA — not a city and not a county — and the client publishes nothing under that name; the string 'Napa Valley' does not appear on this page even once. This is their Napa COUNTY overview page, the nearest real source they have. Every fact below is stated by them about NAPA COUNTY and is recorded with 'Napa County' left exactly as written — nothing has been relabelled as a Napa Valley fact. Anyone consuming this file must make the county-vs-AVA distinction explicit rather than inheriting it silently. Fetched 2026-09-01 with a desktop Chrome User-Agent; HTTP 200, 122,990 bytes; extracted from <main> only (one <section> > <article>, no nav/header/footer). Note also that the page's own rel=canonical points at a different URL than the one we fetched (it drops the /napa-county/ segment).",
+  "extraction": {
+    "fetchedAt": "2026-09-01",
+    "httpStatus": 200,
+    "bytes": 122990,
+    "sha1": "798d202e31d6d8f785419556071e475941751ab6",
+    "scope": "<main> only",
+    "verbatimPolicy": "All headings, paragraphs and list items are verbatim source text, whitespace-normalised (HTML tags stripped, &nbsp; and <br> collapsed to single spaces). The ONLY edit is the removal of one flagged firm claim from the CTA sentence, recorded in full in firmClaimsFlagged."
+  },
+  "page": {
+    "h1": "Napa County Liquor Licenses For Restaurants, Bars, And Retailers",
+    "title": "Napa County Liquor License | Buy, Sell, Transfer",
+    "metaDescription": "Buy, sell, or transfer a liquor license in Napa County, California. Contact Liquor License Agents for expert help with ABC applications, purchases, and license transfers.",
+    "metaDescriptionNote": "Kept verbatim as source metadata. The phrase \"expert help\" is an unverifiable expertise claim and is also listed in firmClaimsFlagged — do not carry it into our copy.",
+    "canonicalOnSource": "https://liquorlicenseagents.com/counties/napa-county-liquor-licenses-for-restaurants-bars-and-retailers/",
+    "canonicalMismatch": "The page's rel=canonical omits the /napa-county/ path segment that the live URL uses (canonical != fetched URL). Their problem, not ours; recorded for completeness.",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    "wordCountMain": 968,
+    "wordCountNote": "968 words of visible text inside <main>, headings included. <main> holds one <section> > <div.container> > <article>; no nav, header, footer, sidebar, image, table, form or embedded widget.",
+    "structure": {
+      "actualSkeleton": "H1 + 2 unheaded intro paragraphs -> 3 content H2s (each: lead paragraph, a colon lead-in line, one bulleted UL, a closing paragraph) -> 1 FAQ H2 holding 6 numbered H3 Q&As -> a 7th H3 that is really the CTA, not a FAQ -> <hr> and an empty trailing <p>.",
+      "differsFromLicenceTypePages": "Yes. This is a 4-H2 county-overview layout, NOT the rigid 7-section licence-type skeleton. There is no table, no pricing grid, no process/timeline table, no image and no form anywhere in <main>.",
+      "quirk": "The 'Schedule an Appointment | (800) 799-9081' CTA is marked up as an H3 nested under the FAQ H2, so it reads to a crawler as a seventh FAQ question. On the sibling Fresno and Kern county pages the same CTA is an H2. Do not copy this nesting.",
+      "counts": {
+        "h1": 1,
+        "h2": 4,
+        "h3": 7,
+        "paragraphs": 18,
+        "unorderedLists": 3,
+        "listItems": 15,
+        "orderedLists": 0,
+        "tables": 0,
+        "images": 0,
+        "forms": 0,
+        "faqQuestions": 6
+      }
+    },
+    "headingsInOrder": [
+      {
+        "level": "h1",
+        "text": "Napa County Liquor Licenses For Restaurants, Bars, And Retailers"
+      },
+      {
+        "level": "h2",
+        "text": "Understanding Liquor Licensing In Napa County"
+      },
+      {
+        "level": "h2",
+        "text": "Key California Liquor License Types In Napa County"
+      },
+      {
+        "level": "h2",
+        "text": "How Liquor License Agents Guides Napa County Buyers And Sellers"
+      },
+      {
+        "level": "h2",
+        "text": "Napa County Liquor License FAQs"
+      },
+      {
+        "level": "h3",
+        "text": "1. What liquor license options are available in Napa County?"
+      },
+      {
+        "level": "h3",
+        "text": "2. How do I choose the right license for my Napa County restaurant, bar, or winery?"
+      },
+      {
+        "level": "h3",
+        "text": "3. Can I purchase and transfer an existing liquor license in Napa County?"
+      },
+      {
+        "level": "h3",
+        "text": "4. How long does it usually take to obtain a Napa County liquor license?"
+      },
+      {
+        "level": "h3",
+        "text": "5. What local zoning or wine-country rules affect Napa County liquor licensing?"
+      },
+      {
+        "level": "h3",
+        "text": "6. How much should I expect to invest in a Napa County liquor license?"
+      },
+      {
+        "level": "h3",
+        "text": "Schedule an Appointment | (800) 799-9081",
+        "note": "CTA, not a FAQ question"
+      }
+    ],
+    "intro": {
+      "note": "The opening unheaded paragraphs, verbatim. Nothing was removed from these.",
+      "paragraphs": [
+        "Napa County is internationally recognized for its wineries, fine dining, and hospitality. Restaurants, bars, tasting rooms, and retailers in this competitive environment need the right liquor licenses in place to operate legally, protect their brand, and support long-term growth.",
+        "Liquor License Agents helps Napa County owners, wineries, restaurateurs, and investors understand complex wine-country licensing rules, select appropriate license types, and manage ABC applications or transfers."
+      ]
+    },
+    "sections": [
+      {
+        "heading": "Understanding Liquor Licensing In Napa County",
+        "level": "h2",
+        "body": [
+          {
+            "type": "p",
+            "text": "Liquor licensing in Napa County is shaped by California ABC law, wine-country land use policies, and a strong emphasis on agricultural and tourism balance. Local jurisdictions carefully consider how new alcohol-related businesses fit into the existing mix of wineries, tasting rooms, restaurants, and retail."
+          },
+          {
+            "type": "p",
+            "text": "Key factors include:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "State ABC categories for on-sale restaurants and bars, off-sale retailers, wineries, and tasting rooms",
+              "Population-based quotas that limit certain license types",
+              "Agricultural and wine-country land-use rules that control where and how alcohol-related businesses may operate",
+              "Conditions on tasting-room size, events, hours, and food offerings in specific areas",
+              "Public notice, and active participation by residents, neighborhood groups, and industry stakeholders"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Understanding these factors is essential before you plan a new concept, expand an existing one, or acquire a business in Napa County."
+          }
+        ]
+      },
+      {
+        "heading": "Key California Liquor License Types In Napa County",
+        "level": "h2",
+        "body": [
+          {
+            "type": "p",
+            "text": "Because of the wine-country setting, Napa County businesses encounter a mix of restaurant, bar, retail, and winery-specific licenses."
+          },
+          {
+            "type": "p",
+            "text": "Core license categories include:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Restaurant licenses for bona fide eating places that serve beer and wine, or full liquor, with complete meals",
+              "Public-premises bar licenses for lounges, cocktail bars, and nightlife concepts where minors are generally not allowed to remain",
+              "Off-sale licenses for wine shops, specialty retailers, and markets that sell packaged alcohol to go",
+              "Winery and tasting-room licenses that allow production, tastings, and bottle sales, subject to local land-use approvals"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "A downtown restaurant, a hotel bar, a retail wine shop, and a hillside winery all have different licensing needs. The right license type should reflect your actual operations, location, and long-term plans."
+          }
+        ]
+      },
+      {
+        "heading": "How Liquor License Agents Guides Napa County Buyers And Sellers",
+        "level": "h2",
+        "body": [
+          {
+            "type": "p",
+            "text": "Transactions in Napa County often involve significant investments in real estate, vineyards, and brand assets. Liquor License Agents helps you manage the licensing details so they do not become a bottleneck in otherwise well-planned projects."
+          },
+          {
+            "type": "p",
+            "text": "We assist by:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Reviewing your concept, site, and operational plans, and recommending license categories that match your goals",
+              "Determining whether you can apply for a new license, or whether you must purchase and transfer an existing license",
+              "Assisting with license valuation, negotiation, and escrow for both stand-alone licenses and licenses sold with businesses or wineries",
+              "Preparing and filing ABC applications, premises diagrams, and required ownership disclosures",
+              "Coordinating with local planning staff regarding zoning, wine-country land-use rules, and conditional use permits",
+              "Tracking your ABC file and helping you respond to questions, protests, or conditions through final issuance"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Our aim is to keep licensing work synchronized with your transaction, construction, and launch schedules."
+          }
+        ],
+        "note": "'Coordinating with local planning staff...' and (in FAQ 5) 'We work with planning staff...' describe a service, not an asserted insider relationship with ABC staff, so they were kept. They are still unsubstantiated and should not be repeated as a differentiator without the client confirming it."
+      },
+      {
+        "heading": "Napa County Liquor License FAQs",
+        "level": "h2",
+        "body": [],
+        "note": "Container heading only; its body is the six H3 Q&As in the faq array below."
+      }
+    ],
+    "faq": {
+      "note": "Six numbered Q&As. The numbering '1.'–'6.' is in the source heading text and is reproduced verbatim. No FAQPage schema markup exists on the page.",
+      "items": [
+        {
+          "q": "1. What liquor license options are available in Napa County?",
+          "a": "Napa County uses the main California categories for restaurants, bars, off-sale retailers, and wineries, along with specialized winery and tasting-room license structures. The right option depends on whether your primary focus is food, wine, cocktails, retail sales, production, or some combination of these."
+        },
+        {
+          "q": "2. How do I choose the right license for my Napa County restaurant, bar, or winery?",
+          "a": "Begin by clarifying your core business. Are you primarily a winery with on-site tastings, a restaurant with a concept-driven beverage program, a bar or cocktail lounge, or a wine-focused retail shop? Will you sell bottles to go, host events, or offer full meals? Once we understand your operational plan and location, we can recommend the license type or combination of licenses that best supports your model."
+        },
+        {
+          "q": "3. Can I purchase and transfer an existing liquor license in Napa County?",
+          "a": "Yes. Many California licenses can be bought and sold, then transferred between qualified parties within the same county, subject to ABC approval. Some may also be moved to a new premises if zoning and land-use rules allow. These transfers typically involve complex negotiations, escrow arrangements, and detailed filings. We guide you through valuation, deal structure, and ABC review."
+        },
+        {
+          "q": "4. How long does it usually take to obtain a Napa County liquor license?",
+          "a": "Most Napa County projects should plan for several months of lead time. ABC review, public notice, local planning processes, and any construction or remodeling all affect timing. Wine-country land-use rules can also add steps and hearings. Starting licensing efforts early and coordinating them with planning approvals helps you avoid last-minute delays."
+        },
+        {
+          "q": "5. What local zoning or wine-country rules affect Napa County liquor licensing?",
+          "a": "Napa County and its cities use detailed land-use rules to protect agricultural areas, manage tourism, and preserve neighborhood character. These rules can govern where tasting rooms are allowed, how many visitors are permitted, hours of operation, event schedules, and food offerings. We work with planning staff and your professional team to ensure your licensing strategy fits within these frameworks."
+        },
+        {
+          "q": "6. How much should I expect to invest in a Napa County liquor license?",
+          "a": "License values in Napa County can vary widely based on license type, location, and whether the license is tied to a winery, restaurant, or retail business. High-demand areas and well-known corridors may command higher prices. In addition to the license itself, you should budget for escrow, legal, consulting, and permit costs. We provide market-based guidance so you can plan your investment with realistic numbers."
+        }
+      ]
+    },
+    "cta": {
+      "heading": "Schedule an Appointment | (800) 799-9081",
+      "phone": "(800) 799-9081",
+      "textVerbatimSource": "If you are planning or acquiring a Napa County restaurant, bar, winery, tasting room, or retail shop that will sell or serve alcohol, you can call (800) 799-9081 to schedule an appointment and review your licensing strategy with a team familiar with wine-country requirements.",
+      "textAfterFlaggedClaimRemoved": "If you are planning or acquiring a Napa County restaurant, bar, winery, tasting room, or retail shop that will sell or serve alcohol, you can call (800) 799-9081 to schedule an appointment and review your licensing strategy.",
+      "note": "The clause \"with a team familiar with wine-country requirements\" was cut and moved to firmClaimsFlagged; the rewritten sentence is what is safe to use."
+    },
+    "lists": [
+      {
+        "underHeading": "Understanding Liquor Licensing In Napa County",
+        "leadIn": "Key factors include:",
+        "items": [
+          "State ABC categories for on-sale restaurants and bars, off-sale retailers, wineries, and tasting rooms",
+          "Population-based quotas that limit certain license types",
+          "Agricultural and wine-country land-use rules that control where and how alcohol-related businesses may operate",
+          "Conditions on tasting-room size, events, hours, and food offerings in specific areas",
+          "Public notice, and active participation by residents, neighborhood groups, and industry stakeholders"
+        ]
+      },
+      {
+        "underHeading": "Key California Liquor License Types In Napa County",
+        "leadIn": "Core license categories include:",
+        "items": [
+          "Restaurant licenses for bona fide eating places that serve beer and wine, or full liquor, with complete meals",
+          "Public-premises bar licenses for lounges, cocktail bars, and nightlife concepts where minors are generally not allowed to remain",
+          "Off-sale licenses for wine shops, specialty retailers, and markets that sell packaged alcohol to go",
+          "Winery and tasting-room licenses that allow production, tastings, and bottle sales, subject to local land-use approvals"
+        ]
+      },
+      {
+        "underHeading": "How Liquor License Agents Guides Napa County Buyers And Sellers",
+        "leadIn": "We assist by:",
+        "items": [
+          "Reviewing your concept, site, and operational plans, and recommending license categories that match your goals",
+          "Determining whether you can apply for a new license, or whether you must purchase and transfer an existing license",
+          "Assisting with license valuation, negotiation, and escrow for both stand-alone licenses and licenses sold with businesses or wineries",
+          "Preparing and filing ABC applications, premises diagrams, and required ownership disclosures",
+          "Coordinating with local planning staff regarding zoning, wine-country land-use rules, and conditional use permits",
+          "Tracking your ABC file and helping you respond to questions, protests, or conditions through final issuance"
+        ]
+      }
+    ],
+    "tables": [],
+    "tablesNote": "None. Zero <table> elements in <main>.",
+    "localNames": [],
+    "localNamesNote": "EMPTY, and that is the finding. Not one neighbourhood, district, landmark, venue, street, highway, AVA, city or municipal body is named anywhere in <main>. Searched and confirmed absent: Napa (city), St. Helena, Yountville, Calistoga, American Canyon, Oakville, Rutherford, Carneros, Highway 29, Silverado Trail, Oxbow, First Street, Main Street, Sonoma, Vallejo. The nearest thing to a local reference is the generic phrase 'A downtown restaurant, a hotel bar, a retail wine shop, and a hillside winery' — four business archetypes, no names.",
+    "properNounsInMain": [
+      "Napa County",
+      "California",
+      "California ABC / State ABC (the regulator)",
+      "Liquor License Agents (the client itself)"
+    ],
+    "placeNameMentions": {
+      "Napa County": 22,
+      "Napa Valley": 0,
+      "Napa (city, standalone)": 0,
+      "California": 4,
+      "ABC": 8,
+      "wine-country / winery / wineries / tasting room(s)": "29 combined",
+      "namedCitiesNeighbourhoodsLandmarksVenues": 0
+    },
+    "schemaOnPage": {
+      "jsonLd": [
+        "BreadcrumbList (Home > Counties > Napa County Liquor Licenses For Restaurants, Bars, And Retailers)"
+      ],
+      "faqPageSchema": false,
+      "note": "Six visible FAQs with no FAQPage markup — a gap on their page, and an easy win on ours."
+    },
+    "firmClaimsFlagged": [
+      {
+        "verbatim": "with a team familiar with wine-country requirements",
+        "fullSourceSentence": "If you are planning or acquiring a Napa County restaurant, bar, winery, tasting room, or retail shop that will sell or serve alcohol, you can call (800) 799-9081 to schedule an appointment and review your licensing strategy with a team familiar with wine-country requirements.",
+        "type": "unverifiable expertise / superiority claim",
+        "where": "CTA paragraph under 'Schedule an Appointment | (800) 799-9081'",
+        "action": "EXCLUDED from the body. Surrounding sentence rewritten to cta.textAfterFlaggedClaimRemoved."
+      },
+      {
+        "verbatim": "Contact Liquor License Agents for expert help with ABC applications, purchases, and license transfers.",
+        "type": "unverifiable expertise claim ('expert help')",
+        "where": "meta description (page metadata, not body copy)",
+        "action": "metaDescription is retained verbatim above because it is a required metadata capture. Do NOT reuse the 'expert help' framing in our copy."
+      }
+    ],
+    "firmClaimsNotFlagged_borderline": [
+      {
+        "verbatim": "We provide market-based guidance so you can plan your investment with realistic numbers.",
+        "why": "A service description, not a superiority / insider / case-history claim, so it was left in the body. It is still unsubstantiated — if we reuse it we need the client to say what the market data actually is."
+      },
+      {
+        "verbatim": "Coordinating with local planning staff regarding zoning, wine-country land-use rules, and conditional use permits",
+        "why": "Names LOCAL PLANNING staff, not ABC staff, and describes a task rather than an insider relationship. Kept, but do not upgrade it into a 'we know the people' claim."
+      }
+    ],
+    "competitorNamesFound": [],
+    "competitorNamesNote": "None. The only organisation names in <main> are the client ('Liquor License Agents') and the regulator ('California ABC' / 'State ABC').",
+    "unverifiableFactsToConfirm": [
+      "'Population-based quotas that limit certain license types' — true of California generally; the page gives no Napa County quota number.",
+      "'Most Napa County projects should plan for several months of lead time' — no source, no range, no ABC district cited.",
+      "'High-demand areas and well-known corridors may command higher prices' — no area, corridor or price named.",
+      "'Napa County is internationally recognized for its wineries, fine dining, and hospitality' — promotional assertion about the place, not sourced. Kept (it is about Napa County, not about the firm) but it is puffery."
+    ],
+    "localSpecificityVerdict": {
+      "verdict": "NOT real local content. A county-page TEMPLATE with a wine-country vocabulary overlay and the county name inserted 22 times. One rung above the pure noun-swap pages in the earlier sample — but only one.",
+      "evidence": [
+        "'Napa County' appears 22 times in 968 words. Concrete local references: ZERO. No city, neighbourhood, district, landmark, venue, street, highway, AVA, ordinance, permit name, fee, quota number or named municipal department anywhere on the page.",
+        "The phrase 'Napa Valley' — our market name — appears 0 times. The client has no Napa Valley content at all; this page is about the COUNTY.",
+        "First-party template proof: I fetched two sibling county pages (Fresno, Kern) and both run the identical 5-heading skeleton — H1 '<County> Liquor Licenses For Restaurants, Bars, And Retailers' / H2 licensing overview / H2 'Key California Liquor License Types In <County>' / H2 'How Liquor License Agents [Guides|Helps|Supports] <County> Buyers And Sellers' / H2 '<County> Liquor License FAQs' / CTA. Only the verb changes.",
+        "Sentence-level diff against those two siblings: 14 of 62 Napa sentences (23%) are >=80% identical to a Fresno/Kern sentence, including whole list items and every heading. The remaining 77% are re-worded, not newly researched — the same slots filled with wine words.",
+        "The 'local' flavour is a swapped regional adjective in a fixed slot: Napa gets 'wine country', Fresno gets 'Central Valley'. Everything underneath it is state-level California ABC boilerplate."
+      ],
+      "whatIsGenuinelyNapaSpecific": [
+        "Winery and tasting-room licence categories, and tasting-room conditions (size, visitor counts, events, hours, food) — a real vertical adaptation that would not appear on a non-wine county page.",
+        "Agricultural / wine-country land-use rules framed as a licensing constraint.",
+        "Vineyards and brand assets named as part of transaction value.",
+        "That is the whole list. It is regional-industry context, not local knowledge — none of it is tied to a named place, body, rule or number."
+      ],
+      "doNotReproduce": "If we build napa-valley from this page as-is we reproduce exactly the noun-swap pattern we said we would not. Our page needs real inputs: the actual Napa Valley AVA sub-appellations and towns, the City of Napa vs unincorporated county permitting split, the Napa County Winery Definition Ordinance / use-permit reality for tasting rooms, real ABC licence-type numbers, and a real timeline or fee. None of that is on this page."
+    }
+  }
+}
