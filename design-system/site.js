@@ -3992,3 +3992,172 @@
     });
   });
 })();
+
+
+/* [CE] SERVICE ACCORDION — keep the deep links working.
+   There are ~1,285 inbound links to #buy / #sell / #transfer / #valuation across
+   the site (323 to #buy alone). The band is now four <details> rows, so a visitor
+   arriving on one of those links would otherwise land on a COLLAPSED row and see
+   a heading with nothing under it. This opens the targeted row — on first load and
+   on every later hash change — then brings it into view.
+
+   Progressive enhancement only: with JS off the markup is still a working native
+   accordion, the first row is open, and every row can be opened by hand. */
+(function () {
+  // querySelectorAll, NOT querySelector — there are TWO accordion containers on
+  // services.html (01-04 and 05-08). A singular lookup would silently ignore the
+  // second one and strand the ~1,283 inbound links that point into it.
+  var accs = [].slice.call(document.querySelectorAll('.svc-acc'));
+  if (!accs.length) return;
+
+  function rowFor(id) {
+    if (!id) return null;
+    var safe = (window.CSS && CSS.escape) ? CSS.escape(id) : id;
+    for (var i = 0; i < accs.length; i++) {
+      var row = accs[i].querySelector('details#' + safe);
+      if (row) return row;
+    }
+    return null;
+  }
+
+  function openFromHash(scroll) {
+    var row = rowFor((window.location.hash || '').replace('#', ''));
+    if (!row) return;
+    row.open = true;
+    if (scroll) {
+      // let the row finish expanding before measuring where it landed
+      window.requestAnimationFrame(function () {
+        row.scrollIntoView({ block: 'start', behavior: 'auto' });
+      });
+    }
+  }
+
+  openFromHash(true);
+  window.addEventListener('hashchange', function () { openFromHash(true); });
+
+  // An in-page link to a row that is already the target fires no hashchange,
+  // so catch the click too.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="#"]');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    var row = rowFor(href.slice(href.indexOf('#') + 1));
+    if (row) row.open = true;
+  });
+})();
+
+
+/* [CF] SERVICE SELECTOR — services 05-08. The four photographs are the navigation.
+
+   PROGRESSIVE ENHANCEMENT, AND THE ORDER MATTERS. The panels are NOT hidden in the
+   markup, so with JS off all four render stacked — degraded, but every service is
+   readable and every anchor still lands somewhere real. This script hides the
+   inactive ones on init; it never relies on the HTML having hidden them.
+
+   THE ANCHORS ARE THE REASON FOR THE HASH HANDLING. ~1,283 inbound links point at
+   #cup (432), #escrow (320), #new-business (319) and #compliance (212). The id lives
+   on the PANEL, and arriving on one of those links selects that panel rather than
+   leaving the visitor on service 05.
+
+   Tab semantics are real, not decorative: roles and aria-selected are in the markup,
+   this adds roving tabindex plus Arrow/Home/End, per the APG tabs pattern. */
+(function () {
+  var roots = [].slice.call(document.querySelectorAll('[data-svc-selector]'));
+  if (!roots.length) return;
+
+  roots.forEach(function (root) {
+    var tabs   = [].slice.call(root.querySelectorAll('.svc-sel__thumb'));
+    var panels = [].slice.call(root.querySelectorAll('.svc-sel__panel'));
+    if (!tabs.length || tabs.length !== panels.length) return;
+
+    function select(i, focus) {
+      if (i < 0 || i >= tabs.length) return;
+      tabs.forEach(function (t, n) {
+        var on = n === i;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        panels[n].hidden = !on;
+      });
+      if (focus) tabs[i].focus();
+    }
+
+    function indexOfId(id) {
+      if (!id) return -1;
+      for (var i = 0; i < panels.length; i++) if (panels[i].id === id) return i;
+      return -1;
+    }
+
+    // init: whatever the markup marked selected, else the first
+    var start = 0;
+    tabs.forEach(function (t, n) { if (t.getAttribute('aria-selected') === 'true') start = n; });
+    select(start, false);
+
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(i, false); });
+    });
+
+    root.addEventListener('keydown', function (e) {
+      var i = tabs.indexOf(document.activeElement);
+      if (i < 0) return;
+      var next = null;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (i + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') next = 0;
+      else if (e.key === 'End') next = tabs.length - 1;
+      if (next === null) return;
+      e.preventDefault();
+      select(next, true);
+    });
+
+    function fromHash(scroll) {
+      var i = indexOfId((window.location.hash || '').replace('#', ''));
+      if (i < 0) return;
+      select(i, false);
+      if (scroll) {
+        window.requestAnimationFrame(function () {
+          panels[i].scrollIntoView({ block: 'start', behavior: 'auto' });
+        });
+      }
+    }
+
+    fromHash(true);
+    window.addEventListener('hashchange', function () { fromHash(true); });
+
+    // an in-page link to the already-current hash fires no hashchange
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href*="#"]');
+      if (!a) return;
+      var href = a.getAttribute('href') || '';
+      var i = indexOfId(href.slice(href.indexOf('#') + 1));
+      if (i >= 0) select(i, false);
+    });
+  });
+})();
+
+
+/* [CG] CLICK-TO-LOAD OFFICE MAP — moved out of index.html's inline <script>.
+
+   The CTA suite (heading, phone, consultation form and this map) now appears on the
+   eight service pages as well as the homepage, and the loader had to travel with it —
+   copying the markup alone would have left a dead "Load the map" button on eight pages.
+
+   Kept as click-to-load ON PURPOSE: the page makes ZERO off-origin requests until the
+   visitor asks for the map, and the address stays real selectable text rather than
+   being baked into an image.
+
+   Safe to run on every page: it returns immediately when the two ids are absent, which
+   is why it can live in the shared bundle. The inline copy was REMOVED from index.html
+   in the same change — leaving both would bind the listener twice and insert two
+   iframes on one click. */
+(function () {
+  var b = document.getElementById('cta-map-load'), ph = document.getElementById('cta-map-ph');
+  if (!b || !ph) return;
+  b.addEventListener('click', function () {
+    var f = document.createElement('iframe');
+    f.title = 'Liquor License Agents office \u2014 5243 E Beverly Blvd, Los Angeles, CA 90022';
+    f.src = 'https://maps.google.com/maps?q=5243%20E%20Beverly%20Blvd,%20Los%20Angeles,%20CA%2090022&t=&z=15&ie=UTF8&iwloc=&output=embed';
+    f.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+    f.setAttribute('loading', 'lazy');
+    ph.replaceWith(f);
+  });
+})();

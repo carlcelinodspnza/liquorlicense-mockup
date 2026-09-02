@@ -27,3 +27,30 @@ Thumbs.db
 # one command; only the rendered page is withheld. It is already published privately as an
 # Artifact for the owner.
 _geography/service-area-register.html
+
+# Internal design exploration for the owner — six layout options for the service list.
+# Not part of the site the client reviews. Reason kept on its OWN line: a trailing
+# comment would become part of the pattern and the rule would match nothing.
+_service-list-layouts.html
+
+# Internal design exploration for the owner — six layout options for the service
+# DETAIL band (services 01-04). Not part of the site the client reviews.
+_service-detail-layouts.html
+
+# Internal design exploration — layout options for services 05-08.
+# Not part of the site the client reviews.
+_service-0508-layouts.html
+
+# Internal design exploration — layout options for the California services page.
+# Not part of the site the client reviews.
+_ca-services-layouts.html
+
+# Internal design exploration — layout options for the market x type pages.
+# Not part of the site the client reviews.
+_sf20-layouts.html
+
+# Internal design exploration — FAQ band layout options.
+_faq-layouts.html
+
+# Internal design exploration — illustrated band layout options.
+_band-layouts.html

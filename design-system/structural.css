@@ -16696,3 +16696,737 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   .svc-card { min-height: 148px; }
   .svc-card__mark { font-size: 88px; }
 }
+
+
+/* ==========================================================================
+   [CD] SERVICE TILES — the "service list" band on services.html
+   --------------------------------------------------------------------------
+   Owner picked Option D from the layout round (2026-09-02). Replaces eight
+   .capability-card boxes laid out three-across in .cap-breakdown__grid with
+   eight denser tiles four-across: two rows instead of three, and the number
+   moves from its own stacked block into a ghost numeral behind the title, so
+   it still anchors each tile without consuming vertical space.
+
+   OWN NAMESPACE, DELIBERATELY. .capability-card is used 42 times site-wide and
+   only 8 of those are this band — the other 26 are specimens on brand-card.html
+   and design-system.html. Restyling the shared class would have moved all 42 to
+   fix 8. Nothing outside this band is reachable by .svc-tile.
+
+   Placed at the END of the file on purpose: equal-specificity rules earlier in
+   this stylesheet would otherwise win, which has already cost a cascade once.
+   -------------------------------------------------------------------------- */
+.svc-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.svc-tile {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 18px 18px;
+  border: 1px solid rgba(255, 255, 255, .10);
+  border-radius: var(--ds-r-lg, 10px);
+  background: rgba(255, 255, 255, .028);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .18s ease, transform .18s ease, background .18s ease;
+}
+.svc-tile:hover,
+.svc-tile:focus-visible {
+  border-color: rgba(230, 156, 78, .5);
+  background: rgba(230, 156, 78, .05);
+  transform: translateY(-3px);
+}
+
+/* the number, as a watermark rather than its own block */
+.svc-tile__ghost {
+  position: absolute;
+  right: 8px;
+  top: -14px;
+  z-index: 0;
+  font-family: var(--ds-font-display, Georgia, serif);
+  font-size: 74px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(255, 255, 255, .045);
+  pointer-events: none;
+}
+
+/* every real child sits above the watermark */
+.svc-tile__t,
+.svc-tile__d,
+.svc-tile__go { position: relative; z-index: 1; }
+
+.svc-tile__t {
+  margin: 0;
+  font-family: var(--ds-font-display, Georgia, serif);
+  font-size: 16.5px;
+  font-weight: 600;
+  line-height: 1.24;
+  letter-spacing: -.01em;
+  color: var(--ds-ink-heading, #fff);
+}
+.svc-tile__d {
+  margin: 7px 0 0;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ds-ink-soft, #c8c6c5);
+}
+/* pinned to the bottom so the eight link rows align across a ragged row */
+.svc-tile__go {
+  margin-top: auto;
+  padding-top: 12px;
+  font-size: 12.5px;
+  color: var(--ds-accent-ink, #eba459);
+}
+.svc-tile__go::after { content: " \2192"; }
+
+@media (max-width: 1099px) {
+  .svc-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .svc-tiles { grid-template-columns: 1fr; }
+  .svc-tile__ghost { font-size: 62px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .svc-tile { transition: none; }
+  .svc-tile:hover, .svc-tile:focus-visible { transform: none; }
+}
+
+
+/* ==========================================================================
+   [CE] SERVICE ACCORDION — the "Moving a licence between owners" band
+   --------------------------------------------------------------------------
+   Owner picked Option A from the detail-layout round (2026-09-02). Replaces four
+   full-width two-column rows with four <details> rows.
+
+   MEASURED at 1440 before and after: the band was 1201px (first row top to last
+   row bottom); closed it is 271px, a 77% cut. One row is open on load so the
+   band is never a wall of closed bars.
+
+   NATIVE <details>, NOT A JS WIDGET. It is keyboard-operable and screen-reader
+   announced for free, it still works with JS disabled, and the copy inside stays
+   in the DOM — so nothing here is hidden from indexing.
+
+   ⚠ THE ANCHORS ARE THE REASON FOR THE JS IN [CE] site.js. There are ~1,285
+   inbound links to #buy / #sell / #transfer / #valuation across the site (323 to
+   #buy alone). Landing on a COLLAPSED row would have made every one of those
+   links look broken, so the id lives on the <details> and the script opens the
+   targeted row on load and on hashchange.
+
+   Own namespace: .svc-acc-* had zero prior hits in css, html and js.
+   -------------------------------------------------------------------------- */
+.svc-acc { border-top: 1px solid rgba(255, 255, 255, .12); }
+
+.svc-acc__row { border-bottom: 1px solid rgba(255, 255, 255, .10); }
+
+.svc-acc__row > summary {
+  list-style: none;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: baseline;
+  padding: 18px 4px;
+  transition: background .16s ease;
+}
+.svc-acc__row > summary::-webkit-details-marker { display: none; }
+.svc-acc__row > summary:hover { background: rgba(230, 156, 78, .05); }
+.svc-acc__row > summary:focus-visible {
+  outline: 2px solid var(--ds-accent, #e69c4e);
+  outline-offset: -2px;
+}
+
+.svc-acc__n {
+  font-family: var(--ds-font-mono, monospace);
+  font-size: 12.5px;
+  color: var(--ds-accent, #e69c4e);
+}
+.svc-acc__t {
+  font-family: var(--ds-font-display, Georgia, serif);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ds-ink-heading, #fff);
+}
+/* a plus that becomes a cross when the row is open */
+.svc-acc__sign {
+  color: var(--ds-accent-ink, #eba459);
+  font-size: 18px;
+  line-height: 1;
+  transition: transform .18s ease;
+}
+.svc-acc__row[open] > summary .svc-acc__sign { transform: rotate(45deg); }
+
+.svc-acc__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 32px;
+  padding: 2px 4px 26px 68px;
+}
+.svc-acc__body > * { min-width: 0; }
+.svc-acc__body p { margin: 0 0 14px; }
+
+@media (max-width: 900px) {
+  .svc-acc__body { grid-template-columns: 1fr; gap: 20px; padding-left: 4px; }
+  .svc-acc__row > summary { grid-template-columns: 38px minmax(0, 1fr) auto; gap: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .svc-acc__row > summary { transition: none; }
+  .svc-acc__sign { transition: none; }
+}
+
+/* --------------------------------------------------------------------------
+   [CE] MEDIA VARIANT — services 05-08 carry a photograph each.
+   The band was 2486px, the tallest on the page, because each row rendered its
+   image at 544x512 (one at 544x756). Collapsing to the accordion above keeps
+   every one of those four photographs rather than discarding them: the image
+   simply moves inside the open body at ~200px, and is only painted when the
+   row is open.
+
+   Three columns when there is room, stacking to one on a narrow screen.
+   -------------------------------------------------------------------------- */
+.svc-acc__body--media {
+  grid-template-columns: 200px minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.svc-acc__media {
+  margin: 4px 0 0;
+  border-radius: var(--ds-r-md, 6px);
+  overflow: hidden;
+  line-height: 0;
+}
+.svc-acc__media img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+/* A placeholder must announce itself even when the row is CLOSED — otherwise
+   collapsing the band would hide the disclosure along with the draft copy. */
+.svc-acc__flag {
+  font-family: var(--ds-font-mono, monospace);
+  font-size: 10.5px;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  color: var(--ds-warning, #d9682f);
+  border: 1px dashed rgba(217, 104, 47, .55);
+  background: var(--ds-warning-soft, #2e1c12);
+  border-radius: var(--ds-r-pill, 999px);
+  padding: 3px 9px;
+  margin-left: 10px;
+  white-space: nowrap;
+}
+
+@media (max-width: 1099px) {
+  .svc-acc__body--media { grid-template-columns: 160px minmax(0, 1fr); }
+  .svc-acc__body--media > :last-child { grid-column: 1 / -1; }
+}
+@media (max-width: 900px) {
+  .svc-acc__body--media { grid-template-columns: 1fr; }
+  .svc-acc__body--media > :last-child { grid-column: auto; }
+  .svc-acc__media { max-width: 220px; }
+  .svc-acc__flag { margin-left: 0; }
+}
+
+
+/* ==========================================================================
+   [CF] SERVICE SELECTOR — services 05-08, "the work that sits around the
+   transaction". Owner picked Option D 2026-09-02.
+   --------------------------------------------------------------------------
+   WHY THIS AND NOT THE ACCORDION IT REPLACES
+   The four photographs become the NAVIGATION rather than decoration inside a
+   row. MEASURED at 1440 against the 2486px the band was originally:
+
+       original image rows      2486px
+       media accordion (mine)    548px   -78%
+       THIS                      437px   -82%   ← and it keeps all four images
+
+   The accordion I had built was replaced on the numbers: this is shorter AND
+   keeps more. The text-only variant that DISCARDED the photographs measured
+   510px — worse than both — so "drop the images to save space" was never a
+   trade worth making.
+
+   ⚠ NO-JS BEHAVIOUR IS DELIBERATE. The panels are NOT hidden in the markup.
+   With JS off all four render stacked: degraded, but every service readable and
+   every anchor still lands. [CF] in site.js hides the inactive ones on init.
+   Never add `hidden` to these panels in the HTML.
+   -------------------------------------------------------------------------- */
+/* MEASURED SPACING FIXES (2026-09-02, owner: "observe proper spacing between
+   card and texts"). Three numbers, all read off the rendered page:
+
+     lede -> cards          0px   the lede computes margin-bottom:0 and the
+                                  selector sits in a bare wrapper div with no
+                                  margin of its own, so the copy touched the cards
+     caption -> card floor  1px on card 08 vs 9px on the others, because its
+                                  "Illustrative scope" flag wraps to a second line
+                                  and card 08 is what sets the row height
+     h3 -> prose            0px   (fixed earlier the same day)
+
+   The margin lives on .svc-sel so it holds whatever wrapper the band sits in. */
+.svc-sel { margin-top: 34px; }
+
+.svc-sel__thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 30px;
+  padding: 0;
+  list-style: none;
+}
+
+.svc-sel__thumb {
+  display: block;
+  width: 100%;
+  padding: 0;
+  text-align: left;
+  color: inherit;
+  font-family: inherit;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: var(--ds-r-lg, 10px);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease;
+}
+.svc-sel__thumb img {
+  display: block;
+  width: 100%;
+  height: 92px;
+  object-fit: cover;
+  opacity: .55;
+  transition: opacity .18s ease;
+}
+.svc-sel__thumb:hover { border-color: rgba(230, 156, 78, .5); }
+.svc-sel__thumb:hover img { opacity: .82; }
+.svc-sel__thumb:focus-visible {
+  outline: 2px solid var(--ds-accent, #e69c4e);
+  outline-offset: 2px;
+}
+.svc-sel__thumb[aria-selected="true"] {
+  border-color: var(--ds-accent, #e69c4e);
+  background: rgba(230, 156, 78, .06);
+}
+.svc-sel__thumb[aria-selected="true"] img { opacity: 1; }
+
+/* 14px floor so a caption that wraps to two lines still clears the card edge —
+   card 08 measured 1px before this. */
+.svc-sel__cap { display: block; padding: 11px 12px 14px; }
+.svc-sel__kick {
+  display: block;
+  font-family: var(--ds-font-mono, monospace);
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ds-accent, #e69c4e);
+  margin-bottom: 3px;
+}
+.svc-sel__name {
+  display: block;
+  font-family: var(--ds-font-display, Georgia, serif);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.22;
+  color: var(--ds-ink-heading, #fff);
+}
+/* the placeholder flag drops to its own line inside a caption rather than
+   crowding the service name it sits beside */
+.svc-sel__name .svc-acc__flag {
+  display: inline-block;
+  margin: 6px 0 0;
+}
+
+.svc-sel__panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 30px;
+  align-items: start;
+}
+.svc-sel__panel > * { min-width: 0; }
+.svc-sel__panel[hidden] { display: none; }
+
+/* Typographic spacing inside the panel. The site's h3 and p both compute to
+   margin 0 here, so heading and body copy were touching at 0px — measured, not
+   guessed. These restore a normal rhythm without reaching outside the panel. */
+.svc-sel__panel h3 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  line-height: 1.18;
+}
+.svc-sel__panel .feature-row__kicker { margin: 0 0 6px; }
+.svc-sel__panel p { margin: 0 0 14px; }
+.svc-sel__panel p:last-child { margin-bottom: 0; }
+.svc-sel__panel .sv-deep { margin-top: 4px; }
+.svc-sel__panel .feature-row__list { margin: 0 0 18px; }
+.svc-sel__panel .trust-note { margin-bottom: 12px; }
+
+@media (max-width: 1000px) {
+  .svc-sel__thumbs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .svc-sel__panel { grid-template-columns: 1fr; gap: 22px; }
+}
+/* Deliberately NOT one column at 375. Stacking the four thumbnails cost 652px of
+   pure navigation before the panel even started — measured. A 2x2 grid keeps the
+   nav to roughly a third of that and the tap target is still ~160px wide. */
+@media (max-width: 560px) {
+  .svc-sel__thumbs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .svc-sel__thumb img { height: 76px; }
+  /* keep the same breathing room as desktop, scaled — the earlier value here
+     silently overrode the 14px floor set above, because a later media block
+     wins at equal specificity. */
+  .svc-sel__cap { padding: 10px 10px 13px; }
+  .svc-sel__name { font-size: 12.5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .svc-sel__thumb, .svc-sel__thumb img { transition: none; }
+}
+
+
+/* ==========================================================================
+   [CH] WHERE BAND — two columns: the copy on the left, the markets on the right
+   --------------------------------------------------------------------------
+   Owner picked a two-COLUMN layout for this band (2026-09-02). It was a heading
+   and a 62ch lede occupying the left ~55% with the right half empty, and the
+   thirteen markets flowing underneath as one run-on line of links separated by
+   middots.
+
+   SCOPED TO .where--split, NOT TO #where OR TO THE RAIL CLASS. Two counts made
+   before writing a line of this:
+     - `.cross-link-rail__rail` appears 83 times site-wide and only 25 of those
+       sit inside a #where band. Restyling the class would have moved 58 rails
+       elsewhere on the site to change 25.
+     - one page (california-liquor-license-services.html) has a #where band with
+       NO market list at all — it carries a CTA row instead. Targeting #where
+       directly would have given that page an empty second column.
+   The generator stamps .where--split only on the bands it actually converts, so
+   both problems are structural rather than something to remember.
+
+   The markets also stop being a run-on paragraph and become a real <ul>, which
+   is what a list of thirteen links always was.
+   -------------------------------------------------------------------------- */
+.mkt-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px 24px;
+}
+.mkt-list > li { min-width: 0; }
+.mkt-list a {
+  display: block;
+  padding: 7px 0;
+  font-size: 14.5px;
+  line-height: 1.35;
+  color: var(--ds-accent-ink, #eba459);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  transition: color .16s ease, padding-left .16s ease;
+}
+.mkt-list a:hover,
+.mkt-list a:focus-visible {
+  color: var(--ds-ink, #fff);
+  padding-left: 6px;
+}
+
+@media (min-width: 900px) {
+  .where--split > .container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: clamp(32px, 5vw, 76px);
+    align-items: start;
+  }
+  /* left column: the copy, in its own reading order */
+  .where--split > .container > .eyebrow { grid-column: 1; grid-row: 1; }
+  .where--split > .container > h2       { grid-column: 1; grid-row: 2; }
+  .where--split > .container > .lede    { grid-column: 1; grid-row: 3; margin-bottom: 0; }
+  /* right column: the markets, spanning the copy's full height */
+  .where--split > .container > .mkt-list {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    margin-top: 6px;
+  }
+}
+
+/* Below the split, one column of markets reads better than two narrow ones. */
+@media (max-width: 620px) {
+  .mkt-list { grid-template-columns: 1fr; }
+}
+
+
+/* ==========================================================================
+   [CI] CALIFORNIA SERVICES PAGE — prose bands
+   --------------------------------------------------------------------------
+   Owner picked, from the layout round on 2026-09-02:
+     F  for the two LONG bands (Qualification 166 words, Consulting 199)
+     E  for the three SHORT ones (Corporate 77, Classifications 15+5, Coverage 18)
+
+   WHAT WAS ACTUALLY WRONG, measured on the live page before any of this:
+   the five bands ran to 2998px, and the text column occupied 633px of a 1200px
+   container — 47% of the width sat empty. The long paragraphs are inside
+   <p class="lede">, a class meant for a SHORT intro, which is WHY they rendered
+   at that measure. The missing pictures were the symptom; the misused class was
+   the cause.
+
+   MEASURED at 1440 for the picked pair:
+     two long bands   1581px -> 1009px   -36%   (F)
+     three short ones 1417px ->  525px   -63%   (E, as one card row)
+
+   Own namespace. .ca-fig / .ca-cards had zero prior hits anywhere.
+   -------------------------------------------------------------------------- */
+
+/* ---- F: measured prose left, square figure right ---- */
+.ca-fig > .container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  column-gap: clamp(28px, 4vw, 60px);
+  align-items: start;
+}
+.ca-fig__copy { grid-column: 1; max-width: 62ch; }
+/* the site's h2 and p both compute to margin 0 in this band, so heading and body
+   copy were touching at 0px — measured on the rendered page, not guessed. */
+.ca-fig__copy > .eyebrow { margin: 0 0 10px; }
+.ca-fig__copy > h2 { margin: 0 0 16px; }
+.ca-fig__copy > p { margin: 0 0 14px; }
+.ca-fig__copy > p:last-child { margin-bottom: 0; }
+.ca-fig__figure {
+  grid-column: 2;
+  grid-row: 1 / span 99;   /* span whatever the copy column produces */
+  margin: 6px 0 0;
+  align-self: start;
+}
+.ca-fig__figure img {
+  width: 100%;
+  height: auto;          /* same trap as .tp-hero__media img — see the note there */
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--ds-r-lg, 10px);
+  display: block;
+}
+.ca-fig__figure figcaption {
+  margin-top: 9px;
+  font-family: var(--ds-font-mono, monospace);
+  font-size: 11.5px;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  color: var(--ds-ink-soft, #c8c6c5);
+  opacity: .75;
+}
+
+/* ---- E: the three short bands as one row of cards ---- */
+.ca-cards__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.ca-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: rgba(255, 255, 255, .028);
+  border: 1px solid rgba(255, 255, 255, .10);
+  border-radius: var(--ds-r-lg, 10px);
+}
+.ca-card__img { height: 126px; overflow: hidden; }
+.ca-card__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ca-card__in { display: flex; flex-direction: column; flex: 1; padding: 18px 18px 20px; }
+.ca-card__in > h3 {
+  margin: 0 0 10px;
+  font-family: var(--ds-font-display, Georgia, serif);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.ca-card__in > p { margin: 0 0 12px; font-size: 13.5px; color: var(--ds-ink-soft, #c8c6c5); }
+.ca-card__in > p:last-child { margin-bottom: 0; }
+/* the classification list keeps its own component styling; only the spacing is ours */
+.ca-card__in .tp-points { margin: 0 0 12px; }
+.ca-card__in .tp-note { font-size: 12.5px; }
+.ca-card__foot { margin-top: auto; padding-top: 14px; }
+
+@media (max-width: 1000px) {
+  .ca-fig > .container { grid-template-columns: 1fr; row-gap: 26px; }
+  .ca-fig__copy, .ca-fig__figure { grid-column: 1; grid-row: auto; }
+  .ca-fig__figure img { max-width: 320px; }
+  .ca-cards__grid { grid-template-columns: 1fr; }
+}
+
+
+/* ==========================================================================
+   [CJ] MARKET x TYPE PAGES — hero split + two-column bullet bands
+   --------------------------------------------------------------------------
+   Owner picked Hero A + Sections B (2026-09-02) for this page family, and asked
+   for it across all 50 market x type pages.
+
+   WHAT WAS WRONG, measured on liquor-license-san-francisco-type-20.html:
+     six stacked single-column sections and ZERO images in <main>
+     hero 741px, its lede 715px of a 1200px container — 40% of the width empty
+     the three middle bands share the IDENTICAL shape (eyebrow, heading, a 10-12
+     word lede, a bullet list), which is what actually made the page read flat
+
+   .tp-hero  copy left, market photograph right
+   .tp-split heading + one-line lede left, the bullets right
+
+   WHY .tp-split IS NOT APPLIED EVERYWHERE
+   It needs bullets to put in the right column. On the ten Los Angeles and San
+   Diego pages #fit/#how are 116-159 words of PROSE with no list at all — those
+   already carry the [CI] figure layout, which is the right treatment for prose.
+   Content decides which band gets which, not a blanket sweep.
+
+   Own namespace: .tp-hero / .tp-split had zero prior hits in css, html and js.
+   -------------------------------------------------------------------------- */
+/* .tp-hero was REMOVED. The split hero it styled was replaced by the design
+   system's existing .hero--photo full-bleed pattern (owner call, 2026-09-02),
+   which brings its own dual-graduated .hero__scrim and the :has() relight for
+   on-photo eyebrows. Leaving these rules behind would have been dead CSS that
+   quietly competes with the real hero. */
+
+/* OPTION A (owner pick, 2026-09-02): the copy and the bullets stack in one column and
+   the photograph becomes the other, STRETCHED to whatever height the text needs.
+
+   WHY: with the picture under the copy the left column ran far taller than the bullet
+   list beside it — measured 271px + 308px + 167px = 746px of empty bottom-right across
+   the three bands. Stretching the image into that column means the imbalance cannot
+   exist: the picture absorbs exactly the leftover height, whatever it is. */
+.tp-split > .container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  column-gap: clamp(28px, 4vw, 52px);
+  align-items: start;
+}
+.tp-split__copy { grid-column: 1; grid-row: 1; }
+.tp-split__copy > .eyebrow { margin: 0 0 10px; }
+.tp-split__copy > h2 { margin: 0 0 12px; }
+.tp-split__copy > .lede { margin: 0; }
+.tp-split__list { grid-column: 1; grid-row: 2; margin: 22px 0 0; }
+/* the list keeps whatever component class it had; only placement is ours */
+
+@media (max-width: 1000px) {
+  .tp-hero > .container,
+  .tp-split > .container { grid-template-columns: 1fr; row-gap: 24px; }
+  .tp-hero__copy, .tp-hero__media,
+  .tp-split__copy, .tp-split__list { grid-column: 1; }
+  .tp-hero__media img { max-width: 420px; }
+}
+
+
+/* ==========================================================================
+   [CK] FAQ BAND, TWO COLUMNS — market x type pages only
+   --------------------------------------------------------------------------
+   Owner picked option A (2026-09-02).
+
+   MEASURED on the live page before building: the band is 762px tall and the
+   accordion renders only 820px wide inside a 1200px container, so 380px of the
+   row sits empty beside six collapsed bars.
+
+   ⚠ SCOPED TO .faq--2col, NEVER TO .faq__list. There are 56 .faq__list
+   instances across 55 files and only 50 of them are the type-page band. The
+   other six are faq.html (7 items, two lists), index.html (4 items) and three
+   market pages. Restyling the shared class would have re-laid out all 56 to
+   change 50, including the site's actual FAQ page. The generator stamps
+   .faq--2col only on the bands it converts.
+
+   TWO REAL COLUMNS, NOT A REFLOW. The six items are wrapped into two column
+   divs of three, so opening an answer grows only its own column. A CSS
+   `columns: 2` would have reflowed items ACROSS the two columns on every open
+   and close, which is disorienting on a click.
+   -------------------------------------------------------------------------- */
+.faq--2col {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 clamp(28px, 4vw, 56px);
+  align-items: start;
+}
+/* ⚠ THE ID SELECTOR BELOW IS LOAD-BEARING. `#faqs .faq__list` already claims
+   max-width: 820px at specificity (1,1,0). A plain `.faq--2col` rule is (0,1,0)
+   and LOSES, so the two columns were silently squeezed into 820px of a 1200px
+   container — the layout looked applied and the 380px it was meant to reclaim
+   stayed empty. MEASURED: computed max-width still read 820px until this rule
+   existed. Match the weight, or the override is decoration. */
+#faqs .faq--2col {
+  max-width: none;
+  margin-inline: 0;
+}
+
+/* TYPE SCALE FOR A HALF-WIDTH COLUMN. At full width the question sits in Fraunces
+   19px/29px, which is right for one wide column. MEASURED in two columns: the same
+   question wraps to THREE lines in a 548px column and every row grows to ~92px, which
+   is what reads as boxy. The two-column variant therefore drops to the body face at
+   15px so a question fits two lines. Scoped with #faqs .faq--2col so faq.html and the
+   homepage — which keep the single wide column — are untouched. */
+#faqs .faq--2col .faq-item__q {
+  font-family: var(--ds-font-body, system-ui, sans-serif);
+  font-size: 15px;
+  line-height: 1.45;
+  padding: 14px 0;
+  gap: 18px;
+}
+#faqs .faq--2col .faq-item__a {
+  font-size: 14px;
+  line-height: 1.55;
+  padding-bottom: 15px;
+}
+.faq--2col > .faq__col { min-width: 0; }
+/* each column carries its own top rule so the two read as a pair */
+.faq--2col > .faq__col > .faq-item:first-child { border-top: 1px solid rgba(255, 255, 255, .12); }
+
+@media (max-width: 900px) {
+  .faq--2col { grid-template-columns: 1fr; }
+  /* stacked, only the very first item needs the top rule */
+  .faq--2col > .faq__col + .faq__col > .faq-item:first-child { border-top: 0; }
+}
+
+
+/* ==========================================================================
+   [CL] IMAGERY IN THE TYPE-PAGE BANDS
+   --------------------------------------------------------------------------
+   Owner asked for imagery in #authorizes / #fit / #how (2026-09-02).
+
+   IT SITS UNDER THE COPY, NOT IN A THIRD COLUMN. Measured on the live page:
+   the bullet column is 630px and the copy column 466px. Introducing a third
+   column would have squeezed the bullets to roughly 420px and pushed most of
+   them onto a second line, which is the opposite of the two-column band the
+   owner just approved. Under the copy, the bullets keep their measure.
+
+   IT ADDS HEIGHT, AND THAT IS UNAVOIDABLE. Only #how had real spare room
+   (117px under the copy); #authorizes had 13px and #fit was already copy-driven
+   at -24px. A picture in those rows makes them taller. 16/9 was chosen over
+   4/3 to bound how much.
+
+   The image is decorative-adjacent but NOT decorative: each one is chosen from
+   the licence class the page is about (see the generator), so an off-sale page
+   never shows on-premises drinking.
+   -------------------------------------------------------------------------- */
+.tp-split__media {
+  grid-column: 2;
+  grid-row: 1 / span 2;      /* spans BOTH text rows — this is what kills the dead space */
+  align-self: stretch;
+  margin: 0;
+  border-radius: var(--ds-r-lg, 10px);
+  overflow: hidden;
+  line-height: 0;
+  min-height: 260px;         /* a floor, so a very short band still shows a real picture */
+}
+.tp-split__media img {
+  width: 100%;
+  height: 100%;              /* NOT auto here: the image is sized by the row, not by its
+                                own ratio, which is the whole point of option A */
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 1000px) {
+  .tp-hero > .container,
+  .tp-split > .container { grid-template-columns: 1fr; row-gap: 22px; }
+  .tp-split__copy, .tp-split__list, .tp-split__media {
+    grid-column: 1; grid-row: auto;
+  }
+  .tp-split__media { max-width: 460px; min-height: 0; }
+  .tp-split__media img { height: auto; aspect-ratio: 16 / 9; }
+  .tp-split__list { margin-top: 18px; }
+}
