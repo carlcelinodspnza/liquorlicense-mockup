@@ -17740,16 +17740,25 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
    [CS] .ca-cards__grid ADAPTS TO ITS CARD COUNT
    --------------------------------------------------------------------------
    The rule above is `repeat(3, minmax(0, 1fr))` and its comment says "the three
-   short bands as one row of cards" -- true when it was written, and it hard-codes
-   the count. Moving the Coverage card out to its own band left TWO cards in a
-   three-column grid, i.e. a 373px hole on the right at 1440: the same short-row
-   defect just fixed on the link rails, arriving by a different route.
+   short bands as one row of cards" -- true when written, and it hard-codes the
+   count. Both the Coverage card and the Classifications card have since moved out
+   to full-width bands of their own, so that 3 became 2 and then 1.
 
-   auto-fit collapses the empty track, so the grid now follows however many cards
-   the page actually has -- two today, three again if one comes back, without
-   another edit. Used on one page (california-liquor-license-services.html), and
-   the <=860px single-column override further up still applies.
+   TWO SEPARATE FAILURES, both measured at 1440:
+     3 cols / 2 cards -> a 373px hole on the right
+     3 cols / 1 card  -> auto-fit stretched the lone card to the full 1152px,
+                         which stops reading as a card at all
+
+   auto-fit collapses the empty tracks, fixing the first. The `:has(:only-child)`
+   arm fixes the second by giving a solitary card a real card's width and centring
+   it, rather than letting it span. :has() is already used ~87 times in this sheet.
+   Used on one page (california-liquor-license-services.html); the <=860px
+   single-column override further up still applies.
    ========================================================================== */
 .ca-cards__grid {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.ca-cards__grid:has(> .ca-card:only-child) {
+  grid-template-columns: minmax(0, 520px);
+  justify-content: center;
 }
