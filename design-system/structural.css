@@ -17737,33 +17737,6 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
 }
 
 /* ==========================================================================
-   [CS] .ca-cards__grid ADAPTS TO ITS CARD COUNT
-   --------------------------------------------------------------------------
-   The rule above is `repeat(3, minmax(0, 1fr))` and its comment says "the three
-   short bands as one row of cards" -- true when written, and it hard-codes the
-   count. Both the Coverage card and the Classifications card have since moved out
-   to full-width bands of their own, so that 3 became 2 and then 1.
-
-   TWO SEPARATE FAILURES, both measured at 1440:
-     3 cols / 2 cards -> a 373px hole on the right
-     3 cols / 1 card  -> auto-fit stretched the lone card to the full 1152px,
-                         which stops reading as a card at all
-
-   auto-fit collapses the empty tracks, fixing the first. The `:has(:only-child)`
-   arm fixes the second by giving a solitary card a real card's width and centring
-   it, rather than letting it span. :has() is already used ~87 times in this sheet.
-   Used on one page (california-liquor-license-services.html); the <=860px
-   single-column override further up still applies.
-   ========================================================================== */
-.ca-cards__grid {
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-.ca-cards__grid:has(> .ca-card:only-child) {
-  grid-template-columns: minmax(0, 520px);
-  justify-content: center;
-}
-
-/* ==========================================================================
    [CT] A MEDIA SLOT FOR THE LINK CARD (owner asked for images, 2026-09-03)
    --------------------------------------------------------------------------
    [CQ]'s card is text-only: a name and a "View ..." affordance. This adds an
@@ -17887,3 +17860,15 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   font-size: 16px;
   line-height: 1.55;
 }
+
+/* ==========================================================================
+   [CS] REMOVED 2026-09-03 -- .ca-cards__grid no longer exists
+   --------------------------------------------------------------------------
+   [CS] existed to keep .ca-cards__grid honest as cards left it: auto-fit when it
+   dropped from three to two, and a `:has(> .ca-card:only-child)` arm to stop the
+   last card stretching the full 1152px. Coverage, Classifications and finally
+   Corporate have all moved out to bands of their own, so the grid and its cards
+   are gone from every page (verified: 0 occurrences of "ca-cards" site-wide) and
+   the rules had nothing left to select. Recorded rather than silently deleted so
+   the block letters stay a continuous history.
+   ========================================================================== */
