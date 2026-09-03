@@ -17680,3 +17680,58 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   .cross-link-rail--cards .clc__name { font-size: 14.5px; line-height: 1.3; }
   .cross-link-rail--cards .clc__go   { font-size: 12px; }
 }
+
+/* ==========================================================================
+   [CR] NEW-BUSINESS "SERVICES AND MARKETS" BAND (owner picked N-A + T-3)
+   --------------------------------------------------------------------------
+   ONE band on ONE page, and it is the odd one out by construction: the other
+   seven #covers bands carry 4-5 plain scope items, this one carries 13 LINKS
+   and is really a navigation index sitting in the [CL] .tp-split shell.
+
+   Measured before: 1016px tall -- nearly double every sibling -- with the 13
+   links in a single 713px column and the heading breaking 268px / 417px.
+
+   TWO LABELLED COLUMNS, because the split is true rather than decorative: the
+   13 are 7 services (services.html#*) and 6 markets (locations.html#*), which
+   the generator asserts by href rather than by reading the labels.
+
+   THE 42px HEADING IS NOT A STYLE PREFERENCE, IT IS ARITHMETIC. "Services and
+   markets on this site" needs 694px on one line at 44px and the copy column is
+   669px, so it missed by 25px and broke to a short orphan first line. 42px
+   clears it at 663px.
+
+   DESKTOP-ONLY, DELIBERATELY. [CL] collapses .tp-split to a single column at
+   <=1000px, where the heading is already responsive and the columns already
+   stack. An unscoped 42px leaked into that layout and forced the phone heading
+   to three lines, so everything here sits above the breakpoint and the mobile
+   band is byte-for-byte what it was.
+   ========================================================================== */
+.covers__groups {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 22px;
+}
+.covers__gh {
+  margin: 0 0 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--ds-ink-on-dark, #fff) 50%, transparent);
+}
+/* .sv-list runs its own auto-fit grid; inside a group it must be one column --
+   the same override [CN] makes for .tp-split__list, for the same reason. */
+.covers__groups .sv-list.covers__one {
+  grid-template-columns: 1fr;
+  margin-top: 0;
+}
+@media (min-width: 1001px) {
+  .covers__groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 36px;
+    row-gap: 0;
+  }
+  #covers.tp-split .tp-split__copy h2 { font-size: 42px; }
+  #covers.tp-split .tp-split__copy .lede { margin-top: 14px; max-width: 58ch; }
+}
