@@ -17762,3 +17762,38 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   grid-template-columns: minmax(0, 520px);
   justify-content: center;
 }
+
+/* ==========================================================================
+   [CT] A MEDIA SLOT FOR THE LINK CARD (owner asked for images, 2026-09-03)
+   --------------------------------------------------------------------------
+   [CQ]'s card is text-only: a name and a "View ..." affordance. This adds an
+   optional image above them. It is OPT-IN by markup -- a card with no
+   .clc__media is untouched, so the 31 rails already shipped are unaffected.
+
+   The card's anchor is display:flex/column with padding; the image has to sit
+   flush to the card's top and side edges, so the media is pulled out by the
+   anchor's own padding with negative margins rather than the padding being
+   removed (which would break every text-only card sharing the rule).
+
+   16/9 is fixed rather than intrinsic: the five assets are 900x562 up to
+   1400x933, and without a fixed box the cards in a row would have different
+   image heights and the names would stop aligning.
+   ========================================================================== */
+.cross-link-rail--cards .cross-link-rail__cards a:has(.clc__media) { padding-top: 0; }
+.clc__media {
+  display: block;
+  margin: 0 -22px 4px;          /* cancels the card's 22px side padding */
+  border-radius: var(--ds-r-lg, 10px) var(--ds-r-lg, 10px) 0 0;
+  overflow: hidden;
+  line-height: 0;
+}
+.clc__media img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;                 /* aspect-ratio only derives the missing axis */
+  object-fit: cover;
+  display: block;
+}
+@media (max-width: 600px) {
+  .clc__media { margin-inline: -15px; }   /* the card's small-screen padding */
+}
