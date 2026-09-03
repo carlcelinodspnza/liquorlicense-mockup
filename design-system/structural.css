@@ -17872,3 +17872,31 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
    the rules had nothing left to select. Recorded rather than silently deleted so
    the block letters stay a continuous history.
    ========================================================================== */
+
+/* ==========================================================================
+   [CW] ALTERNATE THE .ca-fig BANDS (owner asked, 2026-09-03)
+   --------------------------------------------------------------------------
+   Three .ca-fig bands now run consecutively on the CA services page and all put
+   copy left, figure right -- the eye tracks one straight edge for three sections.
+   The middle band flips.
+
+   BY MODIFIER, NOT :nth-of-type. The three are not adjacent siblings
+   (#classifications and #coverage sit between them), so an nth rule would count
+   the wrong elements.
+
+   THE TRACK RATIO SWAPS WITH THE COLUMNS. .ca-fig is 1.5fr / 1fr and the WIDE
+   track carries the prose. Moving the copy to column 2 without reversing the
+   ratio would put 200 words in the narrow track and stretch a square photo across
+   the wide one.
+
+   DESKTOP ONLY -- below 1000px .ca-fig already collapses to one column with the
+   copy first, and the reading order there is heading, prose, picture regardless
+   of which side the figure takes at full width.
+   ========================================================================== */
+@media (min-width: 1001px) {
+  .ca-fig--reverse > .container {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  }
+  .ca-fig--reverse .ca-fig__copy   { grid-column: 2; }
+  .ca-fig--reverse .ca-fig__figure { grid-column: 1; }
+}
