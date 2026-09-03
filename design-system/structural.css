@@ -17850,3 +17850,29 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
     padding-top: 2px;
   }
 }
+
+/* ==========================================================================
+   [CV] BODY-LENGTH PARAGRAPHS STOP USING LEDE SIZING
+   --------------------------------------------------------------------------
+   Owner pointed at process.html #phases as the reference. Measured, both ends:
+
+     reference  .feature-row__body p   16px / 24.8   rgb(200,198,197)
+     was        .lede                  20px / 31     rgb(200,198,197)
+
+   A lede is an intro. The paragraph this started from is 166 words in a 633px
+   column, and thirteen others are 85-159 words -- including #about-<state> bands
+   that stack FOUR consecutive "ledes", which is prose by any reading.
+
+   ONLY SIZE AND LEADING MOVE. A plain <p> was measured first and rejected: it
+   gives the right 16px/24.8 but also turns the soft grey to pure white and drops
+   .lede's 633px max-width, so the lines would run the full column. Keeping .lede
+   and adding a modifier preserves colour and measure, which is the difference
+   between matching the reference and merely shrinking the text.
+
+   Applied to 14 paragraphs on 5 pages, all outside a hero. The 44 long ledes that
+   ARE in a hero keep 20px -- a hero lede is meant to be large.
+   ========================================================================== */
+.lede.lede--prose {
+  font-size: 16px;
+  line-height: 1.55;
+}
