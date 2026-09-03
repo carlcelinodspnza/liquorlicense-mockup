@@ -131,6 +131,14 @@ BLOCK = '''
                                classification labels are ~340px wide)
    Tap target 25px -> 94px. The cost is height: +147px on a seven-link rail.
 
+   FLEX, NOT GRID, and that is the owner's centring request (2026-09-03). CSS Grid places
+   leftover items from the start of the row, so seven cards in a four-column grid left the
+   last three hard against the left edge with a card-sized hole on the right. Grid has no
+   way to centre only the leftover items. Flex with `justify-content: center` does it for
+   free, and because each item's basis still divides the row exactly, a FULL row is
+   unchanged -- centring a row that already spans the container is a no-op. Equal heights
+   survive: flex items stretch by default, and the inner <a> is height:100%.
+
    SCOPED BY MODIFIER, not by component. 58 rails exist site-wide; only the 31
    that are "other N things" lists were converted, and only those carry
    `--cards`. The other 27 keep the prose rail untouched.
@@ -155,10 +163,25 @@ BLOCK = '''
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;             /* NOT grid -- see the note above about centring short rows */
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 14px;
   text-align: left;          /* the band is .closing-cta (centred); the cards are not */
+}
+/* One card per "column", sized so a full row still spans the container exactly. The
+   column counts and their breakpoints were MEASURED off the previous auto-fit grid
+   (2-up below 830px, 3-up 830-1089, 4-up from 1090) so the layout is unchanged at every
+   width -- the only difference is that a short final row now centres. */
+.cross-link-rail--cards .cross-link-rail__cards > li {
+  flex: 0 1 calc((100% - 14px) / 2);
+  min-width: 0;
+}
+@media (min-width: 830px) {
+  .cross-link-rail--cards .cross-link-rail__cards > li { flex-basis: calc((100% - 2 * 14px) / 3); }
+}
+@media (min-width: 1090px) {
+  .cross-link-rail--cards .cross-link-rail__cards > li { flex-basis: calc((100% - 3 * 14px) / 4); }
 }
 .cross-link-rail--cards .cross-link-rail__cards a {
   display: flex;
@@ -207,10 +230,8 @@ BLOCK = '''
    of side padding and a 16px name without the longest labels -- "San Bernardino County",
    "Type 41 - On-Sale Beer & Wine, Eating Place" -- running to five or six lines. */
 @media (max-width: 600px) {
-  .cross-link-rail--cards .cross-link-rail__cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-  }
+  .cross-link-rail--cards .cross-link-rail__cards { gap: 10px; }
+  .cross-link-rail--cards .cross-link-rail__cards > li { flex-basis: calc((100% - 10px) / 2); }
   .cross-link-rail--cards .cross-link-rail__cards a { padding: 14px 15px; gap: 8px; }
   .cross-link-rail--cards .clc__name { font-size: 14.5px; line-height: 1.3; }
   .cross-link-rail--cards .clc__go   { font-size: 12px; }
