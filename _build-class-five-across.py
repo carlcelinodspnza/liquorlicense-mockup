@@ -69,6 +69,17 @@ BLOCK = '''
     flex-basis: calc((100% - 4 * 14px) / 5);
   }
 }
+/* HEADING -> CARDS GAP. On the 31 other rails a .cross-link-rail__label sits above
+   the cards carrying an 18px bottom margin. This band uses its section h2 instead and
+   omits that label, so nothing separated the two: measured 0px, against 12px from the
+   eyebrow to the h2 and 24px from the cards down to the note -- the only zero gap in
+   the band. 24px matches the gap below the cards, so the grid now sits evenly between
+   its heading and its note. (For reference the same page's #coverage gives its h2 40px
+   before a full-width image block; a card row is a lighter payload than that.) */
+#classifications .cross-link-rail {
+  display: block;
+  margin-top: var(--ds-space-lg, 24px);
+}
 @media (min-width: 1001px) {
   #classifications .cross-link-rail__cards a {
     padding: 0 16px 16px;        /* the media is flush to the top, so no top pad */
