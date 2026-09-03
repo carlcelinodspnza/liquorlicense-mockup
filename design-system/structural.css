@@ -17900,3 +17900,34 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   .ca-fig--reverse .ca-fig__copy   { grid-column: 2; }
   .ca-fig--reverse .ca-fig__figure { grid-column: 1; }
 }
+
+/* ==========================================================================
+   [CX] THE FOUR-CARD VARIANT OF THE CLASSIFICATION BAND (2026-09-03)
+   --------------------------------------------------------------------------
+   The 50 market type pages show the OTHER FOUR classifications -- their own is
+   excluded, because a card linking to the page you are already on is not a link.
+
+   [CU] sizes this band's cards for FIVE across and is scoped to #classifications,
+   so four cards inherit a 1/5 basis and leave a fifth of the row empty on the
+   right. That is the same 4 + 1 imbalance [CU] was written to remove, arriving
+   from the other direction. This re-bases the variant so the row always divides
+   evenly: 2 + 2 below 1180, 4 across above it.
+
+   THE 1001-1179 RANGE IS THE REASON THE BASE RULE CARRIES NO MEDIA QUERY.
+   [CU] puts five cards at 3-up there; four cards at 3-up is 3 + 1. The unqueried
+   rule below therefore has to beat a rule that IS inside a media query. Both are
+   (1,1,1), so source order decides and this block must stay after [CU] -- it is
+   appended at the end of the file for exactly that reason. Moving it above [CU]
+   silently reintroduces the gap.
+
+   Sizing, padding and the media slot are all [CU]'s and [CT]'s -- deliberately
+   untouched, so the four-card band and the five-card band are the same component.
+   ========================================================================== */
+#classifications .cross-link-rail__cards--four > li {
+  flex-basis: calc((100% - 14px) / 2);
+}
+@media (min-width: 1180px) {
+  #classifications .cross-link-rail__cards--four > li {
+    flex-basis: calc((100% - 3 * 14px) / 4);
+  }
+}
