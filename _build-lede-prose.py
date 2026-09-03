@@ -54,19 +54,45 @@ for p in sorted(glob.glob(os.path.join(ROOT, '*.html'))):
     if not mm: continue
     main = mm.group(0)
     secs = sections(main)
-    edits = []
-    for m in re.finditer(r'<p class="lede"([^>]*)>(.*?)</p>', main, re.S):
-        words = len(re.sub(r'<[^>]+>', '', m.group(2)).split())
-        host = next((a for a, st, en in secs if st <= m.start() < en), '')
-        if 'hero' in host or words <= 80:
+    # PER BLOCK, NOT PER PARAGRAPH. The first pass tested each <p> on its own and split
+    # runs of prose in half: #consulting's 159-word paragraph went to 16px while its
+    # 40-word sibling stayed at 20px, in the same block. Within one prose run every
+    # paragraph must match. The rule is now:
+    #   - a paragraph AFTER the first in a non-hero block is body copy
+    #   - the FIRST is body copy only if it is itself over 80 words; a short opener
+    #     followed by body paragraphs is a genuine lede and keeps 20px
+    # PER BLOCK, NOT PER PARAGRAPH. The first pass tested each <p> on its own and split
+    # runs of prose in half: #consulting's 159-word paragraph went to 16px while its
+    # 40-word sibling stayed at 20px, in the same block. Within one prose run every
+    # paragraph must match. The rule:
+    #   - any paragraph AFTER the first in a non-hero block is body copy
+    #   - the FIRST is body copy only if it is itself over 80 words; a short opener
+    #     above body paragraphs is a genuine lede and keeps 20px
+    edits = []                       # (abs_start, abs_end, attrs, body)
+    for attrs, st, en in secs:
+        if 'hero' in attrs:
             continue
-        edits.append(m)
+        found = list(re.finditer(r'<p class="lede"([^>]*)>(.*?)</p>', main[st:en], re.S))
+        if not found:
+            continue
+        words = [len(re.sub(r'<[^>]+>', '', m.group(2)).split()) for m in found]
+        # A block is a PROSE RUN only if it actually contains body-length copy.
+        # "any paragraph after the first" alone was far too blunt -- it swept up
+        # 3-word list intros ("Key factors include:") on the market pages and a
+        # 12-word line on contact.html, none of which are prose.
+        if max(words) <= 80:
+            continue
+        for i, m in enumerate(found):
+            if i == 0 and words[0] <= 80:
+                continue             # a real lede: short opener over body copy
+            edits.append((st + m.start(), st + m.end(), m.group(1), m.group(2)))
+    edits.sort()
+
     if not edits:
         continue
     new_main = main
-    for m in reversed(edits):
-        rep = '<p class="lede lede--prose"%s>%s</p>' % (m.group(1), m.group(2))
-        new_main = new_main[:m.start()] + rep + new_main[m.end():]
+    for a, b, attrs, body in reversed(edits):
+        new_main = new_main[:a] + '<p class="lede lede--prose"%s>%s</p>' % (attrs, body) + new_main[b:]
     out = src.replace(main, new_main, 1)
 
     # ---- guards ----
@@ -80,13 +106,10 @@ for p in sorted(glob.glob(os.path.join(ROOT, '*.html'))):
             assert 'lede--prose' not in nm[st:en], base + ': a HERO lede was modified'
     staged[p] = out; hits += len(edits); pages.append((base, len(edits)))
 
-if 'lede--prose' in io.open(os.path.join(ROOT, 'california-liquor-license-services.html'), encoding='utf-8').read():
-    print('markup already applied')
-else:
-    for p, o in staged.items():
-        io.open(p, 'w', encoding='utf-8').write(o)
-    print('paragraphs re-sized: %d across %d page(s)' % (hits, len(pages)))
-    for b, n in pages: print('    %-44s %d' % (b, n))
+for p, o in staged.items():
+    io.open(p, 'w', encoding='utf-8').write(o)
+print('paragraphs at prose size: %d across %d page(s)' % (hits, len(pages)))
+for b, n in pages: print('    %-44s %d' % (b, n))
 
 # ---- CSS ----
 CSS = os.path.join(ROOT, 'design-system', 'structural.css')
