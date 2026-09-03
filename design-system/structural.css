@@ -17526,3 +17526,36 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
 .where--split .mkt-list li a:not([class]) {
   text-decoration: none;
 }
+
+/* ==========================================================================
+   [CP] THE CTA BANNER'S OVERLAP RESERVE, PAIRED TO THE BAND IT ACTUALLY FOLLOWS
+   --------------------------------------------------------------------------
+   `.cta-banner` lifts itself by clamp(140px, 12vw, 176px) so it straddles the seam into the band
+   above. That lift is a CLASS, so it follows the suite wherever the suite goes.
+   Its matching reserve was written as `#faq { padding-bottom: ... }` -- an ID,
+   so it only ever applied to one band on one page.
+
+   That held while the suite only followed the FAQ. Adding the suite to the 8
+   service pages, where it follows #next, broke it: measured on
+   service-new-business at 1440, the banner lifted -172.8px into a band reserving
+   only 72px, hiding the "The other seven services" heading and all seven links
+   behind the banner.
+
+   Pairing the reserve to `:has(+ .cta-suite)` ties it to the same condition as
+   the lift, so the two cannot drift apart again when the suite is placed
+   somewhere new. The straddle itself is unchanged -- this only stops the band
+   above from being shorter than the lift that eats into it.
+
+   The original #faq rule is left in place: it is an ID (1,0,0) and wins over
+   this (0,2,0), but computes the identical value, so it is now redundant rather
+   than conflicting. Every band before the suite is a .section (asserted by the
+   generator), so padding-bottom is the right lever.
+   ========================================================================== */
+.section:has(+ .cta-suite) {
+  padding-bottom: calc(var(--ds-section-py) + clamp(140px, 12vw, 176px) + var(--ds-space-lg));
+}
+@media (max-width: 860px) {
+  .section:has(+ .cta-suite) {
+    padding-bottom: calc(var(--ds-section-py) + 58px + var(--ds-space-lg));
+  }
+}
