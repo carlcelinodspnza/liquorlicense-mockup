@@ -17735,3 +17735,21 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   #covers.tp-split .tp-split__copy h2 { font-size: 42px; }
   #covers.tp-split .tp-split__copy .lede { margin-top: 14px; max-width: 58ch; }
 }
+
+/* ==========================================================================
+   [CS] .ca-cards__grid ADAPTS TO ITS CARD COUNT
+   --------------------------------------------------------------------------
+   The rule above is `repeat(3, minmax(0, 1fr))` and its comment says "the three
+   short bands as one row of cards" -- true when it was written, and it hard-codes
+   the count. Moving the Coverage card out to its own band left TWO cards in a
+   three-column grid, i.e. a 373px hole on the right at 1440: the same short-row
+   defect just fixed on the link rails, arriving by a different route.
+
+   auto-fit collapses the empty track, so the grid now follows however many cards
+   the page actually has -- two today, three again if one comes back, without
+   another edit. Used on one page (california-liquor-license-services.html), and
+   the <=860px single-column override further up still applies.
+   ========================================================================== */
+.ca-cards__grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
