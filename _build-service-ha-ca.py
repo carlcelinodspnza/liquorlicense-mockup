@@ -82,9 +82,14 @@ def words(html):
     return Counter(re.findall(r"[A-Za-z0-9’'-]+", t))
 
 def section_span(hay, start):
-    """end offset of the <section> that opens at `start`, by depth counting."""
+    """end offset of the <section> that opens at `start`, by depth counting.
+
+    The pattern MUST consume the trailing '>'. A bare `<(/?)section\b` matches
+    `</section` only, so the span ends one character short and the orphaned '>'
+    is left behind as visible text -- which is exactly what shipped in ab74bde.
+    """
     depth = 0
-    for t in re.finditer(r'<(/?)section\b', hay[start:]):
+    for t in re.finditer(r'<(/?)section\b[^>]*>', hay[start:]):
         depth += 1 if not t.group(1) else -1
         if depth == 0:
             return start + t.end()
@@ -155,6 +160,11 @@ for page in sorted(HERO):
     main = main0
     touched = False
 
+    # repair the ab74bde off-by-one: a '>' orphaned after a rebuilt </section>
+    if '</section>>' in main:
+        main = main.replace('</section>>', '</section>')
+        touched = True
+
     hm = re.search(r'<section class="' + re.escape(HERO_OPEN) + r'"', main)
     if hm:
         end = section_span(main, hm.start())
@@ -200,6 +210,11 @@ for page in sorted(HERO):
     assert len(imgs) == n0 + added, '%s: image count %d != %d+%d' % (page, len(imgs), n0, added)
     assert main.count('<h1') == 1, page + ': h1 count != 1'
     assert main.count('<section') == main.count('</section>'), page + ': section imbalance'
+    _t = re.sub(r'<(script|style)\b.*?</\1>', '', main, flags=re.S | re.I)
+    _t = re.sub(r'<!--.*?-->', '', _t, flags=re.S)
+    _t = re.sub(r'<[^<>]*>', '', _t)
+    assert '>' not in _t, '%s: stray ">" left in text near %r' % (
+        page, _t[max(0, _t.find('>') - 60):_t.find('>') + 20])
     assert 'hero--photo' in main and 'tp-split' in main, page + ': transform incomplete'
     # only the COVERS band must be free of sv-media; new-business legitimately keeps one
     # in its #detail band, which this generator does not touch.
