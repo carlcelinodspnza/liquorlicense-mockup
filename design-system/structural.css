@@ -17430,3 +17430,27 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   .tp-split__media img { height: auto; aspect-ratio: 16 / 9; }
   .tp-split__list { margin-top: 18px; }
 }
+
+/* ==========================================================================
+   [CN] SERVICE PAGES -- H-A hero + C-A covers band (owner picked 2026-09-03)
+   --------------------------------------------------------------------------
+   Both halves REUSE existing components, so this block is deliberately tiny:
+     H-A  -> .hero--photo / .hero__media / .hero__scrim / .hero__inner  (already
+             on 60 pages; see the hero-photo primitive further up this sheet)
+     C-A  -> .tp-split / .tp-split__copy / .tp-split__list / .tp-split__media
+             from [CL], including its full-height media column and its
+             <=1000px single-column collapse. Nothing re-declared here.
+
+   THE ONE RULE THAT IS ACTUALLY NEW. `.sv-list` runs its own responsive grid:
+     .sv-list { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+   Inside a .tp-split__list the column is ~630px, so auto-fit would break the
+   items into TWO sub-columns and re-create the ragged block the owner asked us
+   to get away from. Forcing one column keeps the checklist reading as a list.
+   Specificity: (0,2,0) here vs (0,1,0) for the base rule, so this wins without
+   !important and without touching the 40-card .svc-split grid on services.html,
+   which is a different container.
+   ========================================================================== */
+.tp-split__list .sv-list {
+  grid-template-columns: 1fr;
+  margin-top: 0;             /* the [CL] .tp-split__list already supplies the 22px */
+}

@@ -54,3 +54,15 @@ _faq-layouts.html
 
 # Internal design exploration — illustrated band layout options.
 _band-layouts.html
+
+# local layout-option preview, not part of the site
+_service-page-layouts.html
+
+# transient image contact sheet
+_contact-sheet.html
+
+# transient crop test sheet
+_crop-test.html
+
+# transient hero crop test
+_hero-crop-test.html
