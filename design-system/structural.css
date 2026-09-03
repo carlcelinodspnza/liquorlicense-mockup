@@ -17635,3 +17635,27 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
 @media (prefers-reduced-motion: reduce) {
   .cross-link-rail--cards .cross-link-rail__cards a { transition: none; }
 }
+
+/* TWO-UP ON SMALL SCREENS (owner asked, 2026-09-03, after seeing the one-up cost).
+   auto-fit with a 250px floor drops to a single column below ~560px, which made the
+   twelve-market rail 1308px tall on a 375px phone and the seven-link rail 770px.
+   Forcing two columns halves that.
+
+   600px, and the number was MEASURED rather than assumed. My first attempt used 560px on
+   the theory that auto-fit was already giving two columns there. It was not: at a 561px
+   viewport the container is 513px and two 250px tracks plus the 14px gap need 514px, so
+   auto-fit fell back to ONE column and the twelve-market rail sprang back to 1308px in a
+   one-pixel-wide dead zone. 600px clears it with margin -- at 601px the container is 553px,
+   comfortably over the 514px needed -- so the two-column run is continuous from 320px up.
+   Padding and the name size step down with it, because a ~156px card cannot carry 22px
+   of side padding and a 16px name without the longest labels -- "San Bernardino County",
+   "Type 41 - On-Sale Beer & Wine, Eating Place" -- running to five or six lines. */
+@media (max-width: 600px) {
+  .cross-link-rail--cards .cross-link-rail__cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .cross-link-rail--cards .cross-link-rail__cards a { padding: 14px 15px; gap: 8px; }
+  .cross-link-rail--cards .clc__name { font-size: 14.5px; line-height: 1.3; }
+  .cross-link-rail--cards .clc__go   { font-size: 12px; }
+}
