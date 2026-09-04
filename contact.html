@@ -425,72 +425,27 @@
       <div class="cta-form__pitch">
         <p class="eyebrow">The ask</p>
         <h2>Tell us what you are working on</h2>
-        <p>A broker can only be useful once they know what is being bought or sold, where it has to sit, and how soon. Every field is optional &mdash; answer what you have and leave the rest &mdash; and the reply comes back with an availability read on the county you name and a straight account of what happens next.</p>
-        <p>Arrived from the five-step <a href="locations.html#qualifier">market qualifier</a>? Your name, your business and county, what you need and how to reach you land here already filled in. Check them, add whatever else matters, and send.</p>
-        <p>Not sure which classification you are after? Leave it on <b>Not sure yet</b> &mdash; what each one authorises is set out on the <a href="licence-types.html">classifications page</a>, and a broker will confirm it against your site either way.</p>
+        <p>A broker can only be useful once they know what is being bought or sold, where it has to sit, and how soon. Put as much of that in the message as you have &mdash; the reply comes back with an availability read on the market you name and a straight account of what happens next.</p>
+        <p>Arrived from the five-step <a href="locations.html#qualifier">market qualifier</a>? Your name and how to reach you land here already filled in. Add the market, the classification and anything else that matters in the message, and send.</p>
+        <p>Not sure which classification you are after? Say so in the message &mdash; what each one authorises is set out on the <a href="licence-types.html">classifications page</a>, and a broker will confirm it against your site either way.</p>
         <p class="lede">If it is quicker to say than to type, use the broker line instead.</p>
         <div class="cross-link-rail__rail">
           <!-- src: R-LOC-02 -->
           <a class="cross-link" href="tel:+18007999081" data-source="R-LOC-02">Call the broker line, 800.799.9081</a>
         </div>
       </div>
-      <form class="form" onsubmit="return false">
-        <div class="field">
-          <label for="q-name">Your name</label>
-          <input id="q-name" name="name" type="text" autocomplete="name">
-        </div>
-        <div class="field">
-          <label for="q-business">Business and county</label>
-          <input id="q-business" name="business" type="text" autocomplete="organization">
-        </div>
-        <div class="field">
-          <label for="q-industry">Type of business</label>
-          <select class="ec-ctrl" id="q-industry" name="industry">
-            <option value="">Choose one</option>
-            <option value="restaurants">Restaurants</option>
-            <option value="bars-nightclubs">Bars &amp; nightclubs</option>
-            <option value="hotels">Hotels</option>
-            <option value="liquor-stores">Liquor stores</option>
-            <option value="grocery-stores">Grocery stores</option>
-            <option value="convenience-stores">Convenience stores</option>
-            <option value="franchise-operators">Franchise operators</option>
-            <option value="event-venues">Event venues</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="q-type">Licence classification</label>
-          <select class="ec-ctrl" id="q-type" name="type">
-            <option value="">Choose one</option>
-            <option value="20">Type 20 &mdash; Off-Sale Beer &amp; Wine</option>
-            <option value="21">Type 21 &mdash; Off-Sale General</option>
-            <option value="41">Type 41 &mdash; On-Sale Beer &amp; Wine, Eating Place</option>
-            <option value="47">Type 47 &mdash; On-Sale General, Eating Place</option>
-            <option value="48">Type 48 &mdash; On-Sale General, Public Premises</option>
-            <option value="unsure">Not sure yet</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="q-need">What you need</label>
-          <select class="ec-ctrl" id="q-need" name="need">
-            <option value="">Choose one</option>
-            <option value="buy">Buy a licence</option>
-            <option value="sell">Sell a licence</option>
-            <option value="transfer">Transfer a licence</option>
-            <option value="value">Value a licence</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="q-reach">Phone or email</label>
-          <input id="q-reach" name="reach" type="text" autocomplete="tel">
-        </div>
-        <div class="field">
-          <label for="q-note">Anything else worth knowing</label>
-          <textarea id="q-note" name="note" rows="3"></textarea>
-        </div>
-        <button class="btn btn-primary wow-glow" type="submit">Send it to a broker</button>
-        <!-- src: R-FACT-05 -->
-        <p class="trust-note" data-source="R-FACT-05">Enquiries sent through the site get a response within 24 hours, and nothing here commits you to anything.</p>
-      </form>
+      <form class="form form--ref" onsubmit="return false">
+          <div class="field"><label class="vh" for="q-name">Full name</label>
+            <input id="q-name" name="name" type="text" autocomplete="name" placeholder="Full Name*" required></div>
+          <div class="field"><label class="vh" for="q-email">Email address</label>
+            <input id="q-email" name="email" type="email" autocomplete="email" placeholder="Email Address*" required></div>
+          <div class="field"><label class="vh" for="q-phone">Phone number</label>
+            <input id="q-phone" name="phone" type="tel" autocomplete="tel" placeholder="+1 (555) 555-5555"></div>
+          <div class="field"><label class="vh" for="q-note">Message</label>
+            <textarea id="q-note" name="message" placeholder="Message"></textarea></div>
+          <div class="field g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+          <button class="btn btn-primary wow-glow" type="submit">Send request</button>
+        </form>
     </div>
   </div>
 </section>
@@ -770,5 +725,6 @@
   <a class="btn btn-primary btn-sm" href="contact.html">Request a quote</a>
 </div>
 <script src="design-system/site.js" defer></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>

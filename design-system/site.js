@@ -1736,12 +1736,12 @@
   // The county rides along in the "Business and county" field, which is what that
   // field is literally labelled for.
   //
-  // UPDATED 2026-07-29 — the carry is now COMPLETE. This comment previously read
-  // "contact.html has four fields and the qualifier collects eight answers;
-  // industry / type / note have no field to land in and stay in the URL". That was
-  // true when contact.html had four fields. Its rebuild added #q-industry, #q-type
-  // and #q-note, so all eight answers now land and nothing the visitor typed is
-  // lost between the two pages.
+  // UPDATED 2026-09-04 — the carry is INCOMPLETE again, deliberately. contact.html
+  // was rebuilt to the client's own four-field form on the owner's instruction,
+  // with this cost stated and accepted. Only name, reach and note have somewhere to
+  // land now; business, industry, type and need are still collected by the
+  // qualifier and have no field here, so they stay in the URL and are never shown.
+  // Restoring them means restoring the fields — see _build-contact-form.py.
   // ---------------------------------------------------------------------
   var cName = document.getElementById('q-name');
   if (cName) {
@@ -1758,8 +1758,11 @@
         ? mkt.replace(/-/g, ' ').replace(/\b[a-z]/g, function (c) { return c.toUpperCase(); })
         : '';
       fill('q-name', cq.get('name') || '');
-      fill('q-business', biz && mktLabel ? biz + ' — ' + mktLabel : (biz || mktLabel));
-      fill('q-reach', cq.get('reach') || '');
+      // reach is ONE field on the qualifier and TWO here, so it is split on the only
+      // reliable signal available: an "@" means an address, anything else a number.
+      // Guessing wrong would drop an email into a tel input.
+      var reach = cq.get('reach') || '';
+      if (reach) fill(reach.indexOf('@') > -1 ? 'q-email' : 'q-phone', reach);
       // Selects only accept a value the control actually offers — an unknown value
       // would leave the control blank-but-dirty and silently drop the answer.
       var fillSel = function (id, v) {
@@ -1768,9 +1771,6 @@
         var known = Array.prototype.some.call(el.options, function (o) { return o.value === v; });
         if (known) el.value = v;
       };
-      fillSel('q-need', cq.get('need') || '');
-      fillSel('q-industry', cq.get('industry') || '');
-      fillSel('q-type', cq.get('type') || '');
       var cnote = document.getElementById('q-note');
       if (cnote && cq.get('note') && !cnote.value) cnote.value = cq.get('note');
     }
