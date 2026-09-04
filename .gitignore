@@ -84,3 +84,17 @@ _type-imgs.html
 
 # local classification card layout preview
 _class-card-layouts.html
+
+# local preview of the restructured Locations mega menu (CA / FL / AZ) and the
+# extracted block it renders. Internal review artefacts, not part of the site.
+_mega-preview.html
+_mm-new-block.html
+
+# the two rendered mega-menu variants under review (markets vs classifications)
+_mega-markets.html
+_mega-classifications.html
+_mm-new-block-markets.html
+_mm-new-block-classifications.html
+
+# local layout-option preview for the buy page's intro band
+_buy-intro-layouts.html

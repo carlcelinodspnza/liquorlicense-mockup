@@ -17931,3 +17931,125 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
     flex-basis: calc((100% - 3 * 14px) / 4);
   }
 }
+
+/* ==========================================================================
+   [CY] THE BUY PAGE MIRRORS THE CLIENT'S OWN /buy LAYOUT (2026-09-04)
+   --------------------------------------------------------------------------
+   Three pieces, all scoped so nothing else on the site moves:
+
+   1. .hero--lead turns the buy hero into two columns -- the existing copy on the
+      left, a lead-capture card on the right -- because the client's /buy opens with
+      a form beside the masthead rather than under it. Below 1001px the card drops
+      under the copy: a 320px form column beside a 320px copy column is two bad
+      columns, not two good ones.
+
+   2. .field--choice is the FIRST radio group in this design system (only
+      locations.html had a radio before, and it is a filter, not a form field). It
+      is built from the existing .field/.form tokens rather than a new look, so the
+      two forms on this page read as one component.
+
+   3. .buyclass is the three-column classification band. It mirrors the pairing on
+      the client's page (20 & 21 / 41 & 47 / 48) but carries NO definitions -- those
+      belong to licence-types.html per dedup-ledger rows C18-C20 -- so the columns
+      are shorter than the client's and the grid is sized for a heading, a short
+      paragraph and a button row rather than a full definition.
+   ========================================================================== */
+@media (min-width: 1001px) {
+  .hero--lead .hero__cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: clamp(28px, 4vw, 56px);
+    align-items: start;
+  }
+  .hero--lead .hero__lead { position: sticky; top: var(--ds-space-lg, 24px); }
+}
+.hero--lead .hero__lead { margin-top: var(--ds-space-lg, 24px); }
+@media (min-width: 1001px) { .hero--lead .hero__lead { margin-top: 0; } }
+.hero--lead .hero__leadh {
+  font-size: 20px;
+  line-height: 1.3;
+  margin: 0 0 var(--ds-space-sm, 12px);
+  color: #1e1e1e;                 /* the card is .form--light, so it sits on white */
+}
+.hero--lead .cta-formcard { max-width: 460px; }
+
+/* the radio group */
+.form .field--choice { border: 0; padding: 0; margin: 0 0 var(--ds-space-md); min-inline-size: 0; }
+.form .field--choice legend {
+  padding: 0;
+  font-size: 14px;
+  margin-bottom: var(--ds-space-2xs, 6px);
+}
+.form--light .field--choice legend { color: #3a3a3a; }
+.form .choice-row { display: flex; flex-wrap: wrap; gap: 10px 18px; }
+.form .choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 15px;
+  cursor: pointer;
+}
+.form .choice input {
+  width: auto;                    /* .form input is width:100% -- undo it here */
+  margin: 0;
+  accent-color: var(--ds-accent);
+  flex: none;
+}
+.form .choice span { line-height: 1.2; }
+
+/* the three-column classification band */
+.buyclass {
+  list-style: none;
+  margin: var(--ds-space-lg, 24px) 0 0;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 700px)  { .buyclass { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1001px) { .buyclass { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.buyclass__col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px;
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-r-lg, 10px);
+  background: rgba(255, 255, 255, .028);
+}
+.buyclass__col h3 { margin: 0; font-size: 20px; line-height: 1.25; }
+.buyclass__col p  { margin: 0; font-size: 15px; line-height: 1.55; }
+.buyclass__go { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 4px; }
+/* SCOPED ON PURPOSE. The first draft styled a bare .btn-sm -- which is used in the
+   markup of 106 pages and, measured, has NO rule anywhere in any stylesheet. Defining
+   it here would have silently restyled a button across the whole site off the back of
+   a single-page request. The dead class is left dead and reported instead. */
+.buyclass__go .btn { padding: 8px 14px; font-size: 14px; }
+
+/* --------------------------------------------------------------------------
+   [CY] continued -- #buy-intro uses layout I-A (owner picked from four options).
+
+   The band shipped first as a full-width h2 over a half-width paragraph: the
+   heading spanned 96% of the container while the prose sat at 506px, so 694px --
+   58% of the band -- was empty to its right. It read as a two-column layout with
+   one column missing.
+
+   I-A gives the heading its own column. Measured on the real page at 1440:
+   463px -> 334px tall, unused right gutter 694px -> 24px, prose 9 lines -> 7.
+   The paragraph's measure stays comfortable (60 -> 67 chars per line).
+
+   DESKTOP ONLY. Below 1001px the two columns stack and the band is identical to
+   the plain stacked version -- 557px, one 327px column -- so this rule buys
+   nothing on a phone and is not asked to.
+   -------------------------------------------------------------------------- */
+@media (min-width: 1001px) {
+  .buyintro {
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: start;
+  }
+  .buyintro__head h2 { margin-top: 6px; }   /* optical align to the prose's first line */
+}
+.buyintro .lede--prose { max-width: none; }  /* the grid column is the measure now */
