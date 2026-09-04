@@ -98,3 +98,8 @@ _mm-new-block-classifications.html
 
 # local layout-option preview for the buy page's intro band
 _buy-intro-layouts.html
+
+# local layout-option preview for the state pages' counties/cities band
+_geo-layouts.html
+_geo-layouts-arizona.html
+_geo-layouts-florida.html

@@ -18070,3 +18070,148 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   border-color: var(--ds-accent, #e69c4e);
   background: rgba(230, 156, 78, .06);
 }
+
+/* ==========================================================================
+   [CZ] THE STATE PAGES' COUNTIES/CITIES BAND (owner picked G-C, 2026-09-04)
+   --------------------------------------------------------------------------
+   FIRST, A SCOPING BUG. [MRAIL] makes "#markets > .container" a two-column grid
+   and pins .eyebrow to column 1 row 1 and h2 to column 1 row 2. It was written for
+   locations.html's master/detail rail. The two state pages reuse the same #markets
+   id for a different band, so their .loc-geo -- which has no placement -- auto-flowed
+   into column 2 and pushed the heading BELOW the cards, into a 585px-tall row 2,
+   leaving 698px of empty left column.
+
+   THE OVERRIDE KEYS OFF .markets--geo, NOT #markets. A bare "#markets > .container
+   { display:block }" would also hit locations.html and destroy the rail [MRAIL]
+   exists to build. Only the two state sections carry this class.
+
+   WHY ONE WIDE CARD. .loc-geo__list is capped at max-height:340px with
+   overflow-y:auto, so any narrow layout hides items behind a scrollbar with no
+   affordance. Measured on FLORIDA (66 counties), the real stress case: a
+   heading-left/cards-right split gives the list ONE grid column and hides 54 of 66;
+   two cards side by side give three columns and hide 30; one full-width card gives
+   six columns, 302px, and hides none. Arizona hides only 2 under the narrow splits,
+   which is exactly why they look fine there and fail here.
+   ========================================================================== */
+/* THE ID HAS TO BE IN THE SELECTOR. [MRAIL] writes "#markets > .container", which is
+   (1,1,0). A ".markets--geo > .container" override is (0,2,0) and LOSES -- one id
+   outranks any number of classes -- so the container stayed display:grid, the card
+   stayed in a narrow column, and Florida still hid 24 counties behind the 340px cap.
+   Measured before this line was corrected. Keeping #markets in the selector makes it
+   (1,2,0), which wins, while .markets--geo keeps locations.html out of range. */
+#markets.markets--geo > .container { display: block; }
+#markets.markets--geo > .container > * { grid-column: auto; grid-row: auto; }
+
+.geo--wide .lede--prose { max-width: 70ch; }
+.geo--wide .loc-geo {
+  display: block;                      /* one card, not a grid of cards */
+  margin-top: var(--ds-space-lg, 24px);
+  margin-bottom: 0;
+  background: var(--ds-bg-surface-2);
+  border: 1px solid var(--ds-hairline);
+  border-radius: var(--ds-r-lg, 10px);
+  box-shadow: var(--ds-shadow-card);
+  padding: var(--ds-space-md) var(--ds-space-lg);
+}
+.geo--wide .loc-geo__col {             /* the columns stop being cards themselves */
+  background: none;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+.geo--wide .loc-geo__col + .loc-geo__col {
+  margin-top: var(--ds-space-lg, 24px);
+  padding-top: var(--ds-space-md);
+  border-top: 1px solid var(--ds-hairline);
+}
+/* The list is a grid already; widening it is what keeps it under the 340px cap. */
+@media (min-width: 700px)  { .geo--wide .loc-geo__list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .geo--wide .loc-geo__list { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 1200px) { .geo--wide .loc-geo__list { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+/* ==========================================================================
+   [DA] STATE PAGES: PAIRED MARKET LISTS, AND COPY-BESIDE-IMAGE BANDS
+   --------------------------------------------------------------------------
+   Both state pages had ZERO images in <main> and three bands that ran a single
+   narrow column with the right half of the container empty.
+
+   .geo--pair -- ARIZONA ONLY. G-C stacks Counties above Cities inside one wide
+   card, which is right for Florida's 66 counties but wasteful for Arizona's 15:
+   at six internal columns the names wrapped ("Apache County" over two lines).
+   Measured: stacked 6-up = 588px section; paired with 3 internal columns = a 245px
+   card with 0 wrapped names. Florida is deliberately NOT paired -- 66 counties in
+   half the width would push the list back under the max-height:340px cap that hid
+   54 of them before G-C.
+
+   .statefig -- copy left, image right. Used by #classifications on both pages and
+   by Florida's #about-florida. The image column is deliberately the narrower one:
+   these bands are read, not looked at.
+
+   .statefig--cols -- Florida's #about-florida only. 300 words in six paragraphs ran
+   1187px tall in one column. Running the prose in two text columns beside the image
+   is what makes the band shorter rather than merely wider.
+   ========================================================================== */
+@media (min-width: 1001px) {
+  .geo--pair .loc-geo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 3vw, 44px);
+    align-items: start;
+  }
+  /* the stacked rule put a top border between the two; paired, they sit side by side */
+  .geo--pair .loc-geo__col + .loc-geo__col {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+    border-left: 1px solid var(--ds-hairline);
+    padding-left: clamp(24px, 3vw, 44px);
+  }
+  .geo--pair .loc-geo__list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.statefig__media { margin: 0; }
+.statefig__media img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--ds-r-lg, 10px);
+  display: block;
+}
+.statefig__copy > :first-child { margin-top: 0; }
+@media (min-width: 1001px) {
+  .statefig {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+  }
+  .statefig--cols { align-items: start; }
+}
+/* THREE TRACKS, NOT TWO. The first attempt kept the 1.45fr/1fr split and put the
+   prose into two columns inside it: that gave 303px per text column -- about 38
+   characters -- and with break-inside:avoid a 527px paragraph could not split, so
+   the band got TALLER (1187px -> 1216px), the opposite of the ask. The copy now
+   spans two full tracks and the image takes a third, so each text column is ~357px
+   (~45 characters) and the paragraphs balance. break-inside:avoid is gone: it was
+   what stopped the columns balancing at all. */
+@media (min-width: 1200px) {
+  .statefig--cols {
+    /* .9fr for the image left only 35 characters per text column; .6fr buys the
+       prose back to 39 and takes the band 1031px -> 938px. Measured, all three
+       ratios tried on the page. 39 is narrow for a single column but normal for a
+       two-column setting, and it is the honest trade for keeping an image here. */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, .6fr);
+    align-items: start;
+  }
+  .statefig--cols .statefig__copy {
+    grid-column: 1 / 3;
+    columns: 2;
+    column-gap: clamp(28px, 3vw, 44px);
+  }
+  .statefig--cols .statefig__copy h2,
+  .statefig--cols .statefig__copy .eyebrow { column-span: all; }
+  .statefig--cols .statefig__media { grid-column: 3; }
+}
+.statefig__media { margin-top: var(--ds-space-lg, 24px); }
+@media (min-width: 1001px) { .statefig__media { margin-top: 0; } }
