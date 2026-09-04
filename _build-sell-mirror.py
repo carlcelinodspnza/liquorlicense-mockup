@@ -18,26 +18,27 @@ This page already had 4 and 5 (#next and #contact), so 1, 2 and 3 are added.
 
 THE SAME TWO CONSTRAINTS AS THE BUY PAGE, both asserted rather than assumed:
 
-  a) NO CLASSIFICATION DEFINITIONS. Dedup ledger C18-C20 gives the Type 21/47/48
-     definitions to licence-types.html -- "may NAME a type but must NOT define what
-     that type authorises". The live band's three columns ARE those definitions, and
-     are identical to the ones on /buy.
+  a) THE CLASSIFICATION DEFINITIONS ARE NOW CARRIED, BY OWNER DECISION. Dedup ledger
+     C18-C20 gives them to licence-types.html, and that conflict was raised twice
+     before the owner chose to duplicate. The ledger now records the exception in
+     writing, licence-types.html stays canonical, and the band keeps its pointer to
+     it. The guard was inverted rather than deleted: it asserts the descriptions ARE
+     present, the pointer survives, and the ledger records the exception.
 
   b) NO CALIFORNIA FRAMING. This page measures 0 "California" and 0 "ABC" in <main>
      after the owner's de-Californisation. The live intro ends "...qualified under
      the requirements of the ABC", so that phrase becomes "the licensing authority"
      -- the wording service-buy.html's own hero already uses.
 
-THE COLUMNS CARRY NO BODY PROSE, AND THAT IS THE HONEST CHOICE. On the buy page each
-column could say something true and DIFFERENT about sourcing that classification. On
-the sell side the process does not vary by classification -- the seller sends a
-number and a county whatever they hold -- so three differentiated sentences would be
-three invented distinctions. The one operational line moves to the band's lede
-instead, and the columns stay heading + links.
+THE COLUMNS NOW CARRY THE CLIENT'S OWN DESCRIPTIONS. They first shipped as heading +
+links only, because the selling PROCESS does not vary by classification and three
+invented distinctions would have been worse than none. The owner then asked for the
+reference pages' descriptions explicitly, so those are used -- see the note on
+DESCRIPTIONS below for the two edits and the recorded ledger exception.
 
-It also avoids restating what this page already owns: the hero lede and #covers
-between them already claim pre-qualified buyers, escrow, the licence as an asset and
-the highest achievable price. None of that is repeated here.
+The band's own lede and this page's existing claims stay separate: the hero lede and
+#covers already own pre-qualified buyers, escrow, the licence as an asset and the
+highest achievable price, and the generator asserts none of them is restated.
 
 SPELLING. Visible text on this page is "licence" 12 / "license" 1, so the client's
 paragraph is reproduced verbatim except for that spelling and the ABC phrase above.
@@ -62,10 +63,42 @@ BAND_H2 = 'Which licence are you selling?'
 BAND_LEDE = ('Send the licence number and the county for any of these and we open with a valuation '
              'and a read on who is buying.')
 
+
+# THE CLIENT'S OWN DESCRIPTIONS, added on the owner's explicit instruction after the
+# ledger conflict was raised twice. Reproduced from their /buy and /sell verbatim,
+# with exactly two edits, both of which keep a STANDING instruction intact:
+#   1. license -> licence, this page's own spelling.
+#   2. "The California Department of Alcoholic Beverage Control states that" becomes
+#      "The state licensing authority requires that". These pages were de-Californised
+#      on the owner's instruction and measure 0 "California" in <main>; naming one
+#      state's regulator here would reverse that. The substance -- bona fide eating
+#      place, 51% of sales from food -- is unchanged, and licence-types.html still
+#      carries the attributed version.
+# dedup-ledger.md now records this as a written C18-C20 exception rather than a
+# silent breach; licence-types.html remains the canonical owner and both bands keep
+# their pointer note to it.
+DESCRIPTIONS = {
+    '20': ('Both Type 20 and Type 21 licences are designated for the sale of alcohol for '
+           'off-premises consumption. Minors are allowed on the premises of businesses that are '
+           'issued this type of licence. The Type 20 licence is issued for the sale of packaged '
+           'beer and wine, while the Type 21 is designated for the sale of general packaged '
+           'alcohol, including spirits and liquor.'),
+    '41': ('Probably some of the most common types of liquor licence, the Type 41 and Type 47 '
+           'licences are specifically designated for businesses that primarily serve food. The '
+           'state licensing authority requires that, in order to be issued a Type 41 or Type 47 '
+           'licence, your facility must be a &ldquo;bona fide eating place.&rdquo; 51% of the '
+           'total sales should come from food.'),
+    '48': ('Type 48 licences differ from Type 41 and Type 47 licences as they are used in '
+           'establishments that are not primarily eateries. Type 48 licences are typically issued '
+           'for bars and nightclubs. The Type 48 licence permits the holder to serve liquor until '
+           '2:00 AM. Unique to this licence, the Type 48 allows closed containers of beer or wine '
+           'to be sold for &ldquo;off-premises&rdquo; consumption.'),
+}
+
 COLUMNS = [
-    ('Type 20 &amp; 21', [('20', 'Type 20'), ('21', 'Type 21')]),
-    ('Type 41 &amp; 47', [('41', 'Type 41'), ('47', 'Type 47')]),
-    ('Type 48', [('48', 'Type 48')]),
+    ('Type 20 &amp; 21', [('20', 'Type 20'), ('21', 'Type 21')], DESCRIPTIONS['20']),
+    ('Type 41 &amp; 47', [('41', 'Type 41'), ('47', 'Type 47')], DESCRIPTIONS['41']),
+    ('Type 48', [('48', 'Type 48')], DESCRIPTIONS['48']),
 ]
 
 FIELDS = [
@@ -186,11 +219,12 @@ intro = (
 
 # ---- 3. the three-column classification band -------------------------------
 cols = []
-for head, types in COLUMNS:
+for idx, (head, types, body) in enumerate(COLUMNS):
     links = ''.join('<a class="btn btn-secondary" href="licence-types.html#type-%s">%s</a>'
                     % (t, label) for t, label in types)
-    cols.append('<li class="buyclass__col"><h3>%s</h3>'
-                '<div class="buyclass__go">%s</div></li>' % (head, links))
+    cls = 'buyclass__col buyclass__col--lead' if idx == 1 else 'buyclass__col'
+    cols.append('<li class="%s"><h3>%s</h3><p>%s</p>'
+                '<div class="buyclass__go">%s</div></li>' % (cls, head, body, links))
 band = (
     '\n<section class="section section--warm" id="sell-classifications">\n'
     '  <div class="container">\n'
@@ -225,10 +259,13 @@ assert not stray_gt(src[:a] + new_m + src[b:]), 'stray ">"'
 vis = re.sub(r'<[^>]+>', ' ', re.sub(r'<!--.*?-->', '', new_m, flags=re.S))
 assert 'California' not in vis, 'de-Californisation broken: California reappeared'
 assert not re.search(r'\bABC\b', vis), 'de-Californisation broken: ABC reappeared'
-vis_blocks = re.sub(r'<[^>]+>', ' | ', new_m)
-for t in ('20', '21', '41', '47', '48'):
-    assert not re.search(r'Type %s[^|]{0,40}(is issued|is designated|authorises|permits the holder)'
-                         % t, vis_blocks), 'ledger C18-C20: a Type %s DEFINITION appeared' % t
+# The definitions are now REQUIRED here, by owner decision -- see the note on
+# DESCRIPTIONS above and the recorded exception in the dedup ledger.
+for _t in ('20', '41', '48'):
+    assert DESCRIPTIONS[_t].split('.')[0][:40] in new_m, 'missing the Type %s description' % _t
+assert 'classifications page' in new_m, 'the pointer to licence-types.html was dropped'
+_led = io.open('_content-requirements/_dedup-ledger.md', encoding='utf-8').read()
+assert 'C18\u2013C20 **EXCEPTION**' in _led, 'dedup ledger does not record the C18-C20 exception'
 # the page's own claims must not be restated in the new copy
 for claim in ('pre-qualified', 'escrow', 'highest achievable'):
     assert claim.lower() not in (INTRO_P + BAND_LEDE).lower(), \

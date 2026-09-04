@@ -60,16 +60,45 @@ FORM_HEAD = 'Contact us today for a free consultation'
 
 # The three columns mirror the live band's pairing. The BODY text is service-side --
 # what we do -- because the definitions belong to licence-types.html (ledger C18-C20).
+
+# THE CLIENT'S OWN DESCRIPTIONS, added on the owner's explicit instruction after the
+# ledger conflict was raised twice. Reproduced from their /buy and /sell verbatim,
+# with exactly two edits, both of which keep a STANDING instruction intact:
+#   1. license -> licence, this page's own spelling.
+#   2. "The California Department of Alcoholic Beverage Control states that" becomes
+#      "The state licensing authority requires that". These pages were de-Californised
+#      on the owner's instruction and measure 0 "California" in <main>; naming one
+#      state's regulator here would reverse that. The substance -- bona fide eating
+#      place, 51% of sales from food -- is unchanged, and licence-types.html still
+#      carries the attributed version.
+# dedup-ledger.md now records this as a written C18-C20 exception rather than a
+# silent breach; licence-types.html remains the canonical owner and both bands keep
+# their pointer note to it.
+DESCRIPTIONS = {
+    '20': ('Both Type 20 and Type 21 licences are designated for the sale of alcohol for '
+           'off-premises consumption. Minors are allowed on the premises of businesses that are '
+           'issued this type of licence. The Type 20 licence is issued for the sale of packaged '
+           'beer and wine, while the Type 21 is designated for the sale of general packaged '
+           'alcohol, including spirits and liquor.'),
+    '41': ('Probably some of the most common types of liquor licence, the Type 41 and Type 47 '
+           'licences are specifically designated for businesses that primarily serve food. The '
+           'state licensing authority requires that, in order to be issued a Type 41 or Type 47 '
+           'licence, your facility must be a &ldquo;bona fide eating place.&rdquo; 51% of the '
+           'total sales should come from food.'),
+    '48': ('Type 48 licences differ from Type 41 and Type 47 licences as they are used in '
+           'establishments that are not primarily eateries. Type 48 licences are typically issued '
+           'for bars and nightclubs. The Type 48 licence permits the holder to serve liquor until '
+           '2:00 AM. Unique to this licence, the Type 48 allows closed containers of beer or wine '
+           'to be sold for &ldquo;off-premises&rdquo; consumption.'),
+}
+
 COLUMNS = [
     ('Type 20 &amp; 21', [('20', 'Type 20'), ('21', 'Type 21')],
-     'The two we are asked for most on the retail side. We source both off-market and carry the '
-     'purchase through to issuance.'),
+     DESCRIPTIONS['20']),
     ('Type 41 &amp; 47', [('41', 'Type 41'), ('47', 'Type 47')],
-     'The pair that food-led premises are usually working towards. We check transferability before '
-     'you commit, not after.'),
+     DESCRIPTIONS['41']),
     ('Type 48', [('48', 'Type 48')],
-     'Where a room is not primarily an eating place. Scarcer, and priced accordingly &mdash; we '
-     'source these against a brief.'),
+     DESCRIPTIONS['48']),
 ]
 
 FIELDS = [
@@ -202,11 +231,13 @@ intro = (
 
 # ---- 3. the three-column classification band -------------------------------
 cols = []
-for head, types, body in COLUMNS:
+for idx, (head, types, body) in enumerate(COLUMNS):
     links = ''.join('<a class="btn btn-secondary" href="licence-types.html#type-%s">%s</a>'
                     % (t, label) for t, label in types)
-    cols.append('<li class="buyclass__col"><h3>%s</h3><p>%s</p>'
-                '<div class="buyclass__go">%s</div></li>' % (head, body, links))
+    # the reference gives the middle column a bordered card; mirrored here
+    cls = 'buyclass__col buyclass__col--lead' if idx == 1 else 'buyclass__col'
+    cols.append('<li class="%s"><h3>%s</h3><p>%s</p>'
+                '<div class="buyclass__go">%s</div></li>' % (cls, head, body, links))
 band = (
     '\n<section class="section section--warm" id="buy-classifications">\n'
     '  <div class="container">\n'
@@ -248,11 +279,16 @@ vis = re.sub(r'<[^>]+>', ' ', new_m)
 # is set out on the classifications page", and a naive proximity regex reads that as
 # a definition. Flatten tags to a sentinel the pattern cannot cross instead.
 vis_blocks = re.sub(r'<[^>]+>', ' | ', new_m)
+# The definitions are now REQUIRED here, by owner decision. Assert they are present,
+# that the pointer to the owning page survives, and that the ledger records the
+# exception -- so this can never become a silent, undocumented duplication.
+for _t in ('20', '41', '48'):
+    assert DESCRIPTIONS[_t].split('.')[0][:40] in new_m, 'missing the Type %s description' % _t
+assert 'classifications page' in new_m, 'the pointer to licence-types.html was dropped'
+_led = io.open('_content-requirements/_dedup-ledger.md', encoding='utf-8').read()
+assert 'C18\u2013C20 **EXCEPTION**' in _led, 'dedup ledger does not record the C18-C20 exception'
 for bad in ('California', ' ABC '):
     assert bad not in vis, 'de-Californisation broken: %r reappeared in <main>' % bad
-for t in ('20', '21', '41', '47', '48'):
-    assert not re.search(r'Type %s[^|]{0,40}(is issued|is designated|authorises|permits the holder)'
-                         % t, vis_blocks), 'ledger C18-C20: a Type %s DEFINITION appeared' % t
 assert 'license' not in vis.lower().replace('licence', ''), 'US spelling leaked in'
 
 for tag in ('section', 'div', 'ul', 'li', 'a', 'span', 'p', 'form', 'fieldset', 'label', 'aside', 'h2', 'h3'):

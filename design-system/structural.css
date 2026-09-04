@@ -18053,3 +18053,20 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   .buyintro__head h2 { margin-top: 6px; }   /* optical align to the prose's first line */
 }
 .buyintro .lede--prose { max-width: none; }  /* the grid column is the measure now */
+
+/* --------------------------------------------------------------------------
+   [CY] continued -- the lead column in the classification band.
+
+   The client's own /buy and /sell put the middle column (Type 41 & 47) in a
+   bordered card to mark it as the pair most businesses are working towards. That
+   emphasis is mirrored here in this theme's terms -- a brighter border and a
+   slightly lifted surface rather than the reference's white box on grey, which
+   would punch a hole in a dark page.
+
+   Emphasis only. The column keeps the same grid track, padding and type as its
+   neighbours, so nothing reflows and the three stay the same height.
+   -------------------------------------------------------------------------- */
+.buyclass__col--lead {
+  border-color: var(--ds-accent, #e69c4e);
+  background: rgba(230, 156, 78, .06);
+}
