@@ -54,6 +54,24 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 os.chdir(ROOT)
 
 NEW = io.open('_mm-new-block-classifications.html', encoding='utf-8').read()
+
+# The pre-swap menu, read from git, is the baseline every revision must still cover.
+BASELINE = None
+try:
+    import subprocess
+    _pre = subprocess.run(['git', 'show', '623e138:california-liquor-license-services.html'],
+                          capture_output=True, text=True, check=True).stdout
+    _i = _pre.find('mm-casc'); _i = _pre.rfind('<div', 0, _i)
+    _d, _j = 1, _pre.find('>', _i) + 1
+    while _d and _j < len(_pre):
+        _nx = re.search(r'<(/?)div\b[^>]*>', _pre[_j:])
+        if not _nx:
+            break
+        _d += -1 if _nx.group(1) else 1
+        _j += _nx.end()
+    BASELINE = _pre[_i:_j]
+except Exception as e:
+    print('  (no git baseline available: %s -- falling back to each page\'s current menu)' % e)
 assert 'data-mmstate="florida"' in NEW and 'data-mmstate="arizona"' in NEW, 'wrong block file'
 
 
@@ -89,7 +107,11 @@ for f in pages:
         nomenu.append(f)
         continue
     old = s[b[0]:b[1]]
-    if 'data-mmstate="florida"' in old:
+    # SKIP ONLY ON AN EXACT MATCH. Testing for the presence of Florida made the script
+    # refuse to apply any LATER revision of the menu -- the pages already had a Florida
+    # rail, so a changed block was silently treated as "already done". Comparing the
+    # whole block keeps it idempotent while still allowing updates.
+    if old == NEW:
         skipped.append(f)
         continue
 
@@ -97,7 +119,9 @@ for f in pages:
 
     # ---- guards ------------------------------------------------------------
     # 1. every link the old menu reached is still reachable
-    old_links = {h.split('#')[0] for h in re.findall(r'href="([^"]+)"', old)}
+    # compare against the ORIGINAL menu, so a second revision is still held to the
+    # full pre-swap link set rather than to whatever the previous revision shipped
+    old_links = {h.split('#')[0] for h in re.findall(r'href="([^"]+)"', BASELINE or old)}
     new_links = {h.split('#')[0] for h in re.findall(r'href="([^"]+)"', NEW)}
     lost = {l for l in old_links - new_links if l}
     assert not lost, '%s: links lost: %s' % (f, sorted(lost))

@@ -117,7 +117,21 @@ def counties_of(page):
     return out
 
 
+# SOURCE THE OLD BLOCK FROM GIT, NOT THE WORKING TREE. Once the new menu has been
+# applied, the working copy no longer contains the "<market>:type-NN" panels this
+# script harvests, so a re-run against the live file dies on a missing key. Reading
+# the pre-swap commit keeps the build reproducible no matter how many times the menu
+# has already been migrated.
+PRE_SWAP = '623e138'
 src = io.open(SRC, encoding='utf-8').read()
+if 'data-mmdetail="san-francisco:type-20"' not in src:
+    import subprocess
+    src = subprocess.run(['git', 'show', '%s:%s' % (PRE_SWAP, SRC)],
+                         capture_output=True, text=True, check=True).stdout
+    assert 'data-mmdetail="san-francisco:type-20"' in src, \
+        'pre-swap commit %s does not carry the old menu either' % PRE_SWAP
+    print('  (harvested the old panels from git %s -- the working tree is already migrated)'
+          % PRE_SWAP)
 b0, b1 = block_bounds(src)
 OLD = src[b0:b1]
 
@@ -128,7 +142,16 @@ d_cities = grab_detail(OLD, 'california:cities')
 d_markets = grab_detail(OLD, 'california:markets')
 fallback = re.search(r'<div class="mm-casc__dfall".*?(?=</div>\s*</div>\s*$)', OLD, re.S)
 fallback = fallback.group(0) if fallback else ''
-ca_note = re.search(r'<p class="mm-casc__note">.*?</p>', OLD, re.S).group(0)
+_ca_note_old = re.search(r'<p class="mm-casc__note">.*?</p>', OLD, re.S).group(0)
+# THE OLD NOTE NO LONGER FITS, AND NO LONGER READS TRUE. It said "Classifications are
+# a market-level question -- open a market to see which apply there", which made sense
+# when this pane held three rows and no classifications. The pane now lists all five
+# directly, so the instruction contradicts what is on screen. It also ran to four
+# wrapped lines and pushed 15px past the panel fold once the type rows were added.
+# One line, still pointing at the page that owns the definitions.
+ca_note = ('<p class="mm-casc__note">What each classification authorises is set out under '
+           '<a href="licence-types.html">Licensing</a>.</p>')
+assert 'licence-types.html' in _ca_note_old, 'the old note lost its Licensing link'
 
 # the ten markets that publish classification pages, named by the markets panel
 markets = re.findall(r'<li><a href="(liquor-license-([a-z-]+)\.html)">([^<]+)</a></li>', d_markets)
@@ -171,10 +194,17 @@ for slug, name, sub, dflt, sel in railspec:
         % (slug, slug, dflt, slug, 'true' if sel else 'false', '0' if sel else '-1', name, sub))
 rail.append('</div>')
 
-def row(href, opt, mark, t, sub):
+def row(href, opt, mark, t, sub=None):
+    # sub=None omits the sublabel span. Used for the Florida/Arizona classification
+    # rows: BOTH state pages say in their own words "We name them; what each
+    # authorises is set by the state, not by us", and neither publishes per-code
+    # detail. A descriptive sublabel there would be invented, so there is none.
+    inner = '<span class="t">%s</span>' % t
+    if sub is not None:
+        inner += '<span class="s">%s</span>' % sub
     return ('<a class="mm-casc__row" role="menuitem" href="%s" data-mmopt="%s">'
             '<span class="mm-casc__mark">%s</span><span class="mm-casc__txt">'
-            '<span class="t">%s</span><span class="s">%s</span></span></a>' % (href, opt, mark, t, sub))
+            '%s</span></a>' % (href, opt, mark, inner))
 
 panes = ['<div class="mm-casc__panes">']
 ca_rows = [
@@ -200,14 +230,23 @@ for slug, st in STATES.items():
     rows = [
         row('%s#markets' % st['page'], '%s:counties' % slug, st['mark'],
             'Counties we broker in', '%d counties published' % len(counties_of(st['page']))),
-        row('%s#classifications' % st['page'], '%s:classifications' % slug, st['mark'],
-            'What %s issues' % st['name'], ' &middot; '.join(st['codes'])),
         row(st['page'], '%s:all' % slug, '&rarr;',
             'Everything we broker in %s' % st['name'], 'The state page'),
     ]
-    rows.append('<p class="mm-casc__note">No live listings in %s today &mdash; that is a stock '
-                'position, not a coverage gap. Tell us the classification and the market and we go '
-                'looking off-market against it.</p>' % st['name'])
+    # ONE ROW PER CLASSIFICATION, so these states read like California's pane rather
+    # than hiding their codes inside a single summary row. Every code row shares the
+    # one :classifications detail panel -- 11 near-identical panels would say the same
+    # sentence eleven times -- and every one links to the anchor that actually exists.
+    for code in st['codes']:
+        digits = re.sub(r'[^0-9]', '', code) or st['mark']
+        rows.append(row('%s#classifications' % st['page'], '%s:classifications' % slug,
+                        digits, code))
+    # ONE SENTENCE, NOT TWO. The two-sentence version ran 95px and pushed its last
+    # line 30px below the panel fold on Arizona (8 rows + note = 576px against a 560px
+    # panel). All eight rows fitted; only the note was cut. The honest fact -- no live
+    # stock, and that this is a stock position rather than a coverage gap -- survives.
+    rows.append('<p class="mm-casc__note">No live listings in %s today &mdash; a stock '
+                'position, not a coverage gap.</p>' % st['name'])
     panes.append('<div class="mm-casc__pane" id="mmst-%s" data-mmpane="%s" role="tabpanel" '
                  'aria-labelledby="mmstate-%s" hidden>%s</div>' % (slug, slug, slug, ''.join(rows)))
 panes.append('</div>')
