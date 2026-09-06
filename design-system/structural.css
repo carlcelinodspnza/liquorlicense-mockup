@@ -18269,3 +18269,57 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
 /* the widget renders a 302x76 iframe; reserve it so the button does not jump when
    the Google script finishes loading */
 .form--ref .g-recaptcha { min-height: 78px; }
+
+/* ==========================================================================
+   [DC] HERO LEAD FORM: GLASS (F-A), AND A MOBILE ORDER OF TITLE > FORM > LEDE
+   --------------------------------------------------------------------------
+   THE ORDER NEEDED MARKUP. The eyebrow, h1, lede and cta-row shared one
+   .hero__inner with the form as its sibling, so no ordering property could put the
+   form BETWEEN the h1 and the lede. .hero__inner is now split into .hero__head and
+   .hero__body with the form between them, which means the DOM order already IS the
+   mobile order -- mobile stacks and needs no rules here at all. Desktop is the
+   case that needs placing.
+
+   F-A, picked from four treatments rendered on the real page. The defect: the card
+   was white and its inputs were WHITE, so the fields had almost no presence.
+   Measured contrast after, composited over the hero's own ground: labels 9.79,
+   input text 15.79, heading 18.32 -- against a 4.5 AA threshold.
+
+   backdrop-filter is progressive: where it is unsupported the panel falls back to
+   its own rgba ground, which is opaque enough to stay legible on its own.
+   ========================================================================== */
+@media (min-width: 1001px) {
+  .hero--lead .hero__cols {
+    grid-template-rows: auto auto;
+    column-gap: clamp(28px, 4vw, 56px);
+    row-gap: var(--ds-space-md, 16px);
+  }
+  .hero--lead .hero__head { grid-column: 1; grid-row: 1; }
+  .hero--lead .hero__body { grid-column: 1; grid-row: 2; }
+  .hero--lead .hero__lead { grid-column: 2; grid-row: 1 / span 2; align-self: start; }
+}
+
+/* ---- F-A: the glass panel ---- */
+.hero--lead .cta-formcard {
+  background: rgba(28, 20, 16, .62);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  backdrop-filter: blur(18px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, .14);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .10);
+}
+.hero--lead .hero__leadh { color: #fff; }
+.hero--lead .form label,
+.hero--lead .form legend { color: rgba(255, 255, 255, .72); }
+.hero--lead .form input:not([type="radio"]) {
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .16);
+  color: #fff;
+}
+.hero--lead .form input:not([type="radio"])::placeholder { color: rgba(255, 255, 255, .4); }
+.hero--lead .form input:not([type="radio"]):focus {
+  border-color: var(--ds-accent);
+  box-shadow: 0 0 0 3px rgba(230, 156, 78, .25);
+  outline: none;
+}
+.hero--lead .form .choice span { color: rgba(255, 255, 255, .86); }
+.hero--lead .form .choice input { accent-color: var(--ds-accent); }
