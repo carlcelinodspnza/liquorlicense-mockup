@@ -18323,3 +18323,43 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
 }
 .hero--lead .form .choice span { color: rgba(255, 255, 255, .86); }
 .hero--lead .form .choice input { accent-color: var(--ds-accent); }
+
+/* ==========================================================================
+   [DD] LEAD FORM: A GRADIENT EDGE, AND ONE PAIRED ROW (owner, 2026-09-07)
+   --------------------------------------------------------------------------
+   THE GRADIENT EDGE. The glass panel had no edge of its own against a dark photo,
+   so it read as a soft rectangle. A 3px gold-to-red rule along its top gives it a
+   defined start. It is drawn as a clipped ::before rather than a border-top so it
+   follows the card's radius and curves into the corners, which is what a border-top
+   would not do. Scoped to .hero--lead so the #contact card, which shares the
+   .cta-formcard class, is untouched.
+
+   THE PAIRED ROW. Operating state and County are two short fields that each had a
+   full-width row. They now share one. The owner declined the OTHER available pair --
+   the two radio sets -- because "Type of business" carries three choices that would
+   wrap to two lines in half the width, trading a row of height for a wrapped list.
+   That trade was offered, measured and turned down; only this pair ships.
+
+   TARGETED BY CLASS, NOT POSITION. The card's existing pairing uses
+   :nth-child(2)/(3) for email and phone. Adding a third and fourth nth-child rule
+   would break the moment a field is inserted, so these two carry .field--half.
+   Same (0,3,0) specificity as the `.form > .field` full-width default, so this
+   block must stay after it -- it is appended at the end of the file for that reason.
+
+   It collapses at the same 600px the existing pairing collapses at, so a phone
+   never puts two inputs side by side.
+   ========================================================================== */
+.hero--lead .cta-formcard { position: relative; overflow: hidden; }
+.hero--lead .cta-formcard::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--ds-accent), #ad1e1e);
+  pointer-events: none;
+}
+
+.cta-formcard .form > .field--half { grid-column: span 1; }
+@media (max-width: 600px) {
+  .cta-formcard .form > .field--half { grid-column: 1 / -1; }
+}
