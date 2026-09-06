@@ -18299,29 +18299,44 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   .hero--lead .hero__lead { grid-column: 2; grid-row: 1 / span 2; align-self: start; }
 }
 
-/* ---- F-A: the glass panel ---- */
-.hero--lead .cta-formcard {
-  background: rgba(28, 20, 16, .62);
-  -webkit-backdrop-filter: blur(18px) saturate(1.2);
-  backdrop-filter: blur(18px) saturate(1.2);
-  border: 1px solid rgba(255, 255, 255, .14);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .10);
+/* ---- THE PANEL IS WHITE ON DESKTOP, GLASS ON MOBILE (owner, 2026-09-07) ----
+   The glass shipped at every width; the owner then asked for white on DESKTOP,
+   keeping the gradient edge. So the glass rules below are scoped to the SMALL
+   end only, and desktop simply falls through to the base .cta-formcard white
+   card and .form--light inputs -- nothing is overridden back to white, which
+   would leave two competing rule sets fighting over the same properties.
+
+   1000px is deliberate: it is one pixel under the 1001px the hero already uses
+   to go two-column, so the panel turns glass at exactly the width it stops
+   sitting beside the copy and starts sitting over the photo full-bleed.
+
+   The gradient edge is OUTSIDE this query on purpose -- it was asked for at both
+   breakpoints, and it is the one thing both treatments share. */
+@media (max-width: 1000px) {
+  .hero--lead .cta-formcard {
+    background: rgba(28, 20, 16, .62);
+    -webkit-backdrop-filter: blur(18px) saturate(1.2);
+    backdrop-filter: blur(18px) saturate(1.2);
+    border: 1px solid rgba(255, 255, 255, .14);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .45), inset 0 1px 0 rgba(255, 255, 255, .10);
+  }
+  .hero--lead .hero__leadh { color: #fff; }
+  .hero--lead .form label,
+  .hero--lead .form legend { color: rgba(255, 255, 255, .72); }
+  .hero--lead .form input:not([type="radio"]) {
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .16);
+    color: #fff;
+  }
+  .hero--lead .form input:not([type="radio"])::placeholder { color: rgba(255, 255, 255, .4); }
+  .hero--lead .form input:not([type="radio"]):focus {
+    border-color: var(--ds-accent);
+    box-shadow: 0 0 0 3px rgba(230, 156, 78, .25);
+    outline: none;
+  }
+  .hero--lead .form .choice span { color: rgba(255, 255, 255, .86); }
 }
-.hero--lead .hero__leadh { color: #fff; }
-.hero--lead .form label,
-.hero--lead .form legend { color: rgba(255, 255, 255, .72); }
-.hero--lead .form input:not([type="radio"]) {
-  background: rgba(255, 255, 255, .06);
-  border: 1px solid rgba(255, 255, 255, .16);
-  color: #fff;
-}
-.hero--lead .form input:not([type="radio"])::placeholder { color: rgba(255, 255, 255, .4); }
-.hero--lead .form input:not([type="radio"]):focus {
-  border-color: var(--ds-accent);
-  box-shadow: 0 0 0 3px rgba(230, 156, 78, .25);
-  outline: none;
-}
-.hero--lead .form .choice span { color: rgba(255, 255, 255, .86); }
+/* the accent dot reads on both grounds, so it is not scoped */
 .hero--lead .form .choice input { accent-color: var(--ds-accent); }
 
 /* ==========================================================================
