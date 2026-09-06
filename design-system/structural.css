@@ -14817,7 +14817,20 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
    At <=768px every rule here is identical to the one already in force, so the
    existing mobile header is unchanged.
    -------------------------------------------------------------------------- */
-@media (max-width: 981px) {
+/* RE-MEASURED 2026-09-07: this ceiling moves 981 -> 1098.
+   The note above set 981 on the measurement that the header CTA "ends at x=982
+   regardless of viewport". That is no longer what the header does. Measured now on
+   about.html -- a page this session has only touched through the shared header --
+   the seven nav items total 715px, the CTA 182px, and with the logo and gaps the
+   bar needs 1099px. So 982-1098 was still overflowing: 99px at a 1000px viewport,
+   desktop nav shown but unable to fit. First clean viewport is 1099.
+   NOT caused by the mega-menu rebuild, checked before changing the number: that
+   panel is position:fixed and the Locations <li> is exactly as wide as its trigger
+   (121px), so nothing inside it can widen the bar. ONLY the ceiling changes; the
+   seven rules below are untouched, and the two OTHER 981px blocks in this file
+   (footer, and #qualifier) are deliberately left alone -- they are unrelated to the
+   header and were never part of this overflow. */
+@media (max-width: 1098px) {
   .site-nav { display: none; }
   .mm-cta-desktop { display: none; }
   .site-header__hamburger { display: flex; }
@@ -18377,4 +18390,30 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
 .cta-formcard .form > .field--half { grid-column: span 1; }
 @media (max-width: 600px) {
   .cta-formcard .form > .field--half { grid-column: 1 / -1; }
+}
+
+/* ==========================================================================
+   [DE] HERO COPY CENTRES ON MOBILE (owner, 2026-09-07)
+   --------------------------------------------------------------------------
+   Below the two-column breakpoint the hero is one stacked column, and the owner
+   asked for the eyebrow + h1 block and the lede block to centre there.
+
+   BOTH properties are needed, not one. .hero__inner is a flex column with
+   align-items:flex-start, so its children shrink to their content width and sit
+   left; text-align alone would centre the text INSIDE a block still pinned left.
+   align-items centres the blocks, text-align centres their lines.
+
+   The CTA buttons are already full-width at this size -- measured 327px in a 327px
+   column -- so they are unaffected, and there is no risk of centred copy sitting
+   above left-aligned buttons.
+
+   1000px is the width at which this hero stops being two-column, so the copy
+   centres at exactly the moment it stops sitting beside the form.
+   ========================================================================== */
+@media (max-width: 1000px) {
+  .hero--lead .hero__head,
+  .hero--lead .hero__body {
+    text-align: center;
+    align-items: center;
+  }
 }
