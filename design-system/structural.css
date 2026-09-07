@@ -18499,25 +18499,33 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   z-index: -1;
   line-height: 0;
 }
-/* object-fit CONTAIN, not cover, and the box is the whole card. Contain is the
-   only value that guarantees the whole frame is visible at every width, which
-   was the owner's condition. The first version (width:100%/height:auto) was
-   uncropped at 1440 -- 171x173 card, 169x112 image -- but NOT on a phone: the
-   card stays 173px tall while the image grew to 325x217, and overflow:hidden
-   clipped 44px off its top. Measured on service-sell.html at 375, not assumed.
-   The letterboxed area is the card's own background, invisible behind an image
-   sitting at 32% opacity. */
+/* object-fit COVER, so the photograph occupies the WHOLE card. This reverses an
+   earlier choice, deliberately, because the two requests are geometrically
+   incompatible and the later one wins: a 3:2 photograph cannot both fill a
+   171x173 near-square box and keep its whole frame. Contain kept every pixel but
+   letterboxed to 169x112, leaving the top 35% of the card bare -- which is the
+   gap in the owner's screenshot. Cover fills the card and crops instead:
+     desktop 1440  card 171x173  image scales to 260x173  -> 34% of WIDTH cropped
+     mobile  375   card 327x173  image scales to 327x218  -> 21% of HEIGHT cropped
+   Measured, not estimated. object-position is centred so the crop is taken evenly
+   from both edges rather than lopping one side off.
+
+   THE MASK NO LONGER REACHES FULL TRANSPARENCY. It used to fade to 0 at the top,
+   so even a covering image would leave the card's upper third looking empty --
+   the whole point of this change. It now bottoms out at 40%, so the image reads
+   across the entire card while the heading keeps enough separation to stay
+   legible against it. */
 .statecard__ph img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: bottom center;
+  object-fit: cover;
+  object-position: center;
   display: block;
   filter: grayscale(1) sepia(.62) saturate(1.5) contrast(1.05) brightness(.85);
   opacity: .32;
   transition: opacity var(--ds-dur-slow, .25s) var(--ds-ease, ease);
-  -webkit-mask-image: linear-gradient(to top, #000 34%, transparent 100%);
-  mask-image: linear-gradient(to top, #000 34%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, #000 55%, rgba(0, 0, 0, .4) 100%);
+  mask-image: linear-gradient(to top, #000 55%, rgba(0, 0, 0, .4) 100%);
 }
 .statecard:hover .statecard__ph img,
 .statecard:focus-visible .statecard__ph img { opacity: .44; }
