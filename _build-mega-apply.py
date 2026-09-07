@@ -98,6 +98,23 @@ def stray_gt(s):
 
 
 pages = [f for f in sorted(glob.glob('*.html')) if not f.startswith('_')]
+
+# Which market x type pages are reachable WITHOUT the mega menu. Computed once from
+# the current tree by stripping each page's menu block before looking for the link,
+# so a link that only exists inside the menu does not count as reachability.
+_MT = [f for f in pages if re.match(r'liquor-license-.*-type-\d+\.html$', f)]
+_REACHABLE_OFF_MENU = set()
+for _t in _MT:
+    for _p in pages:
+        _s = io.open(_p, encoding='utf-8').read()
+        _b = bounds(_s)
+        _body = (_s[:_b[0]] + _s[_b[1]:]) if _b else _s
+        if re.search(r'href="%s(?:#[^"]*)?"' % re.escape(_t), _body):
+            _REACHABLE_OFF_MENU.add(_t)
+            break
+print('  market x type pages reachable outside the menu: %d / %d'
+      % (len(_REACHABLE_OFF_MENU), len(_MT)))
+
 staged, skipped, nomenu = {}, [], []
 
 for f in pages:
@@ -124,7 +141,16 @@ for f in pages:
     old_links = {h.split('#')[0] for h in re.findall(r'href="([^"]+)"', BASELINE or old)}
     new_links = {h.split('#')[0] for h in re.findall(r'href="([^"]+)"', NEW)}
     lost = {l for l in old_links - new_links if l}
-    assert not lost, '%s: links lost: %s' % (f, sorted(lost))
+    # The three-row rebuild (2026-09-07) intentionally drops the five
+    # california:type-NN detail panels, and with them the menu's only route to the
+    # 50 market x type pages. That is allowed ONLY because each of those pages is
+    # linked from at least one page outside the menu -- proved per page below, not
+    # assumed. Anything else going missing is still a hard failure.
+    mt_lost = {l for l in lost if re.match(r'liquor-license-.*-type-\d+\.html$', l)}
+    assert not (lost - mt_lost), '%s: links lost: %s' % (f, sorted(lost - mt_lost))
+    for t in sorted(mt_lost):
+        assert t in _REACHABLE_OFF_MENU, \
+            '%s: %s would be ORPHANED -- no inbound link outside the mega menu' % (f, t)
 
     # 2. every target exists on disk
     for h in sorted(new_links):
@@ -139,9 +165,12 @@ for f in pages:
     dets = set(re.findall(r'data-mmdetail="([^"]+)"', new_s))
     assert opts == dets, '%s: rows/panels mismatch %s' % (f, opts ^ dets)
 
-    # 4. all 50 market x type pages still reachable from the menu
+    # 4. the market x type pages. The old menu carried all 50; the three-row rebuild
+    # carries none. Either is acceptable, but ONLY those two: a partial set would mean
+    # the block was built wrong. Whichever it is, orphaning is what actually matters,
+    # and that is checked above against _REACHABLE_OFF_MENU.
     mt = {l for l in new_links if re.match(r'liquor-license-.*-type-\d+\.html$', l)}
-    assert len(mt) == 50, '%s: %d market x type links, expected 50' % (f, len(mt))
+    assert len(mt) in (0, 50), '%s: %d market x type links, expected 0 or 50' % (f, len(mt))
 
     # 5. nothing outside the block moved
     assert s[:b[0]] == new_s[:b[0]], '%s: content before the block changed' % f

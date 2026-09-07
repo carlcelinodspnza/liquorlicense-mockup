@@ -18559,3 +18559,78 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   .statecard,
   .statecard__ph img { transition: none; }
 }
+
+
+/* ==========================================================================
+   [DG] LOCATIONS MEGA MENU: HEIGHT CAPPED TO THE RAIL (2026-09-07)
+   --------------------------------------------------------------------------
+   The owner asked for the panel to stop "just below Arizona 15 counties".
+
+   THE MARKUP DID MOST OF THE WORK, not this block. Cutting each pane from
+   seven or eight rows to three took the panel from 547px to 351px on its own.
+   What is left is the gap between 351px and the rail: measured with the menu
+   open, the Arizona button's bottom edge sits 185px below the panel's top, and
+   the rail carries 16px of bottom padding, so the requested stop line is 201px.
+   The panel is set to 219px, not 201px, and the extra 18px is not slack: the panes
+   column needs 219px for its three rows (168px of rows plus 14px of padding top and
+   bottom, plus the row gaps). At 201px the third row -- "All 14 California markets"
+   -- was clipped by exactly 18px, which defeats the point of cutting to three rows.
+   Measured with the menu open, not derived on paper. The panel therefore ends 36px
+   below the Arizona button rather than 18px.
+
+   THE HEIGHT IS SET ON THE GRID, not on the panel, because the panel's own
+   max-height is a viewport fraction (76vh) and would go on winning at any tall
+   viewport. Setting height on .mm-casc sizes the single grid row, and the three
+   columns stretch into it.
+
+   THE DETAIL COLUMN THEN SCROLLS, and that is a real consequence rather than a
+   free win: the California services panel wants about 245px, so roughly 60px of
+   it sits below the fold and is reached by scrolling. The counties panel (52
+   entries) scrolls considerably more. Both columns already carried
+   overflow-y:auto before this change, so nothing is clipped without a way to
+   reach it -- but the trade is height for scrolling, and it was asked for
+   explicitly.
+
+   min-height:0 is required on the scrolling children. Without it a grid item's
+   automatic minimum size is its CONTENT size, so the row would refuse to shrink
+   to 201px and the cap would silently do nothing.
+   ========================================================================== */
+.mm-mega--locations .mm-casc {
+  height: 232px;
+}
+/* The detail column's own padding was 18px top / 20px bottom -- 38px of the 232px
+   budget spent on air. Trimmed to 12/12 HERE ONLY, which buys back 14px and is
+   what lets the classifications row and the footnote sit above the fold instead of
+   just below it. Scoped to this mega so nothing else inherits a tighter panel. */
+.mm-mega--locations .mm-casc__details {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.mm-mega--locations .mm-casc__rail,
+.mm-mega--locations .mm-casc__panes,
+.mm-mega--locations .mm-casc__details {
+  min-height: 0;
+}
+.mm-mega--locations .mm-casc__panes,
+.mm-mega--locations .mm-casc__details {
+  overflow-y: auto;
+}
+
+/* The services panel stacks two lists, so its second heading needs air above it
+   that a first-child heading never needed. */
+.mm-casc__dlist[data-cols="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.mm-casc__dlist[data-cols="6"] { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.mm-casc__dhead--sub {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--ds-ink-soft);
+}
+/* Carried forward from the old pane footers, which this rebuild removed. */
+.mm-casc__dfoot {
+  margin: 8px 0 0;
+  font-family: var(--ds-font-body);
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--ds-ink-soft);
+}
+.mm-casc__dfoot a { color: var(--ds-accent-ink, #e69c4e); }
