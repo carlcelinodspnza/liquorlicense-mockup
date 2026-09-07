@@ -18417,3 +18417,137 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
     align-items: center;
   }
 }
+
+/* ==========================================================================
+   [DF] #where CARRIES THREE STATE CARDS ON THE BUY AND SELL PAGES (2026-09-07)
+   --------------------------------------------------------------------------
+   The band listed 13 California market pills. The owner asked for three cards --
+   California, Florida, Arizona -- IN ONE LINE, then picked treatment C: a
+   monochrome photograph inside each card.
+
+   PLACEMENT IS THE FIRST HALF OF THIS BLOCK, and it is not decoration. [CH]
+   pins .eyebrow / h2 / .lede to column 1 rows 1-3 and .mkt-list to column 2
+   spanning rows 1..3. A list WITHOUT a placement rule auto-places into row 1 of
+   column 2, which pushes the h2 down to row 2 -- and row 2 begins below the
+   cards. That produced a tall empty gap between the eyebrow and the heading.
+   .statecards therefore takes the same placement .mkt-list has.
+
+   ONE LINE IS THE REQUIREMENT, so the desktop rule is an explicit
+   repeat(3, minmax(0,1fr)): three equal tracks that cannot wrap, rather than an
+   auto-fit that would silently drop to 2 + 1 the moment the container narrowed.
+   That is the same class of failure the counties band hit -- a grid reflowing on
+   CONTAINER width while the breakpoint fires on VIEWPORT width -- so the count is
+   pinned instead of derived.
+
+   THE PHOTOGRAPH IS NOT CROPPED. All three files are 3:2 and the card box is
+   near square (171x173 at 1440), so object-fit:cover would have discarded about
+   two thirds of every frame. The image is laid in at its own aspect ratio --
+   full card width, height derived -- and anchored to the bottom edge, where the
+   upward fade reveals it. Nothing is cut off on any side.
+
+   COLOUR IS PINNED ON BOTH THE ANCHOR AND THE NAME. Without it .statecard__name
+   inherits the anchor colour and renders :visited purple once a reader has
+   opened a state page.
+
+   Below 700px the three stack, because three cards across a phone would give
+   each about 100px and the sublines would wrap to three lines.
+
+   Scoped to .statecards, which appears on exactly two pages; the other 23 pages
+   carrying this band keep their pills untouched.
+   ========================================================================== */
+@media (min-width: 900px) {
+  .where--split > .container > .statecards {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    margin-top: 6px;
+    align-self: start;
+  }
+}
+.statecards {
+  list-style: none;
+  margin: var(--ds-space-lg, 24px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 700px) {
+  .statecards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.statecard {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  height: 100%;
+  padding: 18px 20px 16px;
+  text-decoration: none;
+  color: var(--ds-ink);
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-r-lg, 10px);
+  background: rgba(255, 255, 255, .028);
+  transition: border-color var(--ds-dur, .2s) var(--ds-ease, ease);
+}
+.statecard:visited { color: var(--ds-ink); }
+.statecard:hover,
+.statecard:focus-visible { border-color: var(--ds-accent); }
+.statecard__ph {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  line-height: 0;
+}
+/* object-fit CONTAIN, not cover, and the box is the whole card. Contain is the
+   only value that guarantees the whole frame is visible at every width, which
+   was the owner's condition. The first version (width:100%/height:auto) was
+   uncropped at 1440 -- 171x173 card, 169x112 image -- but NOT on a phone: the
+   card stays 173px tall while the image grew to 325x217, and overflow:hidden
+   clipped 44px off its top. Measured on service-sell.html at 375, not assumed.
+   The letterboxed area is the card's own background, invisible behind an image
+   sitting at 32% opacity. */
+.statecard__ph img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  display: block;
+  filter: grayscale(1) sepia(.62) saturate(1.5) contrast(1.05) brightness(.85);
+  opacity: .32;
+  transition: opacity var(--ds-dur-slow, .25s) var(--ds-ease, ease);
+  -webkit-mask-image: linear-gradient(to top, #000 34%, transparent 100%);
+  mask-image: linear-gradient(to top, #000 34%, transparent 100%);
+}
+.statecard:hover .statecard__ph img,
+.statecard:focus-visible .statecard__ph img { opacity: .44; }
+.statecard__mark {
+  font-size: 11.5px;
+  letter-spacing: .14em;
+  color: var(--ds-accent-ink, #e69c4e);
+  font-variant-numeric: tabular-nums;
+}
+.statecard__name {
+  font-family: var(--ds-font-display);
+  font-size: 23px;
+  line-height: 1.15;
+  color: var(--ds-ink);
+  margin-top: 8px;
+}
+.statecard__sub {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ds-ink-soft);
+  min-height: 2.9em;
+  font-variant-numeric: tabular-nums;
+}
+.statecard__go {
+  margin-top: auto;
+  padding-top: 10px;
+  font-size: 13px;
+  color: var(--ds-accent-ink, #e69c4e);
+}
+@media (prefers-reduced-motion: reduce) {
+  .statecard,
+  .statecard__ph img { transition: none; }
+}
