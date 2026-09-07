@@ -193,7 +193,58 @@ assert cards.count('mm-casc__card"') == 3, 'expected 3 state cards, got %d' % ca
 KEEP_DETAILS = ['california:counties', 'california:markets',
                 'florida:counties', 'florida:all',
                 'arizona:counties', 'arizona:all']
-kept = {k: detail_of(blk, k) for k in KEEP_DETAILS}
+def close_grid(panel):
+    """Pad every dlist so its last row is FULL, and the grid closes.
+
+    A CSS grid only draws rules where there are cells. Eight services in three
+    columns leaves the third cell of the last row empty, so the rule stops short
+    and the box reads as broken -- which is what the owner photographed. The same
+    happens to California's 52 counties in three columns (52 = 3x17 + 1) and to
+    five classifications in six columns.
+
+    Column count cannot fix this in general (52 has no useful divisor near three),
+    so the fix is structural and count-agnostic: append empty <li> fillers until
+    the item count is a multiple of the column count. A filler carries no text, so
+    it adds no words and no links; it exists only to carry the two hairlines.
+    """
+    out, added = panel, 0
+    for m in list(re.finditer(r'<ul class="mm-casc__dlist" data-cols="(\d)"[^>]*>(.*?)</ul>',
+                              out, re.S))[::-1]:
+        cols = int(m.group(1))
+        n = m.group(2).count('<li')
+        pad = (-n) % cols
+        if not pad:
+            continue
+        fill = '<li class="mm-casc__dlist__pad" aria-hidden="true"></li>' * pad
+        out = out[:m.end(2)] + fill + out[m.end(2):]
+        added += pad
+    return out, added
+
+
+def normalise_items(panel):
+    """Wrap bare-text <li> items in a <span>.
+
+    THIS IS THE ACTUAL CAUSE of the owner's "these texts are quite big". Every type
+    rule on these lists is written as `.mm-casc__dlist a` / `.mm-casc__dlist span`,
+    so an item shaped `<li>Alachua County</li>` matches NOTHING -- no font-size, no
+    line-height, no padding -- and renders at the ambient size. Measured: 66 of 66
+    Florida county items and 15 of 15 Arizona ones are bare, while all 52 California
+    ones are already wrapped, which is why only two of the three lists looked wrong.
+
+    A <span> here is exactly what the California list already uses, and the CSS
+    already documents it as "a published place with no page of its own -- deliberately
+    not a link". Wrapping adds no words and no links; it only lets the existing rules
+    apply.
+    """
+    out, n = re.subn(r'<li>(?!\s*<)([^<]+)</li>', r'<li><span>\1</span></li>', panel)
+    return out, n
+
+
+kept, _wrapped = {}, 0
+for k in KEEP_DETAILS:
+    _p, _n = normalise_items(detail_of(blk, k))
+    kept[k] = _p
+    _wrapped += _n
 
 # ---- the rail -----------------------------------------------------------------
 RAIL_SUB = {'california': '52 counties &middot; 172 cities',
@@ -245,6 +296,15 @@ assert max(len(t) for _, t in svc_titles) <= 26, \
 details = ['<div class="mm-casc__details">']
 for st in ['california', 'florida', 'arizona']:
     details.append(kept['%s:counties' % st])
+    # The sub-heading carries the link the removed footnote used to hold. California
+    # points at licence-types.html (what each classification authorises); Florida and
+    # Arizona point at their own #classifications section, which is where their series
+    # are actually defined.
+    CLS_HEAD_HREF = {'california': 'licence-types.html',
+                     'florida': 'florida-liquor-license.html#classifications',
+                     'arizona': 'arizona-liquor-license.html#classifications'}
+    cls_head = ('<a href="%s">%s classifications</a>'
+                % (CLS_HEAD_HREF[st], st.capitalize()))
     svc_items = ''.join('<li><a href="%s">%s</a></li>' % (p, t) for p, t in svc_titles)
     cls_items = ''.join('<li><a href="%s">%s</a></li>' % (href, label)
                         for _, label, href in CLASSIFICATIONS[st])
@@ -257,17 +317,27 @@ for st in ['california', 'florida', 'arizona']:
         # said the same thing twice for ~29px.
         '<div class="mm-casc__detail" data-mmdetail="%s:services" hidden>\n'
         '              <p class="mm-casc__dhead">Services we provide</p>%.0s\n'
-        '              <ul class="mm-casc__dlist" data-cols="3" role="list">%s</ul>\n'
+        # TWO columns for the services. At three (155px) "Conditional Use Permits"
+        # and "New business planning" both wrapped to a second line, which is the
+        # other half of the ragged look in the owner's screenshot. Two columns give
+        # 244px, every label sits on one line, and 8 divides by 2 so the grid closes
+        # without any filler at all.
+        '              <ul class="mm-casc__dlist" data-cols="2" role="list">%s</ul>\n'
         # SIX COLUMNS for the classifications. They are the shortest labels on the
         # page ("Type 20", "1COP", "Series 10"), and at three columns they took two
         # rows -- which pushed the footnote out of a panel that has 219px to work
         # with. Six puts California's five, Florida's five and Arizona's six all on
         # ONE row, in an 81px column that comfortably holds "Series 10" at 13px.
-        '              <p class="mm-casc__dhead mm-casc__dhead--sub">%s classifications</p>\n'
-        '              <ul class="mm-casc__dlist" data-cols="6" role="list">%s</ul>\n'
-        '              <p class="mm-casc__dfoot">%s</p>\n'
-        '            </div>' % (st, STATE_NOTE[st], svc_items, st.capitalize(), cls_items,
-                                PANE_NOTE[st]))
+        '              <p class="mm-casc__dhead mm-casc__dhead--sub">%s</p>\n'
+        # NO FOOTNOTE. It was carried forward from the old pane footers on 2026-09-07
+        # and the owner removed it the same day -- the "No live listings in Florida
+        # today" line in particular. The only thing it held that mattered was the
+        # California link to licence-types.html, and that is preserved by making the
+        # classifications sub-heading itself the link (see cls_head below), so no
+        # target is lost by dropping the paragraph.
+        '              <ul class="mm-casc__dlist" data-cols="%d" role="list">%s</ul>\n'
+        '            </div>' % (st, STATE_NOTE[st], svc_items, cls_head,
+                                len(CLASSIFICATIONS[st]), cls_items))
     third = THIRD_ROW[st][0]
     details.append(kept['%s:%s' % (st, third)])
 details.append('</div>')
@@ -329,14 +399,28 @@ for tag in ('div', 'a', 'span', 'ul', 'li', 'p', 'button'):
 t = re.sub(r'<[^<>]*>', '', NEW)
 assert '>' not in t, 'stray ">"'
 assert '<h1' not in NEW, 'the menu must not contain an h1'
-# the three pane notes must have been carried forward verbatim
+# no item may be left bare: a bare <li> matches none of the .mm-casc__dlist type rules
+_bare = re.findall(r'<li>(?!\s*<)([^<]+)</li>', NEW)
+assert not _bare, '%d list items are still bare text and would render unstyled: %s' % (
+    len(_bare), _bare[:4])
+# The footnotes are deliberately absent (owner, 2026-09-07). What must NOT be absent
+# is the link one of them carried.
+assert 'mm-casc__dfoot' not in NEW, 'a footnote survived; the owner asked for none'
 for st, note in PANE_NOTE.items():
-    assert note in NEW, 'pane note for %s was dropped' % st
-assert NEW.count('mm-casc__dfoot') == 3, 'expected 3 carried-forward notes'
+    assert note not in NEW, 'pane note for %s is still present' % st
+assert NEW.count('href="licence-types.html"') == 1, \
+    'the licence-types link the footnote carried was not preserved on the sub-heading'
+
+NEW, _padded = close_grid(NEW)
+for m in re.finditer(r'<ul class="mm-casc__dlist" data-cols="(\d)"[^>]*>(.*?)</ul>', NEW, re.S):
+    cols, n = int(m.group(1)), m.group(2).count('<li')
+    assert n % cols == 0, 'grid still ragged: %d items in %d columns' % (n, cols)
 
 io.open(OUT, 'w', encoding='utf-8').write(NEW)
 print('wrote %s  %d bytes (was %d)' % (OUT, len(NEW), len(blk)))
 print('   baseline read from: %s' % _src_from)
+print('   bare <li> items wrapped in <span> so the type rules apply: %d' % _wrapped)
+print('   empty cells added to close ragged grid rows: %d' % _padded)
 print('   panes            : 3 rows each  (california, florida, arizona)')
 print('   distinct options : %d   detail panels: %d' % (len(opts), len(dets)))
 print('   services panel   : %d services + per-state classifications' % len(SERVICES))

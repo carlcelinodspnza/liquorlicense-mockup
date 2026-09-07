@@ -16506,11 +16506,11 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
 .mm-casc__dlist a,
 .mm-casc__dlist span {
   display: block;
-  padding: 5px 8px;
-  border-radius: var(--ds-r-sm);
+  padding: 5px 10px;
+  border-radius: 0;
   font-family: var(--ds-font-body);
-  font-size: 13px;
-  line-height: 1.35;
+  font-size: 12px;
+  line-height: 1.3;
   overflow-wrap: anywhere;
 }
 .mm-casc__dlist a { color: var(--ds-ink); text-decoration: none; }
@@ -18620,6 +18620,45 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
    that a first-child heading never needed. */
 .mm-casc__dlist[data-cols="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .mm-casc__dlist[data-cols="6"] { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+
+/* --------------------------------------------------------------------------
+   A SUBTLE GRID ON THE DETAIL LISTS, and smaller type.
+   Sixty-six county names set at 13px in three gapped columns read as a wall --
+   the eye has no rule to travel along, so the columns blur into each other.
+   Hairlines at 7% white give the rows and columns an edge without becoming
+   furniture, and the 14px column gap becomes cell padding so the rules sit
+   flush instead of floating.
+
+   The left rule is suppressed on the first cell of each row. That has to be
+   done per column count, because :nth-child cannot read grid-template-columns
+   -- hence one selector per data-cols value in use (1, 2, 3 and 6, all four
+   confirmed present in the rendered menu).
+   -------------------------------------------------------------------------- */
+.mm-casc__dlist {
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, .07);
+}
+.mm-casc__dlist li {
+  border-bottom: 1px solid rgba(255, 255, 255, .07);
+  border-left: 1px solid rgba(255, 255, 255, .07);
+}
+/* A filler cell exists only to carry the grid's hairlines where the content ran
+   out. It is empty, aria-hidden, and matched to a real cell's height so the last
+   row lines up with the rest. */
+.mm-casc__dlist__pad {
+  min-height: 27px;
+}
+.mm-casc__dlist[data-cols="4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.mm-casc__dlist[data-cols="5"] { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.mm-casc__dlist:not([data-cols]) li:nth-child(2n + 1),
+.mm-casc__dlist[data-cols="1"] li,
+.mm-casc__dlist[data-cols="2"] li:nth-child(2n + 1),
+.mm-casc__dlist[data-cols="3"] li:nth-child(3n + 1),
+.mm-casc__dlist[data-cols="4"] li:nth-child(4n + 1),
+.mm-casc__dlist[data-cols="5"] li:nth-child(5n + 1),
+.mm-casc__dlist[data-cols="6"] li:nth-child(6n + 1) {
+  border-left: 0;
+}
 .mm-casc__dhead--sub {
   margin-top: 8px;
   font-size: 13px;
