@@ -18721,3 +18721,33 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   transform: translateY(0);
   pointer-events: auto;
 }
+
+
+/* ==========================================================================
+   [DI] THE LOCATIONS MEGA GETS THE SAME NAV CLEARANCE AS THE OTHER TWO (2026-09-08)
+   --------------------------------------------------------------------------
+   The owner: the Locations dropdown "does not have the same gap as the others.
+   It should be below the nav bar and NEVER overlapping the nav bar."
+
+   Measured at 1600, all three panels open:
+
+     #mm-mega-services    top 88px    clears the header
+     #mm-dd-licensing     top 88px    clears the header
+     #mm-mega-locations   top 68px    OVERLAPS the header by 14px
+
+   #mm-mega-locations had NO id-scoped rules at all -- 0 in this sheet, and 0 at
+   4830cc5 either, so it has never had them -- and therefore fell back to the base
+   `.mm-panel { top: calc(100% + 4px) }`. That resolves against the nav <li>, whose
+   bottom is 59px, not against the 82px header, so the panel opened INSIDE the bar.
+
+   This is not a new rule, it is a rule that was never copied across. The comment
+   above #mm-mega-services already diagnoses exactly this: "68 against a real 80 is
+   why the panel currently opens 12px INSIDE the nav (measured navGap -12)". The
+   Locations mega was built later and never picked it up.
+
+   Same idiom, same literal, same edge as the other two, deliberately -- so all
+   three panels share one top edge and there is one number to change if the header
+   height ever moves. 80px stays a measured literal because there is still no
+   header-height token in tokens.css.
+   ========================================================================== */
+#mm-mega-locations { top: calc(80px + var(--ds-space-xs)); }
