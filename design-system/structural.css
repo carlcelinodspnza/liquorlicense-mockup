@@ -611,7 +611,9 @@ p { margin: 0; }
 .mm-panel::after { content: ""; position: absolute; left: -10px; right: -10px; top: -12px; height: 14px; pointer-events: auto; }
 .mm-panel__bloom { position: absolute; inset: 0 0 auto 0; height: 46%; z-index: 0; border-radius: var(--ds-r-lg) var(--ds-r-lg) 0 0; pointer-events: none; background: var(--ds-glow-wash); }
 .mm-panel > *:not(.mm-panel__bloom) { position: relative; z-index: 1; }
-.mm-has-panel:hover > .mm-panel, .mm-has-panel.is-open > .mm-panel, .mm-has-panel:focus-within > .mm-panel { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+.mm-has-panel:hover > .mm-panel, .mm-has-panel.is-open > .mm-panel { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+/* :focus-within was REMOVED from the line above and re-expressed in block [DH];
+   it kept every panel painted after a mouse click. See [DH] for the trace. */
 
 /* ---- DROPDOWN (compact single-column list of links) ---- */
 .mm-dropdown { left: 0; min-width: 268px; }
@@ -18673,3 +18675,49 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   color: var(--ds-ink-soft);
 }
 .mm-casc__dfoot a { color: var(--ds-accent-ink, #e69c4e); }
+
+
+/* ==========================================================================
+   [DH] MEGA PANELS NO LONGER STICK OPEN AFTER A MOUSE CLICK (2026-09-08)
+   --------------------------------------------------------------------------
+   Reported as "the Locations tab drops down, stays for a while and does not go
+   back up". It was not Locations and it was not a delay -- it affected ALL
+   THREE panels and the panel never closed at all until the reader clicked
+   somewhere else. Measured trace, at 1440:
+
+     hover the trigger    is-open true   aria-expanded true    visible   correct
+     CLICK the trigger    is-open FALSE  aria-expanded FALSE   VISIBLE   <-- wrong
+     pointer far away     is-open false  aria-expanded false   VISIBLE   after 5.5s
+     click elsewhere      is-open false  aria-expanded false   hidden
+
+   The JS was right the whole time: clicking a trigger toggles the group shut
+   and sets aria-expanded="false". The CSS then kept painting it, because
+   :focus-within was in the visibility selector and CLICKING A <button> FOCUSES
+   IT. So the panel stayed lit while the markup said closed -- and only a click
+   elsewhere, which moved focus to <body>, released it.
+
+   :focus-within is there for KEYBOARD users, and that still has to work. The
+   fix keeps the intent and drops the mouse case:
+
+     - :focus-visible instead of :focus -- a mouse click does not set it, a
+       keyboard tab does;
+     - scoped INSIDE .mm-panel, not to the group, so focus on the TRIGGER does
+       not hold the panel open. That matters for Escape, which closes the group
+       and returns focus to the trigger; had this been :has(:focus-visible) on
+       the group, Escape would have re-lit the panel it just closed.
+
+   IT IS A SEPARATE RULE, NOT A THIRD CLAUSE ON THE LINE ABOVE, and that is
+   deliberate. One unsupported selector invalidates the WHOLE comma-separated
+   group it sits in. Folding :has() into that line would mean that on any engine
+   without :has() the panels would stop opening on hover AND on click -- the
+   navigation would simply not work. Split, the worst case is that keyboard
+   focus alone no longer holds a panel open, while hover and .is-open keep
+   working. Verified supported here: CSS.supports('selector(:has(a))') and
+   ('selector(:focus-visible)') both true.
+   ========================================================================== */
+.mm-has-panel:has(.mm-panel :focus-visible) > .mm-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
