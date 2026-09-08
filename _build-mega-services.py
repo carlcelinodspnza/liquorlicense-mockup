@@ -96,14 +96,39 @@ PANE_NOTE = {
     'arizona':    'No live listings in Arizona today &mdash; a stock position, not a coverage gap.',
 }
 
-# The third row of each pane -- kept from the existing menu, not invented.
+# The third row of each pane.
+#
+# THE COPY IS BOUNDED BY A MEASURED BOX, NOT BY TASTE. A row's text column is
+# 175px wide (the panes column is a fixed 292px at every viewport; the mark, gaps
+# and padding take the rest), and .mm-casc__row .s is nowrap + ellipsis. Anything
+# wider silently truncates, and a title wider than 175px wraps to a second line,
+# which makes that ONE row 75px tall against its neighbours' 56px. That is the
+# broken spacing the owner photographed.
+#
+# The inherited strings all overflowed -- measured in the browser at the real
+# font, not estimated:
+#     "All 14 California markets"              187px   over by 12
+#     "Statewide plus thirteen named markets"  229px   over by 54
+#     "Everything we broker in Florida"        239px   over by 64
+#     "Everything we broker in Arizona"        244px   over by 69
+# Widening the column instead was rejected: fitting the 244px title needs
+# +69px, which takes the details column below the 153px per column that
+# "San Luis Obispo County" needs, so the 52-county list would start wrapping.
+#
+# Replacements, with their measured width and headroom inside the 175px box.
+# The state name is dropped from the California title and the Florida/Arizona
+# sublines because the rail button and the card beside them already name the
+# state twice over. Do NOT lengthen these without re-measuring.
 THIRD_ROW = {
     'california': ('markets', 'locations.html#state-california', '&rarr;',
-                   'All 14 California markets', 'Statewide plus thirteen named markets'),
+                   'All 14 markets',            # 108px, 67 spare
+                   'Statewide plus 13 named'),  # 145px, 30 spare
     'florida':    ('all', 'florida-liquor-license.html', '&rarr;',
-                   'Everything we broker in Florida', 'The state page'),
+                   'All of Florida',            #  98px, 77 spare
+                   'The state page'),           #  87px, 88 spare
     'arizona':    ('all', 'arizona-liquor-license.html', '&rarr;',
-                   'Everything we broker in Arizona', 'The state page'),
+                   'All of Arizona',            # 103px, 72 spare
+                   'The state page'),           #  87px, 88 spare
 }
 
 FIRST_ROW = {
