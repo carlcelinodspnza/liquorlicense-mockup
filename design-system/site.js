@@ -539,13 +539,15 @@
   // =====================================================================
   // [AE] HERO COMMAND BAR — federated autosuggest + free-text parse.
   //
-  // NULL-GUARDED: only index.html carries [data-cmdbar], so the other 8 pages
-  // fall straight through this block (same idiom as the inventory board above).
+  // NULL-GUARDED: only index.html carries [data-cmdbar], so the other 107
+  // published pages fall straight through this block (same idiom as the
+  // inventory board above).
   //
   // WHAT IT IS: one control that searches ACROSS the site — the nine live
-  // listings, the five licence types, the eight business industries, the eight
-  // services, the guides, the FAQs and every market we cover — and ROUTES to
-  // whichever page owns the answer. It never filters anything on this page.
+  // listings, the five CALIFORNIA licence types, the eight business industries,
+  // the eight services, the guides, the FAQs, every California market we cover
+  // and the two out-of-state markets we publish an indexable page for — and
+  // ROUTES to whichever page owns the answer. It never filters this page.
   //
   // DEDUP DISCIPLINE (_dedup-ledger.md PART 1): a suggestion is a POINTER, not
   // a restatement. Each row shows a title and a ROUTING label, then hands off to
@@ -568,6 +570,11 @@
   // a bare place name. It either says how many live listings it holds, or it
   // says in words that we broker there and hold none today, and routes to a
   // sourcing brief instead of to the board.
+  // [DJ] EXTENDED to the out-of-state markets: Arizona and Florida hold ZERO
+  // stock (every one of the nine listings is Californian), so both take the
+  // second shape — but they route to their OWN PAGE rather than to the brief,
+  // because that page owns their counties, cities, regulator and
+  // classifications. The rule is unchanged; only the destination is better.
   //
   // NAMING: .cmdbar__input, NOT the shared probe's generic search class. That
   // class is hard-coded in client-visual-verify/scripts/interact.mjs to assert
@@ -779,6 +786,47 @@
         }
       });
 
+      // --- [DJ] COVERAGE, OUT OF STATE: the two INDEXABLE states published
+      //     beside California. Same group, same honesty rule, ONE difference —
+      //     what these rows point at is a PAGE, not the board. Each renders its
+      //     own markets, its own regulator and its own classifications, and the
+      //     DEDUP DISCIPLINE above makes a suggestion a POINTER to the page that
+      //     owns the answer rather than a restatement of it.
+      //     ZERO out-of-state stock exists — inventory.html renders nine cards,
+      //     every data-county on them is Californian and there is no data-state
+      //     attribute at all — so both rows take the no-stock shape: the pill,
+      //     the sentence in words, and no route to the board.
+      //     The meta tail is the state rail's OWN sub-label on locations.html
+      //     ("15 counties · 10 cities" / "66 counties · 10 cities"), so no count
+      //     is invented here.
+      //     NEW JERSEY, OHIO and PENNSYLVANIA are deliberately ABSENT (owner
+      //     decision 2026-09-11): those three pages are noindex,follow and are
+      //     not cards in the Locations mega, so the homepage's flagship control
+      //     does not promote them. See the [BO] comment in index.html.
+      //     `k` carries ONLY place names these two pages actually publish, minus
+      //     three that COLLIDE with California entries already in CB_PLACES:
+      //     'glendale' (-> Los Angeles County) and 'mesa' (-> San Diego County
+      //     via "la mesa") would hijack live-stock queries, and 'fort lauderdale'
+      //     makes the bare query "la" word-match this row and displace the
+      //     Anaheim listing. Deliberately absent everywhere, for the reason the
+      //     statewide row states: 'liquor', 'licence' and the regulator names,
+      //     which would float these rows onto broad queries and make them compete
+      //     for the 8 cap slots.
+      [
+        ['Arizona', 'arizona-liquor-license.html', '15 counties and 10 cities published',
+          'az state phoenix tucson chandler gilbert scottsdale tempe peoria surprise'],
+        ['Florida', 'florida-liquor-license.html', '66 counties and 10 cities published',
+          'fl state miami orlando tampa jacksonville hialeah tallahassee cape coral port st. lucie st. petersburg']
+      ].forEach(function (r) {
+        cbAdd({
+          g: 'coverage', t: r[0],
+          m: 'We broker here · no live listings today · ' + r[2],
+          href: r[1], tag: 'No stock today',
+          k: r[3] + ' sourcing brief off market',
+          cslug: null, cname: cbNorm(r[0])
+        });
+      });
+
       // ---------------------------------------------------------------
       // 2. NORMALISATION + THE PRICE / TYPE / PLACE PARSER
       //     ONE parser drives BOTH halves: it ranks listings in the dropdown
@@ -825,7 +873,21 @@
         { n:'napa valley',    slug:null,              label:'Napa Valley' },
         { n:'napa',           slug:null,              label:'Napa Valley' },
         { n:'ventura',        slug:null,              label:'Ventura' },
-        { n:'fresno',         slug:null,              label:'Fresno' }
+        { n:'fresno',         slug:null,              label:'Fresno' },
+        /* [DJ] The two out-of-state markets the site publishes an INDEXABLE page
+           for. slug:null is the same "we cover it, we hold nothing there" shape
+           the six zero-stock California entries already use, and it arms two
+           existing mechanisms: the listings gate below ("A named market with NO
+           stock must never pull listings in"), which stops "type 47 arizona"
+           answering with California stock, and the `rescue` clause, which stops
+           "restaurant arizona" collapsing to "Nothing on the site matches".
+           `page` is new and is read ONLY by the Enter path — these two have a
+           page that owns the answer; the California entries do not.
+           No CITY aliases are added here on purpose: 'mesa' and 'glendale' are
+           already bound to San Diego and Los Angeles by live-stock entries above,
+           and redefining them would kill real listing queries. */
+        { n:'arizona',        slug:null,              label:'Arizona',  page:'arizona-liquor-license.html' },
+        { n:'florida',        slug:null,              label:'Florida',  page:'florida-liquor-license.html' }
       ].sort(function (a, b) { return b.n.length - a.n.length; }); // longest first: "san bernardino" must beat "san diego"'s prefix
 
       var CB_MONEYTOK = '(\\$?\\s*\\d[\\d,.]*\\s*k?)';
@@ -1191,7 +1253,7 @@
       // NOT a search result — it exists so the control teaches its own scope.
       function cbPrompt() {
         var starters = IX.filter(function (e) { return e.g === 'types'; }).slice();
-        var buckets = { start: starters.concat([{ g:'start', t:'Browse all 9 live licences', m:'The full board', href:'inventory.html', tag:'' }]) };
+        var buckets = { start: starters.concat([{ g:'start', t:'Browse all 9 California licences', m:'The full board', href:'inventory.html', tag:'' }]) };
         cbPaint(['start'], buckets);
         cbShow();
         cbSay(cbOpts.length + ' starting points. Type to search listings, licence types, industries and markets.');
@@ -1212,7 +1274,7 @@
             '&rdquo;. Press Enter to open the full board, or tell us what you are looking for.</div>' +
             '<div role="group" aria-labelledby="cmdbar-grp-none">' +
             '<div class="cmdbar__grouplabel" id="cmdbar-grp-none">Where to go instead</div>' +
-            cbOptionHtml({ t:'Browse all 9 live licences', m:'The full board', href:'inventory.html', tag:'' }, 'cmdbar-opt-none-0') +
+            cbOptionHtml({ t:'Browse all 9 California licences', m:'The full board', href:'inventory.html', tag:'' }, 'cmdbar-opt-none-0') +
             cbOptionHtml({ t:'Send us a sourcing brief', m:'We source off-market against your spec', href:'contact.html#quote', tag:'' }, 'cmdbar-opt-none-1') +
             '</div>');
           cbOpts = Array.prototype.slice.call(cbPanel.querySelectorAll('.cmdbar__opt'));
@@ -1236,7 +1298,7 @@
       function cbSubmit() {
         var raw = cbInput.value;
         var p = cbParse(raw);
-        var applied = [], told = [], extraHref = null;
+        var applied = [], told = [], extraHref = null, extraLabel = 'Send a sourcing brief';
 
         var q = new URLSearchParams();
         if (p.type) { q.set('type', p.type); applied.push('Type ' + p.type); }
@@ -1245,8 +1307,13 @@
           // THE LOCATION-HONESTY RULE, on the Enter path: we understood the
           // market and we cover it — we simply hold nothing there today, and we
           // say so rather than quietly dropping the word.
+          // [DJ] The out-of-state markets carry a `page`: that page owns the
+          // counties, the cities, the regulator and the classifications, so it is
+          // a better answer than a form, and the label below is that page's own
+          // CTA wording off locations.html — nothing new is written.
           told.push('We broker in ' + p.place.label + ', but hold no live listings there today.');
-          extraHref = 'contact.html#quote';
+          extraHref = p.place.page || 'contact.html#quote';
+          if (p.place.page) extraLabel = 'Everything we broker in ' + p.place.label;
         }
         if (p.price) {
           if (p.band) { q.set('band', p.band); applied.push(CB_BAND_LABEL[p.band]); }
@@ -1274,10 +1341,10 @@
         // front of "we broker in Napa Valley…", where the market WAS understood —
         // it just is not a filter we can honestly apply.
         var lead = applied.length ? 'Showing ' + applied.join(' in ') + ' on the board. ' : '';
-        var goLabel = applied.length ? 'Show matching licences' : 'Show all 9 live licences';
+        var goLabel = applied.length ? 'Show matching licences' : 'Show all 9 California licences';
         cbNote.innerHTML =
           '<p class="cmdbar__note-txt">' + cbEscHtml(lead + told.join(' ')) + '</p>' +
-          (extraHref ? '<a class="btn btn-secondary cmdbar__note-go" href="' + extraHref + '">Send a sourcing brief</a>' : '') +
+          (extraHref ? '<a class="btn btn-secondary cmdbar__note-go" href="' + extraHref + '">' + cbEscHtml(extraLabel) + '</a>' : '') +
           '<a class="btn btn-primary cmdbar__note-go" href="' + cbEscHtml(href) + '">' + goLabel + '</a>';
         cbNote.hidden = false;
         cbSay(lead + told.join(' ') + ' ' + goLabel + '.');
@@ -3415,7 +3482,28 @@
       }
       var below = window.innerHeight - r.bottom - barH;
       wrap.classList.toggle('dsel--up', below < 240 && r.top > below);
-      if (barH > 0) {
+      /* [DJ] INSIDE .cmdbar, ALWAYS CLAMP — not only when the mobile CTA bar is
+         showing. MEASURED at 1440x900: the 15-option market panel opened 354px
+         tall from y=649, bottom at 1003 — 103px below the fold — and because
+         max-height(420) exceeded its content height, scrollHeight === clientHeight,
+         so the hidden rows were neither painted NOR scrollable. Page-scrolling
+         does not recover them: the panel is absolutely positioned and travels
+         with the field (scrollBy(0,300) moved it y=649 -> y=349 and the
+         unreachable count stayed at 3). Measured off the PANEL's own rect, so it
+         is correct whatever gap the skin sets; when flipped up it also subtracts
+         the sticky header, measured covering the first row at 375x812.
+         SCOPED to .cmdbar deliberately: the four selects outside the command bar
+         keep the shipped barH-only behaviour untouched. */
+      if (wrap.closest && wrap.closest('.cmdbar')) {
+        panel.style.maxHeight = '';
+        var pr = panel.getBoundingClientRect();
+        var hdr = document.querySelector('.site-header');
+        var hdrB = hdr ? hdr.getBoundingClientRect().bottom : 0;
+        var cbRoom = wrap.classList.contains('dsel--up')
+          ? (pr.bottom - hdrB - 8)
+          : (window.innerHeight - pr.top - barH - 8);
+        panel.style.maxHeight = Math.max(0, cbRoom) + 'px';
+      } else if (barH > 0) {
         var room = (wrap.classList.contains('dsel--up') ? r.top : below) - 8;
         panel.style.maxHeight = Math.max(0, Math.min(340, room)) + 'px';
       } else {
@@ -3556,6 +3644,29 @@
       var r = btn.getBoundingClientRect();
       var below = window.innerHeight - r.bottom;
       wrap.classList.toggle('dsel--up', below < 240 && r.top > below);
+      /* [DJ] Inside .cmdbar the flip decision and the height clamp must be
+         recomputed TOGETHER. .mm-sticky-cta gains .show ON SCROLL, so a panel
+         opened near the top of the page was placed with barH = 0 and then had the
+         bar appear underneath it — the exact collision the open-time clamp exists
+         to prevent. Re-toggling `dsel--up` without re-clamping also leaves a
+         flipped panel carrying the height computed for the dropped position. */
+      if (!(wrap.closest && wrap.closest('.cmdbar'))) return;
+      var sBar = document.querySelector('.mm-sticky-cta');
+      var sBarH = 0;
+      if (sBar && sBar.classList.contains('show')) {
+        var sCs = window.getComputedStyle(sBar);
+        if (sCs.display !== 'none' && sCs.visibility !== 'hidden') {
+          sBarH = sBar.getBoundingClientRect().height;
+        }
+      }
+      panel.style.maxHeight = '';
+      var sPr = panel.getBoundingClientRect();
+      var sHdr = document.querySelector('.site-header');
+      var sHdrB = sHdr ? sHdr.getBoundingClientRect().bottom : 0;
+      var sRoom = wrap.classList.contains('dsel--up')
+        ? (sPr.bottom - sHdrB - 8)
+        : (window.innerHeight - sPr.top - sBarH - 8);
+      panel.style.maxHeight = Math.max(0, sRoom) + 'px';
     }, { passive: true });
 
     /* ---- staying in sync with the native control -------------------------
@@ -3688,6 +3799,18 @@
   var FILTERABLE = ['los-angeles','orange','riverside','sacramento',
                     'san-bernardino','san-diego','san-francisco'];
 
+  /* [DJ] The out-of-state values and the page that owns each. These can never
+     become a board filter — inventory.html carries nine cards, every data-county
+     on them is Californian, there is no data-state attribute, and #inv-county
+     offers only the seven counties above — so the state page is the ONLY honest
+     destination. Only the two INDEXABLE states are here; NJ/OH/PA are withheld
+     from this control by owner decision 2026-09-11 (see index.html's [BO] note),
+     so their values never reach this map. */
+  var STATE_PAGE = {
+    'st-arizona': ['arizona-liquor-license.html', 'Arizona'],
+    'st-florida': ['florida-liquor-license.html', 'Florida']
+  };
+
   function esc(s) {
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')
                     .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -3706,12 +3829,36 @@
 
     var q = new URLSearchParams();
     var applied = [], told = [], extraHref = null;
+    var extraLabel = 'Send a sourcing brief';
+    var st = STATE_PAGE[m] || null;
 
-    if (t) { q.set('type', t); applied.push('Type ' + t); }
+    /* [DJ] The five licence types in this segment are CALIFORNIA ABC
+       classifications. Arizona issues Series 6, 7, 9, 10, 11 and 12; Florida
+       issues 1COP, 2COP, 3PS, 4COP, 4COP-SFS and 6COP (locations.html's own state
+       rail says so). Applying a Type 47 filter for a Florida visitor would
+       compose a licence that does not exist in their jurisdiction — the
+       LOCATION-HONESTY RULE one axis over. So the type is SAID, not applied: the
+       same idiom this block already uses for industry. */
+    if (t && !st) { q.set('type', t); applied.push('Type ' + t); }
+    if (t && st) {
+      told.push('Type ' + t + ' is a California ABC classification, so it was not applied to ' +
+                st[1] + '. ' + st[1] + ' issues its own classifications.');
+    }
 
     if (m && m !== 'california') {
       var mLabel = textOf(mkt);
-      if (FILTERABLE.indexOf(m) !== -1) { q.set('county', m); applied.push(mLabel); }
+      if (st) {
+        /* An out-of-state market. Say it, and route to the page that owns it. */
+        told.push('We broker in ' + st[1] + ', but hold no live listings there today.');
+        extraHref = st[0];
+        extraLabel = 'Everything we broker in ' + st[1];
+      } else if (m === 'other') {
+        /* NOT a place. Its label is "Another California county", so it must not
+           be fed through the sentence template below — a broken sentence is the
+           worst place to ship the honest option. */
+        told.push('Tell us which California county and we will source against it — we broker all 58.');
+        extraHref = 'contact.html#quote';
+      } else if (FILTERABLE.indexOf(m) !== -1) { q.set('county', m); applied.push(mLabel); }
       else {
         told.push('We broker in ' + mLabel + ', but hold no live listings there today.');
         extraHref = 'contact.html#quote';
@@ -3736,12 +3883,12 @@
     if (!told.length) { window.location.href = href; return; }
 
     var lead = applied.length ? 'Showing ' + applied.join(' in ') + ' on the board. ' : '';
-    var goLabel = applied.length ? 'Show matching licences' : 'Show all 9 live licences';
+    var goLabel = applied.length ? 'Show matching licences' : 'Show all 9 California licences';
     if (!note) { window.location.href = href; return; }
     note.innerHTML =
       '<p class="cmdbar__note-txt">' + esc(lead + told.join(' ')) + '</p>' +
       (extraHref ? '<a class="btn btn-secondary cmdbar__note-go" href="' + extraHref +
-                   '">Send a sourcing brief</a>' : '') +
+                   '">' + esc(extraLabel) + '</a>' : '') +
       '<a class="btn btn-primary cmdbar__note-go" href="' + esc(href) + '">' + goLabel + '</a>';
     note.hidden = false;
     if (live) live.textContent = lead + told.join(' ') + ' ' + goLabel + '.';

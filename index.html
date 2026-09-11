@@ -399,7 +399,7 @@
          from two columns back to ONE and the h1 recovers its full editorial clamp —
          measured 53.28px -> 74px at 1440. Presentation: structural.css block [AE].
          Behaviour: design-system/site.js block [AE], null-guarded on [data-cmdbar]
-         so the other 8 pages fall straight through it.
+         so the other 107 published pages fall straight through it.
          NAMING IS LOAD-BEARING: the field is .cmdbar__input. The shared functional
          probe hard-codes one generic search class to mean "type into it and the card
          grid on this page MUST shrink, then return". This control opens a suggestion
@@ -412,10 +412,29 @@
           <!-- [BO] SEGMENTS. These are plain native select controls carrying the
                shared ec-ctrl class, nothing more: site.js [BD] auto-enhances every
                select.ec-ctrl into the .dsel listbox, so they need no behaviour code
-               of their own. Option sets are LIFTED VERBATIM from the shipped
-               canonical controls, so nothing is invented and the emitted params
-               already match: market = locations.html #qz-market, type + industry =
-               contact.html #q-type / #q-industry.
+               of their own.
+               MARKET: the VALUE set is taken from locations.html #qz-market, in
+               its order, two-tier. It is a deliberate SUBSET, not the full lift
+               this comment used to claim — OWNER DECISION 2026-09-11: the two
+               INDEXABLE out-of-state markets ship here (st-arizona, st-florida,
+               the same two the Locations mega tab offers as cards), and
+               st-new-jersey / st-ohio / st-pennsylvania are withheld because
+               those three pages carry robots noindex,follow and are absent from
+               the mega tab. Promoting them from the homepage's flagship control
+               would contradict that de-promotion. Everything shipped here is
+               byte-identical to the canonical values; a value-column diff of the
+               two selects is the check, and nothing automated runs it.
+               TYPE and INDUSTRY: these sets are AUTHORED HERE. They have no
+               upstream — contact.html was rebuilt to the client's four-field
+               form on 2026-09-04 and carries no select at all, so the two
+               controls this comment used to name no longer exist.
+               THE LEADING EMPTY OPTION on all three segments is authored here
+               too: a search facet needs a no-filter state that a five-step
+               wizard does not.
+               PARAMS DO NOT MATCH, DELIBERATELY: #qz-market serialises its value
+               into a brief; this control turns a market into county= for the
+               board, into that state's own page for the out-of-state values, and
+               into a sentence where neither is honest.
                NOTE: no tag literals in this comment on purpose — a comment on this
                page that spelled out neighbouring markup once desynchronised
                verify-not-flat's parser, which does not strip comments (see the U1
@@ -426,6 +445,7 @@
               <select class="ec-ctrl" id="cb-market" name="market" aria-labelledby="cb-market-l">
               <option value="">Any market</option>
               <option value="california">California — statewide</option>
+              <optgroup label="California markets">
               <option value="los-angeles">Los Angeles County</option>
               <option value="orange">Orange County</option>
               <option value="riverside">Riverside County</option>
@@ -439,6 +459,12 @@
               <option value="san-jose">San Jose</option>
               <option value="santa-barbara">Santa Barbara</option>
               <option value="ventura">Ventura</option>
+              <option value="other">Another California county</option>
+              </optgroup>
+              <optgroup label="Other states we broker in">
+              <option value="st-arizona">Arizona</option>
+              <option value="st-florida">Florida</option>
+              </optgroup>
               </select>
             </div>
             <div class="cmdbar__seg">
@@ -480,7 +506,7 @@
       </form>
       <div class="cmdbar__note" id="cmdbar-note" hidden></div>
       <div class="cmdbar__foot">
-        <p class="cmdbar__scope">Searches the live board, the five licence types, the eight industries, our services, the guides and every market we cover.</p>
+        <p class="cmdbar__scope">Searches the live board, the five California licence types, the eight industries, our services, the guides, and our California, Arizona and Florida markets.</p>
         <a class="cmdbar__alt" href="services.html#valuation">Get a professional licence valuation</a>
       </div>
       <p class="cmdbar__live" id="cmdbar-live" role="status" aria-live="polite"></p>

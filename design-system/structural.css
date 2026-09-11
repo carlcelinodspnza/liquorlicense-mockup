@@ -15523,6 +15523,25 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   box-shadow: var(--ds-shadow-lift), var(--ds-inset-hi);
   max-height: min(58vh, 420px);
 }
+/* [DJ] THE FLIP-UP RULE WAS LOST ON SPECIFICITY INSIDE .cmdbar. [BD]'s
+   `.dsel--up .dsel__panel { top: auto }` (structural.css:14095) is (0,2,0) and so
+   is `.cmdbar .dsel__panel` above — which is LATER in the file and therefore won,
+   so a flipped command-bar panel kept top:38px AND gained bottom:30px and
+   collapsed to an 18px scrollport. MEASURED before this rule, market panel open:
+   1024x800 and 375x812 both painted an 18px box and ALL 15 options failed an
+   elementFromPoint hit-test. Note the gap: this block opens with --ds-space-sm,
+   not [BD]'s --ds-space-2xs, so the flip mirrors --ds-space-sm. */
+.cmdbar .dsel--up .dsel__panel {
+  top: auto;
+  bottom: calc(100% + var(--ds-space-sm));
+}
+/* [DJ] [BD] renders an <optgroup> label as a .dsel__grouplabel div. The shipped
+   rule at :14175 colours it --ds-accent-ink, tuned for the LIGHT form surfaces,
+   and in the two-column market grid it would occupy a single cell. Both are
+   corrected here and nowhere else, so the selects outside .cmdbar keep the
+   shipped treatment. */
+.cmdbar .dsel__grouplabel { color: var(--ds-ink-soft); }
+.cmdbar__seg--wide .dsel__panel:not([hidden]) .dsel__grouplabel { grid-column: 1 / -1; }
 .cmdbar .dsel__opt {
   border-radius: var(--ds-r-md);
   padding: 10px 12px;
@@ -15565,14 +15584,20 @@ a.btn-primary:not([href^="tel:"]):not([href^="sms:"]):hover::after { transform: 
   .cmdbar__segs { flex: 1 1 100%; }
   .cmdbar__seg:first-child { padding-left: var(--ds-space-sm); }
   .cmdbar__q { flex: 1 1 200px; border-left: 0; border-top: 1px solid var(--ds-glass-border); }
-  .cmdbar__seg--wide .dsel__panel { min-width: 320px; grid-template-columns: 1fr; }
+  /* [DJ] :not([hidden]) here for the same reason as the base rule above — without
+     it this is (0,2,0) against that rule's (0,3,0), and a media query adds NO
+     specificity, so this override had never once executed. MEASURED before the
+     fix: at 1023px and at 375px the panel still computed grid-template-columns
+     "220px 220px" and min-width 460px — a 460px panel inside a 375px viewport,
+     right edge 126px off-screen. */
+  .cmdbar__seg--wide .dsel__panel:not([hidden]) { min-width: 320px; grid-template-columns: 1fr; }
 }
 @media (max-width: 700px) {
   .cmdbar__segs { flex-wrap: wrap; }
   .cmdbar__seg { flex: 1 1 100%; border-left: 0; border-top: 1px solid var(--ds-glass-border); padding-left: var(--ds-space-sm); }
   .cmdbar__seg:first-child { border-top: 0; }
   .cmdbar .dsel__panel { min-width: 0; right: 0; }
-  .cmdbar__seg--wide .dsel__panel { min-width: 0; grid-template-columns: 1fr; }
+  .cmdbar__seg--wide .dsel__panel:not([hidden]) { min-width: 0; grid-template-columns: 1fr; }
   .cmdbar__go { flex: 1 0 100%; }
 }
 
