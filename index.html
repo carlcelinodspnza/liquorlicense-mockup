@@ -413,9 +413,15 @@
                shared ec-ctrl class, nothing more: site.js [BD] auto-enhances every
                select.ec-ctrl into the .dsel listbox, so they need no behaviour code
                of their own.
-               MARKET: the VALUE set is taken from locations.html #qz-market, in
-               its order, two-tier. It is a deliberate SUBSET, not the full lift
-               this comment used to claim — OWNER DECISION 2026-09-11: the two
+               MARKET: the VALUE set is taken from locations.html #qz-market, but
+               NOT in its order. OWNER DECISION 2026-09-11: the three STATES lead
+               — California, Arizona, Florida sit together at the top, above the
+               California-markets group — because the state is the first choice a
+               visitor makes and burying two of the three under fourteen county
+               rows made the bar read as California-only. A value-column diff
+               against the canonical control must therefore be compared as a SET,
+               not line-by-line; ordering here is intentional and owner-set.
+               It is also a deliberate SUBSET — OWNER DECISION 2026-09-11: the two
                INDEXABLE out-of-state markets ship here (st-arizona, st-florida,
                the same two the Locations mega tab offers as cards), and
                st-new-jersey / st-ohio / st-pennsylvania are withheld because
@@ -445,6 +451,8 @@
               <select class="ec-ctrl" id="cb-market" name="market" aria-labelledby="cb-market-l">
               <option value="">Any market</option>
               <option value="california">California — statewide</option>
+              <option value="st-arizona">Arizona</option>
+              <option value="st-florida">Florida</option>
               <optgroup label="California markets">
               <option value="los-angeles">Los Angeles County</option>
               <option value="orange">Orange County</option>
@@ -460,10 +468,6 @@
               <option value="santa-barbara">Santa Barbara</option>
               <option value="ventura">Ventura</option>
               <option value="other">Another California county</option>
-              </optgroup>
-              <optgroup label="Other states we broker in">
-              <option value="st-arizona">Arizona</option>
-              <option value="st-florida">Florida</option>
               </optgroup>
               </select>
             </div>
