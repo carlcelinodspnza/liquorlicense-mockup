@@ -1,0 +1,5 @@
+# Client preview build - not the production site.
+# liquorlicenseagents.com is live and serves DIFFERENT content; this bundle
+# must never be indexed alongside it. Remove this file only at domain launch.
+User-agent: *
+Disallow: /
